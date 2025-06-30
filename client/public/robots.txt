@@ -1,0 +1,6 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow: /api/
+Allow: /
+
+Sitemap: https://eweek2025.uoj.ac.lk/sitemap.xml

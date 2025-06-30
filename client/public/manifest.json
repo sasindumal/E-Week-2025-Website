@@ -1,0 +1,25 @@
+{
+  "short_name": "E-Week 2025",
+  "name": "E-Week 2025 - University of Jaffna",
+  "icons": [
+    {
+      "src": "https://cdn.builder.io/api/v1/assets/c5794fad86854d05a0a2b5f05a97b44d/e-week_logo_-2025-322131?format=webp&width=64",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/webp"
+    },
+    {
+      "src": "https://cdn.builder.io/api/v1/assets/c5794fad86854d05a0a2b5f05a97b44d/e-week_logo_-2025-322131?format=webp&width=192",
+      "type": "image/webp",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://cdn.builder.io/api/v1/assets/c5794fad86854d05a0a2b5f05a97b44d/e-week_logo_-2025-322131?format=webp&width=512",
+      "type": "image/webp",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#110921",
+  "background_color": "#110921"
+}
