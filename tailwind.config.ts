@@ -57,6 +57,11 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        eweek: {
+          white: "#ffffff",
+          navy: "#110921",
+          red: "#a71c20",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
