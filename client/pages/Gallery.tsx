@@ -1,88 +1,113 @@
-import { Navigation } from "@/components/ui/navigation";
+import { Layout } from "@/components/Layout";
+import { EnhancedCard } from "@/components/ui/enhanced-card";
+import { EnhancedButton } from "@/components/ui/enhanced-button";
 import { Calendar, Eye, Heart } from "lucide-react";
+import { useState, useMemo } from "react";
+
+interface GalleryItem {
+  id: number;
+  year: string;
+  title: string;
+  image: string;
+  views: number;
+  likes: number;
+}
+
+const galleryItems: GalleryItem[] = [
+  {
+    id: 1,
+    year: "2024",
+    title: "Programming Contest Winners",
+    image: "/placeholder.svg",
+    views: 1250,
+    likes: 89,
+  },
+  {
+    id: 2,
+    year: "2024",
+    title: "Robotics Challenge",
+    image: "/placeholder.svg",
+    views: 950,
+    likes: 67,
+  },
+  {
+    id: 3,
+    year: "2024",
+    title: "Innovation Showcase",
+    image: "/placeholder.svg",
+    views: 1100,
+    likes: 78,
+  },
+  {
+    id: 4,
+    year: "2023",
+    title: "Opening Ceremony",
+    image: "/placeholder.svg",
+    views: 2100,
+    likes: 145,
+  },
+  {
+    id: 5,
+    year: "2023",
+    title: "Team Building Activities",
+    image: "/placeholder.svg",
+    views: 850,
+    likes: 52,
+  },
+  {
+    id: 6,
+    year: "2023",
+    title: "Awards Night",
+    image: "/placeholder.svg",
+    views: 1650,
+    likes: 112,
+  },
+  {
+    id: 7,
+    year: "2022",
+    title: "Hackathon Marathon",
+    image: "/placeholder.svg",
+    views: 1350,
+    likes: 95,
+  },
+  {
+    id: 8,
+    year: "2022",
+    title: "Engineering Design Challenge",
+    image: "/placeholder.svg",
+    views: 720,
+    likes: 41,
+  },
+  {
+    id: 9,
+    year: "2022",
+    title: "Closing Ceremony",
+    image: "/placeholder.svg",
+    views: 980,
+    likes: 73,
+  },
+];
+
+const years = ["All", "2024", "2023", "2022", "2021"];
 
 export default function Gallery() {
-  const galleryItems = [
-    {
-      id: 1,
-      year: "2024",
-      title: "Programming Contest Winners",
-      image: "/placeholder.svg",
-      views: 1250,
-      likes: 89,
-    },
-    {
-      id: 2,
-      year: "2024",
-      title: "Robotics Challenge",
-      image: "/placeholder.svg",
-      views: 950,
-      likes: 67,
-    },
-    {
-      id: 3,
-      year: "2024",
-      title: "Innovation Showcase",
-      image: "/placeholder.svg",
-      views: 1100,
-      likes: 78,
-    },
-    {
-      id: 4,
-      year: "2023",
-      title: "Opening Ceremony",
-      image: "/placeholder.svg",
-      views: 2100,
-      likes: 145,
-    },
-    {
-      id: 5,
-      year: "2023",
-      title: "Team Building Activities",
-      image: "/placeholder.svg",
-      views: 850,
-      likes: 52,
-    },
-    {
-      id: 6,
-      year: "2023",
-      title: "Awards Night",
-      image: "/placeholder.svg",
-      views: 1650,
-      likes: 112,
-    },
-    {
-      id: 7,
-      year: "2022",
-      title: "Hackathon Marathon",
-      image: "/placeholder.svg",
-      views: 1350,
-      likes: 95,
-    },
-    {
-      id: 8,
-      year: "2022",
-      title: "Engineering Design Challenge",
-      image: "/placeholder.svg",
-      views: 720,
-      likes: 41,
-    },
-    {
-      id: 9,
-      year: "2022",
-      title: "Closing Ceremony",
-      image: "/placeholder.svg",
-      views: 980,
-      likes: 73,
-    },
-  ];
+  const [selectedYear, setSelectedYear] = useState("All");
 
-  const years = ["All", "2024", "2023", "2022", "2021"];
+  const filteredItems = useMemo(() => {
+    if (selectedYear === "All") return galleryItems;
+    return galleryItems.filter((item) => item.year === selectedYear);
+  }, [selectedYear]);
+
+  const stats = useMemo(() => {
+    return {
+      photos: galleryItems.length * 5, // Simulated
+      videos: Math.floor(galleryItems.length / 2),
+      years: new Set(galleryItems.map((item) => item.year)).size,
+    };
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-eweek-navy via-eweek-navy to-eweek-navy/80">
-      <Navigation />
-
+    <Layout className="bg-gradient-to-br from-eweek-navy via-eweek-navy to-eweek-navy/80">
       <div className="pt-16 py-20">
         <div className="container mx-auto px-4">
           {/* Header */}
@@ -98,49 +123,66 @@ export default function Gallery() {
           {/* Year Filter */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             {years.map((year) => (
-              <button
+              <EnhancedButton
                 key={year}
-                className="px-6 py-2 rounded-full bg-eweek-white/10 text-eweek-white hover:bg-eweek-red hover:text-eweek-white transition-all duration-300 border border-eweek-white/20"
+                variant={selectedYear === year ? "primary" : "outline"}
+                size="sm"
+                onClick={() => setSelectedYear(year)}
               >
                 {year}
-              </button>
+              </EnhancedButton>
             ))}
           </div>
 
           {/* Statistics */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 max-w-4xl mx-auto">
-            <div className="bg-eweek-white/10 backdrop-blur-sm rounded-xl p-6 text-center border border-eweek-red/30">
-              <div className="text-3xl font-bold text-eweek-red mb-2">500+</div>
+            <EnhancedCard variant="glass" className="p-6 text-center">
+              <div className="text-3xl font-bold text-eweek-red mb-2">
+                {stats.photos}+
+              </div>
               <div className="text-eweek-white/80">Photos</div>
-            </div>
-            <div className="bg-eweek-white/10 backdrop-blur-sm rounded-xl p-6 text-center border border-eweek-red/30">
-              <div className="text-3xl font-bold text-eweek-red mb-2">50+</div>
+            </EnhancedCard>
+            <EnhancedCard variant="glass" className="p-6 text-center">
+              <div className="text-3xl font-bold text-eweek-red mb-2">
+                {stats.videos}+
+              </div>
               <div className="text-eweek-white/80">Videos</div>
-            </div>
-            <div className="bg-eweek-white/10 backdrop-blur-sm rounded-xl p-6 text-center border border-eweek-red/30">
-              <div className="text-3xl font-bold text-eweek-red mb-2">4</div>
+            </EnhancedCard>
+            <EnhancedCard variant="glass" className="p-6 text-center">
+              <div className="text-3xl font-bold text-eweek-red mb-2">
+                {stats.years}
+              </div>
               <div className="text-eweek-white/80">Years</div>
-            </div>
+            </EnhancedCard>
           </div>
 
           {/* Gallery Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {galleryItems.map((item) => (
-              <div
+            {filteredItems.map((item) => (
+              <EnhancedCard
                 key={item.id}
-                className="group relative bg-eweek-white/10 backdrop-blur-sm rounded-xl overflow-hidden border border-eweek-red/30 hover:border-eweek-red/60 transition-all duration-300 transform hover:scale-105"
+                variant="glass"
+                hover
+                className="group relative overflow-hidden"
               >
                 {/* Image Placeholder */}
                 <div className="aspect-video bg-gradient-to-br from-eweek-navy/50 to-eweek-red/30 flex items-center justify-center">
-                  <div className="text-eweek-white/60 text-6xl">📷</div>
+                  <div className="text-eweek-white/60 text-6xl group-hover:scale-110 transition-transform duration-300">
+                    📷
+                  </div>
                 </div>
 
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-eweek-navy/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                   <div className="p-4 w-full">
-                    <button className="w-full bg-eweek-red hover:bg-eweek-red/90 text-eweek-white py-2 rounded-lg font-medium transition-all duration-300">
+                    <EnhancedButton
+                      variant="primary"
+                      size="sm"
+                      className="w-full"
+                      onClick={() => console.log(`View ${item.title}`)}
+                    >
                       View Full Size
-                    </button>
+                    </EnhancedButton>
                   </div>
                 </div>
 
@@ -153,14 +195,14 @@ export default function Gallery() {
                     <Calendar className="w-4 h-4 text-eweek-red" />
                   </div>
 
-                  <h3 className="text-lg font-semibold text-eweek-white mb-3">
+                  <h3 className="text-lg font-semibold text-eweek-white mb-3 group-hover:text-eweek-red transition-colors duration-300">
                     {item.title}
                   </h3>
 
                   <div className="flex items-center justify-between text-eweek-white/70 text-sm">
                     <div className="flex items-center space-x-1">
                       <Eye className="w-4 h-4" />
-                      <span>{item.views}</span>
+                      <span>{item.views.toLocaleString()}</span>
                     </div>
                     <div className="flex items-center space-x-1">
                       <Heart className="w-4 h-4" />
@@ -168,18 +210,22 @@ export default function Gallery() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </EnhancedCard>
             ))}
           </div>
 
           {/* Load More Button */}
           <div className="text-center mt-12">
-            <button className="bg-eweek-red hover:bg-eweek-red/90 text-eweek-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+            <EnhancedButton
+              variant="primary"
+              size="lg"
+              onClick={() => console.log("Load more photos")}
+            >
               Load More Photos
-            </button>
+            </EnhancedButton>
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 }
