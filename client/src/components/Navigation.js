@@ -10,6 +10,7 @@ const Navigation = () => {
     { path: "/", label: "Home" },
     { path: "/events", label: "Events" },
     { path: "/leaderboard", label: "Leaderboard" },
+    { path: "/skillstorm", label: "SkillStorm" },
     { path: "/gallery", label: "Gallery" },
     { path: "/scorecards", label: "Scorecards" },
   ];

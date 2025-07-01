@@ -6,6 +6,7 @@ import "./App.css";
 import Home from "./pages/Home";
 import Events from "./pages/Events";
 import Leaderboard from "./pages/Leaderboard";
+import SkillStorm from "./pages/SkillStorm";
 import Gallery from "./pages/Gallery";
 import Scorecards from "./pages/Scorecards";
 import NotFound from "./pages/NotFound";
@@ -22,6 +23,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/events" element={<Events />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/skillstorm" element={<SkillStorm />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/scorecards" element={<Scorecards />} />
             <Route path="*" element={<NotFound />} />
