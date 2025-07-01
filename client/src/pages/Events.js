@@ -444,6 +444,50 @@ const Events = () => {
     }
   };
 
+  // Filter and sort upcoming events
+  const filteredUpcomingEvents = upcomingEvents
+    .filter((event) => {
+      const matchesSearch =
+        searchTerm === "" ||
+        event.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        event.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        event.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        event.description.toLowerCase().includes(searchTerm.toLowerCase());
+
+      const matchesCategory =
+        selectedCategory === "all" || event.category === selectedCategory;
+      const matchesStatus =
+        selectedStatus === "all" ||
+        (selectedStatus === "scheduled" && event.date !== "Today");
+
+      return matchesSearch && matchesCategory && matchesStatus;
+    })
+    .sort((a, b) => {
+      let comparison = 0;
+
+      switch (sortBy) {
+        case "time":
+          // Simple time comparison for demo - in real app would parse dates properly
+          comparison = a.time.localeCompare(b.time);
+          break;
+        case "name":
+          comparison = a.name.localeCompare(b.name);
+          break;
+        case "participants":
+          const aParticipants = parseInt(a.participants.replace(/\D/g, ""));
+          const bParticipants = parseInt(b.participants.replace(/\D/g, ""));
+          comparison = bParticipants - aParticipants;
+          break;
+        case "category":
+          comparison = a.category.localeCompare(b.category);
+          break;
+        default:
+          comparison = 0;
+      }
+
+      return sortOrder === "asc" ? comparison : -comparison;
+    });
+
   return (
     <Layout>
       <div className="events-page">
@@ -646,6 +690,146 @@ const Events = () => {
           </div>
         </section>
 
+        {/* Advanced Search and Filter System */}
+        <section className="events-search-section">
+          <div className="container">
+            <div className="events-search-header">
+              <h2 className="search-section-title">
+                Find Your Events
+                <Search className="title-icon" size={32} />
+              </h2>
+              <p className="search-section-subtitle">
+                Advanced search and filtering to discover the perfect events for
+                you
+              </p>
+            </div>
+
+            <div className="events-search-bar">
+              <div className="search-container">
+                <div className="search-input-wrapper">
+                  <Search className="search-icon" />
+                  <input
+                    type="text"
+                    placeholder="Search events by name, category, location..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="search-input"
+                  />
+                  {searchTerm && (
+                    <button
+                      onClick={() => setSearchTerm("")}
+                      className="clear-search"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+
+                <button
+                  onClick={() => setIsFilterOpen(!isFilterOpen)}
+                  className={`filter-toggle ${isFilterOpen ? "active" : ""}`}
+                >
+                  <Filter className="w-5 h-5" />
+                  <span>Filters</span>
+                </button>
+
+                <div className="view-controls">
+                  <button
+                    onClick={() => setViewMode("grid")}
+                    className={`view-btn ${viewMode === "grid" ? "active" : ""}`}
+                  >
+                    <Grid className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={() => setViewMode("list")}
+                    className={`view-btn ${viewMode === "list" ? "active" : ""}`}
+                  >
+                    <List className="w-5 h-5" />
+                  </button>
+                </div>
+
+                <div className="sort-controls">
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="sort-select"
+                  >
+                    <option value="time">Time</option>
+                    <option value="name">Name</option>
+                    <option value="participants">Participants</option>
+                    <option value="category">Category</option>
+                  </select>
+                  <button
+                    onClick={() =>
+                      setSortOrder(sortOrder === "asc" ? "desc" : "asc")
+                    }
+                    className="sort-order"
+                  >
+                    {sortOrder === "asc" ? (
+                      <SortAsc className="w-5 h-5" />
+                    ) : (
+                      <SortDesc className="w-5 h-5" />
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {/* Advanced Filters Panel */}
+              {isFilterOpen && (
+                <div className="filters-panel">
+                  <div className="filter-group">
+                    <label className="filter-label">Category</label>
+                    <select
+                      value={selectedCategory}
+                      onChange={(e) => setSelectedCategory(e.target.value)}
+                      className="filter-select"
+                    >
+                      <option value="all">All Categories</option>
+                      <option value="Competition">Competition</option>
+                      <option value="Workshop">Workshop</option>
+                      <option value="Conference">Conference</option>
+                      <option value="Ceremony">Ceremony</option>
+                      <option value="Social">Social</option>
+                    </select>
+                  </div>
+
+                  <div className="filter-group">
+                    <label className="filter-label">Status</label>
+                    <select
+                      value={selectedStatus}
+                      onChange={(e) => setSelectedStatus(e.target.value)}
+                      className="filter-select"
+                    >
+                      <option value="all">All Status</option>
+                      <option value="scheduled">Scheduled</option>
+                      <option value="ongoing">Live/Ongoing</option>
+                      <option value="completed">Completed</option>
+                    </select>
+                  </div>
+
+                  <div className="filter-actions">
+                    <button
+                      onClick={() => {
+                        setSearchTerm("");
+                        setSelectedCategory("all");
+                        setSelectedStatus("all");
+                        setSortBy("time");
+                        setSortOrder("asc");
+                      }}
+                      className="clear-filters"
+                    >
+                      Clear All
+                    </button>
+                    <span className="results-count">
+                      {filteredUpcomingEvents.length} events found
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+
         {/* Section 03: Upcoming Events */}
         <section className="upcoming-section">
           <div className="container">
@@ -660,8 +844,8 @@ const Events = () => {
               </p>
             </div>
 
-            <div className="upcoming-grid">
-              {upcomingEvents.map((event, index) => {
+            <div className={`upcoming-grid ${viewMode}`}>
+              {filteredUpcomingEvents.map((event, index) => {
                 const IconComponent = event.icon;
                 return (
                   <div
