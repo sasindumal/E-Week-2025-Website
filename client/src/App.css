@@ -5824,3 +5824,413 @@
     padding: 1.5rem;
   }
 }
+
+/* ===============================================
+   ULTRA-MODERN SEARCH & FILTER SYSTEM
+   =============================================== */
+
+/* Universal Search Bar Styles */
+.events-search-bar {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2rem;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.search-input-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 300px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.5);
+  z-index: 2;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1.25rem 1.25rem 1.25rem 3.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1.5rem;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: rgba(167, 28, 32, 0.5);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 4px rgba(167, 28, 32, 0.1);
+  transform: translateY(-1px);
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.clear-search {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.clear-search:hover {
+  background: rgba(167, 28, 32, 0.2);
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.filter-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 2rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.filter-toggle:hover,
+.filter-toggle.active {
+  background: rgba(167, 28, 32, 0.2);
+  border-color: rgba(167, 28, 32, 0.3);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(167, 28, 32, 0.2);
+}
+
+.view-controls {
+  display: flex;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.75rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.view-btn {
+  padding: 0.875rem;
+  background: transparent;
+  border: none;
+  border-radius: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view-btn:hover,
+.view-btn.active {
+  color: white;
+  background: rgba(167, 28, 32, 0.3);
+  transform: scale(1.1);
+}
+
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.75rem;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sort-select {
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  outline: none;
+  cursor: pointer;
+  font-weight: 500;
+  appearance: none;
+  padding-right: 1.5rem;
+}
+
+.sort-select option {
+  background: #1a0b2e;
+  color: white;
+}
+
+.sort-order {
+  padding: 0.5rem;
+  background: transparent;
+  border: none;
+  border-radius: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sort-order:hover {
+  color: white;
+  background: rgba(167, 28, 32, 0.2);
+  transform: scale(1.1);
+}
+
+/* Advanced Filters Panel */
+.filters-panel {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.5rem;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.filter-group:last-of-type {
+  margin-bottom: 2rem;
+}
+
+.filter-label {
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.filter-select {
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1rem;
+  color: white;
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2'><polyline points='6,9 12,15 18,9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem;
+  padding-right: 3rem;
+}
+
+.filter-select option {
+  background: #1a0b2e;
+  color: white;
+  padding: 0.5rem;
+}
+
+.filter-select:focus {
+  border-color: rgba(167, 28, 32, 0.5);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 3px rgba(167, 28, 32, 0.1);
+}
+
+.filter-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.clear-filters {
+  padding: 0.875rem 1.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.clear-filters:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.results-count {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Events Search Section */
+.events-search-section {
+  padding: 3rem 0;
+  background: linear-gradient(
+    135deg,
+    rgba(17, 9, 33, 0.8) 0%,
+    rgba(26, 11, 46, 0.9) 100%
+  );
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.events-search-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.search-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 2.5rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #ffffff, #a71c20);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+.search-section-subtitle {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Enhanced Grid View */
+.upcoming-grid.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 2rem;
+}
+
+.upcoming-grid.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.upcoming-grid.list .upcoming-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 1.5rem;
+  gap: 2rem;
+}
+
+.upcoming-grid.list .upcoming-icon {
+  margin: 0;
+}
+
+.upcoming-grid.list .upcoming-details {
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .search-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-input-wrapper {
+    min-width: unset;
+  }
+
+  .filter-group {
+    margin-bottom: 1rem;
+  }
+
+  .filters-panel {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .events-search-bar {
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+  }
+
+  .search-section-title {
+    font-size: 2rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .filter-actions {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .upcoming-grid.grid {
+    grid-template-columns: 1fr;
+  }
+
+  .upcoming-grid.list .upcoming-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .view-controls,
+  .sort-controls {
+    width: 100%;
+    justify-content: center;
+  }
+}
