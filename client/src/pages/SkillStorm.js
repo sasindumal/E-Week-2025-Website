@@ -18,19 +18,15 @@ import {
   Smartphone,
   Joystick,
   Award,
-  ChevronRight,
   ChevronDown,
   UserCheck,
   Shield,
   Car,
   Crosshair,
-  Wrench,
-  Cpu,
   ArrowRight,
 } from "lucide-react";
 
 const SkillStorm = () => {
-  const [selectedGame, setSelectedGame] = useState(null);
   const [registrationModal, setRegistrationModal] = useState(null);
   const [expandedSection, setExpandedSection] = useState("pc-games");
 

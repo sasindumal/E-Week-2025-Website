@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Layout from "../components/Layout";
 import { useApp } from "../context/AppContext";
 import { Trophy, Medal, Award, Star } from "lucide-react";

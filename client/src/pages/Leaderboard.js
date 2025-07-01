@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Layout from "../components/Layout";
 import {
   Trophy,
@@ -17,13 +17,10 @@ import {
   ChevronDown,
   BarChart3,
   Activity,
-  Clock,
-  MapPin,
 } from "lucide-react";
 
 const Leaderboard = () => {
-  const [selectedTimeframe, setSelectedTimeframe] = useState("all");
-  const [animationDelay, setAnimationDelay] = useState(0);
+  const [selectedTimeframe] = useState("all");
 
   // Enhanced batch rankings with detailed stats
   const batchRankings = [
