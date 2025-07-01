@@ -424,6 +424,21 @@ const Home = () => {
               </div>
             ))}
           </div>
+
+          <div className="text-center mt-8">
+            <p className="text-white opacity-80 mb-6">
+              🎯 Earn points by participating in pre-event activities, polls,
+              and challenges!
+            </p>
+            <Link
+              to="/leaderboard"
+              className="btn-modern btn-secondary-modern inline-flex items-center gap-2"
+            >
+              <Trophy size={20} />
+              <span>View Full Leaderboard</span>
+              <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
       </section>
 
