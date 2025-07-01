@@ -213,6 +213,77 @@
   opacity: 0.8;
 }
 
+/* Sponsors Sliding Animation */
+.sponsors-container {
+  overflow: hidden;
+  position: relative;
+  padding: 2rem 0;
+}
+
+.sponsors-slider {
+  display: flex;
+  gap: 2rem;
+  animation: slideSponsors 30s linear infinite;
+  width: fit-content;
+}
+
+.sponsor-card {
+  min-width: 280px;
+  padding: 2rem;
+  border-radius: 1rem;
+  color: white;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.sponsor-card:hover {
+  transform: translateY(-5px);
+}
+
+.sponsor-logo {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.sponsor-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.sponsor-description {
+  font-size: 0.875rem;
+  opacity: 0.9;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.sponsor-tier {
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@keyframes slideSponsors {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause animation on hover */
+.sponsors-container:hover .sponsors-slider {
+  animation-play-state: paused;
+}
+
 /* Sections */
 .section {
   padding: 5rem 0;
@@ -364,6 +435,55 @@
   font-size: 0.875rem;
 }
 
+/* Batch Leaderboard Styles */
+.max-w-4xl {
+  max-width: 56rem;
+}
+
+.max-w-5xl {
+  max-width: 64rem;
+}
+
+.ring-2 {
+  box-shadow: 0 0 0 2px currentColor;
+}
+
+.ring-yellow-400 {
+  --tw-ring-color: #facc15;
+}
+
+.ring-gray-400 {
+  --tw-ring-color: #9ca3af;
+}
+
+.ring-orange-400 {
+  --tw-ring-color: #fb923c;
+}
+
+.text-yellow-400 {
+  color: #facc15;
+}
+
+.text-blue-400 {
+  color: #60a5fa;
+}
+
+.border-yellow-400 {
+  border-color: #facc15;
+}
+
+.border-blue-400 {
+  border-color: #60a5fa;
+}
+
+.text-green-400 {
+  color: #4ade80;
+}
+
+.bg-green-400 {
+  background-color: #4ade80;
+}
+
 /* Responsive Design */
 @media (min-width: 640px) {
   .hero-title {
@@ -427,6 +547,15 @@
 
   .event-highlights {
     grid-template-columns: 1fr;
+  }
+
+  .sponsors-slider {
+    gap: 1rem;
+  }
+
+  .sponsor-card {
+    min-width: 240px;
+    padding: 1.5rem;
   }
 }
 
