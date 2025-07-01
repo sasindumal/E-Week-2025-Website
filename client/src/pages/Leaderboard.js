@@ -17,10 +17,21 @@ import {
   ChevronDown,
   BarChart3,
   Activity,
+  Search,
+  Filter,
+  SortAsc,
+  SortDesc,
+  X,
 } from "lucide-react";
 
 const Leaderboard = () => {
   const [selectedTimeframe] = useState("all");
+  const [eventSearchTerm, setEventSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedBatch, setSelectedBatch] = useState("all");
+  const [sortBy, setSortBy] = useState("date");
+  const [sortOrder, setSortOrder] = useState("desc");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   // Enhanced batch rankings with detailed stats
   const batchRankings = [
@@ -258,6 +269,48 @@ const Leaderboard = () => {
     return colors[category] || "from-gray-500 to-gray-600";
   };
 
+  // Filter and sort past events
+  const filteredPastEvents = pastEvents
+    .filter((event) => {
+      const matchesSearch =
+        eventSearchTerm === "" ||
+        event.name.toLowerCase().includes(eventSearchTerm.toLowerCase()) ||
+        event.category.toLowerCase().includes(eventSearchTerm.toLowerCase()) ||
+        event.results.some((result) =>
+          result.batch.toLowerCase().includes(eventSearchTerm.toLowerCase()),
+        );
+
+      const matchesCategory =
+        selectedCategory === "all" || event.category === selectedCategory;
+      const matchesBatch =
+        selectedBatch === "all" ||
+        event.results.some((result) => result.batch === selectedBatch);
+
+      return matchesSearch && matchesCategory && matchesBatch;
+    })
+    .sort((a, b) => {
+      let comparison = 0;
+
+      switch (sortBy) {
+        case "date":
+          comparison = new Date(b.date) - new Date(a.date);
+          break;
+        case "participants":
+          comparison = b.participants - a.participants;
+          break;
+        case "category":
+          comparison = a.category.localeCompare(b.category);
+          break;
+        case "name":
+          comparison = a.name.localeCompare(b.name);
+          break;
+        default:
+          comparison = 0;
+      }
+
+      return sortOrder === "asc" ? -comparison : comparison;
+    });
+
   return (
     <Layout>
       <div className="leaderboard-page">
@@ -464,8 +517,119 @@ const Leaderboard = () => {
               </p>
             </div>
 
+            {/* Modern Search and Filter Bar */}
+            <div className="events-search-bar">
+              <div className="search-container">
+                <div className="search-input-wrapper">
+                  <Search className="search-icon" />
+                  <input
+                    type="text"
+                    placeholder="Search events, categories, or batches..."
+                    value={eventSearchTerm}
+                    onChange={(e) => setEventSearchTerm(e.target.value)}
+                    className="search-input"
+                  />
+                  {eventSearchTerm && (
+                    <button
+                      onClick={() => setEventSearchTerm("")}
+                      className="clear-search"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+
+                <button
+                  onClick={() => setIsFilterOpen(!isFilterOpen)}
+                  className={`filter-toggle ${isFilterOpen ? "active" : ""}`}
+                >
+                  <Filter className="w-5 h-5" />
+                  <span>Filters</span>
+                </button>
+
+                <div className="sort-controls">
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="sort-select"
+                  >
+                    <option value="date">Date</option>
+                    <option value="participants">Participants</option>
+                    <option value="category">Category</option>
+                    <option value="name">Name</option>
+                  </select>
+                  <button
+                    onClick={() =>
+                      setSortOrder(sortOrder === "asc" ? "desc" : "asc")
+                    }
+                    className="sort-order"
+                  >
+                    {sortOrder === "asc" ? (
+                      <SortAsc className="w-5 h-5" />
+                    ) : (
+                      <SortDesc className="w-5 h-5" />
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {/* Advanced Filters Panel */}
+              {isFilterOpen && (
+                <div className="filters-panel">
+                  <div className="filter-group">
+                    <label className="filter-label">Category</label>
+                    <select
+                      value={selectedCategory}
+                      onChange={(e) => setSelectedCategory(e.target.value)}
+                      className="filter-select"
+                    >
+                      <option value="all">All Categories</option>
+                      <option value="Technical">Technical</option>
+                      <option value="Engineering">Engineering</option>
+                      <option value="Innovation">Innovation</option>
+                      <option value="Security">Security</option>
+                    </select>
+                  </div>
+
+                  <div className="filter-group">
+                    <label className="filter-label">Winning Batch</label>
+                    <select
+                      value={selectedBatch}
+                      onChange={(e) => setSelectedBatch(e.target.value)}
+                      className="filter-select"
+                    >
+                      <option value="all">All Batches</option>
+                      <option value="E20">E20</option>
+                      <option value="E21">E21</option>
+                      <option value="E22">E22</option>
+                      <option value="E23">E23</option>
+                      <option value="E24">E24</option>
+                    </select>
+                  </div>
+
+                  <div className="filter-actions">
+                    <button
+                      onClick={() => {
+                        setEventSearchTerm("");
+                        setSelectedCategory("all");
+                        setSelectedBatch("all");
+                        setSortBy("date");
+                        setSortOrder("desc");
+                      }}
+                      className="clear-filters"
+                    >
+                      Clear All
+                    </button>
+                    <span className="results-count">
+                      {filteredPastEvents.length} events found
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+
             <div className="events-timeline">
-              {pastEvents.map((event, index) => (
+              {filteredPastEvents.map((event, index) => (
                 <div
                   key={event.id}
                   className="event-scorecard"

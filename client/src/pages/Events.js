@@ -18,11 +18,25 @@ import {
   Flame,
   CheckCircle,
   ArrowRight,
+  Search,
+  Filter,
+  SortAsc,
+  SortDesc,
+  X,
+  Grid,
+  List,
 } from "lucide-react";
 
 const Events = () => {
   const [selectedDay, setSelectedDay] = useState(0);
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedStatus, setSelectedStatus] = useState("all");
+  const [sortBy, setSortBy] = useState("time");
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [viewMode, setViewMode] = useState("grid");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   // Update current time every minute
   useEffect(() => {
