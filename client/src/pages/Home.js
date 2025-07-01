@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Layout from "../components/Layout";
 import CountdownTimer from "../components/CountdownTimer";
 import {
@@ -10,138 +10,249 @@ import {
   Clock,
   MapPin,
   Star,
+  ArrowRight,
+  Play,
+  ChevronDown,
+  Sparkles,
+  Target,
+  Award,
+  Code,
+  Cpu,
+  Lightbulb,
 } from "lucide-react";
 
 const Home = () => {
   const [isRegistered, setIsRegistered] = useState(false);
   const [email, setEmail] = useState("");
   const [showNotificationModal, setShowNotificationModal] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [scrollY, setScrollY] = useState(0);
+  const heroRef = useRef(null);
 
-  // Mock data for batch leaderboard (fun competition before event)
+  // Track mouse for parallax effects
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Modern batch leaderboard with enhanced styling
   const batchLeaderboard = [
-    { batch: "E21", points: 450, emoji: "🏆", rank: 1, activities: 15 },
-    { batch: "E22", points: 420, emoji: "🥈", rank: 2, activities: 12 },
-    { batch: "E20", points: 380, emoji: "🥉", rank: 3, activities: 10 },
-    { batch: "E23", points: 350, emoji: "🌟", rank: 4, activities: 8 },
-    { batch: "E24", points: 320, emoji: "⭐", rank: 5, activities: 6 },
+    {
+      batch: "E21",
+      points: 2450,
+      emoji: "🏆",
+      rank: 1,
+      activities: 24,
+      growth: "+12%",
+      color: "from-yellow-400 to-yellow-600",
+    },
+    {
+      batch: "E22",
+      points: 2120,
+      emoji: "🥈",
+      rank: 2,
+      activities: 18,
+      growth: "+8%",
+      color: "from-gray-300 to-gray-500",
+    },
+    {
+      batch: "E20",
+      points: 1980,
+      emoji: "🥉",
+      rank: 3,
+      activities: 15,
+      growth: "+5%",
+      color: "from-orange-400 to-orange-600",
+    },
+    {
+      batch: "E23",
+      points: 1750,
+      emoji: "⭐",
+      rank: 4,
+      activities: 12,
+      growth: "+15%",
+      color: "from-blue-400 to-blue-600",
+    },
+    {
+      batch: "E24",
+      points: 1420,
+      emoji: "🌟",
+      rank: 5,
+      activities: 9,
+      growth: "+22%",
+      color: "from-purple-400 to-purple-600",
+    },
   ];
 
-  // Mock upcoming events data
+  // Enhanced upcoming events
   const upcomingEvents = [
     {
       id: 1,
-      title: "Programming Contest",
+      title: "AI & Machine Learning Hackathon",
       date: "August 25, 2025",
       time: "9:00 AM",
-      location: "Computer Lab A",
+      location: "Innovation Hub",
       category: "Technical",
       priority: "high",
+      participants: "500+",
+      prize: "$5,000",
+      icon: Code,
+      gradient: "from-blue-500 to-purple-600",
     },
     {
       id: 2,
-      title: "Robotics Challenge",
+      title: "Robotics Championship",
       date: "August 26, 2025",
       time: "2:00 PM",
-      location: "Engineering Workshop",
-      category: "Engineering",
+      location: "Engineering Arena",
+      category: "Competition",
       priority: "high",
+      participants: "200+",
+      prize: "$3,000",
+      icon: Cpu,
+      gradient: "from-green-500 to-teal-600",
     },
     {
       id: 3,
-      title: "Innovation Pitch",
+      title: "Startup Pitch Battle",
       date: "August 27, 2025",
       time: "10:00 AM",
       location: "Main Auditorium",
       category: "Innovation",
       priority: "medium",
+      participants: "150+",
+      prize: "$2,000",
+      icon: Lightbulb,
+      gradient: "from-orange-500 to-red-600",
     },
     {
       id: 4,
-      title: "Circuit Design Workshop",
+      title: "IoT Solutions Workshop",
       date: "August 28, 2025",
       time: "1:00 PM",
-      location: "Electronics Lab",
+      location: "Tech Lab",
       category: "Workshop",
       priority: "medium",
+      participants: "100+",
+      prize: "Certificates",
+      icon: Target,
+      gradient: "from-pink-500 to-purple-600",
     },
   ];
 
-  // Mock sponsors data
+  // Premium sponsors with enhanced data
   const sponsors = [
     {
-      name: "TechCorp",
+      name: "TechCorp Global",
       logo: "🏢",
       tier: "platinum",
-      description: "Leading technology solutions",
+      description: "Leading AI & Cloud Solutions",
+      value: "$50K",
+      industry: "Technology",
     },
     {
       name: "InnovateLab",
       logo: "🔬",
       tier: "gold",
-      description: "Innovation and research",
+      description: "Research & Development Pioneer",
+      value: "$30K",
+      industry: "R&D",
     },
     {
-      name: "CodeMasters",
+      name: "CodeMasters Inc",
       logo: "💻",
       tier: "gold",
-      description: "Software development experts",
+      description: "Software Development Excellence",
+      value: "$25K",
+      industry: "Software",
     },
     {
-      name: "FutureTech",
+      name: "FutureTech Systems",
       logo: "🚀",
       tier: "silver",
-      description: "Future technology pioneers",
+      description: "Next-Gen Technology Solutions",
+      value: "$15K",
+      industry: "Hardware",
     },
     {
-      name: "GreenEnergy",
+      name: "GreenEnergy Solutions",
       logo: "🌱",
       tier: "silver",
-      description: "Sustainable energy solutions",
+      description: "Sustainable Innovation Leaders",
+      value: "$12K",
+      industry: "Energy",
     },
     {
-      name: "DataDrive",
+      name: "DataDrive Analytics",
       logo: "📊",
       tier: "bronze",
-      description: "Data analytics platform",
+      description: "Big Data & Analytics Platform",
+      value: "$8K",
+      industry: "Analytics",
     },
     {
-      name: "CloudSys",
+      name: "CloudSys Networks",
       logo: "☁️",
       tier: "bronze",
-      description: "Cloud infrastructure",
+      description: "Cloud Infrastructure Specialists",
+      value: "$6K",
+      industry: "Cloud",
     },
     {
-      name: "AIVision",
+      name: "AIVision Technologies",
       logo: "🤖",
       tier: "bronze",
-      description: "Artificial intelligence",
+      description: "Computer Vision & AI",
+      value: "$5K",
+      industry: "AI/ML",
     },
   ];
 
-  const features = [
+  const modernFeatures = [
     {
-      icon: Calendar,
-      title: "Exciting Events",
+      icon: Code,
+      title: "Cutting-Edge Competitions",
       description:
-        "Multiple competitive events spanning technology, innovation, and engineering challenges",
+        "AI, blockchain, IoT, and emerging tech challenges that shape the future",
+      color: "from-blue-500 to-cyan-500",
+      delay: "0ms",
     },
     {
       icon: Trophy,
-      title: "Win Big",
+      title: "Premium Rewards",
       description:
-        "Compete for amazing prizes and recognition in various categories",
+        "Cash prizes, internships, and exclusive opportunities with top companies",
+      color: "from-yellow-500 to-orange-500",
+      delay: "100ms",
     },
     {
       icon: Users,
-      title: "Team Building",
+      title: "Global Networking",
       description:
-        "Connect with fellow engineers and build lasting professional relationships",
+        "Connect with industry leaders, innovators, and future tech pioneers",
+      color: "from-purple-500 to-pink-500",
+      delay: "200ms",
     },
     {
-      icon: Zap,
-      title: "Innovation",
+      icon: Sparkles,
+      title: "Innovation Showcase",
       description:
-        "Showcase your creativity and technical skills in cutting-edge challenges",
+        "Present groundbreaking solutions to real-world engineering challenges",
+      color: "from-green-500 to-teal-500",
+      delay: "300ms",
     },
   ];
 
@@ -157,217 +268,234 @@ const Home = () => {
     }
   };
 
-  const getPriorityColor = (priority) => {
-    switch (priority) {
-      case "high":
-        return "text-red border-red";
-      case "medium":
-        return "text-yellow-400 border-yellow-400";
-      default:
-        return "text-blue-400 border-blue-400";
-    }
-  };
-
-  const getTierColor = (tier) => {
-    switch (tier) {
-      case "platinum":
-        return "bg-gradient-to-r from-purple-400 to-purple-600";
-      case "gold":
-        return "bg-gradient-to-r from-yellow-400 to-yellow-600";
-      case "silver":
-        return "bg-gradient-to-r from-gray-300 to-gray-500";
-      default:
-        return "bg-gradient-to-r from-orange-400 to-orange-600";
-    }
+  const scrollToSection = (sectionId) => {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
     <Layout>
-      {/* Hero Section with Countdown */}
-      <section className="hero">
-        <div className="hero-content">
-          <img
-            src="https://cdn.builder.io/api/v1/assets/c5794fad86854d05a0a2b5f05a97b44d/e-week_logo_-2025-322131?format=webp&width=800"
-            alt="E-Week 2025"
-            className="hero-logo"
-          />
+      {/* Ultra-Modern Hero Section */}
+      <section className="modern-hero" ref={heroRef}>
+        {/* Animated Background */}
+        <div className="hero-background">
+          <div className="floating-shapes">
+            <div className="shape shape-1"></div>
+            <div className="shape shape-2"></div>
+            <div className="shape shape-3"></div>
+            <div className="shape shape-4"></div>
+            <div className="shape shape-5"></div>
+          </div>
 
-          <h1 className="hero-title">
-            E-WEEK
-            <span className="highlight">2025</span>
-          </h1>
+          {/* Particle Effect */}
+          <div className="particles">
+            {[...Array(20)].map((_, i) => (
+              <div key={i} className={`particle particle-${i}`}></div>
+            ))}
+          </div>
+        </div>
 
-          <p className="hero-subtitle">
-            The ultimate engineering competition at University of Jaffna Faculty
-            of Engineering. Join us for an unforgettable week of innovation,
-            competition, and excellence.
-          </p>
+        <div className="hero-content-modern">
+          {/* Floating Logo */}
+          <div
+            className="logo-container"
+            style={{
+              transform: `translateY(${scrollY * 0.1}px) rotateX(${mousePosition.x * 0.01}deg)`,
+            }}
+          >
+            <img
+              src="https://cdn.builder.io/api/v1/assets/c5794fad86854d05a0a2b5f05a97b44d/e-week_logo_-2025-322131?format=webp&width=800"
+              alt="E-Week 2025"
+              className="modern-logo"
+            />
+            <div className="logo-glow"></div>
+          </div>
 
-          <CountdownTimer targetDate="2025-08-25T00:00:00" />
+          {/* Modern Typography */}
+          <div className="hero-text">
+            <h1 className="modern-title">
+              <span className="title-line">E-WEEK</span>
+              <span className="title-year">2025</span>
+              <div className="title-underline"></div>
+            </h1>
 
-          {/* Registration for Notifications */}
-          <div className="hero-actions">
+            <p className="modern-subtitle">
+              Where Innovation Meets{" "}
+              <span className="highlight-text">Excellence</span>
+              <br />
+              The Future of Engineering Starts Here
+            </p>
+          </div>
+
+          {/* Enhanced Countdown */}
+          <div className="modern-countdown">
+            <CountdownTimer targetDate="2025-08-25T00:00:00" />
+          </div>
+
+          {/* Modern CTA Buttons */}
+          <div className="modern-actions">
             <button
               onClick={() => setShowNotificationModal(true)}
-              className="btn btn-primary flex items-center gap-2"
+              className="btn-modern btn-primary-modern"
             >
               <Bell size={20} />
-              Get Notified
+              <span>Get Early Access</span>
+              <ArrowRight size={16} />
             </button>
-            <button className="btn btn-secondary">Learn More</button>
+
+            <button
+              onClick={() => scrollToSection("events")}
+              className="btn-modern btn-secondary-modern"
+            >
+              <Play size={20} />
+              <span>Watch Trailer</span>
+            </button>
+          </div>
+
+          {/* Scroll Indicator */}
+          <div
+            className="scroll-indicator"
+            onClick={() => scrollToSection("leaderboard")}
+          >
+            <ChevronDown size={24} />
+            <span>Explore</span>
           </div>
         </div>
       </section>
 
-      {/* Batch Leaderboard Section */}
-      <section className="section">
+      {/* Modern Batch Competition */}
+      <section className="modern-section" id="leaderboard">
         <div className="container">
-          <h2 className="section-title">Batch Competition</h2>
-          <p className="section-subtitle">
-            Pre-event excitement! See which batch is leading in engagement and
-            activities
-          </p>
+          <div className="section-header-modern">
+            <h2 className="section-title-modern">
+              Batch Competition
+              <Sparkles className="title-icon" size={32} />
+            </h2>
+            <p className="section-subtitle-modern">
+              Real-time leaderboard showing which engineering batch is
+              dominating the pre-event challenges
+            </p>
+          </div>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-              {batchLeaderboard.map((batch, index) => (
+          <div className="leaderboard-modern">
+            {batchLeaderboard.map((batch, index) => (
+              <div
+                key={batch.batch}
+                className={`leaderboard-card ${batch.rank <= 3 ? "top-three" : ""}`}
+                style={{
+                  animationDelay: `${index * 100}ms`,
+                  transform: `perspective(1000px) rotateY(${(mousePosition.x - window.innerWidth / 2) * 0.01}deg)`,
+                }}
+              >
                 <div
-                  key={batch.batch}
-                  className={`card text-center transition-all duration-300 hover:scale-105 ${
-                    batch.rank === 1
-                      ? "ring-2 ring-yellow-400"
-                      : batch.rank === 2
-                        ? "ring-2 ring-gray-400"
-                        : batch.rank === 3
-                          ? "ring-2 ring-orange-400"
-                          : ""
-                  }`}
+                  className={`card-gradient bg-gradient-to-br ${batch.color}`}
                 >
-                  <div className="text-4xl mb-2">{batch.emoji}</div>
-                  <h3 className="text-xl font-bold text-white mb-1">
-                    {batch.batch}
-                  </h3>
-                  <div className="text-2xl font-bold text-red mb-1">
-                    {batch.points}
+                  <div className="rank-badge">#{batch.rank}</div>
+                  <div className="batch-emoji">{batch.emoji}</div>
+                  <h3 className="batch-name">{batch.batch}</h3>
+
+                  <div className="stats-section">
+                    <div className="main-stat">
+                      <span className="stat-number">
+                        {batch.points.toLocaleString()}
+                      </span>
+                      <span className="stat-label">Points</span>
+                    </div>
+
+                    <div className="sub-stats">
+                      <div className="sub-stat">
+                        <span className="sub-number">{batch.activities}</span>
+                        <span className="sub-label">Activities</span>
+                      </div>
+                      <div className="sub-stat growth">
+                        <span className="sub-number">{batch.growth}</span>
+                        <span className="sub-label">Growth</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-sm text-white opacity-70">points</div>
-                  <div className="text-xs text-white opacity-60 mt-2">
-                    {batch.activities} activities
-                  </div>
-                  <div className="text-xs text-white opacity-60">
-                    Rank #{batch.rank}
+
+                  <div className="progress-bar">
+                    <div
+                      className="progress-fill"
+                      style={{ width: `${(batch.points / 2500) * 100}%` }}
+                    ></div>
                   </div>
                 </div>
-              ))}
-            </div>
-            <div className="text-center mt-6">
-              <p className="text-white opacity-80">
-                🎯 Earn points by participating in pre-event activities, polls,
-                and challenges!
-              </p>
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Upcoming Events Section */}
-      <section className="section section-white">
+      {/* Ultra-Modern Events Section */}
+      <section className="modern-section events-section" id="events">
         <div className="container">
-          <h2 className="section-title text-navy">Upcoming Events</h2>
-          <p className="section-subtitle">
-            Mark your calendars for these exciting events in chronological order
-          </p>
+          <div className="section-header-modern">
+            <h2 className="section-title-modern">
+              Upcoming Events
+              <Calendar className="title-icon" size={32} />
+            </h2>
+            <p className="section-subtitle-modern">
+              Cutting-edge competitions and workshops designed for the next
+              generation of engineers
+            </p>
+          </div>
 
-          <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {upcomingEvents.map((event) => (
+          <div className="events-grid-modern">
+            {upcomingEvents.map((event, index) => {
+              const IconComponent = event.icon;
+              return (
                 <div
                   key={event.id}
-                  className={`bg-white rounded-xl p-6 border-l-4 ${getPriorityColor(event.priority)} shadow-lg hover:shadow-xl transition-all duration-300`}
+                  className="event-card-modern"
+                  style={{ animationDelay: `${index * 150}ms` }}
                 >
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-xl font-semibold text-navy">
-                      {event.title}
-                    </h3>
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-medium ${getPriorityColor(event.priority)} border`}
-                    >
-                      {event.category}
-                    </span>
-                  </div>
-
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center text-navy opacity-70">
-                      <Calendar className="w-4 h-4 mr-3 text-red" />
-                      <span>{event.date}</span>
+                  <div
+                    className={`event-gradient bg-gradient-to-br ${event.gradient}`}
+                  >
+                    <div className="event-header">
+                      <div className="event-icon">
+                        <IconComponent size={24} />
+                      </div>
+                      <div className="event-priority">
+                        <span className={`priority-badge ${event.priority}`}>
+                          {event.priority.toUpperCase()}
+                        </span>
+                      </div>
                     </div>
-                    <div className="flex items-center text-navy opacity-70">
-                      <Clock className="w-4 h-4 mr-3 text-red" />
-                      <span>{event.time}</span>
+
+                    <h3 className="event-title">{event.title}</h3>
+
+                    <div className="event-details">
+                      <div className="detail-item">
+                        <Calendar size={16} />
+                        <span>{event.date}</span>
+                      </div>
+                      <div className="detail-item">
+                        <Clock size={16} />
+                        <span>{event.time}</span>
+                      </div>
+                      <div className="detail-item">
+                        <MapPin size={16} />
+                        <span>{event.location}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center text-navy opacity-70">
-                      <MapPin className="w-4 h-4 mr-3 text-red" />
-                      <span>{event.location}</span>
+
+                    <div className="event-stats">
+                      <div className="stat-pill">
+                        <Users size={14} />
+                        <span>{event.participants}</span>
+                      </div>
+                      <div className="stat-pill prize">
+                        <Award size={14} />
+                        <span>{event.prize}</span>
+                      </div>
                     </div>
+
+                    <button className="event-cta">
+                      Register Now
+                      <ArrowRight size={16} />
+                    </button>
                   </div>
-
-                  <button className="w-full bg-navy text-white py-2 rounded-lg font-medium hover:bg-red transition-colors duration-300">
-                    Learn More
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Sponsors Sliding Section */}
-      <section className="section">
-        <div className="container">
-          <h2 className="section-title">Our Sponsors</h2>
-          <p className="section-subtitle">
-            Proudly supported by industry leaders and innovators
-          </p>
-
-          <div className="sponsors-container">
-            <div className="sponsors-slider">
-              {[...sponsors, ...sponsors].map((sponsor, index) => (
-                <div
-                  key={`${sponsor.name}-${index}`}
-                  className={`sponsor-card ${getTierColor(sponsor.tier)}`}
-                >
-                  <div className="sponsor-logo">{sponsor.logo}</div>
-                  <h3 className="sponsor-name">{sponsor.name}</h3>
-                  <p className="sponsor-description">{sponsor.description}</p>
-                  <div className="sponsor-tier">
-                    {sponsor.tier.toUpperCase()}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="section section-white">
-        <div className="container">
-          <h2 className="section-title text-navy">Why Join E-Week 2025?</h2>
-          <p className="section-subtitle">
-            Experience the thrill of engineering excellence through our
-            carefully curated events and competitions
-          </p>
-
-          <div className="features-grid">
-            {features.map((feature, index) => {
-              const IconComponent = feature.icon;
-              return (
-                <div key={index} className="feature-card">
-                  <div className="feature-icon">
-                    <IconComponent size={32} />
-                  </div>
-                  <h3 className="feature-title text-navy">{feature.title}</h3>
-                  <p className="feature-description">{feature.description}</p>
                 </div>
               );
             })}
@@ -375,67 +503,165 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="footer">
+      {/* Premium Sponsors Showcase */}
+      <section className="modern-section sponsors-section">
         <div className="container">
-          <img
-            src="https://cdn.builder.io/api/v1/assets/c5794fad86854d05a0a2b5f05a97b44d/e-week_logo_-2025-322131?format=webp&width=800"
-            alt="E-Week 2025"
-            className="footer-logo"
-          />
-          <p className="footer-text">
-            University of Jaffna • Faculty of Engineering
-          </p>
-          <p className="footer-copyright">
-            © 2025 E-Week. All rights reserved.
-          </p>
+          <div className="section-header-modern">
+            <h2 className="section-title-modern">
+              Premium Partners
+              <Star className="title-icon" size={32} />
+            </h2>
+            <p className="section-subtitle-modern">
+              Powered by industry leaders investing in the future of engineering
+            </p>
+          </div>
+
+          <div className="sponsors-showcase">
+            <div className="sponsors-track">
+              {[...sponsors, ...sponsors].map((sponsor, index) => (
+                <div
+                  key={`${sponsor.name}-${index}`}
+                  className={`sponsor-card-modern ${sponsor.tier}`}
+                >
+                  <div className="sponsor-tier-badge">{sponsor.tier}</div>
+                  <div className="sponsor-logo-modern">{sponsor.logo}</div>
+                  <h3 className="sponsor-name-modern">{sponsor.name}</h3>
+                  <p className="sponsor-description-modern">
+                    {sponsor.description}
+                  </p>
+                  <div className="sponsor-meta">
+                    <span className="sponsor-value">{sponsor.value}</span>
+                    <span className="sponsor-industry">{sponsor.industry}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Modern Features */}
+      <section className="modern-section features-section">
+        <div className="container">
+          <div className="section-header-modern">
+            <h2 className="section-title-modern">
+              Why Choose E-Week 2025?
+              <Zap className="title-icon" size={32} />
+            </h2>
+          </div>
+
+          <div className="features-grid-modern">
+            {modernFeatures.map((feature, index) => {
+              const IconComponent = feature.icon;
+              return (
+                <div
+                  key={index}
+                  className="feature-card-modern"
+                  style={{ animationDelay: feature.delay }}
+                >
+                  <div
+                    className={`feature-gradient bg-gradient-to-br ${feature.color}`}
+                  >
+                    <div className="feature-icon-modern">
+                      <IconComponent size={32} />
+                    </div>
+                    <h3 className="feature-title-modern">{feature.title}</h3>
+                    <p className="feature-description-modern">
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Modern Footer */}
+      <footer className="modern-footer">
+        <div className="container">
+          <div className="footer-content-modern">
+            <div className="footer-logo-section">
+              <img
+                src="https://cdn.builder.io/api/v1/assets/c5794fad86854d05a0a2b5f05a97b44d/e-week_logo_-2025-322131?format=webp&width=800"
+                alt="E-Week 2025"
+                className="footer-logo-modern"
+              />
+              <p className="footer-tagline">Engineering the Future, Together</p>
+            </div>
+
+            <div className="footer-info">
+              <p className="footer-text-modern">
+                University of Jaffna • Faculty of Engineering
+              </p>
+              <p className="footer-copyright-modern">
+                © 2025 E-Week. Crafted with ❤️ for Innovation
+              </p>
+            </div>
+          </div>
         </div>
       </footer>
 
-      {/* Notification Modal */}
+      {/* Ultra-Modern Notification Modal */}
       {showNotificationModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-navy rounded-xl p-8 max-w-md w-full">
-            <h3 className="text-2xl font-bold text-white mb-4 text-center">
-              🔔 Get Event Notifications
-            </h3>
+        <div className="modal-overlay-modern">
+          <div className="modal-content-modern">
+            <div className="modal-header-modern">
+              <h3 className="modal-title-modern">
+                🚀 Join the Innovation Journey
+              </h3>
+              <button
+                onClick={() => setShowNotificationModal(false)}
+                className="modal-close-modern"
+              >
+                ×
+              </button>
+            </div>
 
             {!isRegistered ? (
-              <form onSubmit={handleNotificationSignup} className="space-y-4">
-                <p className="text-white opacity-80 text-center mb-4">
-                  Be the first to know when registration opens and get exclusive
-                  updates!
+              <form
+                onSubmit={handleNotificationSignup}
+                className="modal-form-modern"
+              >
+                <p className="modal-description">
+                  Get exclusive early access, insider updates, and be the first
+                  to know when registration opens!
                 </p>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email address"
-                  className="w-full px-4 py-3 rounded-lg bg-white text-navy placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red"
-                  required
-                />
-                <div className="flex gap-4">
-                  <button type="submit" className="btn btn-primary flex-1">
-                    Notify Me
-                  </button>
+
+                <div className="input-group-modern">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email address"
+                    className="input-modern"
+                    required
+                  />
+                  <div className="input-glow"></div>
+                </div>
+
+                <div className="modal-actions-modern">
                   <button
-                    type="button"
-                    onClick={() => setShowNotificationModal(false)}
-                    className="btn btn-secondary flex-1"
+                    type="submit"
+                    className="btn-modern btn-primary-modern full-width"
                   >
-                    Cancel
+                    <Bell size={20} />
+                    <span>Notify Me First</span>
+                    <Sparkles size={16} />
                   </button>
                 </div>
+
+                <p className="modal-footer-text">
+                  Join 1,000+ engineers already signed up!
+                </p>
               </form>
             ) : (
-              <div className="text-center">
-                <div className="text-4xl mb-4">🎉</div>
-                <h4 className="text-xl font-bold text-green-400 mb-2">
-                  Success!
-                </h4>
-                <p className="text-white opacity-80">
-                  You'll receive notifications when registration opens and for
-                  important updates!
+              <div className="success-message-modern">
+                <div className="success-icon">🎉</div>
+                <h4 className="success-title">Welcome Aboard!</h4>
+                <p className="success-description">
+                  You're now part of the E-Week 2025 community. Get ready for an
+                  amazing journey!
                 </p>
               </div>
             )}
