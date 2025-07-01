@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Layout from "../components/Layout";
 import { useApp } from "../context/AppContext";
 import {
@@ -9,8 +9,7 @@ import {
   Heart,
   Download,
   Share2,
-  Filter,
-  Grid3X3,
+  Grid,
   Layers,
   Play,
   X,
@@ -158,7 +157,7 @@ const Gallery = () => {
                   className={`view-btn ${viewMode === "grid" ? "active" : ""}`}
                   onClick={() => setViewMode("grid")}
                 >
-                  <Grid3X3 className="w-5 h-5" />
+                  <Grid className="w-5 h-5" />
                 </button>
                 <button
                   className={`view-btn ${viewMode === "masonry" ? "active" : ""}`}

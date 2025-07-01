@@ -11,7 +11,7 @@ import {
 
 const Downloads = () => {
   const [activeTab, setActiveTab] = useState("android");
-  const [downloadStats, setDownloadStats] = useState({
+  const [downloadStats] = useState({
     android: { count: 15420, growth: "+23%" },
     macos: { count: 8930, growth: "+18%" },
     windows: { count: 22150, growth: "+31%" },
