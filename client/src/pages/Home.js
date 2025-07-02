@@ -276,90 +276,113 @@ const Home = () => {
   return (
     <Layout>
       {/* Ultra-Modern Hero Section */}
-      <section className="modern-hero" ref={heroRef}>
-        {/* Animated Background */}
-        <div className="hero-background">
-          <div className="floating-shapes">
-            <div className="shape shape-1"></div>
-            <div className="shape shape-2"></div>
-            <div className="shape shape-3"></div>
-            <div className="shape shape-4"></div>
-            <div className="shape shape-5"></div>
+      <section
+        className="modern-hero"
+        ref={heroRef}
+        style={{
+          backgroundImage: "url('/greek-gods-hero.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          position: 'relative',
+          zIndex: 1,
+        }}
+      >
+        {/* Overlay for readability */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'rgba(0,0,0,0.75)',
+            zIndex: 2,
+            pointerEvents: 'none',
+          }}
+        />
+        <div style={{ position: 'relative', zIndex: 3 }}>
+          {/* Animated Background */}
+          <div className="hero-background">
+            <div className="floating-shapes">
+              <div className="shape shape-1"></div>
+              <div className="shape shape-2"></div>
+              <div className="shape shape-3"></div>
+              <div className="shape shape-4"></div>
+              <div className="shape shape-5"></div>
+            </div>
+
+            {/* Particle Effect */}
+            <div className="particles">
+              {[...Array(20)].map((_, i) => (
+                <div key={i} className={`particle particle-${i}`}></div>
+              ))}
+            </div>
           </div>
 
-          {/* Particle Effect */}
-          <div className="particles">
-            {[...Array(20)].map((_, i) => (
-              <div key={i} className={`particle particle-${i}`}></div>
-            ))}
-          </div>
-        </div>
-
-        <div className="hero-content-modern">
-          {/* Floating Logo */}
-          <div
-            className="logo-container"
-            style={{
-              transform: `translateY(${scrollY * 0.1}px) rotateX(${mousePosition.x * 0.01}deg)`,
-            }}
-          >
-            <img
-              src="https://cdn.builder.io/api/v1/assets/c5794fad86854d05a0a2b5f05a97b44d/e-week_logo_-2025-322131?format=webp&width=800"
-              alt="E-Week 2025"
-              className="modern-logo"
-            />
-            <div className="logo-glow"></div>
-          </div>
-
-          {/* Modern Typography */}
-          <div className="hero-text">
-            <h1 className="modern-title">
-              <span className="title-line">E-WEEK</span>
-              <span className="title-year">2K25</span>
-              <div className="title-underline"></div>
-              <h3 className="countdown-title">Organized By E22</h3>
-            </h1>
-
-            <p className="modern-subtitle">
-              Where Innovation Meets{" "}
-              <span className="highlight-text">Excellence</span>
-              <br />
-              The Future of Engineering Starts Here
-            </p>
-          </div>
-
-          {/* Enhanced Countdown */}
-          <div className="modern-countdown">
-            <CountdownTimer targetDate="2025-08-25T00:00:00" />
-          </div>
-
-          {/* Modern CTA Buttons */}
-          <div className="modern-actions">
-            <button
-              onClick={() => setShowNotificationModal(true)}
-              className="btn-modern btn-primary-modern"
+          <div className="hero-content-modern">
+            {/* Floating Logo */}
+            <div
+              className="logo-container"
+              style={{
+                transform: `translateY(${scrollY * 0.1}px) rotateX(${mousePosition.x * 0.01}deg)`,
+              }}
             >
-              <Bell size={20} />
-              <span>Register for Notifications</span>
-              <ArrowRight size={16} />
-            </button>
+              <img
+                src="https://cdn.builder.io/api/v1/assets/c5794fad86854d05a0a2b5f05a97b44d/e-week_logo_-2025-322131?format=webp&width=800"
+                alt="E-Week 2025"
+                className="modern-logo"
+              />
+              <div className="logo-glow"></div>
+            </div>
 
-            <button
-              onClick={() => scrollToSection("events")}
-              className="btn-modern btn-secondary-modern"
+            {/* Modern Typography */}
+            <div className="hero-text">
+              <h1 className="modern-title">
+                <span className="title-line">E-WEEK</span>
+                <span className="title-year">2K25</span>
+                <div className="title-underline"></div>
+                <h3 className="countdown-title">Organized By E22</h3>
+              </h1>
+
+              <p className="modern-subtitle">
+                Warriors of the Odyssey, rise! The storm is near, and only the brave shall write history.
+                <br />   
+                <span className="highlight-text">Get ready into the battle.</span>
+                           
+              </p>
+            </div>
+
+            {/* Enhanced Countdown */}
+            <div className="modern-countdown">
+              <CountdownTimer targetDate="2025-08-25T00:00:00" />
+            </div>
+
+            {/* Modern CTA Buttons */}
+            <div className="modern-actions">
+              <button
+                onClick={() => setShowNotificationModal(true)}
+                className="btn-modern btn-primary-modern"
+              >
+                <Bell size={20} />
+                <span>Register for Notifications</span>
+                <ArrowRight size={16} />
+              </button>
+
+              <button
+                onClick={() => scrollToSection("events")}
+                className="btn-modern btn-secondary-modern"
+              >
+                <Play size={20} />
+                <span>Watch Trailer</span>
+              </button>
+            </div>
+
+            {/* Scroll Indicator */}
+            <div
+              className="scroll-indicator"
+              onClick={() => scrollToSection("leaderboard")}
             >
-              <Play size={20} />
-              <span>Watch Trailer</span>
-            </button>
-          </div>
-
-          {/* Scroll Indicator */}
-          <div
-            className="scroll-indicator"
-            onClick={() => scrollToSection("leaderboard")}
-          >
-            <ChevronDown size={24} />
-            <span>Explore</span>
+              <ChevronDown size={24} />
+              <span>Explore</span>
+            </div>
           </div>
         </div>
       </section>
