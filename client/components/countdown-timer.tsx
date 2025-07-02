@@ -77,7 +77,7 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
             key={unit.label}
             className="bg-eweek-white/10 backdrop-blur-sm rounded-lg p-4 border border-eweek-red/30"
           >
-            <div className="text-3xl sm:text-4xl font-bold text-eweek-red mb-2">
+            <div className="text-3xl sm:text-4xl font-bold mb-2" style={{ color: '#ffa502' }}>
               {unit.value.toString().padStart(2, "0")}
             </div>
             <div className="text-eweek-white text-sm uppercase tracking-wide">
