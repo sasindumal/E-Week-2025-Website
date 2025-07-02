@@ -40,7 +40,7 @@ const CountdownTimer = ({ targetDate }) => {
     return (
       <div className="countdown text-center">
         <h2 className="text-4xl font-bold text-red mb-4">
-          E-WEEK 2025 HAS BEGUN!
+          E-WEEK 2K25 HAS BEGUN!
         </h2>
         <p className="text-xl">The event is now live!</p>
       </div>
@@ -56,7 +56,7 @@ const CountdownTimer = ({ targetDate }) => {
 
   return (
     <div className="countdown">
-      <h2 className="countdown-title">Countdown to E-Week 2025</h2>
+      <h2 className="countdown-title">Countdown to E-Week 2K25</h2>
       <div className="countdown-grid">
         {timeUnits.map((unit) => (
           <div key={unit.label} className="countdown-item">
@@ -68,7 +68,7 @@ const CountdownTimer = ({ targetDate }) => {
         ))}
       </div>
       <p className="countdown-date">
-        August 25, 2025 • UOJ Faculty of Engineering
+        August 25, 2025 • Faculty of Engineering • University of Jaffna
       </p>
     </div>
   );

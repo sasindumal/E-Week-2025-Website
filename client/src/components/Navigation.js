@@ -29,7 +29,7 @@ const Navigation = () => {
             src="https://cdn.builder.io/api/v1/assets/c5794fad86854d05a0a2b5f05a97b44d/e-week_logo_-2025-322131?format=webp&width=800"
             alt="E-Week 2025"
           />
-          E-WEEK 2025
+          E-WEEK 2K25
         </Link>
 
         {/* Desktop Navigation */}

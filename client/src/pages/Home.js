@@ -54,45 +54,45 @@ const Home = () => {
     {
       batch: "E21",
       points: 2450,
-      emoji: "🏆",
+      logo: "🏆",
       rank: 1,
-      activities: 24,
+      wins: 24,
       growth: "+12%",
       color: "from-yellow-400 to-yellow-600",
     },
     {
       batch: "E22",
       points: 2120,
-      emoji: "🥈",
+      logo: "🥈",
       rank: 2,
-      activities: 18,
+      wins: 18,
       growth: "+8%",
       color: "from-gray-300 to-gray-500",
     },
     {
       batch: "E20",
       points: 1980,
-      emoji: "🥉",
+      logo: "🥉",
       rank: 3,
-      activities: 15,
+      wins: 15,
       growth: "+5%",
       color: "from-orange-400 to-orange-600",
     },
     {
       batch: "E23",
       points: 1750,
-      emoji: "⭐",
+      logo: "⭐",
       rank: 4,
-      activities: 12,
+      wins: 12,
       growth: "+15%",
       color: "from-blue-400 to-blue-600",
     },
     {
       batch: "E24",
       points: 1420,
-      emoji: "🌟",
+      logo: "🌟",
       rank: 5,
-      activities: 9,
+      wins: 9,
       growth: "+22%",
       color: "from-purple-400 to-purple-600",
     },
@@ -109,7 +109,7 @@ const Home = () => {
       category: "Technical",
       priority: "high",
       participants: "500+",
-      prize: "$5,000",
+      prize: "20 Points",
       icon: Code,
       gradient: "from-blue-500 to-purple-600",
     },
@@ -122,7 +122,7 @@ const Home = () => {
       category: "Competition",
       priority: "high",
       participants: "200+",
-      prize: "$3,000",
+      prize: "30 Points",
       icon: Cpu,
       gradient: "from-green-500 to-teal-600",
     },
@@ -135,7 +135,7 @@ const Home = () => {
       category: "Innovation",
       priority: "medium",
       participants: "150+",
-      prize: "$2,000",
+      prize: "20 Points",
       icon: Lightbulb,
       gradient: "from-orange-500 to-red-600",
     },
@@ -148,7 +148,7 @@ const Home = () => {
       category: "Workshop",
       priority: "medium",
       participants: "100+",
-      prize: "Certificates",
+      prize: "10 Points",
       icon: Target,
       gradient: "from-pink-500 to-purple-600",
     },
@@ -315,8 +315,9 @@ const Home = () => {
           <div className="hero-text">
             <h1 className="modern-title">
               <span className="title-line">E-WEEK</span>
-              <span className="title-year">2025</span>
+              <span className="title-year">2K25</span>
               <div className="title-underline"></div>
+              <h3 className="countdown-title">Organized By E22</h3>
             </h1>
 
             <p className="modern-subtitle">
@@ -339,7 +340,7 @@ const Home = () => {
               className="btn-modern btn-primary-modern"
             >
               <Bell size={20} />
-              <span>Get Early Access</span>
+              <span>Register for Notifications</span>
               <ArrowRight size={16} />
             </button>
 
@@ -373,7 +374,7 @@ const Home = () => {
             </h2>
             <p className="section-subtitle-modern">
               Real-time leaderboard showing which engineering batch is
-              dominating the pre-event challenges
+              dominating the events
             </p>
           </div>
 
@@ -391,7 +392,7 @@ const Home = () => {
                   className={`card-gradient bg-gradient-to-br ${batch.color}`}
                 >
                   <div className="rank-badge">#{batch.rank}</div>
-                  <div className="batch-emoji">{batch.emoji}</div>
+                  <div className="batch-emoji">{batch.logo}</div>
                   <h3 className="batch-name">{batch.batch}</h3>
 
                   <div className="stats-section">
@@ -404,8 +405,8 @@ const Home = () => {
 
                     <div className="sub-stats">
                       <div className="sub-stat">
-                        <span className="sub-number">{batch.activities}</span>
-                        <span className="sub-label">Activities</span>
+                        <span className="sub-number">{batch.wins}</span>
+                        <span className="sub-label">Wins</span>
                       </div>
                       <div className="sub-stat growth">
                         <span className="sub-number">{batch.growth}</span>
@@ -425,14 +426,14 @@ const Home = () => {
             ))}
           </div>
 
-          <div className="text-center mt-8">
+          <div className="text-center mt-8 mb-8">
             <p className="text-white opacity-80 mb-6">
-              🎯 Earn points by participating in pre-event activities, polls,
-              and challenges!
+              🎯 Earn points by participating in event activities!
             </p>
+            <div className="mt-8"></div>
             <Link
               to="/leaderboard"
-              className="btn-modern btn-secondary-modern inline-flex items-center gap-2"
+              className="btn-modern btn-secondary-modern inline-flex items-center gap-10"
             >
               <Trophy size={20} />
               <span>View Full Leaderboard</span>
@@ -506,11 +507,6 @@ const Home = () => {
                         <span>{event.prize}</span>
                       </div>
                     </div>
-
-                    <button className="event-cta">
-                      Register Now
-                      <ArrowRight size={16} />
-                    </button>
                   </div>
                 </div>
               );
@@ -611,7 +607,7 @@ const Home = () => {
                 University of Jaffna • Faculty of Engineering
               </p>
               <p className="footer-copyright-modern">
-                © 2025 E-Week. Crafted with ❤️ for Innovation
+                © E-WEEK 2K25 • ORGANIZED BY E22
               </p>
             </div>
           </div>
@@ -624,7 +620,7 @@ const Home = () => {
           <div className="modal-content-modern">
             <div className="modal-header-modern">
               <h3 className="modal-title-modern">
-                🚀 Join the Innovation Journey
+                🚀 Join the E-WEEK 2K25 Journey
               </h3>
               <button
                 onClick={() => setShowNotificationModal(false)}
@@ -640,7 +636,7 @@ const Home = () => {
                 className="modal-form-modern"
               >
                 <p className="modal-description">
-                  Get exclusive early access, insider updates, and be the first
+                  Get exclusive notifications, event updates, and be the first
                   to know when registration opens!
                 </p>
 
@@ -662,13 +658,13 @@ const Home = () => {
                     className="btn-modern btn-primary-modern full-width"
                   >
                     <Bell size={20} />
-                    <span>Notify Me First</span>
+                    <span>Notify Me</span>
                     <Sparkles size={16} />
                   </button>
                 </div>
 
                 <p className="modal-footer-text">
-                  Join 1,000+ engineers already signed up!
+                  Join 500+ already signed up!
                 </p>
               </form>
             ) : (
