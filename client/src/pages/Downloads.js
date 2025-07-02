@@ -100,6 +100,8 @@ const Downloads = () => {
       <div className="downloads-page animate-slide-up">
         {/* Hero Section */}
         <section className="downloads-hero" ref={heroRef}>
+          {/* Animated Background like Events page */}
+          <div className="hero-background-events" style={{ zIndex: 0, position: 'absolute', inset: 0 }} />
           <div className="downloads-hero-bg">
             {/* Enhanced Floating Shapes */}
             <div className="floating-shapes">
@@ -129,21 +131,21 @@ const Downloads = () => {
                 <Download className="w-16 h-16" />
                 <div className="logo-glow"></div>
               </div>
-              <h1 className="downloads-hero-title">Download E-Week 2025</h1>
-              <p className="downloads-hero-subtitle">
+              <h1 className="downloads-hero-title hero-title-events">Download E-Week 2025</h1>
+              <p className="downloads-hero-subtitle hero-subtitle-events">
                 Get the official E-Week 2025 app on your favorite platform
               </p>
 
-              <div className="downloads-stats">
-                <div className="download-stat">
+              <div className="downloads-stats hero-stats-events">
+                <div className="download-stat stat-card-events">
                   <span className="stat-number">46K+</span>
                   <span className="stat-label">Total Downloads</span>
                 </div>
-                <div className="download-stat">
+                <div className="download-stat stat-card-events">
                   <span className="stat-number">4.8★</span>
                   <span className="stat-label">App Rating</span>
                 </div>
-                <div className="download-stat">
+                <div className="download-stat stat-card-events">
                   <span className="stat-number">98%</span>
                   <span className="stat-label">Satisfaction</span>
                 </div>

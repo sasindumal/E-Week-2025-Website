@@ -410,6 +410,8 @@ const History = () => {
       <div className="history-page animate-slide-up">
         {/* Hero Section */}
         <section className="history-hero" ref={heroRef}>
+          {/* Animated Background like Events page */}
+          <div className="hero-background-events" style={{ zIndex: 0, position: 'absolute', inset: 0 }} />
           <div className="history-hero-bg">
             {/* Enhanced Floating Shapes */}
             <div className="floating-shapes">
@@ -439,37 +441,27 @@ const History = () => {
                 <HistoryIcon className="w-16 h-16" />
                 <div className="logo-glow"></div>
               </div>
-              <h1 className="history-hero-title">E-Week Legacy</h1>
-              <p className="history-hero-subtitle">
-                Celebrating champions and innovations from years of engineering
-                excellence
+              <h1 className="history-hero-title hero-title-events">E-Week History</h1>
+              <p className="history-hero-subtitle hero-subtitle-events">
+                Explore the legacy, champions, and milestones of E-Week through the years
               </p>
 
-              <div className="history-stats-hero">
-                <div className="hero-stat">
-                  <span className="stat-value">{years.length}</span>
-                  <span className="stat-label">Years</span>
+              <div className="history-stats-hero hero-stats-events">
+                <div className="stat-card-events">
+                  <span className="stat-number">{currentYearData?.totalParticipants ?? '-'}</span>
+                  <span className="stat-label">Participants</span>
                 </div>
-                <div className="hero-stat">
-                  <span className="stat-value">
-                    {eweekHistory
-                      .reduce((sum, year) => sum + year.totalParticipants, 0)
-                      .toLocaleString()}
-                  </span>
-                  <span className="stat-label">Total Participants</span>
+                <div className="stat-card-events">
+                  <span className="stat-number">{currentYearData?.totalEvents ?? '-'}</span>
+                  <span className="stat-label">Events</span>
                 </div>
-                <div className="hero-stat">
-                  <span className="stat-value">
-                    {eweekHistory.reduce(
-                      (sum, year) => sum + year.totalEvents,
-                      0,
-                    )}
-                  </span>
-                  <span className="stat-label">Total Events</span>
+                <div className="stat-card-events">
+                  <span className="stat-number">{currentYearData?.overallChampion ?? '-'}</span>
+                  <span className="stat-label">Champion</span>
                 </div>
-                <div className="hero-stat">
-                  <span className="stat-value">€270K+</span>
-                  <span className="stat-label">Total Prizes</span>
+                <div className="stat-card-events">
+                  <span className="stat-number">{currentYearData?.championPoints ?? '-'}</span>
+                  <span className="stat-label">Points</span>
                 </div>
               </div>
             </div>

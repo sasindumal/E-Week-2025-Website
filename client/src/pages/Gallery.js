@@ -115,6 +115,8 @@ const Gallery = () => {
       <div className="gallery-page animate-slide-up">
         {/* Ultra-Modern Hero Section */}
         <section className="gallery-hero" ref={heroRef}>
+          {/* Animated Background like Events page */}
+          <div className="hero-background-events" style={{ zIndex: 0, position: 'absolute', inset: 0 }} />
           <div className="gallery-hero-bg">
             {/* Enhanced Floating Shapes */}
             <div className="floating-shapes">
@@ -144,28 +146,28 @@ const Gallery = () => {
                 <Camera className="w-16 h-16" />
                 <div className="logo-glow"></div>
               </div>
-              <h1 className="gallery-hero-title">Visual Chronicles</h1>
-              <p className="gallery-hero-subtitle">
+              <h1 className="gallery-hero-title hero-title-events">Visual Chronicles</h1>
+              <p className="gallery-hero-subtitle hero-subtitle-events">
                 Immerse yourself in the stunning visual journey of E-Week
                 celebrations
               </p>
 
-              <div className="gallery-stats-hero">
-                <div className="hero-stat">
+              <div className="gallery-stats-hero hero-stats-events">
+                <div className="hero-stat stat-card-events">
                   <span className="stat-value">{stats.photos}+</span>
                   <span className="stat-label">Photos</span>
                 </div>
-                <div className="hero-stat">
+                <div className="hero-stat stat-card-events">
                   <span className="stat-value">{stats.videos}+</span>
                   <span className="stat-label">Videos</span>
                 </div>
-                <div className="hero-stat">
+                <div className="hero-stat stat-card-events">
                   <span className="stat-value">
                     {(stats.totalViews / 1000).toFixed(1)}K
                   </span>
                   <span className="stat-label">Views</span>
                 </div>
-                <div className="hero-stat">
+                <div className="hero-stat stat-card-events">
                   <span className="stat-value">{stats.highlights}</span>
                   <span className="stat-label">Highlights</span>
                 </div>

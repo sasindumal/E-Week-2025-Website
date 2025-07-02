@@ -264,6 +264,8 @@ const About = () => {
       <div className="about-page animate-slide-up">
         {/* Hero Section */}
         <section className="about-hero" ref={heroRef}>
+          {/* Animated Background like Events page */}
+          <div className="hero-background-events" style={{ zIndex: 0, position: 'absolute', inset: 0 }} />
           <div className="about-hero-bg">
             {/* Enhanced Floating Shapes */}
             <div className="floating-shapes">
@@ -293,14 +295,14 @@ const About = () => {
                 <Rocket className="w-20 h-20" />
                 <div className="logo-glow"></div>
               </div>
-              <h1 className="about-hero-title">About E-Week</h1>
-              <p className="about-hero-subtitle">
+              <h1 className="about-hero-title hero-title-events">About E-Week</h1>
+              <p className="about-hero-subtitle hero-subtitle-events">
                 The premier engineering innovation platform where brilliant
                 minds converge to shape the future of technology
               </p>
 
-              <div className="hero-mission-statement">
-                <div className="mission-card">
+              <div className="hero-mission-statement hero-stats-events">
+                <div className="mission-card stat-card-events">
                   <Heart className="w-8 h-8" />
                   <div className="mission-content">
                     <h3>Our Mission</h3>
