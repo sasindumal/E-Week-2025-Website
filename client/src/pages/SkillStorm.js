@@ -314,8 +314,8 @@ const SkillStorm = () => {
                 </div>
                 <div className="stat-item-skillstorm">
                   <Trophy className="stat-icon-skillstorm" size={24} />
-                  <span className="stat-number-skillstorm">$10K+</span>
-                  <span className="stat-label-skillstorm">Total Prizes</span>
+                  <span className="stat-number-skillstorm">100</span>
+                  <span className="stat-label-skillstorm">Total Points</span>
                 </div>
               </div>
             </div>
