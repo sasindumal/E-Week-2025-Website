@@ -20,6 +20,7 @@ import {
   Code,
   Cpu,
   Lightbulb,
+  HeartHandshake,
 } from "lucide-react";
 
 const Home = () => {
@@ -224,36 +225,44 @@ const Home = () => {
 
   const modernFeatures = [
     {
-      icon: Code,
-      title: "Cutting-Edge Competitions",
+      icon: Sparkles,
+      title: "Engineering Excellence",
       description:
-        "AI, blockchain, IoT, and emerging tech challenges that shape the future",
-      color: "from-blue-500 to-cyan-500",
+        "Showcase the capabilities, achievements, and unity of the Faculty of Engineering to the world.",
+      color: "from-blue-600 to-cyan-500",
       delay: "0ms",
     },
     {
-      icon: Trophy,
-      title: "Premium Rewards",
+      icon: Users,
+      title: "Community Engagement",
       description:
-        "Cash prizes, internships, and exclusive opportunities with top companies",
-      color: "from-yellow-500 to-orange-500",
+        "Inspire and educate society through workshops, seminars, and school outreach programs.",
+      color: "from-green-600 to-lime-500",
       delay: "100ms",
     },
     {
-      icon: Users,
-      title: "Global Networking",
+      icon: Code,
+      title: "Dynamic Competitions",
       description:
-        "Connect with industry leaders, innovators, and future tech pioneers",
-      color: "from-purple-500 to-pink-500",
+        "Unleash talent through design, coding, gaming, and creativity contests across disciplines.",
+      color: "from-purple-600 to-pink-500",
       delay: "200ms",
     },
     {
-      icon: Sparkles,
-      title: "Innovation Showcase",
+      icon: Trophy,
+      title: "Unity & Collaboration",
       description:
-        "Present groundbreaking solutions to real-world engineering challenges",
-      color: "from-green-500 to-teal-500",
+        "Foster strong bonds between students, staff, and the community through shared goals and teamwork.",
+      color: "from-yellow-500 to-orange-500",
       delay: "300ms",
+    },
+    {
+      icon: HeartHandshake,
+      title: "Social Responsibility",
+      description:
+        "Give back to society with initiatives like blood donation campaigns and public awareness drives.",
+      color: "from-red-600 to-rose-500",
+      delay: "400ms",
     },
   ];
 
