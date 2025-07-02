@@ -5910,8 +5910,8 @@
 .filter-toggle {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1.25rem 2rem;
+  gap: 0rem;
+  padding: 1.25rem 3rem;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -5964,9 +5964,9 @@
 .sort-controls {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0rem;
   background: rgba(255, 255, 255, 0.08);
-  padding: 0.75rem;
+  padding: 0.75rem 1rem;
   border-radius: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
@@ -5979,9 +5979,9 @@
   border-radius: 0.75rem;
   outline: none;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 800;
   appearance: none;
-  padding-right: 1.5rem;
+ 
 }
 
 .sort-select option {
@@ -5990,16 +5990,19 @@
 }
 
 .sort-order {
-  padding: 0.5rem;
-  background: transparent;
-  border: none;
-  border-radius: 0.75rem;
-  color: rgba(255, 255, 255, 0.7);
-  cursor: pointer;
-  transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  justify-content: center;
+
+  padding: 0rem 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
 }
 
 .sort-order:hover {
@@ -6211,8 +6214,8 @@
   }
 
   .filter-actions {
-    flex-direction: column;
-    gap: 1rem;
+    flex-direction: row;
+    gap: 0rem;
     align-items: stretch;
   }
 

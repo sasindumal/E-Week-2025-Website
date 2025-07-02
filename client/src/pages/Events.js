@@ -691,7 +691,7 @@ const Events = () => {
         </section>
 
         {/* Advanced Search and Filter System */}
-        {/*<section className="events-search-section">
+        {<section className="events-search-section">
           <div className="container">
             <div className="events-search-header">
               <h2 className="search-section-title">
@@ -733,21 +733,6 @@ const Events = () => {
                   <span>Filters</span>
                 </button>
 
-                <div className="view-controls">
-                  <button
-                    onClick={() => setViewMode("grid")}
-                    className={`view-btn ${viewMode === "grid" ? "active" : ""}`}
-                  >
-                    <Grid className="w-5 h-5" />
-                  </button>
-                  <button
-                    onClick={() => setViewMode("list")}
-                    className={`view-btn ${viewMode === "list" ? "active" : ""}`}
-                  >
-                    <List className="w-5 h-5" />
-                  </button>
-                </div>
-
                 <div className="sort-controls">
                   <select
                     value={sortBy}
@@ -762,7 +747,7 @@ const Events = () => {
                   <button
                     onClick={() =>
                       setSortOrder(sortOrder === "asc" ? "desc" : "asc")
-                    }
+                    } 
                     className="sort-order"
                   >
                     {sortOrder === "asc" ? (
@@ -773,9 +758,9 @@ const Events = () => {
                   </button>
                 </div>
               </div>
-              */}
+
               {/* Advanced Filters Panel */}
-              {/*{isFilterOpen && (
+              {isFilterOpen && (
                 <div className="filters-panel">
                   <div className="filter-group">
                     <label className="filter-label">Category</label>
@@ -828,7 +813,7 @@ const Events = () => {
               )}
             </div>
           </div>
-        </section>*/}
+        </section>}
 
         {/* Section 03: Upcoming Events */}
         <section className="upcoming-section">
