@@ -4,6 +4,7 @@ import "./App.css";
 
 // Pages
 import Home from "./pages/Home";
+import About from "./pages/About";
 import Events from "./pages/Events";
 import Leaderboard from "./pages/Leaderboard";
 import SkillStorm from "./pages/SkillStorm";
@@ -22,6 +23,7 @@ function App() {
         <div className="App">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
             <Route path="/events" element={<Events />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/skillstorm" element={<SkillStorm />} />
