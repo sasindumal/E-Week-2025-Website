@@ -276,7 +276,7 @@ const Leaderboard = () => {
         eventSearchTerm === "" ||
         event.name.toLowerCase().includes(eventSearchTerm.toLowerCase()) ||
         event.category.toLowerCase().includes(eventSearchTerm.toLowerCase()) ||
-        event.results.some((result) =>
+        event.scores.some((result) =>
           result.batch.toLowerCase().includes(eventSearchTerm.toLowerCase()),
         );
 
@@ -284,7 +284,7 @@ const Leaderboard = () => {
         selectedCategory === "all" || event.category === selectedCategory;
       const matchesBatch =
         selectedBatch === "all" ||
-        event.results.some((result) => result.batch === selectedBatch);
+        event.scores.some((result) => result.batch === selectedBatch);
 
       return matchesSearch && matchesCategory && matchesBatch;
     })
