@@ -445,31 +445,13 @@ const History = () => {
               <p className="history-hero-subtitle hero-subtitle-events">
                 Explore the legacy, champions, and milestones of E-Week through the years
               </p>
-
-              <div className="history-stats-hero hero-stats-events">
-                <div className="stat-card-events">
-                  <span className="stat-number">{currentYearData?.totalParticipants ?? '-'}</span>
-                  <span className="stat-label">Participants</span>
-                </div>
-                <div className="stat-card-events">
-                  <span className="stat-number">{currentYearData?.totalEvents ?? '-'}</span>
-                  <span className="stat-label">Events</span>
-                </div>
-                <div className="stat-card-events">
-                  <span className="stat-number">{currentYearData?.overallChampion ?? '-'}</span>
-                  <span className="stat-label">Champion</span>
-                </div>
-                <div className="stat-card-events">
-                  <span className="stat-number">{currentYearData?.championPoints ?? '-'}</span>
-                  <span className="stat-label">Points</span>
-                </div>
-              </div>
             </div>
           </div>
         </section>
 
         {/* Year Navigation */}
-        <section className="year-navigation">
+        <section className="history-hero" ref={heroRef}>
+        <div className="hero-background-events" style={{ zIndex: 0, position: 'absolute', inset: 0 }} />
           <div className="container">
             <div className="year-selector">
               <button
