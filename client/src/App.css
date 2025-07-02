@@ -2673,9 +2673,7 @@
 }
 
 .event-type-badge {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
+  position: relative;
   padding: 0.5rem 1rem;
   border-radius: 50px;
   color: white;
