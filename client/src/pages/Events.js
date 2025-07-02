@@ -691,7 +691,7 @@ const Events = () => {
         </section>
 
         {/* Advanced Search and Filter System */}
-        <section className="events-search-section">
+        {/*<section className="events-search-section">
           <div className="container">
             <div className="events-search-header">
               <h2 className="search-section-title">
@@ -773,9 +773,9 @@ const Events = () => {
                   </button>
                 </div>
               </div>
-
+              */}
               {/* Advanced Filters Panel */}
-              {isFilterOpen && (
+              {/*{isFilterOpen && (
                 <div className="filters-panel">
                   <div className="filter-group">
                     <label className="filter-label">Category</label>
@@ -828,7 +828,7 @@ const Events = () => {
               )}
             </div>
           </div>
-        </section>
+        </section>*/}
 
         {/* Section 03: Upcoming Events */}
         <section className="upcoming-section">
