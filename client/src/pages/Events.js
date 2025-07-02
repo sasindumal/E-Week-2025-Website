@@ -297,7 +297,7 @@ const Events = () => {
       icon: Target,
       gradient: "from-red-500 to-pink-600",
       description: "Advanced cybersecurity simulation and defense challenges",
-      prizes: "$5,000",
+      points: "30 Points",
       tags: ["Security", "CTF", "Networking"],
     },
     {
@@ -313,7 +313,7 @@ const Events = () => {
       icon: Zap,
       gradient: "from-purple-500 to-blue-600",
       description: "Hands-on experience with quantum algorithms and circuits",
-      prizes: "Certificates",
+      points: "20 Points",
       tags: ["Quantum", "Computing", "Research"],
     },
     {
@@ -329,7 +329,7 @@ const Events = () => {
       icon: Code,
       gradient: "from-green-500 to-cyan-600",
       description: "Build and deploy mobile apps in a day-long sprint",
-      prizes: "$3,000",
+      points: "10 Points",
       tags: ["Mobile", "React Native", "Flutter"],
     },
     {
@@ -345,7 +345,7 @@ const Events = () => {
       icon: Lightbulb,
       gradient: "from-yellow-500 to-orange-600",
       description: "Learn human-centered design principles and methods",
-      prizes: "Portfolio Review",
+      points: "20 Points",
       tags: ["Design", "UX", "Innovation"],
     },
   ];
@@ -893,7 +893,7 @@ const Events = () => {
                       {/* Prize Info */}
                       <div className="prize-info">
                         <Award className="w-4 h-4 text-yellow-400" />
-                        <span>{event.prizes}</span>
+                        <span>{event.points}</span>
                       </div>
 
                       {/* Action Button */}
