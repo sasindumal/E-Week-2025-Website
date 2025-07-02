@@ -557,7 +557,7 @@ const Home = () => {
         <div className="container">
           <div className="section-header-modern">
             <h2 className="section-title-modern">
-              Why Choose E-Week 2025?
+              Why E-WEEK 2K25 Excellent?
               <Zap className="title-icon" size={32} />
             </h2>
           </div>
