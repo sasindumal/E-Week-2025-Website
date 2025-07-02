@@ -11,6 +11,7 @@ import SkillStorm from "./pages/SkillStorm";
 import Downloads from "./pages/Downloads";
 import Gallery from "./pages/Gallery";
 import History from "./pages/History";
+import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
 // Context
@@ -30,6 +31,7 @@ function App() {
             <Route path="/downloads" element={<Downloads />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/history" element={<History />} />
+            <Route path="/admin/*" element={<Admin />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
