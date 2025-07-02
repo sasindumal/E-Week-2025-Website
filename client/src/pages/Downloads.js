@@ -84,6 +84,22 @@ const Downloads = () => {
               <div className="download-shape download-shape-2"></div>
               <div className="download-shape download-shape-3"></div>
             </div>
+
+            {/* Floating Particles */}
+            <div className="downloads-particles">
+              {[...Array(12)].map((_, i) => (
+                <div
+                  key={i}
+                  className="download-particle"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    animationDelay: `${Math.random() * 15}s`,
+                    animationDuration: `${15 + Math.random() * 10}s`,
+                  }}
+                ></div>
+              ))}
+            </div>
           </div>
 
           <div className="container">

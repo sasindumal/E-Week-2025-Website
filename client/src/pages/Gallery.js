@@ -100,6 +100,22 @@ const Gallery = () => {
               <div className="gallery-shape gallery-shape-3"></div>
               <div className="gallery-shape gallery-shape-4"></div>
             </div>
+
+            {/* Floating Particles */}
+            <div className="gallery-particles">
+              {[...Array(15)].map((_, i) => (
+                <div
+                  key={i}
+                  className="gallery-particle"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                    animationDelay: `${Math.random() * 20}s`,
+                    animationDuration: `${20 + Math.random() * 15}s`,
+                  }}
+                ></div>
+              ))}
+            </div>
           </div>
 
           <div className="container">
