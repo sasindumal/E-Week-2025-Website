@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Layout from "../components/Layout";
 import {
   Trophy,
@@ -23,6 +23,28 @@ import {
 const History = () => {
   const [selectedYear, setSelectedYear] = useState(2024);
   const [activeCategory, setActiveCategory] = useState("overall");
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [scrollY, setScrollY] = useState(0);
+  const heroRef = useRef(null);
+
+  // Track mouse for parallax effects
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   // Historical E-Week data
   const eweekHistory = [
@@ -385,22 +407,37 @@ const History = () => {
 
   return (
     <Layout>
-      <div className="history-page">
+      <div className="history-page animate-slide-up">
         {/* Hero Section */}
-        <section className="history-hero">
+        <section className="history-hero" ref={heroRef}>
           <div className="history-hero-bg">
-            <div className="history-shapes">
-              <div className="history-shape history-shape-1"></div>
-              <div className="history-shape history-shape-2"></div>
-              <div className="history-shape history-shape-3"></div>
-              <div className="history-shape history-shape-4"></div>
+            {/* Enhanced Floating Shapes */}
+            <div className="floating-shapes">
+              <div className="shape shape-1"></div>
+              <div className="shape shape-2"></div>
+              <div className="shape shape-3"></div>
+              <div className="shape shape-4"></div>
+              <div className="shape shape-5"></div>
+            </div>
+
+            {/* Enhanced Particle Effect */}
+            <div className="particles">
+              {[...Array(20)].map((_, i) => (
+                <div key={i} className={`particle particle-${i}`}></div>
+              ))}
             </div>
           </div>
 
           <div className="container">
             <div className="history-hero-content">
-              <div className="history-hero-icon">
+              <div
+                className="history-hero-icon"
+                style={{
+                  transform: `translateY(${scrollY * 0.1}px) rotateX(${mousePosition.x * 0.01}deg)`,
+                }}
+              >
                 <HistoryIcon className="w-16 h-16" />
+                <div className="logo-glow"></div>
               </div>
               <h1 className="history-hero-title">E-Week Legacy</h1>
               <p className="history-hero-subtitle">

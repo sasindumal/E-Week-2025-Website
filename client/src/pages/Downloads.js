@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Layout from "../components/Layout";
 import {
   Download,
@@ -11,6 +11,9 @@ import {
 
 const Downloads = () => {
   const [activeTab, setActiveTab] = useState("android");
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [scrollY, setScrollY] = useState(0);
+  const heroRef = useRef(null);
   const [downloadStats] = useState({
     android: { count: 15420, growth: "+23%" },
     macos: { count: 8930, growth: "+18%" },
@@ -73,39 +76,58 @@ const Downloads = () => {
 
   const activePlatform = platforms.find((p) => p.id === activeTab);
 
+  // Track mouse for parallax effects
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <Layout>
-      <div className="downloads-page">
+      <div className="downloads-page animate-slide-up">
         {/* Hero Section */}
-        <section className="downloads-hero">
+        <section className="downloads-hero" ref={heroRef}>
           <div className="downloads-hero-bg">
-            <div className="downloads-shapes">
-              <div className="download-shape download-shape-1"></div>
-              <div className="download-shape download-shape-2"></div>
-              <div className="download-shape download-shape-3"></div>
+            {/* Enhanced Floating Shapes */}
+            <div className="floating-shapes">
+              <div className="shape shape-1"></div>
+              <div className="shape shape-2"></div>
+              <div className="shape shape-3"></div>
+              <div className="shape shape-4"></div>
+              <div className="shape shape-5"></div>
             </div>
 
-            {/* Floating Particles */}
-            <div className="downloads-particles">
-              {[...Array(12)].map((_, i) => (
-                <div
-                  key={i}
-                  className="download-particle"
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                    animationDelay: `${Math.random() * 15}s`,
-                    animationDuration: `${15 + Math.random() * 10}s`,
-                  }}
-                ></div>
+            {/* Enhanced Particle Effect */}
+            <div className="particles">
+              {[...Array(20)].map((_, i) => (
+                <div key={i} className={`particle particle-${i}`}></div>
               ))}
             </div>
           </div>
 
           <div className="container">
             <div className="downloads-hero-content">
-              <div className="downloads-hero-icon">
+              <div
+                className="downloads-hero-icon"
+                style={{
+                  transform: `translateY(${scrollY * 0.1}px) rotateX(${mousePosition.x * 0.01}deg)`,
+                }}
+              >
                 <Download className="w-16 h-16" />
+                <div className="logo-glow"></div>
               </div>
               <h1 className="downloads-hero-title">Download E-Week 2025</h1>
               <p className="downloads-hero-subtitle">

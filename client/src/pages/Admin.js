@@ -401,28 +401,11 @@ const AdminDashboard = ({
           </p>
         </div>
         <div className="dashboard-actions">
-          <select
-            value={selectedTimeRange}
-            onChange={(e) => setSelectedTimeRange(e.target.value)}
-            className="time-range-select"
-          >
-            {timeRanges.map((range) => (
-              <option key={range.value} value={range.value}>
-                {range.label}
-              </option>
-            ))}
-          </select>
-          <button
-            className="action-btn primary"
-            onClick={() => handleQuickAction("Quick Add")}
-          >
-            <Plus className="w-4 h-4" />
-            Quick Add
-          </button>
           <button
             className={`action-btn secondary ${refreshing ? "loading" : ""}`}
             onClick={handleRefresh}
             disabled={refreshing}
+            style={{ gap: "2px", marginLeft: "-1px", padding: "12px 36px" }}
           >
             <RefreshCw
               className={`w-4 h-4 ${refreshing ? "animate-spin" : ""}`}
@@ -492,10 +475,7 @@ const AdminDashboard = ({
           <div className="stat-content">
             <div className="stat-header">
               <h3>{stats.activeEvents}</h3>
-              <div className="stat-trend live">
-                <div className="live-indicator"></div>
-                <span>LIVE</span>
-              </div>
+              <div className="stat-trend live">LIVE</div>
             </div>
             <p>Active Events</p>
             <div className="stat-progress">
@@ -650,63 +630,6 @@ const AdminDashboard = ({
                 <span className="action-description">Register new user</span>
               </div>
             </button>
-          </div>
-        </div>
-
-        {/* Enhanced System Status */}
-        <div className="content-card full-width">
-          <div className="card-header">
-            <h3>System Health Monitor</h3>
-            <div className="system-health-score">
-              <div className="health-indicator">
-                <div className="health-circle">
-                  <span>{stats.systemHealth.toFixed(1)}%</span>
-                </div>
-              </div>
-              <span className="health-label">Overall Health</span>
-            </div>
-          </div>
-          <div className="system-status-grid">
-            <div className="status-item">
-              <div className="status-header">
-                <div className="status-indicator online"></div>
-                <span className="status-name">Database</span>
-              </div>
-              <div className="status-details">
-                <span className="status-value">Online</span>
-                <span className="status-metric">Response: 12ms</span>
-              </div>
-            </div>
-            <div className="status-item">
-              <div className="status-header">
-                <div className="status-indicator online"></div>
-                <span className="status-name">File Storage</span>
-              </div>
-              <div className="status-details">
-                <span className="status-value">78% Used</span>
-                <span className="status-metric">2.3TB / 3TB</span>
-              </div>
-            </div>
-            <div className="status-item">
-              <div className="status-header">
-                <div className="status-indicator warning"></div>
-                <span className="status-name">Email Service</span>
-              </div>
-              <div className="status-details">
-                <span className="status-value">Limited</span>
-                <span className="status-metric">Queue: 45 pending</span>
-              </div>
-            </div>
-            <div className="status-item">
-              <div className="status-header">
-                <div className="status-indicator online"></div>
-                <span className="status-name">API Gateway</span>
-              </div>
-              <div className="status-details">
-                <span className="status-value">All Active</span>
-                <span className="status-metric">12 endpoints</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -1081,6 +1004,7 @@ const AdminSection = ({ title, description, icon, onNotify, features }) => (
       <button
         className="action-btn primary"
         onClick={() => onNotify(`${title} - Getting started`, "info")}
+        style={{ padding: "12px 45px 12px 40px" }}
       >
         <Plus className="w-4 h-4" />
         Get Started
@@ -1103,10 +1027,16 @@ const AdminSection = ({ title, description, icon, onNotify, features }) => (
           <button
             className="action-btn primary"
             onClick={() => onNotify(`Starting ${title} setup`, "success")}
+            style={{ padding: "12px 38px" }}
           >
             Start Setup
           </button>
-          <button className="action-btn secondary">View Documentation</button>
+          <button
+            className="action-btn secondary"
+            style={{ padding: "12px 60px" }}
+          >
+            View Documentation
+          </button>
         </div>
       </div>
     </div>

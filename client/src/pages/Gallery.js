@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Layout from "../components/Layout";
 import { useApp } from "../context/AppContext";
 import {
@@ -27,6 +27,28 @@ const Gallery = () => {
   const [selectedMedia, setSelectedMedia] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [scrollY, setScrollY] = useState(0);
+  const heroRef = useRef(null);
+
+  // Track mouse for parallax effects
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const categories = [
     { id: "all", label: "All Media", icon: <Layers className="w-4 h-4" /> },
@@ -90,38 +112,37 @@ const Gallery = () => {
 
   return (
     <Layout>
-      <div className="gallery-page">
+      <div className="gallery-page animate-slide-up">
         {/* Ultra-Modern Hero Section */}
-        <section className="gallery-hero">
+        <section className="gallery-hero" ref={heroRef}>
           <div className="gallery-hero-bg">
-            <div className="gallery-shapes">
-              <div className="gallery-shape gallery-shape-1"></div>
-              <div className="gallery-shape gallery-shape-2"></div>
-              <div className="gallery-shape gallery-shape-3"></div>
-              <div className="gallery-shape gallery-shape-4"></div>
+            {/* Enhanced Floating Shapes */}
+            <div className="floating-shapes">
+              <div className="shape shape-1"></div>
+              <div className="shape shape-2"></div>
+              <div className="shape shape-3"></div>
+              <div className="shape shape-4"></div>
+              <div className="shape shape-5"></div>
             </div>
 
-            {/* Floating Particles */}
-            <div className="gallery-particles">
-              {[...Array(15)].map((_, i) => (
-                <div
-                  key={i}
-                  className="gallery-particle"
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                    animationDelay: `${Math.random() * 20}s`,
-                    animationDuration: `${20 + Math.random() * 15}s`,
-                  }}
-                ></div>
+            {/* Enhanced Particle Effect */}
+            <div className="particles">
+              {[...Array(20)].map((_, i) => (
+                <div key={i} className={`particle particle-${i}`}></div>
               ))}
             </div>
           </div>
 
           <div className="container">
             <div className="gallery-hero-content">
-              <div className="gallery-hero-icon">
+              <div
+                className="gallery-hero-icon"
+                style={{
+                  transform: `translateY(${scrollY * 0.1}px) rotateX(${mousePosition.x * 0.01}deg)`,
+                }}
+              >
                 <Camera className="w-16 h-16" />
+                <div className="logo-glow"></div>
               </div>
               <h1 className="gallery-hero-title">Visual Chronicles</h1>
               <p className="gallery-hero-subtitle">

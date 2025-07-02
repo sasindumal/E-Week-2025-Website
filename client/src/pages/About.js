@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Layout from "../components/Layout";
 import {
   Lightbulb,
@@ -28,6 +28,28 @@ import {
 const About = () => {
   const [activeTimeline, setActiveTimeline] = useState(0);
   const [expandedValue, setExpandedValue] = useState(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [scrollY, setScrollY] = useState(0);
+  const heroRef = useRef(null);
+
+  // Track mouse for parallax effects
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   // E-Week Timeline Data
   const timeline = [
@@ -239,39 +261,37 @@ const About = () => {
 
   return (
     <Layout>
-      <div className="about-page">
+      <div className="about-page animate-slide-up">
         {/* Hero Section */}
-        <section className="about-hero">
+        <section className="about-hero" ref={heroRef}>
           <div className="about-hero-bg">
-            <div className="about-shapes">
-              <div className="about-shape about-shape-1"></div>
-              <div className="about-shape about-shape-2"></div>
-              <div className="about-shape about-shape-3"></div>
-              <div className="about-shape about-shape-4"></div>
-              <div className="about-shape about-shape-5"></div>
+            {/* Enhanced Floating Shapes */}
+            <div className="floating-shapes">
+              <div className="shape shape-1"></div>
+              <div className="shape shape-2"></div>
+              <div className="shape shape-3"></div>
+              <div className="shape shape-4"></div>
+              <div className="shape shape-5"></div>
             </div>
 
-            {/* Floating Particles */}
-            <div className="about-particles">
+            {/* Enhanced Particle Effect */}
+            <div className="particles">
               {[...Array(20)].map((_, i) => (
-                <div
-                  key={i}
-                  className="about-particle"
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                    animationDelay: `${Math.random() * 25}s`,
-                    animationDuration: `${25 + Math.random() * 15}s`,
-                  }}
-                ></div>
+                <div key={i} className={`particle particle-${i}`}></div>
               ))}
             </div>
           </div>
 
           <div className="container">
             <div className="about-hero-content">
-              <div className="about-hero-icon">
+              <div
+                className="about-hero-icon"
+                style={{
+                  transform: `translateY(${scrollY * 0.1}px) rotateX(${mousePosition.x * 0.01}deg)`,
+                }}
+              >
                 <Rocket className="w-20 h-20" />
+                <div className="logo-glow"></div>
               </div>
               <h1 className="about-hero-title">About E-Week</h1>
               <p className="about-hero-subtitle">
