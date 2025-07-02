@@ -9,7 +9,7 @@ import Leaderboard from "./pages/Leaderboard";
 import SkillStorm from "./pages/SkillStorm";
 import Downloads from "./pages/Downloads";
 import Gallery from "./pages/Gallery";
-import Scorecards from "./pages/Scorecards";
+import History from "./pages/History";
 import NotFound from "./pages/NotFound";
 
 // Context
@@ -27,7 +27,7 @@ function App() {
             <Route path="/skillstorm" element={<SkillStorm />} />
             <Route path="/downloads" element={<Downloads />} />
             <Route path="/gallery" element={<Gallery />} />
-            <Route path="/scorecards" element={<Scorecards />} />
+            <Route path="/history" element={<History />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

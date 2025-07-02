@@ -13,7 +13,7 @@ const Navigation = () => {
     { path: "/skillstorm", label: "SkillStorm" },
     { path: "/downloads", label: "Downloads" },
     { path: "/gallery", label: "Gallery" },
-    { path: "/scorecards", label: "Scorecards" },
+    { path: "/history", label: "E-Week History" },
   ];
 
   const toggleMobileMenu = () => {
