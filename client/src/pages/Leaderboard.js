@@ -357,7 +357,8 @@ const Leaderboard = () => {
                 Live standings based on total earned points across all events
               </p>
             </div>
-
+            <div className="mt-8"></div>
+            
             <div className="rankings-grid">
               {batchRankings.map((batch, index) => {
                 const rankChange = getRankChange(
@@ -432,7 +433,7 @@ const Leaderboard = () => {
                               {batch.weeklyChange}%
                             </span>
                           </div>
-                          <span className="gain-label">This Week</span>
+                          <span className="gain-label">Today</span>
                         </div>
                       </div>
 
@@ -462,7 +463,7 @@ const Leaderboard = () => {
                           <span className="perf-value">
                             +{batch.weeklyGain}
                           </span>
-                          <span className="perf-label">Weekly</span>
+                          <span className="perf-label">Daily</span>
                         </div>
                       </div>
 
