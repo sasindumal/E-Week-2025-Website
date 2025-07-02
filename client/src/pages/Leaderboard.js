@@ -324,7 +324,7 @@ const Leaderboard = () => {
                 <BarChart3 className="title-icon" size={48} />
               </h1>
               <p className="hero-subtitle">
-                Real-time rankings and performance analytics for E-Week 2025
+                Real-time rankings and performance analytics for E-Week 2K25
                 competitions
               </p>
               <div className="hero-stats">
@@ -337,7 +337,7 @@ const Leaderboard = () => {
                   <span className="stat-label">Completed Events</span>
                 </div>
                 <div className="stat-item">
-                  <span className="stat-number">1,200+</span>
+                  <span className="stat-number">500+</span>
                   <span className="stat-label">Participants</span>
                 </div>
               </div>

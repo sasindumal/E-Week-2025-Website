@@ -1,7 +1,7 @@
 {
-  "name": "eweek-2025",
+  "name": "eweek-2K25",
   "version": "1.0.0",
-  "description": "E-Week 2025 - University of Jaffna Faculty of Engineering",
+  "description": "E-Week 2K25 - University of Jaffna Faculty of Engineering",
   "main": "server/index.js",
   "scripts": {
     "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
