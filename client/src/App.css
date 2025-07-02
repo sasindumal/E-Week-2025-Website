@@ -1751,6 +1751,7 @@
 }
 
 .hero-content {
+  justify-content: center;
   text-align: center;
   position: relative;
   z-index: 10;
@@ -1784,6 +1785,7 @@
 }
 
 .hero-subtitle {
+  justify-content: center;
   font-size: 1.25rem;
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 3rem;
@@ -1792,11 +1794,12 @@
 }
 
 .hero-stats {
-  display: grid;
+  justify-content: center;
+  display: flex;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: auto;
+  margin: auto;
   animation: heroSlideUp 1s ease-out 0.4s both;
 }
 
