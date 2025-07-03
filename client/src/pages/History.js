@@ -10,7 +10,6 @@ import {
   Target,
   Flame,
   Star,
-  Clock,
   TrendingUp,
   ChevronLeft,
   ChevronRight,
@@ -376,19 +375,6 @@ const History = () => {
       icon: <Sparkles className="w-5 h-5" />,
     },
   ];
-
-  const getPositionIcon = (position) => {
-    switch (position) {
-      case 1:
-        return <Trophy className="w-8 h-8 text-yellow-400" />;
-      case 2:
-        return <Medal className="w-8 h-8 text-gray-400" />;
-      case 3:
-        return <Award className="w-8 h-8 text-amber-600" />;
-      default:
-        return <Star className="w-8 h-8 text-blue-400" />;
-    }
-  };
 
   const getBatchColor = (batch) => {
     const colors = {

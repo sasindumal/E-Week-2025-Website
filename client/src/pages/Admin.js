@@ -7,7 +7,6 @@ import {
   Users,
   Image,
   History,
-  Download,
   Settings,
   FileText,
   BarChart3,
@@ -17,7 +16,6 @@ import {
   Edit,
   Trash2,
   Eye,
-  Save,
   X,
   Upload,
   Activity,
@@ -372,7 +370,6 @@ const AdminDashboard = ({
   onQuickAction,
 }) => {
   const [refreshing, setRefreshing] = useState(false);
-  const [selectedTimeRange, setSelectedTimeRange] = useState("today");
 
   const handleRefresh = async () => {
     setRefreshing(true);
@@ -383,13 +380,6 @@ const AdminDashboard = ({
   const handleQuickAction = (action) => {
     onQuickAction(action);
   };
-
-  const timeRanges = [
-    { value: "today", label: "Today" },
-    { value: "week", label: "This Week" },
-    { value: "month", label: "This Month" },
-    { value: "year", label: "This Year" },
-  ];
 
   return (
     <div className="admin-dashboard">
@@ -674,8 +664,6 @@ const AdminEvents = ({ onNotify }) => {
       maxParticipants: 120,
     },
   ]);
-  const [showModal, setShowModal] = useState(false);
-  const [editingEvent, setEditingEvent] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
 
@@ -717,7 +705,6 @@ const AdminEvents = ({ onNotify }) => {
           <button
             className="action-btn primary"
             onClick={() => {
-              setShowModal(true);
               onNotify("Opening event creation form", "info");
             }}
           >
@@ -860,10 +847,6 @@ const AdminEvents = ({ onNotify }) => {
                     <button
                       className="action-icon"
                       title="Edit Event"
-                      onClick={() => {
-                        setEditingEvent(event);
-                        setShowModal(true);
-                      }}
                     >
                       <Edit className="w-4 h-4" />
                     </button>
