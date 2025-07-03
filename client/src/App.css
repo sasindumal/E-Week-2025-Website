@@ -3147,7 +3147,7 @@
 .timeline-event {
   display: grid;
   grid-template-columns: 150px 20px 1fr;
-  gap: 2rem;
+  gap: 1rem;
   margin-bottom: 2rem;
   animation: timelineSlideIn 0.6s ease-out both;
 }
@@ -3206,7 +3206,7 @@
 .event-card-timeline {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 1rem;
-  padding: 1.5rem;
+  padding: 0.5rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
@@ -3229,7 +3229,7 @@
 }
 
 .event-name-timeline {
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 700;
   color: white;
   margin: 0;
