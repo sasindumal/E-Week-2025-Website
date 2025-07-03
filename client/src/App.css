@@ -2943,9 +2943,10 @@
 }
 
 .hero-content-events {
+  display: flex;
+  flex-direction: column;
   text-align: center;
   position: relative;
-  z-index: 10;
   max-width: 800px;
 }
 
@@ -2957,8 +2958,7 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 1.5rem;
-  display: flex;
-  flex-direction: column;
+  display:inline;
   align-items: center;
   justify-content: center;
   padding: 0 0.7rem;
@@ -2978,7 +2978,9 @@
 }
 
 .hero-subtitle-events {
-  font-size: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 3rem;
   line-height: 1.6;
@@ -3005,6 +3007,7 @@
   border: 1px solid rgba(167, 28, 32, 0.2);
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
+  margin: 1rem;
 }
 
 .stat-card-events:hover {
