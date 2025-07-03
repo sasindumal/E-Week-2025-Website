@@ -3000,7 +3000,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0rem;
   padding: 1.5rem;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 1rem;
@@ -3008,6 +3008,7 @@
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   margin: 1rem;
+  max-height: 30rem;
 }
 
 .stat-card-events:hover {
@@ -3020,12 +3021,6 @@
   margin-bottom: 0.5rem;
 }
 
-.stat-number {
-  font-size: 2rem;
-  font-weight: 900;
-  color: white;
-  line-height: 1;
-}
 
 .stat-label {
   font-size: 0.875rem;
@@ -5017,7 +5012,7 @@
 
 .stat-number {
   display: block;
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: 900;
   color: #a71c20;
   margin-bottom: 0.5rem;
@@ -8474,7 +8469,7 @@
 }
 
 .stat-number {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 900;
   background: linear-gradient(135deg, #a71c20, #ff4757);
   -webkit-background-clip: text;
