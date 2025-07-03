@@ -3066,12 +3066,17 @@
   background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
 }
 
+.schedule-timeline{
+  padding-top: 1rem;
+
+}
+
 .day-selector {
-  display: grid;
+  display:grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 1rem;
-  margin-bottom: 4rem;
-  max-width: 1200px;
+  margin-bottom: 1rem;
+  max-width: auto;
   margin-left: auto;
   margin-right: auto;
 }
