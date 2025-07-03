@@ -1746,9 +1746,7 @@
     gap: 1rem;
   }
 
-  .stat-item {
-    padding: 1rem;
-  }
+
 
   .rankings-grid {
     grid-template-columns: 1fr;
@@ -2320,26 +2318,30 @@
 }
 
 .hero-content {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   text-align: center;
   position: relative;
-  z-index: 10;
   max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .hero-title {
-  font-size: clamp(3rem, 6vw, 5rem);
+  font-size: clamp(2.5rem, 6vw, 5rem);
   font-weight: 900;
   background: linear-gradient(135deg, #fff 0%, #e2e8f0 50%, #a71c20 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 1.5rem;
-  display: flex;
+  display:inline;
   align-items: center;
   justify-content: center;
+  padding: 0 0.7rem;
   gap: 1rem;
-  animation: heroSlideUp 1s ease-out;
+  animation: heroTitleSlide 1s ease-out;
 }
 
 @keyframes heroSlideUp {
@@ -2354,24 +2356,24 @@
 }
 
 .hero-subtitle {
-  justify-content: center;
-  font-size: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 3rem;
   line-height: 1.6;
-  animation: heroSlideUp 1s ease-out 0.2s both;
+  animation: heroTitleSlide 1s ease-out 0.2s both;
 }
 
 .hero-stats {
-  justify-content: center;
   display: flex;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  max-width: auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 100%;
   margin: auto;
   animation: heroSlideUp 1s ease-out 0.4s both;
 }
-
 .stat-item {
   display: flex;
   align-items: center;
@@ -6038,10 +6040,11 @@
 
 .stat-item {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.375rem;
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.875rem;
+  max-width: 40rem;
 }
 
 .item-actions {
