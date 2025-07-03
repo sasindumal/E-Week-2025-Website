@@ -2958,8 +2958,10 @@
   background-clip: text;
   margin-bottom: 1.5rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 0 0.7rem;
   gap: 1rem;
   animation: heroTitleSlide 1s ease-out;
 }
