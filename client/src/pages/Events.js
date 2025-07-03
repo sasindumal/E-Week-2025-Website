@@ -933,7 +933,6 @@ const Events = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="past-event-category">{event.category}</div>
                   </div>
 
                   <div className="scoreboard">
@@ -958,14 +957,7 @@ const Events = () => {
                             <span className="points-value">{score.score}</span>
                             <span className="points-label">pts</span>
                           </div>
-                          <div className="score-progress">
-                            <div
-                              className="score-bar"
-                              style={{
-                                width: `${(score.score / Math.max(...event.scores.map((s) => s.score))) * 100}%`,
-                              }}
-                            ></div>
-                          </div>
+                          
                         </div>
                       ))}
                     </div>

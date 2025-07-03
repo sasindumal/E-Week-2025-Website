@@ -3609,7 +3609,7 @@
 .past-event-card {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 2rem;
-  padding: 2.5rem;
+  padding: 1rem;
   border: 1px solid rgba(167, 28, 32, 0.2);
   backdrop-filter: blur(20px);
   transition: all 0.4s ease;
@@ -3682,7 +3682,7 @@
 .scoreboard {
   background: rgba(255, 255, 255, 0.02);
   border-radius: 1.5rem;
-  padding: 2rem;
+  padding: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -3702,7 +3702,7 @@
 
 .score-row {
   display: grid;
-  grid-template-columns: auto 1fr auto auto;
+  grid-template-columns: auto 1fr 1rem auto;
   align-items: center;
   gap: 1rem;
   padding: 1rem;
@@ -3723,8 +3723,8 @@
 }
 
 .rank-number {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2rem;
+  height: 1.5rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
