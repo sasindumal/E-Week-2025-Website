@@ -25,7 +25,6 @@ import {
 } from "lucide-react";
 
 const Leaderboard = () => {
-  const [selectedTimeframe] = useState("all");
   const [eventSearchTerm, setEventSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedBatch, setSelectedBatch] = useState("all");
@@ -358,7 +357,7 @@ const Leaderboard = () => {
               </p>
             </div>
             <div className="mt-8"></div>
-            
+
             <div className="rankings-grid">
               {batchRankings.map((batch, index) => {
                 const rankChange = getRankChange(

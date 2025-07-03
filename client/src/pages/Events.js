@@ -23,28 +23,16 @@ import {
   SortAsc,
   SortDesc,
   X,
-  Grid,
-  List,
 } from "lucide-react";
 
 const Events = () => {
   const [selectedDay, setSelectedDay] = useState(0);
-  const [currentTime, setCurrentTime] = useState(new Date());
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
   const [sortBy, setSortBy] = useState("time");
   const [sortOrder, setSortOrder] = useState("asc");
-  const [viewMode, setViewMode] = useState("grid");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-
-  // Update current time every minute
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 60000);
-    return () => clearInterval(timer);
-  }, []);
 
   // 7-day schedule
   const weekSchedule = [
@@ -691,129 +679,131 @@ const Events = () => {
         </section>
 
         {/* Advanced Search and Filter System */}
-        {<section className="events-search-section">
-          <div className="container">
-            <div className="events-search-header">
-              <h2 className="search-section-title">
-                Find Your Events
-                <Search className="title-icon" size={32} />
-              </h2>
-              <p className="search-section-subtitle">
-                Advanced search and filtering to discover the perfect events for
-                you
-              </p>
-            </div>
-
-            <div className="events-search-bar">
-              <div className="search-container">
-                <div className="search-input-wrapper">
-                  <Search className="search-icon" />
-                  <input
-                    type="text"
-                    placeholder="Search events by name, category, location..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="search-input"
-                  />
-                  {searchTerm && (
-                    <button
-                      onClick={() => setSearchTerm("")}
-                      className="clear-search"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
-                  )}
-                </div>
-
-                <button
-                  onClick={() => setIsFilterOpen(!isFilterOpen)}
-                  className={`filter-toggle ${isFilterOpen ? "active" : ""}`}
-                >
-                  <Filter className="w-5 h-5" />
-                  <span>Filters</span>
-                </button>
-
-                <div className="sort-controls">
-                  <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                    className="sort-select"
-                  >
-                    <option value="time">Time</option>
-                    <option value="name">Name</option>
-                    <option value="participants">Participants</option>
-                    <option value="category">Category</option>
-                  </select>
-                  <button
-                    onClick={() =>
-                      setSortOrder(sortOrder === "asc" ? "desc" : "asc")
-                    } 
-                    className="sort-order"
-                  >
-                    {sortOrder === "asc" ? (
-                      <SortAsc className="w-5 h-5" />
-                    ) : (
-                      <SortDesc className="w-5 h-5" />
-                    )}
-                  </button>
-                </div>
+        {
+          <section className="events-search-section">
+            <div className="container">
+              <div className="events-search-header">
+                <h2 className="search-section-title">
+                  Find Your Events
+                  <Search className="title-icon" size={32} />
+                </h2>
+                <p className="search-section-subtitle">
+                  Advanced search and filtering to discover the perfect events
+                  for you
+                </p>
               </div>
 
-              {/* Advanced Filters Panel */}
-              {isFilterOpen && (
-                <div className="filters-panel">
-                  <div className="filter-group">
-                    <label className="filter-label">Category</label>
-                    <select
-                      value={selectedCategory}
-                      onChange={(e) => setSelectedCategory(e.target.value)}
-                      className="filter-select"
-                    >
-                      <option value="all">All Categories</option>
-                      <option value="Competition">Competition</option>
-                      <option value="Workshop">Workshop</option>
-                      <option value="Conference">Conference</option>
-                      <option value="Ceremony">Ceremony</option>
-                      <option value="Social">Social</option>
-                    </select>
+              <div className="events-search-bar">
+                <div className="search-container">
+                  <div className="search-input-wrapper">
+                    <Search className="search-icon" />
+                    <input
+                      type="text"
+                      placeholder="Search events by name, category, location..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="search-input"
+                    />
+                    {searchTerm && (
+                      <button
+                        onClick={() => setSearchTerm("")}
+                        className="clear-search"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    )}
                   </div>
 
-                  <div className="filter-group">
-                    <label className="filter-label">Status</label>
-                    <select
-                      value={selectedStatus}
-                      onChange={(e) => setSelectedStatus(e.target.value)}
-                      className="filter-select"
-                    >
-                      <option value="all">All Status</option>
-                      <option value="scheduled">Scheduled</option>
-                      <option value="ongoing">Live/Ongoing</option>
-                      <option value="completed">Completed</option>
-                    </select>
-                  </div>
+                  <button
+                    onClick={() => setIsFilterOpen(!isFilterOpen)}
+                    className={`filter-toggle ${isFilterOpen ? "active" : ""}`}
+                  >
+                    <Filter className="w-5 h-5" />
+                    <span>Filters</span>
+                  </button>
 
-                  <div className="filter-actions">
+                  <div className="sort-controls">
+                    <select
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value)}
+                      className="sort-select"
+                    >
+                      <option value="time">Time</option>
+                      <option value="name">Name</option>
+                      <option value="participants">Participants</option>
+                      <option value="category">Category</option>
+                    </select>
                     <button
-                      onClick={() => {
-                        setSearchTerm("");
-                        setSelectedCategory("all");
-                        setSelectedStatus("all");
-                        setSortBy("time");
-                        setSortOrder("asc");
-                      }}
-                      className="clear-filters"
+                      onClick={() =>
+                        setSortOrder(sortOrder === "asc" ? "desc" : "asc")
+                      }
+                      className="sort-order"
                     >
-                      Clear All
+                      {sortOrder === "asc" ? (
+                        <SortAsc className="w-5 h-5" />
+                      ) : (
+                        <SortDesc className="w-5 h-5" />
+                      )}
                     </button>
-                    <span className="results-count">
-                      {filteredUpcomingEvents.length} events found
-                    </span>
                   </div>
                 </div>
-              )}
+
+                {/* Advanced Filters Panel */}
+                {isFilterOpen && (
+                  <div className="filters-panel">
+                    <div className="filter-group">
+                      <label className="filter-label">Category</label>
+                      <select
+                        value={selectedCategory}
+                        onChange={(e) => setSelectedCategory(e.target.value)}
+                        className="filter-select"
+                      >
+                        <option value="all">All Categories</option>
+                        <option value="Competition">Competition</option>
+                        <option value="Workshop">Workshop</option>
+                        <option value="Conference">Conference</option>
+                        <option value="Ceremony">Ceremony</option>
+                        <option value="Social">Social</option>
+                      </select>
+                    </div>
+
+                    <div className="filter-group">
+                      <label className="filter-label">Status</label>
+                      <select
+                        value={selectedStatus}
+                        onChange={(e) => setSelectedStatus(e.target.value)}
+                        className="filter-select"
+                      >
+                        <option value="all">All Status</option>
+                        <option value="scheduled">Scheduled</option>
+                        <option value="ongoing">Live/Ongoing</option>
+                        <option value="completed">Completed</option>
+                      </select>
+                    </div>
+
+                    <div className="filter-actions">
+                      <button
+                        onClick={() => {
+                          setSearchTerm("");
+                          setSelectedCategory("all");
+                          setSelectedStatus("all");
+                          setSortBy("time");
+                          setSortOrder("asc");
+                        }}
+                        className="clear-filters"
+                      >
+                        Clear All
+                      </button>
+                      <span className="results-count">
+                        {filteredUpcomingEvents.length} events found
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        </section>}
+          </section>
+        }
 
         {/* Section 03: Upcoming Events */}
         <section className="upcoming-section">
@@ -829,7 +819,7 @@ const Events = () => {
               </p>
             </div>
 
-            <div className={`upcoming-grid ${viewMode}`}>
+            <div className="upcoming-grid grid">
               {filteredUpcomingEvents.map((event, index) => {
                 const IconComponent = event.icon;
                 return (
