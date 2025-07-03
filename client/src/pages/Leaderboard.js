@@ -677,25 +677,11 @@ const Leaderboard = () => {
                         <div className="score-info">
                           <div className="batch-score">
                             <span className="batch-name">{score.batch}</span>
-                            <span className="team-name">{score.team}</span>
                           </div>
                           <div className="score-value">
                             <span className="points">{score.score}</span>
                             <span className="points-label">points</span>
                           </div>
-                        </div>
-
-                        <div className="score-bar">
-                          <div
-                            className="score-fill"
-                            style={{
-                              width: `${(score.score / Math.max(...event.scores.map((s) => s.score))) * 100}%`,
-                              background:
-                                idx < 3
-                                  ? `linear-gradient(90deg, ${["#fbbf24", "#9ca3af", "#fb923c"][idx]}, ${["#f59e0b", "#6b7280", "#ea580c"][idx]})`
-                                  : "linear-gradient(90deg, #60a5fa, #3b82f6)",
-                            }}
-                          ></div>
                         </div>
                       </div>
                     ))}
