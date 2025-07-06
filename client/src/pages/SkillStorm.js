@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
+import EventRegistrationModal from "../components/EventRegistrationModal";
 import {
   Code,
   Palette,
@@ -25,16 +26,25 @@ import {
 } from "lucide-react";
 
 const SkillStorm = () => {
-  const [registrationModal, setRegistrationModal] = useState(null);
+  const [registrationModal, setRegistrationModal] = useState({
+    isOpen: false,
+    event: null,
+  });
   const [expandedSection, setExpandedSection] = useState("pc-games");
 
   // Registration modal handler
   const openRegistration = (competition) => {
-    setRegistrationModal(competition);
+    setRegistrationModal({ isOpen: true, event: competition });
   };
 
   const closeRegistration = () => {
-    setRegistrationModal(null);
+    setRegistrationModal({ isOpen: false, event: null });
+  };
+
+  const handleRegistrationSubmit = (registrationData) => {
+    console.log("SkillStorm Registration submitted:", registrationData);
+    // Here you would typically send to backend API
+    alert("Registration submitted successfully!");
   };
 
   // Main competitions data
@@ -59,6 +69,13 @@ const SkillStorm = () => {
       ],
       duration: "6 hours",
       format: "Algorithm & Problem Solving",
+      type: "team",
+      playersPerTeam: 4,
+      maxTeamsPerBatch: 2,
+      maxPlayersPerBatch: 20,
+      date: "2025-08-26",
+      time: "09:00",
+      location: "Programming Lab",
     },
     {
       id: "pixel-ares",
@@ -80,6 +97,11 @@ const SkillStorm = () => {
       ],
       duration: "4 hours",
       format: "Creative Design Challenge",
+      type: "individual",
+      maxPlayersPerBatch: 10,
+      date: "2025-08-27",
+      time: "10:00",
+      location: "Design Studio",
     },
     {
       id: "titan-cad",
@@ -101,6 +123,13 @@ const SkillStorm = () => {
       ],
       duration: "5 hours",
       format: "3D Modeling & Engineering",
+      type: "team",
+      playersPerTeam: 2,
+      maxTeamsPerBatch: 5,
+      maxPlayersPerBatch: 25,
+      date: "2025-08-28",
+      time: "14:00",
+      location: "CAD Lab",
     },
   ];
 
@@ -123,6 +152,13 @@ const SkillStorm = () => {
         "Non-registered players not allowed",
         "Match overturn possible for violations",
       ],
+      type: "team",
+      playersPerTeam: 5,
+      maxTeamsPerBatch: 1,
+      maxPlayersPerBatch: 15,
+      date: "2025-08-29",
+      time: "09:00",
+      location: "Gaming Arena A",
     },
     {
       id: "six-siege",
@@ -144,6 +180,13 @@ const SkillStorm = () => {
         "Secure time limit: 15s",
         "Diffuser plant time: 10s",
       ],
+      type: "team",
+      playersPerTeam: 5,
+      maxTeamsPerBatch: 1,
+      maxPlayersPerBatch: 15,
+      date: "2025-08-29",
+      time: "14:00",
+      location: "Gaming Arena B",
     },
     {
       id: "blur",
@@ -163,6 +206,13 @@ const SkillStorm = () => {
         "Barcelona Gracia – Passeig De Gracia (3 Laps)",
         "Amboy – Route 66 (2 Laps)",
       ],
+      type: "team",
+      playersPerTeam: 4,
+      maxTeamsPerBatch: 1,
+      maxPlayersPerBatch: 12,
+      date: "2025-08-30",
+      time: "10:00",
+      location: "Gaming Arena C",
     },
     {
       id: "cod4",
@@ -190,6 +240,13 @@ const SkillStorm = () => {
         "Friendly fire disabled",
         "Kill streak rewards disabled",
       ],
+      type: "team",
+      playersPerTeam: 5,
+      maxTeamsPerBatch: 1,
+      maxPlayersPerBatch: 15,
+      date: "2025-08-30",
+      time: "15:00",
+      location: "Gaming Arena D",
     },
     {
       id: "nfs-girls",
@@ -206,6 +263,13 @@ const SkillStorm = () => {
         "Single/Double elimination format",
         "Female participants only",
       ],
+      type: "team",
+      playersPerTeam: 4,
+      maxTeamsPerBatch: 1,
+      maxPlayersPerBatch: 12,
+      date: "2025-08-31",
+      time: "10:00",
+      location: "Gaming Arena E",
     },
   ];
 
@@ -227,6 +291,13 @@ const SkillStorm = () => {
         "Bring your own device",
         "No dress code required",
       ],
+      type: "team",
+      playersPerTeam: 4,
+      maxTeamsPerBatch: 4,
+      maxPlayersPerBatch: 30,
+      date: "2025-08-31",
+      time: "14:00",
+      location: "Mobile Gaming Zone",
     },
     {
       id: "cod-mobile",
@@ -242,6 +313,13 @@ const SkillStorm = () => {
         "Tournament format TBD",
         "Bring your own device",
       ],
+      type: "team",
+      playersPerTeam: 5,
+      maxTeamsPerBatch: 3,
+      maxPlayersPerBatch: 25,
+      date: "2025-08-31",
+      time: "16:00",
+      location: "Mobile Gaming Zone",
     },
   ];
 
@@ -657,93 +735,12 @@ const SkillStorm = () => {
         </section>
 
         {/* Registration Modal */}
-        {registrationModal && (
-          <div className="modal-overlay-skillstorm">
-            <div className="modal-content-skillstorm">
-              <div className="modal-header-skillstorm">
-                <h3 className="modal-title-skillstorm">
-                  Register for{" "}
-                  {registrationModal.name || registrationModal.title}
-                </h3>
-                <button
-                  onClick={closeRegistration}
-                  className="modal-close-skillstorm"
-                >
-                  ×
-                </button>
-              </div>
-
-              <div className="modal-body-skillstorm">
-                <div className="registration-info">
-                  <h4>Competition Requirements</h4>
-                  {registrationModal.requirements && (
-                    <div className="requirements-list">
-                      <div className="req-item">
-                        <Users className="w-4 h-4 text-blue-400" />
-                        <span>{registrationModal.requirements.teams}</span>
-                      </div>
-                      <div className="req-item">
-                        <UserCheck className="w-4 h-4 text-green-400" />
-                        <span>{registrationModal.requirements.members}</span>
-                      </div>
-                    </div>
-                  )}
-
-                  {registrationModal.rules && (
-                    <div className="rules-section">
-                      <h5>Game Rules</h5>
-                      <ul className="rules-list">
-                        {registrationModal.rules
-                          .slice(0, 4)
-                          .map((rule, idx) => (
-                            <li key={idx}>{rule}</li>
-                          ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-
-                <div className="registration-form">
-                  <div className="form-group">
-                    <label>Team Name</label>
-                    <input type="text" placeholder="Enter your team name" />
-                  </div>
-                  <div className="form-group">
-                    <label>Batch</label>
-                    <select>
-                      <option>Select your batch</option>
-                      <option>E20</option>
-                      <option>E21</option>
-                      <option>E22</option>
-                      <option>E23</option>
-                      <option>E24</option>
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <label>Team Leader Email</label>
-                    <input type="email" placeholder="team.leader@email.com" />
-                  </div>
-                  <div className="form-group">
-                    <label>Team Members</label>
-                    <textarea placeholder="List all team member names and IDs"></textarea>
-                  </div>
-                </div>
-
-                <div className="modal-actions-skillstorm">
-                  <button className="btn-register-skillstorm">
-                    Submit Registration
-                  </button>
-                  <button
-                    onClick={closeRegistration}
-                    className="btn-cancel-skillstorm"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+        <EventRegistrationModal
+          event={registrationModal.event}
+          isOpen={registrationModal.isOpen}
+          onClose={closeRegistration}
+          onSubmit={handleRegistrationSubmit}
+        />
       </div>
     </Layout>
   );
