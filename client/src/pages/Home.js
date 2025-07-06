@@ -290,24 +290,24 @@ const Home = () => {
         ref={heroRef}
         style={{
           backgroundImage: "url('/greek-gods-hero.jpg')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          position: 'relative',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          position: "relative",
           zIndex: 1,
         }}
       >
         {/* Overlay for readability */}
         <div
           style={{
-            position: 'absolute',
+            position: "absolute",
             inset: 0,
-            background: 'rgba(0,0,0,0.75)',
+            background: "rgba(0,0,0,0.75)",
             zIndex: 2,
-            pointerEvents: 'none',
+            pointerEvents: "none",
           }}
         />
-        <div style={{ position: 'relative', zIndex: 3 }}>
+        <div style={{ position: "relative", zIndex: 3 }}>
           {/* Animated Background */}
           <div className="hero-background">
             <div className="floating-shapes">
@@ -348,14 +348,16 @@ const Home = () => {
                 <span className="title-line">E-WEEK</span>
                 <span className="title-year">2K25</span>
                 <div className="title-underline"></div>
-                <h3 className="countdown-title">Organized By E22</h3>
               </h1>
+              <p className="countdown-title">Organized By E22</p>
 
               <p className="modern-subtitle">
-                Warriors of the Odyssey, rise! The storm is near, and only the brave shall write history.
-                <br />   
-                <span className="highlight-text">Get ready into the battle.</span>
-                           
+                Warriors of the Odyssey, rise! The storm is near, and only the
+                brave shall write history.
+                <br />
+                <span className="highlight-text">
+                  Get ready into the battle.
+                </span>
               </p>
             </div>
 

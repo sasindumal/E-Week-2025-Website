@@ -30,6 +30,9 @@ import {
   MapPin,
   Target,
   Zap,
+  SortAsc,
+  SortDesc,
+  Crown,
 } from "lucide-react";
 
 const Admin = () => {
@@ -640,6 +643,10 @@ const AdminEvents = ({ onNotify }) => {
       location: "Tech Hub Alpha",
       category: "Competition",
       maxParticipants: 150,
+      type: "team",
+      playersPerTeam: 4,
+      maxTeamsPerBatch: 2,
+      maxPlayersPerBatch: 20,
     },
     {
       id: 2,
@@ -651,6 +658,8 @@ const AdminEvents = ({ onNotify }) => {
       location: "Engineering Lab",
       category: "Workshop",
       maxParticipants: 100,
+      type: "individual",
+      maxPlayersPerBatch: 15,
     },
     {
       id: 3,
@@ -662,10 +671,16 @@ const AdminEvents = ({ onNotify }) => {
       location: "Computer Center",
       category: "Competition",
       maxParticipants: 120,
+      type: "team",
+      playersPerTeam: 3,
+      maxTeamsPerBatch: 3,
+      maxPlayersPerBatch: 25,
     },
   ]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
+  const [showAddEventModal, setShowAddEventModal] = useState(false);
+  const [editingEvent, setEditingEvent] = useState(null);
 
   const filteredEvents = events.filter((event) => {
     const matchesSearch = event.name
@@ -688,6 +703,33 @@ const AdminEvents = ({ onNotify }) => {
     onNotify(`Event status updated to ${newStatus}`, "success");
   };
 
+  const handleAddEvent = () => {
+    setEditingEvent(null);
+    setShowAddEventModal(true);
+  };
+
+  const handleEditEvent = (event) => {
+    setEditingEvent(event);
+    setShowAddEventModal(true);
+  };
+
+  const handleSaveEvent = (eventData) => {
+    if (editingEvent) {
+      setEvents(
+        events.map((e) =>
+          e.id === editingEvent.id ? { ...eventData, id: editingEvent.id } : e,
+        ),
+      );
+      onNotify("Event updated successfully", "success");
+    } else {
+      const newEvent = { ...eventData, id: Date.now(), participants: 0 };
+      setEvents([...events, newEvent]);
+      onNotify("Event created successfully", "success");
+    }
+    setShowAddEventModal(false);
+    setEditingEvent(null);
+  };
+
   return (
     <div className="admin-section">
       <div className="section-header">
@@ -702,12 +744,7 @@ const AdminEvents = ({ onNotify }) => {
             <Upload className="w-4 h-4" />
             Import
           </button>
-          <button
-            className="action-btn primary"
-            onClick={() => {
-              onNotify("Opening event creation form", "info");
-            }}
-          >
+          <button className="action-btn primary" onClick={handleAddEvent}>
             <Plus className="w-4 h-4" />
             Add Event
           </button>
@@ -781,6 +818,7 @@ const AdminEvents = ({ onNotify }) => {
             <tr>
               <th>Event Details</th>
               <th>Date & Time</th>
+              <th>Type</th>
               <th>Status</th>
               <th>Participants</th>
               <th>Location</th>
@@ -802,6 +840,18 @@ const AdminEvents = ({ onNotify }) => {
                       {new Date(event.date).toLocaleDateString()}
                     </span>
                     <span className="event-time">{event.time}</span>
+                  </div>
+                </td>
+                <td>
+                  <div className="event-type-info">
+                    <span className={`type-badge ${event.type}`}>
+                      {event.type === "team" ? "Team" : "Individual"}
+                    </span>
+                    {event.type === "team" && (
+                      <span className="type-details">
+                        {event.playersPerTeam} players/team
+                      </span>
+                    )}
                   </div>
                 </td>
                 <td>
@@ -847,6 +897,7 @@ const AdminEvents = ({ onNotify }) => {
                     <button
                       className="action-icon"
                       title="Edit Event"
+                      onClick={() => handleEditEvent(event)}
                     >
                       <Edit className="w-4 h-4" />
                     </button>
@@ -872,6 +923,266 @@ const AdminEvents = ({ onNotify }) => {
           <p>Try adjusting your search or filter criteria</p>
         </div>
       )}
+
+      {/* Add/Edit Event Modal */}
+      {showAddEventModal && (
+        <AddEventModal
+          event={editingEvent}
+          isOpen={showAddEventModal}
+          onClose={() => {
+            setShowAddEventModal(false);
+            setEditingEvent(null);
+          }}
+          onSave={handleSaveEvent}
+        />
+      )}
+    </div>
+  );
+};
+
+// Add Event Modal Component
+const AddEventModal = ({ event, isOpen, onClose, onSave }) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    date: "",
+    time: "",
+    location: "",
+    category: "Competition",
+    type: "individual",
+    playersPerTeam: 4,
+    maxTeamsPerBatch: 2,
+    maxPlayersPerBatch: 20,
+    maxParticipants: 100,
+    status: "upcoming",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (event) {
+      setFormData(event);
+    } else {
+      setFormData({
+        name: "",
+        date: "",
+        time: "",
+        location: "",
+        category: "Competition",
+        type: "individual",
+        playersPerTeam: 4,
+        maxTeamsPerBatch: 2,
+        maxPlayersPerBatch: 20,
+        maxParticipants: 100,
+        status: "upcoming",
+      });
+    }
+  }, [event]);
+
+  const handleInputChange = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: "" }));
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.name.trim()) newErrors.name = "Event name is required";
+    if (!formData.date) newErrors.date = "Date is required";
+    if (!formData.time) newErrors.time = "Time is required";
+    if (!formData.location.trim()) newErrors.location = "Location is required";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      onSave(formData);
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay-admin">
+      <div className="modal-content-admin">
+        <div className="modal-header-admin">
+          <h3>{event ? "Edit Event" : "Add New Event"}</h3>
+          <button onClick={onClose} className="modal-close-admin">
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="admin-form">
+          <div className="form-grid">
+            <div className="form-group">
+              <label>Event Name *</label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => handleInputChange("name", e.target.value)}
+                placeholder="Enter event name"
+                className={errors.name ? "error" : ""}
+              />
+              {errors.name && <span className="error-text">{errors.name}</span>}
+            </div>
+
+            <div className="form-group">
+              <label>Category</label>
+              <select
+                value={formData.category}
+                onChange={(e) => handleInputChange("category", e.target.value)}
+              >
+                <option value="Competition">Competition</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Conference">Conference</option>
+                <option value="Ceremony">Ceremony</option>
+                <option value="Social">Social</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>Date *</label>
+              <input
+                type="date"
+                value={formData.date}
+                onChange={(e) => handleInputChange("date", e.target.value)}
+                className={errors.date ? "error" : ""}
+              />
+              {errors.date && <span className="error-text">{errors.date}</span>}
+            </div>
+
+            <div className="form-group">
+              <label>Time *</label>
+              <input
+                type="time"
+                value={formData.time}
+                onChange={(e) => handleInputChange("time", e.target.value)}
+                className={errors.time ? "error" : ""}
+              />
+              {errors.time && <span className="error-text">{errors.time}</span>}
+            </div>
+
+            <div className="form-group span-2">
+              <label>Location *</label>
+              <input
+                type="text"
+                value={formData.location}
+                onChange={(e) => handleInputChange("location", e.target.value)}
+                placeholder="Enter event location"
+                className={errors.location ? "error" : ""}
+              />
+              {errors.location && (
+                <span className="error-text">{errors.location}</span>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label>Event Type</label>
+              <select
+                value={formData.type}
+                onChange={(e) => handleInputChange("type", e.target.value)}
+              >
+                <option value="individual">Individual</option>
+                <option value="team">Team</option>
+              </select>
+            </div>
+
+            {formData.type === "team" && (
+              <>
+                <div className="form-group">
+                  <label>Players per Team</label>
+                  <input
+                    type="number"
+                    min="2"
+                    max="10"
+                    value={formData.playersPerTeam}
+                    onChange={(e) =>
+                      handleInputChange(
+                        "playersPerTeam",
+                        parseInt(e.target.value),
+                      )
+                    }
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>Max Teams per Batch</label>
+                  <input
+                    type="number"
+                    min="1"
+                    max="10"
+                    value={formData.maxTeamsPerBatch}
+                    onChange={(e) =>
+                      handleInputChange(
+                        "maxTeamsPerBatch",
+                        parseInt(e.target.value),
+                      )
+                    }
+                  />
+                </div>
+              </>
+            )}
+
+            <div className="form-group">
+              <label>Max Players per Batch</label>
+              <input
+                type="number"
+                min="1"
+                max="100"
+                value={formData.maxPlayersPerBatch}
+                onChange={(e) =>
+                  handleInputChange(
+                    "maxPlayersPerBatch",
+                    parseInt(e.target.value),
+                  )
+                }
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Total Max Participants</label>
+              <input
+                type="number"
+                min="1"
+                max="1000"
+                value={formData.maxParticipants}
+                onChange={(e) =>
+                  handleInputChange("maxParticipants", parseInt(e.target.value))
+                }
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Status</label>
+              <select
+                value={formData.status}
+                onChange={(e) => handleInputChange("status", e.target.value)}
+              >
+                <option value="upcoming">Upcoming</option>
+                <option value="active">Active</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="modal-actions-admin">
+            <button
+              type="button"
+              onClick={onClose}
+              className="btn-secondary-admin"
+            >
+              Cancel
+            </button>
+            <button type="submit" className="btn-primary-admin">
+              {event ? "Update Event" : "Create Event"}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
@@ -892,20 +1203,320 @@ const AdminLeaderboard = ({ onNotify }) => (
   />
 );
 
-const AdminParticipants = ({ onNotify }) => (
-  <AdminSection
-    title="Participants Management"
-    description="Manage user accounts, registrations, and profiles"
-    icon={<Users className="w-16 h-16" />}
-    onNotify={onNotify}
-    features={[
-      "Add Participants",
-      "Manage Batches",
-      "Update Profiles",
-      "Export Lists",
-    ]}
-  />
-);
+const AdminParticipants = ({ onNotify }) => {
+  const [registrations, setRegistrations] = useState([
+    {
+      id: 1,
+      eventName: "AI Hackathon 2025",
+      eventId: 1,
+      teamName: "Code Warriors",
+      batch: "E21",
+      type: "team",
+      submittedAt: "2025-01-15T10:30:00Z",
+      participants: [
+        {
+          name: "John Doe",
+          registrationNumber: "E/21/001",
+          contactNumber: "0771234567",
+          email: "john@example.com",
+          isCaptain: true,
+        },
+        {
+          name: "Jane Smith",
+          registrationNumber: "E/21/002",
+          contactNumber: "0771234568",
+          email: "jane@example.com",
+          isCaptain: false,
+        },
+      ],
+    },
+    {
+      id: 2,
+      eventName: "Quantum Computing Workshop",
+      eventId: 2,
+      teamName: "Individual - John Wilson",
+      batch: "E22",
+      type: "individual",
+      submittedAt: "2025-01-16T14:20:00Z",
+      participants: [
+        {
+          name: "John Wilson",
+          registrationNumber: "E/22/015",
+          contactNumber: "0771234569",
+          email: "wilson@example.com",
+          isCaptain: true,
+        },
+      ],
+    },
+  ]);
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterEvent, setFilterEvent] = useState("all");
+  const [filterBatch, setFilterBatch] = useState("all");
+  const [sortBy, setSortBy] = useState("date");
+  const [sortOrder, setSortOrder] = useState("desc");
+
+  // Get unique events and batches for filters
+  const events = [...new Set(registrations.map((r) => r.eventName))];
+  const batches = [...new Set(registrations.map((r) => r.batch))];
+
+  const filteredRegistrations = registrations
+    .filter((reg) => {
+      const matchesSearch =
+        reg.eventName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        reg.teamName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        reg.participants.some((p) =>
+          p.name.toLowerCase().includes(searchTerm.toLowerCase()),
+        );
+
+      const matchesEvent =
+        filterEvent === "all" || reg.eventName === filterEvent;
+      const matchesBatch = filterBatch === "all" || reg.batch === filterBatch;
+
+      return matchesSearch && matchesEvent && matchesBatch;
+    })
+    .sort((a, b) => {
+      let comparison = 0;
+
+      switch (sortBy) {
+        case "date":
+          comparison = new Date(b.submittedAt) - new Date(a.submittedAt);
+          break;
+        case "event":
+          comparison = a.eventName.localeCompare(b.eventName);
+          break;
+        case "batch":
+          comparison = a.batch.localeCompare(b.batch);
+          break;
+        case "team":
+          comparison = a.teamName.localeCompare(b.teamName);
+          break;
+        default:
+          comparison = 0;
+      }
+
+      return sortOrder === "asc" ? comparison : -comparison;
+    });
+
+  // Group registrations by event
+  const groupedRegistrations = filteredRegistrations.reduce((acc, reg) => {
+    if (!acc[reg.eventName]) {
+      acc[reg.eventName] = [];
+    }
+    acc[reg.eventName].push(reg);
+    return acc;
+  }, {});
+
+  const handleDeleteRegistration = (regId) => {
+    setRegistrations((prev) => prev.filter((r) => r.id !== regId));
+    onNotify("Registration deleted successfully", "success");
+  };
+
+  return (
+    <div className="admin-section">
+      <div className="section-header">
+        <div className="header-content">
+          <h1>Participants Management</h1>
+          <p className="section-description">
+            Manage event registrations and participant details
+          </p>
+        </div>
+        <div className="header-actions">
+          <button className="action-btn secondary">
+            <Upload className="w-4 h-4" />
+            Export
+          </button>
+          <button className="action-btn primary">
+            <Plus className="w-4 h-4" />
+            Add Registration
+          </button>
+        </div>
+      </div>
+
+      <div className="section-controls">
+        <div className="search-bar">
+          <Search className="w-4 h-4" />
+          <input
+            type="text"
+            placeholder="Search participants, teams, or events..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+        <div className="filter-controls">
+          <select
+            className="filter-select"
+            value={filterEvent}
+            onChange={(e) => setFilterEvent(e.target.value)}
+          >
+            <option value="all">All Events</option>
+            {events.map((event) => (
+              <option key={event} value={event}>
+                {event}
+              </option>
+            ))}
+          </select>
+          <select
+            className="filter-select"
+            value={filterBatch}
+            onChange={(e) => setFilterBatch(e.target.value)}
+          >
+            <option value="all">All Batches</option>
+            {batches.map((batch) => (
+              <option key={batch} value={batch}>
+                {batch}
+              </option>
+            ))}
+          </select>
+          <select
+            className="filter-select"
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+          >
+            <option value="date">Sort by Date</option>
+            <option value="event">Sort by Event</option>
+            <option value="batch">Sort by Batch</option>
+            <option value="team">Sort by Team</option>
+          </select>
+          <button
+            className="sort-order-btn"
+            onClick={() =>
+              setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"))
+            }
+          >
+            {sortOrder === "asc" ? (
+              <SortAsc className="w-4 h-4" />
+            ) : (
+              <SortDesc className="w-4 h-4" />
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Statistics */}
+      <div className="participants-stats">
+        <div className="participants-stat">
+          <span className="stat-number">{registrations.length}</span>
+          <span className="stat-label">Total Registrations</span>
+        </div>
+        <div className="participants-stat">
+          <span className="stat-number">
+            {Object.keys(groupedRegistrations).length}
+          </span>
+          <span className="stat-label">Events with Registrations</span>
+        </div>
+        <div className="participants-stat">
+          <span className="stat-number">
+            {registrations.reduce((sum, r) => sum + r.participants.length, 0)}
+          </span>
+          <span className="stat-label">Total Participants</span>
+        </div>
+        <div className="participants-stat">
+          <span className="stat-number">
+            {registrations.filter((r) => r.type === "team").length}
+          </span>
+          <span className="stat-label">Team Registrations</span>
+        </div>
+      </div>
+
+      {/* Grouped Registrations */}
+      <div className="registrations-container">
+        {Object.entries(groupedRegistrations).map(
+          ([eventName, eventRegistrations]) => (
+            <div key={eventName} className="event-group">
+              <div className="event-group-header">
+                <h3>{eventName}</h3>
+                <span className="registration-count">
+                  {eventRegistrations.length} registration
+                  {eventRegistrations.length !== 1 ? "s" : ""}
+                </span>
+              </div>
+
+              <div className="registrations-grid">
+                {eventRegistrations.map((registration) => (
+                  <div key={registration.id} className="registration-card">
+                    <div className="registration-header">
+                      <div className="registration-info">
+                        <h4>{registration.teamName}</h4>
+                        <div className="registration-meta">
+                          <span className="batch-badge">
+                            {registration.batch}
+                          </span>
+                          <span className="type-badge">
+                            {registration.type}
+                          </span>
+                          <span className="date-info">
+                            {new Date(
+                              registration.submittedAt,
+                            ).toLocaleDateString()}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="registration-actions">
+                        <button className="action-icon" title="View Details">
+                          <Eye className="w-4 h-4" />
+                        </button>
+                        <button
+                          className="action-icon"
+                          title="Edit Registration"
+                        >
+                          <Edit className="w-4 h-4" />
+                        </button>
+                        <button
+                          className="action-icon danger"
+                          title="Delete Registration"
+                          onClick={() =>
+                            handleDeleteRegistration(registration.id)
+                          }
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="participants-list">
+                      {registration.participants.map((participant, index) => (
+                        <div key={index} className="participant-row">
+                          <div className="participant-info">
+                            <span className="participant-name">
+                              {participant.isCaptain && (
+                                <Crown className="w-3 h-3 text-yellow-400" />
+                              )}
+                              {participant.name}
+                            </span>
+                            <span className="participant-reg">
+                              {participant.registrationNumber}
+                            </span>
+                          </div>
+                          <div className="participant-contact">
+                            <span className="participant-phone">
+                              {participant.contactNumber}
+                            </span>
+                            <span className="participant-email">
+                              {participant.email}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ),
+        )}
+      </div>
+
+      {filteredRegistrations.length === 0 && (
+        <div className="empty-state">
+          <Users className="w-16 h-16" />
+          <h3>No registrations found</h3>
+          <p>Try adjusting your search or filter criteria</p>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const AdminGallery = ({ onNotify }) => (
   <AdminSection

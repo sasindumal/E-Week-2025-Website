@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Layout from "../components/Layout";
+import EventRegistrationModal from "../components/EventRegistrationModal";
 import {
   Calendar,
   Clock,
@@ -33,6 +34,10 @@ const Events = () => {
   const [sortBy, setSortBy] = useState("time");
   const [sortOrder, setSortOrder] = useState("asc");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [registrationModal, setRegistrationModal] = useState({
+    isOpen: false,
+    event: null,
+  });
 
   // 7-day schedule
   const weekSchedule = [
@@ -270,13 +275,29 @@ const Events = () => {
     },
   ];
 
+  // Registration handlers
+  const openRegistration = (event) => {
+    setRegistrationModal({ isOpen: true, event });
+  };
+
+  const closeRegistration = () => {
+    setRegistrationModal({ isOpen: false, event: null });
+  };
+
+  const handleRegistrationSubmit = (registrationData) => {
+    console.log("Registration submitted:", registrationData);
+    // Here you would typically send to backend API
+    // For now, just show success message
+    alert("Registration submitted successfully!");
+  };
+
   // Upcoming events
   const upcomingEvents = [
     {
       id: 1,
       name: "Cybersecurity War Games",
-      date: "Tomorrow",
-      time: "09:00 AM",
+      date: "2025-08-26",
+      time: "09:00",
       duration: "6 hours",
       location: "Security Command Center",
       participants: "150+ registered",
@@ -287,12 +308,16 @@ const Events = () => {
       description: "Advanced cybersecurity simulation and defense challenges",
       points: "30 Points",
       tags: ["Security", "CTF", "Networking"],
+      type: "team",
+      playersPerTeam: 4,
+      maxTeamsPerBatch: 2,
+      maxPlayersPerBatch: 20,
     },
     {
       id: 2,
       name: "Quantum Computing Workshop",
-      date: "Aug 28",
-      time: "2:00 PM",
+      date: "2025-08-28",
+      time: "14:00",
       duration: "4 hours",
       location: "Quantum Lab",
       participants: "80+ registered",
@@ -303,12 +328,14 @@ const Events = () => {
       description: "Hands-on experience with quantum algorithms and circuits",
       points: "20 Points",
       tags: ["Quantum", "Computing", "Research"],
+      type: "individual",
+      maxPlayersPerBatch: 15,
     },
     {
       id: 3,
       name: "Mobile App Development Sprint",
-      date: "Aug 29",
-      time: "10:00 AM",
+      date: "2025-08-29",
+      time: "10:00",
       duration: "8 hours",
       location: "Mobile Dev Studio",
       participants: "100+ registered",
@@ -319,12 +346,16 @@ const Events = () => {
       description: "Build and deploy mobile apps in a day-long sprint",
       points: "10 Points",
       tags: ["Mobile", "React Native", "Flutter"],
+      type: "team",
+      playersPerTeam: 3,
+      maxTeamsPerBatch: 3,
+      maxPlayersPerBatch: 25,
     },
     {
       id: 4,
       name: "Design Thinking Masterclass",
-      date: "Aug 30",
-      time: "11:00 AM",
+      date: "2025-08-30",
+      time: "11:00",
       duration: "3 hours",
       location: "Creative Hub",
       participants: "60+ registered",
@@ -335,6 +366,8 @@ const Events = () => {
       description: "Learn human-centered design principles and methods",
       points: "20 Points",
       tags: ["Design", "UX", "Innovation"],
+      type: "individual",
+      maxPlayersPerBatch: 12,
     },
   ];
 
@@ -887,7 +920,10 @@ const Events = () => {
                       </div>
 
                       {/* Action Button */}
-                      <button className="upcoming-cta">
+                      <button
+                        className="upcoming-cta"
+                        onClick={() => openRegistration(event)}
+                      >
                         <span>Register Now</span>
                         <ArrowRight className="w-4 h-4" />
                       </button>
@@ -957,7 +993,6 @@ const Events = () => {
                             <span className="points-value">{score.score}</span>
                             <span className="points-label">pts</span>
                           </div>
-                          
                         </div>
                       ))}
                     </div>
@@ -967,6 +1002,14 @@ const Events = () => {
             </div>
           </div>
         </section>
+
+        {/* Registration Modal */}
+        <EventRegistrationModal
+          event={registrationModal.event}
+          isOpen={registrationModal.isOpen}
+          onClose={closeRegistration}
+          onSubmit={handleRegistrationSubmit}
+        />
       </div>
     </Layout>
   );
