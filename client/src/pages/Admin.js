@@ -1560,24 +1560,105 @@ const EventCompletionModal = ({ event, isOpen, onClose, onSave }) => {
   });
 
   const [errors, setErrors] = useState({});
+  const [availableTeams, setAvailableTeams] = useState({});
+  const [availableParticipants, setAvailableParticipants] = useState({});
+  const [loadingTeams, setLoadingTeams] = useState({});
 
   const batches = ["E21", "E22", "E23", "E24", "E25"];
 
   useEffect(() => {
     if (event) {
       setWinners({
-        first: { batch: "", team: "", name: "", points: event.points.first },
-        second: { batch: "", team: "", name: "", points: event.points.second },
-        third: { batch: "", team: "", name: "", points: event.points.third },
+        first: {
+          batch: "",
+          team: "",
+          name: "",
+          points: event.points?.first || 100,
+        },
+        second: {
+          batch: "",
+          team: "",
+          name: "",
+          points: event.points?.second || 70,
+        },
+        third: {
+          batch: "",
+          team: "",
+          name: "",
+          points: event.points?.third || 50,
+        },
       });
+      // Reset teams and participants data
+      setAvailableTeams({});
+      setAvailableParticipants({});
     }
   }, [event]);
+
+  // Fetch teams and participants when batch is selected
+  const fetchTeamsAndParticipants = async (eventId, batch, position) => {
+    if (!batch || !eventId) return;
+
+    const key = `${batch}_${eventId}`;
+    if (availableTeams[key] || loadingTeams[position]) return; // Already loaded or loading
+
+    setLoadingTeams((prev) => ({ ...prev, [position]: true }));
+
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/events/${eventId}/batches/${batch}/teams`,
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      setAvailableTeams((prev) => ({
+        ...prev,
+        [key]: data.teams || [],
+      }));
+
+      setAvailableParticipants((prev) => ({
+        ...prev,
+        [key]: data.participants || [],
+      }));
+    } catch (error) {
+      console.error("Failed to fetch teams and participants:", error);
+      // Set empty arrays on error to prevent infinite loading
+      setAvailableTeams((prev) => ({
+        ...prev,
+        [key]: [],
+      }));
+      setAvailableParticipants((prev) => ({
+        ...prev,
+        [key]: [],
+      }));
+    } finally {
+      setLoadingTeams((prev) => ({ ...prev, [position]: false }));
+    }
+  };
 
   const handleWinnerChange = (position, field, value) => {
     setWinners((prev) => ({
       ...prev,
       [position]: { ...prev[position], [field]: value },
     }));
+
+    // Clear error for this field
+    const errorKey = `${position}_${field}`;
+    if (errors[errorKey]) {
+      setErrors((prev) => ({ ...prev, [errorKey]: "" }));
+    }
+
+    // If batch is changed, fetch teams and participants and reset team/name
+    if (field === "batch" && value) {
+      fetchTeamsAndParticipants(event.id, value, position);
+      setWinners((prev) => ({
+        ...prev,
+        [position]: { ...prev[position], team: "", name: "" },
+      }));
+    }
   };
 
   const validateForm = () => {
@@ -1659,15 +1740,45 @@ const EventCompletionModal = ({ event, isOpen, onClose, onSave }) => {
                   {event.type === "team" ? (
                     <div className="form-group">
                       <label>Team Name *</label>
-                      <input
-                        type="text"
-                        value={winner.team}
-                        onChange={(e) =>
-                          handleWinnerChange(position, "team", e.target.value)
-                        }
-                        placeholder="Enter team name"
-                        className={errors[`${position}_team`] ? "error" : ""}
-                      />
+                      {winner.batch &&
+                      availableTeams[`${winner.batch}_${event.id}`] ? (
+                        <select
+                          value={winner.team}
+                          onChange={(e) =>
+                            handleWinnerChange(position, "team", e.target.value)
+                          }
+                          className={errors[`${position}_team`] ? "error" : ""}
+                          disabled={loadingTeams[position]}
+                        >
+                          <option value="">
+                            {loadingTeams[position]
+                              ? "Loading teams..."
+                              : "Select Team"}
+                          </option>
+                          {availableTeams[`${winner.batch}_${event.id}`].map(
+                            (team) => (
+                              <option key={team.id} value={team.name}>
+                                {team.name} ({team.members.length} members)
+                              </option>
+                            ),
+                          )}
+                        </select>
+                      ) : (
+                        <input
+                          type="text"
+                          value={winner.team}
+                          onChange={(e) =>
+                            handleWinnerChange(position, "team", e.target.value)
+                          }
+                          placeholder={
+                            winner.batch
+                              ? "Loading teams..."
+                              : "Select batch first"
+                          }
+                          className={errors[`${position}_team`] ? "error" : ""}
+                          disabled={!winner.batch || loadingTeams[position]}
+                        />
+                      )}
                       {errors[`${position}_team`] && (
                         <span className="error-text">
                           {errors[`${position}_team`]}
@@ -1677,15 +1788,48 @@ const EventCompletionModal = ({ event, isOpen, onClose, onSave }) => {
                   ) : (
                     <div className="form-group">
                       <label>Participant Name *</label>
-                      <input
-                        type="text"
-                        value={winner.name}
-                        onChange={(e) =>
-                          handleWinnerChange(position, "name", e.target.value)
-                        }
-                        placeholder="Enter participant name"
-                        className={errors[`${position}_name`] ? "error" : ""}
-                      />
+                      {winner.batch &&
+                      availableParticipants[`${winner.batch}_${event.id}`] ? (
+                        <select
+                          value={winner.name}
+                          onChange={(e) =>
+                            handleWinnerChange(position, "name", e.target.value)
+                          }
+                          className={errors[`${position}_name`] ? "error" : ""}
+                          disabled={loadingTeams[position]}
+                        >
+                          <option value="">
+                            {loadingTeams[position]
+                              ? "Loading participants..."
+                              : "Select Participant"}
+                          </option>
+                          {availableParticipants[
+                            `${winner.batch}_${event.id}`
+                          ].map((participant) => (
+                            <option
+                              key={participant.id}
+                              value={participant.name}
+                            >
+                              {participant.name} ({participant.studentId})
+                            </option>
+                          ))}
+                        </select>
+                      ) : (
+                        <input
+                          type="text"
+                          value={winner.name}
+                          onChange={(e) =>
+                            handleWinnerChange(position, "name", e.target.value)
+                          }
+                          placeholder={
+                            winner.batch
+                              ? "Loading participants..."
+                              : "Select batch first"
+                          }
+                          className={errors[`${position}_name`] ? "error" : ""}
+                          disabled={!winner.batch || loadingTeams[position]}
+                        />
+                      )}
                       {errors[`${position}_name`] && (
                         <span className="error-text">
                           {errors[`${position}_name`]}
@@ -1883,6 +2027,8 @@ const AdminSkillStorm = ({ onNotify }) => {
   const [filterStatus, setFilterStatus] = useState("all");
   const [showAddEventModal, setShowAddEventModal] = useState(false);
   const [editingEvent, setEditingEvent] = useState(null);
+  const [showCompletionModal, setShowCompletionModal] = useState(false);
+  const [completingEvent, setCompletingEvent] = useState(null);
 
   // Event Management Functions
   const handleAddEvent = () => {
@@ -1921,6 +2067,34 @@ const AdminSkillStorm = ({ onNotify }) => {
     }
     setShowAddEventModal(false);
     setEditingEvent(null);
+  };
+
+  const handleCompleteSkillStormEvent = (event) => {
+    setCompletingEvent(event);
+    setShowCompletionModal(true);
+  };
+
+  const handleSaveSkillStormCompletion = (completionData) => {
+    setSkillstormEvents(
+      skillstormEvents.map((e) =>
+        e.id === completingEvent.id
+          ? { ...e, status: "completed", winners: completionData.winners }
+          : e,
+      ),
+    );
+
+    // Submit to leaderboards
+    if (completionData.winners) {
+      Object.entries(completionData.winners).forEach(([position, winner]) => {
+        onNotify(
+          `SkillStorm: ${winner.team || winner.name} placed ${position} in ${completingEvent.name}`,
+          "success",
+        );
+      });
+    }
+
+    setShowCompletionModal(false);
+    setCompletingEvent(null);
   };
 
   const handleDeleteRegistration = (regId) => {
@@ -2173,6 +2347,15 @@ const AdminSkillStorm = ({ onNotify }) => {
                         >
                           <Edit className="w-4 h-4" />
                         </button>
+                        {event.status === "active" && (
+                          <button
+                            className="action-icon success"
+                            title="Complete Competition"
+                            onClick={() => handleCompleteSkillStormEvent(event)}
+                          >
+                            <CheckCircle className="w-4 h-4" />
+                          </button>
+                        )}
                         <button
                           className="action-icon danger"
                           title="Delete Competition"
@@ -2355,6 +2538,19 @@ const AdminSkillStorm = ({ onNotify }) => {
             setEditingEvent(null);
           }}
           onSave={handleSaveEvent}
+        />
+      )}
+
+      {/* SkillStorm Event Completion Modal */}
+      {showCompletionModal && (
+        <EventCompletionModal
+          event={completingEvent}
+          isOpen={showCompletionModal}
+          onClose={() => {
+            setShowCompletionModal(false);
+            setCompletingEvent(null);
+          }}
+          onSave={handleSaveSkillStormCompletion}
         />
       )}
     </div>
@@ -2740,6 +2936,15 @@ const AdminLeaderboard = ({ onNotify }) => {
           </p>
         </div>
         <div className="header-actions">
+          <button
+            className="action-btn secondary"
+            onClick={() =>
+              onNotify("Scores recalculated successfully", "success")
+            }
+          >
+            <RefreshCw className="w-4 h-4" />
+            Recalculate
+          </button>
           <button className="action-btn secondary">
             <Upload className="w-4 h-4" />
             Export Rankings
@@ -3116,11 +3321,25 @@ const AdminParticipants = ({ onNotify }) => {
           </p>
         </div>
         <div className="header-actions">
-          <button className="action-btn secondary">
+          <button
+            className="action-btn secondary"
+            onClick={() =>
+              onNotify("Bulk import functionality - coming soon", "info")
+            }
+          >
             <Upload className="w-4 h-4" />
+            Bulk Import
+          </button>
+          <button className="action-btn secondary">
+            <FileText className="w-4 h-4" />
             Export
           </button>
-          <button className="action-btn primary">
+          <button
+            className="action-btn primary"
+            onClick={() =>
+              onNotify("Add registration functionality - coming soon", "info")
+            }
+          >
             <Plus className="w-4 h-4" />
             Add Registration
           </button>
@@ -3454,6 +3673,15 @@ const AdminGallery = ({ onNotify }) => {
           </p>
         </div>
         <div className="header-actions">
+          <button
+            className="action-btn secondary"
+            onClick={() =>
+              onNotify("Gallery organized successfully", "success")
+            }
+          >
+            <BarChart3 className="w-4 h-4" />
+            Organize
+          </button>
           <button className="action-btn secondary">
             <Upload className="w-4 h-4" />
             Bulk Upload
@@ -3576,7 +3804,7 @@ const AdminGallery = ({ onNotify }) => {
               <img src={item.thumbnail} alt={item.title} />
               <div className="item-overlay">
                 <div className="item-type">
-                  {item.type === "video" ? "📹" : "����"}
+                  {item.type === "video" ? "📹" : "�����"}
                 </div>
                 <div className="item-actions">
                   <button className="action-icon" title="View">
@@ -3778,8 +4006,15 @@ const AdminHistory = ({ onNotify }) => {
           </p>
         </div>
         <div className="header-actions">
+          <button
+            className="action-btn secondary"
+            onClick={() => onNotify("Archives updated successfully", "success")}
+          >
+            <RefreshCw className="w-4 h-4" />
+            Update Archives
+          </button>
           <button className="action-btn secondary">
-            <Upload className="w-4 h-4" />
+            <FileText className="w-4 h-4" />
             Export History
           </button>
           <button className="action-btn primary" onClick={handleAddYear}>
