@@ -7,8 +7,8 @@ import { createServer } from "./server";
 export default defineConfig(({ mode }) => ({
   server: {
     host: true,
-    // allowedHosts: 'all', // Uncomment if using Vite 5+
-    port: 8080,
+    allowedHosts: 'all', // Uncomment if using Vite 5+
+    port: 5000,
   },
   build: {
     outDir: "dist/spa",
