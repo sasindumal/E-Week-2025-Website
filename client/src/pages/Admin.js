@@ -34,9 +34,6 @@ import {
   SortDesc,
   Crown,
   Gamepad2,
-  Code,
-  Palette,
-  Box,
 } from "lucide-react";
 
 const Admin = () => {
@@ -187,20 +184,10 @@ const Admin = () => {
       badge: null,
     },
     {
-      id: "content",
-      label: "Content",
-      icon: <FileText className="w-5 h-5" />,
-      path: "/admin/content",
-      badge:
-        adminData.stats.pendingApprovals > 0
-          ? adminData.stats.pendingApprovals
-          : null,
-    },
-    {
-      id: "analytics",
-      label: "Analytics",
-      icon: <BarChart3 className="w-5 h-5" />,
-      path: "/admin/analytics",
+      id: "admins",
+      label: "Admin Users",
+      icon: <Shield className="w-5 h-5" />,
+      path: "/admin/admins",
       badge: null,
     },
     {
@@ -295,7 +282,14 @@ const Admin = () => {
           </div>
           <button
             className="logout-btn"
-            onClick={() => addNotification("Logout successful", "success")}
+            onClick={() => {
+              if (window.confirm("Are you sure you want to logout?")) {
+                addNotification("Logout successful", "success");
+                setTimeout(() => {
+                  window.location.href = "/admin/login";
+                }, 1000);
+              }
+            }}
           >
             <LogOut className="w-5 h-5" />
             <span className={`nav-label ${!sidebarOpen ? "hidden" : ""}`}>
@@ -363,12 +357,8 @@ const Admin = () => {
             element={<AdminHistory onNotify={addNotification} />}
           />
           <Route
-            path="/content"
-            element={<AdminContent onNotify={addNotification} />}
-          />
-          <Route
-            path="/analytics"
-            element={<AdminAnalytics onNotify={addNotification} />}
+            path="/admins"
+            element={<AdminUsers onNotify={addNotification} />}
           />
           <Route
             path="/settings"
@@ -388,6 +378,79 @@ const AdminDashboard = ({
   onQuickAction,
 }) => {
   const [refreshing, setRefreshing] = useState(false);
+
+  // Mock data for upcoming and completed events
+  const upcomingEvents = [
+    {
+      id: 1,
+      name: "AI Hackathon 2025",
+      date: "2025-08-26",
+      time: "09:00",
+      location: "Tech Hub Alpha",
+      participants: 120,
+      maxParticipants: 150,
+      category: "Technical",
+      status: "upcoming",
+      daysLeft: 2,
+    },
+    {
+      id: 2,
+      name: "Robotics Championship",
+      date: "2025-08-27",
+      time: "14:00",
+      location: "Engineering Lab",
+      participants: 85,
+      maxParticipants: 100,
+      category: "Engineering",
+      status: "upcoming",
+      daysLeft: 3,
+    },
+    {
+      id: 3,
+      name: "Mobile App Sprint",
+      date: "2025-08-28",
+      time: "10:00",
+      location: "Innovation Center",
+      participants: 95,
+      maxParticipants: 120,
+      category: "Competition",
+      status: "upcoming",
+      daysLeft: 4,
+    },
+  ];
+
+  const completedEvents = [
+    {
+      id: 1,
+      name: "Opening Ceremony",
+      date: "2025-08-20",
+      participants: 500,
+      winner: "All Batches",
+      category: "Ceremony",
+      rating: 4.9,
+      feedback: "Excellent organization",
+    },
+    {
+      id: 2,
+      name: "Programming Contest",
+      date: "2025-08-21",
+      participants: 180,
+      winner: "E21 - Code Warriors",
+      category: "Technical",
+      rating: 4.7,
+      feedback: "Challenging problems",
+    },
+    {
+      id: 3,
+      name: "Design Workshop",
+      date: "2025-08-22",
+      participants: 120,
+      winner: "E22 - Creative Minds",
+      category: "Workshop",
+      rating: 4.8,
+      feedback: "Very informative",
+    },
+  ];
 
   const handleRefresh = async () => {
     setRefreshing(true);
@@ -528,8 +591,122 @@ const AdminDashboard = ({
 
       {/* Enhanced Content Grid */}
       <div className="dashboard-content">
+        {/* Upcoming Events */}
+        <div className="content-card events-card">
+          <div className="card-header">
+            <h3>Upcoming Events</h3>
+            <div className="header-actions">
+              <button
+                className="view-all"
+                onClick={() => handleQuickAction("View All Events")}
+              >
+                View All
+              </button>
+            </div>
+          </div>
+          <div className="events-list">
+            {upcomingEvents.map((event) => (
+              <div key={event.id} className="event-item upcoming">
+                <div className="event-info">
+                  <div className="event-main">
+                    <h4 className="event-name">{event.name}</h4>
+                    <div className="event-meta">
+                      <span className="event-date">
+                        <Calendar className="w-3 h-3" />
+                        {new Date(event.date).toLocaleDateString()} at{" "}
+                        {event.time}
+                      </span>
+                      <span className="event-location">
+                        <MapPin className="w-3 h-3" />
+                        {event.location}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="event-stats">
+                    <div className="participants-stat">
+                      <span className="stat-value">
+                        {event.participants}/{event.maxParticipants}
+                      </span>
+                      <span className="stat-label">Participants</span>
+                    </div>
+                    <div className="days-left">
+                      <span className="days-count">{event.daysLeft}</span>
+                      <span className="days-label">days left</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="event-progress">
+                  <div className="progress-bar">
+                    <div
+                      className="progress-fill"
+                      style={{
+                        width: `${(event.participants / event.maxParticipants) * 100}%`,
+                      }}
+                    ></div>
+                  </div>
+                  <span className="progress-text">
+                    {Math.round(
+                      (event.participants / event.maxParticipants) * 100,
+                    )}
+                    % filled
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Completed Events */}
+        <div className="content-card events-card">
+          <div className="card-header">
+            <h3>Recent Completed Events</h3>
+            <div className="header-actions">
+              <button
+                className="view-all"
+                onClick={() => handleQuickAction("View Event Results")}
+              >
+                View Results
+              </button>
+            </div>
+          </div>
+          <div className="events-list">
+            {completedEvents.map((event) => (
+              <div key={event.id} className="event-item completed">
+                <div className="event-info">
+                  <div className="event-main">
+                    <h4 className="event-name">{event.name}</h4>
+                    <div className="event-meta">
+                      <span className="event-date">
+                        <CheckCircle className="w-3 h-3" />
+                        {new Date(event.date).toLocaleDateString()}
+                      </span>
+                      <span className="event-winner">
+                        <Trophy className="w-3 h-3" />
+                        {event.winner}
+                      </span>
+                    </div>
+                  </div>
+                  <div className="event-stats">
+                    <div className="participants-stat">
+                      <span className="stat-value">{event.participants}</span>
+                      <span className="stat-label">Participants</span>
+                    </div>
+                    <div className="rating-stat">
+                      <span className="rating-value">⭐ {event.rating}</span>
+                      <span className="rating-label">Rating</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="event-feedback">
+                  <span className="feedback-text">"{event.feedback}"</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Enhanced Recent Activity */}
-        <div className="content-card">
+        <div className="content-card activity-card">
           <div className="card-header">
             <h3>Recent Activity</h3>
             <div className="header-actions">
@@ -582,7 +759,7 @@ const AdminDashboard = ({
         </div>
 
         {/* Enhanced Quick Actions */}
-        <div className="content-card">
+        <div className="content-card quick-actions-card">
           <div className="card-header">
             <h3>Quick Actions</h3>
             <span className="card-subtitle">Most used admin tasks</span>
@@ -662,6 +839,8 @@ const AdminEvents = ({ onNotify }) => {
       playersPerTeam: 4,
       maxTeamsPerBatch: 2,
       maxPlayersPerBatch: 20,
+      points: { first: 100, second: 70, third: 50 },
+      winners: null,
     },
     {
       id: 2,
@@ -675,13 +854,15 @@ const AdminEvents = ({ onNotify }) => {
       maxParticipants: 100,
       type: "individual",
       maxPlayersPerBatch: 15,
+      points: { first: 80, second: 50, third: 30 },
+      winners: null,
     },
     {
       id: 3,
       name: "Web Development Contest",
       date: "2025-03-20",
       time: "14:00",
-      status: "upcoming",
+      status: "completed",
       participants: 95,
       location: "Computer Center",
       category: "Competition",
@@ -690,12 +871,24 @@ const AdminEvents = ({ onNotify }) => {
       playersPerTeam: 3,
       maxTeamsPerBatch: 3,
       maxPlayersPerBatch: 25,
+      points: { first: 120, second: 80, third: 60 },
+      winners: {
+        first: { batch: "E21", team: "Code Masters", points: 120 },
+        second: { batch: "E22", team: "Web Warriors", points: 80 },
+        third: { batch: "E23", team: "Dev Squad", points: 60 },
+      },
     },
   ]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
   const [showAddEventModal, setShowAddEventModal] = useState(false);
   const [editingEvent, setEditingEvent] = useState(null);
+  const [showCompletionModal, setShowCompletionModal] = useState(false);
+  const [completingEvent, setCompletingEvent] = useState(null);
+  const [deleteConfirm, setDeleteConfirm] = useState({
+    show: false,
+    eventId: null,
+  });
 
   const filteredEvents = events.filter((event) => {
     const matchesSearch = event.name
@@ -707,8 +900,45 @@ const AdminEvents = ({ onNotify }) => {
   });
 
   const handleDeleteEvent = (eventId) => {
-    setEvents(events.filter((e) => e.id !== eventId));
+    setDeleteConfirm({ show: true, eventId });
+  };
+
+  const confirmDelete = () => {
+    setEvents(events.filter((e) => e.id !== deleteConfirm.eventId));
     onNotify("Event deleted successfully", "success");
+    setDeleteConfirm({ show: false, eventId: null });
+  };
+
+  const handleCompleteEvent = (event) => {
+    setCompletingEvent(event);
+    setShowCompletionModal(true);
+  };
+
+  const handleSaveCompletion = (completionData) => {
+    setEvents(
+      events.map((e) =>
+        e.id === completingEvent.id
+          ? { ...e, status: "completed", winners: completionData.winners }
+          : e,
+      ),
+    );
+
+    // Submit to leaderboards
+    if (completionData.winners) {
+      Object.entries(completionData.winners).forEach(([position, winner]) => {
+        onNotify(
+          `${position} place: ${winner.batch} - ${winner.team || winner.name} (+${winner.points} points)`,
+          "success",
+        );
+      });
+    }
+
+    onNotify(
+      "Event completed and results submitted to leaderboard!",
+      "success",
+    );
+    setShowCompletionModal(false);
+    setCompletingEvent(null);
   };
 
   const handleStatusChange = (eventId, newStatus) => {
@@ -755,10 +985,6 @@ const AdminEvents = ({ onNotify }) => {
           </p>
         </div>
         <div className="header-actions">
-          <button className="action-btn secondary">
-            <Upload className="w-4 h-4" />
-            Import
-          </button>
           <button className="action-btn primary" onClick={handleAddEvent}>
             <Plus className="w-4 h-4" />
             Add Event
@@ -916,6 +1142,16 @@ const AdminEvents = ({ onNotify }) => {
                     >
                       <Edit className="w-4 h-4" />
                     </button>
+                    {(event.status === "active" ||
+                      event.status === "upcoming") && (
+                      <button
+                        className="action-icon success"
+                        title="Complete Event"
+                        onClick={() => handleCompleteEvent(event)}
+                      >
+                        <CheckCircle className="w-4 h-4" />
+                      </button>
+                    )}
                     <button
                       className="action-icon danger"
                       title="Delete Event"
@@ -936,6 +1172,52 @@ const AdminEvents = ({ onNotify }) => {
           <Calendar className="w-16 h-16" />
           <h3>No events found</h3>
           <p>Try adjusting your search or filter criteria</p>
+        </div>
+      )}
+
+      {/* Event Completion Modal */}
+      {showCompletionModal && (
+        <EventCompletionModal
+          event={completingEvent}
+          isOpen={showCompletionModal}
+          onClose={() => {
+            setShowCompletionModal(false);
+            setCompletingEvent(null);
+          }}
+          onSave={handleSaveCompletion}
+        />
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {deleteConfirm.show && (
+        <div className="modal-overlay-admin">
+          <div className="modal-content-admin small">
+            <div className="modal-header-admin">
+              <h3>Confirm Delete</h3>
+            </div>
+            <div className="modal-body-admin">
+              <p>
+                Are you sure you want to delete this event? This action cannot
+                be undone.
+              </p>
+            </div>
+            <div className="modal-actions-admin">
+              <button
+                type="button"
+                onClick={() => setDeleteConfirm({ show: false, eventId: null })}
+                className="btn-secondary-admin"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={confirmDelete}
+                className="btn-danger-admin"
+              >
+                Delete Event
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
@@ -969,6 +1251,8 @@ const AddEventModal = ({ event, isOpen, onClose, onSave }) => {
     maxPlayersPerBatch: 20,
     maxParticipants: 100,
     status: "upcoming",
+    points: { first: 100, second: 70, third: 50 },
+    winners: null,
   });
 
   const [errors, setErrors] = useState({});
@@ -989,6 +1273,8 @@ const AddEventModal = ({ event, isOpen, onClose, onSave }) => {
         maxPlayersPerBatch: 20,
         maxParticipants: 100,
         status: "upcoming",
+        points: { first: 100, second: 70, third: 50 },
+        winners: null,
       });
     }
   }, [event]);
@@ -1182,6 +1468,54 @@ const AddEventModal = ({ event, isOpen, onClose, onSave }) => {
                 <option value="cancelled">Cancelled</option>
               </select>
             </div>
+
+            <div className="form-group span-3">
+              <label>Points Configuration</label>
+              <div className="points-grid">
+                <div className="points-field">
+                  <label>1st Place</label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={formData.points.first}
+                    onChange={(e) =>
+                      handleInputChange("points", {
+                        ...formData.points,
+                        first: parseInt(e.target.value) || 0,
+                      })
+                    }
+                  />
+                </div>
+                <div className="points-field">
+                  <label>2nd Place</label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={formData.points.second}
+                    onChange={(e) =>
+                      handleInputChange("points", {
+                        ...formData.points,
+                        second: parseInt(e.target.value) || 0,
+                      })
+                    }
+                  />
+                </div>
+                <div className="points-field">
+                  <label>3rd Place</label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={formData.points.third}
+                    onChange={(e) =>
+                      handleInputChange("points", {
+                        ...formData.points,
+                        third: parseInt(e.target.value) || 0,
+                      })
+                    }
+                  />
+                </div>
+              </div>
+            </div>
           </div>
 
           <div className="modal-actions-admin">
@@ -1194,6 +1528,209 @@ const AddEventModal = ({ event, isOpen, onClose, onSave }) => {
             </button>
             <button type="submit" className="btn-primary-admin">
               {event ? "Update Event" : "Create Event"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+// Event Completion Modal Component
+const EventCompletionModal = ({ event, isOpen, onClose, onSave }) => {
+  const [winners, setWinners] = useState({
+    first: {
+      batch: "",
+      team: "",
+      name: "",
+      points: event?.points?.first || 100,
+    },
+    second: {
+      batch: "",
+      team: "",
+      name: "",
+      points: event?.points?.second || 70,
+    },
+    third: {
+      batch: "",
+      team: "",
+      name: "",
+      points: event?.points?.third || 50,
+    },
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const batches = ["E21", "E22", "E23", "E24", "E25"];
+
+  useEffect(() => {
+    if (event) {
+      setWinners({
+        first: { batch: "", team: "", name: "", points: event.points.first },
+        second: { batch: "", team: "", name: "", points: event.points.second },
+        third: { batch: "", team: "", name: "", points: event.points.third },
+      });
+    }
+  }, [event]);
+
+  const handleWinnerChange = (position, field, value) => {
+    setWinners((prev) => ({
+      ...prev,
+      [position]: { ...prev[position], [field]: value },
+    }));
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    Object.keys(winners).forEach((position) => {
+      const winner = winners[position];
+      if (!winner.batch) {
+        newErrors[`${position}_batch`] = "Batch is required";
+      }
+      if (event?.type === "team" && !winner.team) {
+        newErrors[`${position}_team`] = "Team name is required";
+      }
+      if (event?.type === "individual" && !winner.name) {
+        newErrors[`${position}_name`] = "Participant name is required";
+      }
+    });
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      onSave({ winners });
+    }
+  };
+
+  if (!isOpen || !event) return null;
+
+  return (
+    <div className="modal-overlay-admin">
+      <div className="modal-content-admin large">
+        <div className="modal-header-admin">
+          <h3>Complete Event: {event.name}</h3>
+          <button onClick={onClose} className="modal-close-admin">
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="admin-form">
+          <div className="completion-grid">
+            {Object.entries(winners).map(([position, winner]) => (
+              <div key={position} className="winner-section">
+                <h4 className={`winner-title ${position}`}>
+                  <Crown className="w-5 h-5" />
+                  {position === "first"
+                    ? "1st"
+                    : position === "second"
+                      ? "2nd"
+                      : "3rd"}{" "}
+                  Place ({winner.points} points)
+                </h4>
+
+                <div className="winner-form">
+                  <div className="form-group">
+                    <label>Batch *</label>
+                    <select
+                      value={winner.batch}
+                      onChange={(e) =>
+                        handleWinnerChange(position, "batch", e.target.value)
+                      }
+                      className={errors[`${position}_batch`] ? "error" : ""}
+                    >
+                      <option value="">Select Batch</option>
+                      {batches.map((batch) => (
+                        <option key={batch} value={batch}>
+                          {batch}
+                        </option>
+                      ))}
+                    </select>
+                    {errors[`${position}_batch`] && (
+                      <span className="error-text">
+                        {errors[`${position}_batch`]}
+                      </span>
+                    )}
+                  </div>
+
+                  {event.type === "team" ? (
+                    <div className="form-group">
+                      <label>Team Name *</label>
+                      <input
+                        type="text"
+                        value={winner.team}
+                        onChange={(e) =>
+                          handleWinnerChange(position, "team", e.target.value)
+                        }
+                        placeholder="Enter team name"
+                        className={errors[`${position}_team`] ? "error" : ""}
+                      />
+                      {errors[`${position}_team`] && (
+                        <span className="error-text">
+                          {errors[`${position}_team`]}
+                        </span>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="form-group">
+                      <label>Participant Name *</label>
+                      <input
+                        type="text"
+                        value={winner.name}
+                        onChange={(e) =>
+                          handleWinnerChange(position, "name", e.target.value)
+                        }
+                        placeholder="Enter participant name"
+                        className={errors[`${position}_name`] ? "error" : ""}
+                      />
+                      {errors[`${position}_name`] && (
+                        <span className="error-text">
+                          {errors[`${position}_name`]}
+                        </span>
+                      )}
+                    </div>
+                  )}
+
+                  <div className="form-group">
+                    <label>Points</label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={winner.points}
+                      onChange={(e) =>
+                        handleWinnerChange(
+                          position,
+                          "points",
+                          parseInt(e.target.value) || 0,
+                        )
+                      }
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="completion-note">
+            <p>
+              <strong>Note:</strong> Completing this event will automatically
+              update the leaderboard with the winners and their points.
+            </p>
+          </div>
+
+          <div className="modal-actions-admin">
+            <button
+              type="button"
+              onClick={onClose}
+              className="btn-secondary-admin"
+            >
+              Cancel
+            </button>
+            <button type="submit" className="btn-primary-admin">
+              Complete Event & Update Leaderboard
             </button>
           </div>
         </form>
@@ -1344,8 +1881,6 @@ const AdminSkillStorm = ({ onNotify }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState("all");
   const [filterStatus, setFilterStatus] = useState("all");
-  const [sortBy, setSortBy] = useState("date");
-  const [sortOrder, setSortOrder] = useState("desc");
   const [showAddEventModal, setShowAddEventModal] = useState(false);
   const [editingEvent, setEditingEvent] = useState(null);
 
@@ -1361,8 +1896,14 @@ const AdminSkillStorm = ({ onNotify }) => {
   };
 
   const handleDeleteEvent = (eventId) => {
-    setSkillstormEvents((prev) => prev.filter((e) => e.id !== eventId));
-    onNotify("SkillStorm event deleted successfully", "success");
+    if (
+      window.confirm(
+        "Are you sure you want to delete this competition? This action cannot be undone.",
+      )
+    ) {
+      setSkillstormEvents((prev) => prev.filter((e) => e.id !== eventId));
+      onNotify("SkillStorm event deleted successfully", "success");
+    }
   };
 
   const handleSaveEvent = (eventData) => {
@@ -1383,8 +1924,14 @@ const AdminSkillStorm = ({ onNotify }) => {
   };
 
   const handleDeleteRegistration = (regId) => {
-    setSkillstormRegistrations((prev) => prev.filter((r) => r.id !== regId));
-    onNotify("Registration deleted successfully", "success");
+    if (
+      window.confirm(
+        "Are you sure you want to delete this registration? This action cannot be undone.",
+      )
+    ) {
+      setSkillstormRegistrations((prev) => prev.filter((r) => r.id !== regId));
+      onNotify("Registration deleted successfully", "success");
+    }
   };
 
   // Filter functions
@@ -1435,10 +1982,6 @@ const AdminSkillStorm = ({ onNotify }) => {
           </p>
         </div>
         <div className="header-actions">
-          <button className="action-btn secondary">
-            <Upload className="w-4 h-4" />
-            Import
-          </button>
           <button className="action-btn primary" onClick={handleAddEvent}>
             <Plus className="w-4 h-4" />
             Add Competition
@@ -2074,7 +2617,7 @@ const AddSkillStormEventModal = ({ event, isOpen, onClose, onSave }) => {
 
 // Enhanced AdminLeaderboard Component
 const AdminLeaderboard = ({ onNotify }) => {
-  const [batchRankings, setBatchRankings] = useState([
+  const [batchRankings] = useState([
     {
       id: 1,
       batch: "E21",
@@ -2175,24 +2718,6 @@ const AdminLeaderboard = ({ onNotify }) => {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("rankings");
-  const [editingScore, setEditingScore] = useState(null);
-  const [showAddScoreModal, setShowAddScoreModal] = useState(false);
-
-  const handleUpdateScore = (eventId, batchScore) => {
-    setEventScores((prev) =>
-      prev.map((event) =>
-        event.id === eventId
-          ? {
-              ...event,
-              scores: event.scores.map((score) =>
-                score.batch === batchScore.batch ? batchScore : score,
-              ),
-            }
-          : event,
-      ),
-    );
-    onNotify("Score updated successfully", "success");
-  };
 
   const handleDeleteEvent = (eventId) => {
     setEventScores((prev) => prev.filter((e) => e.id !== eventId));
@@ -2221,7 +2746,9 @@ const AdminLeaderboard = ({ onNotify }) => {
           </button>
           <button
             className="action-btn primary"
-            onClick={() => setShowAddScoreModal(true)}
+            onClick={() =>
+              onNotify("Add event scores functionality - coming soon", "info")
+            }
           >
             <Plus className="w-4 h-4" />
             Add Event Scores
@@ -2440,9 +2967,13 @@ const AdminLeaderboard = ({ onNotify }) => {
                             <button
                               className="action-icon"
                               onClick={() =>
-                                setEditingScore({ eventId: event.id, ...score })
+                                onNotify(
+                                  "Edit score functionality - coming soon",
+                                  "info",
+                                )
                               }
                             >
+                              >
                               <Edit className="w-3 h-3" />
                             </button>
                           </td>
@@ -2565,8 +3096,14 @@ const AdminParticipants = ({ onNotify }) => {
   }, {});
 
   const handleDeleteRegistration = (regId) => {
-    setRegistrations((prev) => prev.filter((r) => r.id !== regId));
-    onNotify("Registration deleted successfully", "success");
+    if (
+      window.confirm(
+        "Are you sure you want to delete this registration? This action cannot be undone.",
+      )
+    ) {
+      setRegistrations((prev) => prev.filter((r) => r.id !== regId));
+      onNotify("Registration deleted successfully", "success");
+    }
   };
 
   return (
@@ -2841,7 +3378,6 @@ const AdminGallery = ({ onNotify }) => {
   const [filterType, setFilterType] = useState("all");
   const [sortBy, setSortBy] = useState("date");
   const [viewMode, setViewMode] = useState("grid");
-  const [showUploadModal, setShowUploadModal] = useState(false);
 
   const categories = [
     "Events",
@@ -2850,8 +3386,6 @@ const AdminGallery = ({ onNotify }) => {
     "Ceremonies",
     "Workshops",
   ];
-  const statuses = ["approved", "pending", "rejected"];
-  const types = ["image", "video"];
 
   const handleStatusChange = (itemId, newStatus) => {
     setGalleryItems((prev) =>
@@ -2863,8 +3397,22 @@ const AdminGallery = ({ onNotify }) => {
   };
 
   const handleDeleteItem = (itemId) => {
-    setGalleryItems((prev) => prev.filter((item) => item.id !== itemId));
-    onNotify("Media deleted successfully", "success");
+    if (
+      window.confirm(
+        "Are you sure you want to delete this media? This action cannot be undone.",
+      )
+    ) {
+      setGalleryItems((prev) => prev.filter((item) => item.id !== itemId));
+      onNotify("Media deleted successfully", "success");
+    }
+  };
+
+  const handleEditItem = (item) => {
+    onNotify("Edit media functionality - coming soon", "info");
+  };
+
+  const handleUploadMedia = () => {
+    onNotify("Upload media functionality - coming soon", "info");
   };
 
   const filteredItems = galleryItems
@@ -2910,10 +3458,7 @@ const AdminGallery = ({ onNotify }) => {
             <Upload className="w-4 h-4" />
             Bulk Upload
           </button>
-          <button
-            className="action-btn primary"
-            onClick={() => setShowUploadModal(true)}
-          >
+          <button className="action-btn primary" onClick={handleUploadMedia}>
             <Plus className="w-4 h-4" />
             Upload Media
           </button>
@@ -3031,13 +3576,17 @@ const AdminGallery = ({ onNotify }) => {
               <img src={item.thumbnail} alt={item.title} />
               <div className="item-overlay">
                 <div className="item-type">
-                  {item.type === "video" ? "📹" : "📷"}
+                  {item.type === "video" ? "📹" : "����"}
                 </div>
                 <div className="item-actions">
                   <button className="action-icon" title="View">
                     <Eye className="w-4 h-4" />
                   </button>
-                  <button className="action-icon" title="Edit">
+                  <button
+                    className="action-icon"
+                    title="Edit"
+                    onClick={() => handleEditItem(item)}
+                  >
                     <Edit className="w-4 h-4" />
                   </button>
                   <button
@@ -3188,39 +3737,24 @@ const AdminHistory = ({ onNotify }) => {
   const [activeTab, setActiveTab] = useState("years");
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
-  const [editingYear, setEditingYear] = useState(null);
-  const [showAddYearModal, setShowAddYearModal] = useState(false);
 
   const handleAddYear = () => {
-    setEditingYear(null);
-    setShowAddYearModal(true);
+    onNotify("Add year functionality - coming soon", "info");
   };
 
   const handleEditYear = (year) => {
-    setEditingYear(year);
-    setShowAddYearModal(true);
+    onNotify("Edit year functionality - coming soon", "info");
   };
 
   const handleDeleteYear = (yearId) => {
-    setHistoryData((prev) => prev.filter((y) => y.id !== yearId));
-    onNotify("Year record deleted successfully", "success");
-  };
-
-  const handleSaveYear = (yearData) => {
-    if (editingYear) {
-      setHistoryData((prev) =>
-        prev.map((y) =>
-          y.id === editingYear.id ? { ...yearData, id: editingYear.id } : y,
-        ),
-      );
-      onNotify("Year record updated successfully", "success");
-    } else {
-      const newYear = { ...yearData, id: Date.now() };
-      setHistoryData((prev) => [newYear, ...prev]);
-      onNotify("Year record created successfully", "success");
+    if (
+      window.confirm(
+        "Are you sure you want to delete this year record? This action cannot be undone.",
+      )
+    ) {
+      setHistoryData((prev) => prev.filter((y) => y.id !== yearId));
+      onNotify("Year record deleted successfully", "success");
     }
-    setShowAddYearModal(false);
-    setEditingYear(null);
   };
 
   const filteredHistory = historyData.filter((year) => {
@@ -3449,93 +3983,933 @@ const AdminHistory = ({ onNotify }) => {
   );
 };
 
-const AdminContent = ({ onNotify }) => (
-  <AdminSection
-    title="Content Management"
-    description="Edit website content, announcements, and static pages"
-    icon={<FileText className="w-16 h-16" />}
-    onNotify={onNotify}
-    features={["Edit Pages", "Manage News", "Update About", "Approve Content"]}
-  />
-);
+const AdminSettings = ({ onNotify }) => {
+  const [activeTab, setActiveTab] = useState("general");
+  const [settings, setSettings] = useState({
+    general: {
+      siteName: "E-Week 2025",
+      siteDescription: "University of Jaffna Faculty of Engineering",
+      contactEmail: "admin@eweek2025.lk",
+      maintenanceMode: false,
+      registrationOpen: true,
+      maxParticipantsPerEvent: 150,
+    },
+    notifications: {
+      emailNotifications: true,
+      smsNotifications: false,
+      pushNotifications: true,
+      eventReminders: true,
+      scoreUpdates: true,
+    },
+    security: {
+      twoFactorAuth: false,
+      sessionTimeout: 30,
+      maxLoginAttempts: 5,
+      passwordMinLength: 8,
+      requirePasswordChange: false,
+    },
+    backup: {
+      autoBackup: true,
+      backupFrequency: "daily",
+      retentionDays: 30,
+      lastBackup: "2025-01-20T10:30:00Z",
+    },
+  });
 
-const AdminAnalytics = ({ onNotify }) => (
-  <AdminSection
-    title="Analytics & Reports"
-    description="View detailed analytics and generate comprehensive reports"
-    icon={<BarChart3 className="w-16 h-16" />}
-    onNotify={onNotify}
-    features={[
-      "View Analytics",
-      "Generate Reports",
-      "Export Data",
-      "Track Performance",
-    ]}
-  />
-);
+  const handleSettingChange = (category, setting, value) => {
+    setSettings((prev) => ({
+      ...prev,
+      [category]: {
+        ...prev[category],
+        [setting]: value,
+      },
+    }));
+    onNotify(`${setting} updated successfully`, "success");
+  };
 
-const AdminSettings = ({ onNotify }) => (
-  <AdminSection
-    title="System Settings"
-    description="Configure system-wide settings and preferences"
-    icon={<Settings className="w-16 h-16" />}
-    onNotify={onNotify}
-    features={[
-      "General Settings",
-      "User Permissions",
-      "API Configuration",
-      "Backup Settings",
-    ]}
-  />
-);
+  const handleBackupNow = () => {
+    onNotify("Backup initiated successfully", "success");
+    setSettings((prev) => ({
+      ...prev,
+      backup: {
+        ...prev.backup,
+        lastBackup: new Date().toISOString(),
+      },
+    }));
+  };
 
-const AdminSection = ({ title, description, icon, onNotify, features }) => (
-  <div className="admin-section">
-    <div className="section-header">
-      <div className="header-content">
-        <h1>{title}</h1>
-        <p className="section-description">{description}</p>
+  return (
+    <div className="admin-section">
+      <div className="section-header">
+        <div className="header-content">
+          <h1>System Settings</h1>
+          <p className="section-description">
+            Configure system-wide settings and preferences
+          </p>
+        </div>
+        <div className="header-actions">
+          <button className="action-btn secondary">
+            <Upload className="w-4 h-4" />
+            Export Settings
+          </button>
+          <button className="action-btn primary">
+            <Shield className="w-4 h-4" />
+            Save All Changes
+          </button>
+        </div>
       </div>
-      <button
-        className="action-btn primary"
-        onClick={() => onNotify(`${title} - Getting started`, "info")}
-        style={{ padding: "12px 45px 12px 40px" }}
-      >
-        <Plus className="w-4 h-4" />
-        Get Started
-      </button>
-    </div>
-    <div className="section-placeholder">
-      <div className="placeholder-content">
-        <div className="placeholder-icon">{icon}</div>
-        <h3>{title}</h3>
-        <p>{description}</p>
-        <div className="feature-list">
-          {features.map((feature, index) => (
-            <div key={index} className="feature-item">
-              <CheckCircle className="w-4 h-4" />
-              <span>{feature}</span>
+
+      {/* Tab Navigation */}
+      <div className="tab-navigation">
+        <button
+          className={`tab-button ${activeTab === "general" ? "active" : ""}`}
+          onClick={() => setActiveTab("general")}
+        >
+          <Settings className="w-4 h-4" />
+          <span>General</span>
+        </button>
+        <button
+          className={`tab-button ${activeTab === "notifications" ? "active" : ""}`}
+          onClick={() => setActiveTab("notifications")}
+        >
+          <Bell className="w-4 h-4" />
+          <span>Notifications</span>
+        </button>
+        <button
+          className={`tab-button ${activeTab === "security" ? "active" : ""}`}
+          onClick={() => setActiveTab("security")}
+        >
+          <Shield className="w-4 h-4" />
+          <span>Security</span>
+        </button>
+        <button
+          className={`tab-button ${activeTab === "backup" ? "active" : ""}`}
+          onClick={() => setActiveTab("backup")}
+        >
+          <Upload className="w-4 h-4" />
+          <span>Backup</span>
+        </button>
+      </div>
+
+      {/* Settings Content */}
+      <div className="settings-content">
+        {activeTab === "general" && (
+          <div className="settings-section">
+            <h3>General Settings</h3>
+            <div className="settings-grid">
+              <div className="setting-item">
+                <label>Site Name</label>
+                <input
+                  type="text"
+                  value={settings.general.siteName}
+                  onChange={(e) =>
+                    handleSettingChange("general", "siteName", e.target.value)
+                  }
+                  className="setting-input"
+                />
+              </div>
+              <div className="setting-item">
+                <label>Site Description</label>
+                <input
+                  type="text"
+                  value={settings.general.siteDescription}
+                  onChange={(e) =>
+                    handleSettingChange(
+                      "general",
+                      "siteDescription",
+                      e.target.value,
+                    )
+                  }
+                  className="setting-input"
+                />
+              </div>
+              <div className="setting-item">
+                <label>Contact Email</label>
+                <input
+                  type="email"
+                  value={settings.general.contactEmail}
+                  onChange={(e) =>
+                    handleSettingChange(
+                      "general",
+                      "contactEmail",
+                      e.target.value,
+                    )
+                  }
+                  className="setting-input"
+                />
+              </div>
+              <div className="setting-item">
+                <label>Max Participants Per Event</label>
+                <input
+                  type="number"
+                  value={settings.general.maxParticipantsPerEvent}
+                  onChange={(e) =>
+                    handleSettingChange(
+                      "general",
+                      "maxParticipantsPerEvent",
+                      parseInt(e.target.value),
+                    )
+                  }
+                  className="setting-input"
+                />
+              </div>
+              <div className="setting-item toggle">
+                <label>Maintenance Mode</label>
+                <button
+                  className={`toggle-btn ${settings.general.maintenanceMode ? "active" : ""}`}
+                  onClick={() =>
+                    handleSettingChange(
+                      "general",
+                      "maintenanceMode",
+                      !settings.general.maintenanceMode,
+                    )
+                  }
+                >
+                  {settings.general.maintenanceMode ? "ON" : "OFF"}
+                </button>
+              </div>
+              <div className="setting-item toggle">
+                <label>Registration Open</label>
+                <button
+                  className={`toggle-btn ${settings.general.registrationOpen ? "active" : ""}`}
+                  onClick={() =>
+                    handleSettingChange(
+                      "general",
+                      "registrationOpen",
+                      !settings.general.registrationOpen,
+                    )
+                  }
+                >
+                  {settings.general.registrationOpen ? "OPEN" : "CLOSED"}
+                </button>
+              </div>
             </div>
-          ))}
+          </div>
+        )}
+
+        {activeTab === "notifications" && (
+          <div className="settings-section">
+            <h3>Notification Settings</h3>
+            <div className="settings-grid">
+              <div className="setting-item toggle">
+                <label>Email Notifications</label>
+                <button
+                  className={`toggle-btn ${settings.notifications.emailNotifications ? "active" : ""}`}
+                  onClick={() =>
+                    handleSettingChange(
+                      "notifications",
+                      "emailNotifications",
+                      !settings.notifications.emailNotifications,
+                    )
+                  }
+                >
+                  {settings.notifications.emailNotifications ? "ON" : "OFF"}
+                </button>
+              </div>
+              <div className="setting-item toggle">
+                <label>SMS Notifications</label>
+                <button
+                  className={`toggle-btn ${settings.notifications.smsNotifications ? "active" : ""}`}
+                  onClick={() =>
+                    handleSettingChange(
+                      "notifications",
+                      "smsNotifications",
+                      !settings.notifications.smsNotifications,
+                    )
+                  }
+                >
+                  {settings.notifications.smsNotifications ? "ON" : "OFF"}
+                </button>
+              </div>
+              <div className="setting-item toggle">
+                <label>Push Notifications</label>
+                <button
+                  className={`toggle-btn ${settings.notifications.pushNotifications ? "active" : ""}`}
+                  onClick={() =>
+                    handleSettingChange(
+                      "notifications",
+                      "pushNotifications",
+                      !settings.notifications.pushNotifications,
+                    )
+                  }
+                >
+                  {settings.notifications.pushNotifications ? "ON" : "OFF"}
+                </button>
+              </div>
+              <div className="setting-item toggle">
+                <label>Event Reminders</label>
+                <button
+                  className={`toggle-btn ${settings.notifications.eventReminders ? "active" : ""}`}
+                  onClick={() =>
+                    handleSettingChange(
+                      "notifications",
+                      "eventReminders",
+                      !settings.notifications.eventReminders,
+                    )
+                  }
+                >
+                  {settings.notifications.eventReminders ? "ON" : "OFF"}
+                </button>
+              </div>
+              <div className="setting-item toggle">
+                <label>Score Updates</label>
+                <button
+                  className={`toggle-btn ${settings.notifications.scoreUpdates ? "active" : ""}`}
+                  onClick={() =>
+                    handleSettingChange(
+                      "notifications",
+                      "scoreUpdates",
+                      !settings.notifications.scoreUpdates,
+                    )
+                  }
+                >
+                  {settings.notifications.scoreUpdates ? "ON" : "OFF"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "security" && (
+          <div className="settings-section">
+            <h3>Security Settings</h3>
+            <div className="settings-grid">
+              <div className="setting-item toggle">
+                <label>Two-Factor Authentication</label>
+                <button
+                  className={`toggle-btn ${settings.security.twoFactorAuth ? "active" : ""}`}
+                  onClick={() =>
+                    handleSettingChange(
+                      "security",
+                      "twoFactorAuth",
+                      !settings.security.twoFactorAuth,
+                    )
+                  }
+                >
+                  {settings.security.twoFactorAuth ? "ENABLED" : "DISABLED"}
+                </button>
+              </div>
+              <div className="setting-item">
+                <label>Session Timeout (minutes)</label>
+                <input
+                  type="number"
+                  value={settings.security.sessionTimeout}
+                  onChange={(e) =>
+                    handleSettingChange(
+                      "security",
+                      "sessionTimeout",
+                      parseInt(e.target.value),
+                    )
+                  }
+                  className="setting-input"
+                />
+              </div>
+              <div className="setting-item">
+                <label>Max Login Attempts</label>
+                <input
+                  type="number"
+                  value={settings.security.maxLoginAttempts}
+                  onChange={(e) =>
+                    handleSettingChange(
+                      "security",
+                      "maxLoginAttempts",
+                      parseInt(e.target.value),
+                    )
+                  }
+                  className="setting-input"
+                />
+              </div>
+              <div className="setting-item">
+                <label>Password Min Length</label>
+                <input
+                  type="number"
+                  value={settings.security.passwordMinLength}
+                  onChange={(e) =>
+                    handleSettingChange(
+                      "security",
+                      "passwordMinLength",
+                      parseInt(e.target.value),
+                    )
+                  }
+                  className="setting-input"
+                />
+              </div>
+              <div className="setting-item toggle">
+                <label>Require Password Change</label>
+                <button
+                  className={`toggle-btn ${settings.security.requirePasswordChange ? "active" : ""}`}
+                  onClick={() =>
+                    handleSettingChange(
+                      "security",
+                      "requirePasswordChange",
+                      !settings.security.requirePasswordChange,
+                    )
+                  }
+                >
+                  {settings.security.requirePasswordChange
+                    ? "REQUIRED"
+                    : "OPTIONAL"}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "backup" && (
+          <div className="settings-section">
+            <h3>Backup Settings</h3>
+            <div className="settings-grid">
+              <div className="setting-item toggle">
+                <label>Auto Backup</label>
+                <button
+                  className={`toggle-btn ${settings.backup.autoBackup ? "active" : ""}`}
+                  onClick={() =>
+                    handleSettingChange(
+                      "backup",
+                      "autoBackup",
+                      !settings.backup.autoBackup,
+                    )
+                  }
+                >
+                  {settings.backup.autoBackup ? "ENABLED" : "DISABLED"}
+                </button>
+              </div>
+              <div className="setting-item">
+                <label>Backup Frequency</label>
+                <select
+                  value={settings.backup.backupFrequency}
+                  onChange={(e) =>
+                    handleSettingChange(
+                      "backup",
+                      "backupFrequency",
+                      e.target.value,
+                    )
+                  }
+                  className="setting-select"
+                >
+                  <option value="hourly">Hourly</option>
+                  <option value="daily">Daily</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="monthly">Monthly</option>
+                </select>
+              </div>
+              <div className="setting-item">
+                <label>Retention Days</label>
+                <input
+                  type="number"
+                  value={settings.backup.retentionDays}
+                  onChange={(e) =>
+                    handleSettingChange(
+                      "backup",
+                      "retentionDays",
+                      parseInt(e.target.value),
+                    )
+                  }
+                  className="setting-input"
+                />
+              </div>
+              <div className="setting-item">
+                <label>Last Backup</label>
+                <span className="setting-value">
+                  {new Date(settings.backup.lastBackup).toLocaleString()}
+                </span>
+              </div>
+              <div className="setting-item action">
+                <button
+                  className="action-btn primary"
+                  onClick={handleBackupNow}
+                >
+                  <Upload className="w-4 h-4" />
+                  Backup Now
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+// AdminUsers Component
+const AdminUsers = ({ onNotify }) => {
+  const [admins, setAdmins] = useState([
+    {
+      id: 1,
+      name: "John Administrator",
+      email: "admin@eweek.com",
+      role: "Super Admin",
+      status: "active",
+      lastLogin: "2025-01-15T10:30:00Z",
+      createdAt: "2024-01-01T00:00:00Z",
+      permissions: ["all"],
+    },
+    {
+      id: 2,
+      name: "Sarah Manager",
+      email: "sarah@eweek.com",
+      role: "Event Manager",
+      status: "active",
+      lastLogin: "2025-01-14T16:45:00Z",
+      createdAt: "2024-02-15T00:00:00Z",
+      permissions: ["events", "participants", "gallery"],
+    },
+    {
+      id: 3,
+      name: "Mike Moderator",
+      email: "mike@eweek.com",
+      role: "Content Moderator",
+      status: "inactive",
+      lastLogin: "2025-01-10T09:15:00Z",
+      createdAt: "2024-06-01T00:00:00Z",
+      permissions: ["gallery", "history"],
+    },
+  ]);
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterRole, setFilterRole] = useState("all");
+  const [filterStatus, setFilterStatus] = useState("all");
+  const [showAddAdminModal, setShowAddAdminModal] = useState(false);
+  const [editingAdmin, setEditingAdmin] = useState(null);
+
+  const roles = ["Super Admin", "Event Manager", "Content Moderator", "Viewer"];
+
+  const filteredAdmins = admins.filter((admin) => {
+    const matchesSearch =
+      admin.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      admin.email.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesRole = filterRole === "all" || admin.role === filterRole;
+    const matchesStatus =
+      filterStatus === "all" || admin.status === filterStatus;
+    return matchesSearch && matchesRole && matchesStatus;
+  });
+
+  const handleAddAdmin = () => {
+    setEditingAdmin(null);
+    setShowAddAdminModal(true);
+  };
+
+  const handleEditAdmin = (admin) => {
+    setEditingAdmin(admin);
+    setShowAddAdminModal(true);
+  };
+
+  const handleDeleteAdmin = (adminId) => {
+    if (
+      window.confirm(
+        "Are you sure you want to delete this admin? This action cannot be undone.",
+      )
+    ) {
+      setAdmins((prev) => prev.filter((a) => a.id !== adminId));
+      onNotify("Admin deleted successfully", "success");
+    }
+  };
+
+  const handleStatusChange = (adminId, newStatus) => {
+    setAdmins((prev) =>
+      prev.map((admin) =>
+        admin.id === adminId ? { ...admin, status: newStatus } : admin,
+      ),
+    );
+    onNotify(`Admin status updated to ${newStatus}`, "success");
+  };
+
+  const handleSaveAdmin = (adminData) => {
+    if (editingAdmin) {
+      setAdmins((prev) =>
+        prev.map((admin) =>
+          admin.id === editingAdmin.id
+            ? { ...adminData, id: editingAdmin.id }
+            : admin,
+        ),
+      );
+      onNotify("Admin updated successfully", "success");
+    } else {
+      const newAdmin = {
+        ...adminData,
+        id: Date.now(),
+        createdAt: new Date().toISOString(),
+        lastLogin: null,
+      };
+      setAdmins((prev) => [...prev, newAdmin]);
+      onNotify("Admin created successfully", "success");
+    }
+    setShowAddAdminModal(false);
+    setEditingAdmin(null);
+  };
+
+  return (
+    <div className="admin-section">
+      <div className="section-header">
+        <div className="header-content">
+          <h1>Admin Users</h1>
+          <p className="section-description">
+            Manage admin users, roles, and permissions
+          </p>
         </div>
-        <div className="placeholder-actions">
-          <button
-            className="action-btn primary"
-            onClick={() => onNotify(`Starting ${title} setup`, "success")}
-            style={{ padding: "12px 38px" }}
-          >
-            Start Setup
-          </button>
-          <button
-            className="action-btn secondary"
-            style={{ padding: "12px 60px" }}
-          >
-            View Documentation
+        <div className="header-actions">
+          <button className="action-btn primary" onClick={handleAddAdmin}>
+            <Plus className="w-4 h-4" />
+            Add Admin
           </button>
         </div>
       </div>
+
+      <div className="section-controls">
+        <div className="search-bar">
+          <Search className="w-4 h-4" />
+          <input
+            type="text"
+            placeholder="Search admins..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+        <div className="filter-controls">
+          <select
+            className="filter-select"
+            value={filterRole}
+            onChange={(e) => setFilterRole(e.target.value)}
+          >
+            <option value="all">All Roles</option>
+            {roles.map((role) => (
+              <option key={role} value={role}>
+                {role}
+              </option>
+            ))}
+          </select>
+          <select
+            className="filter-select"
+            value={filterStatus}
+            onChange={(e) => setFilterStatus(e.target.value)}
+          >
+            <option value="all">All Status</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div>
+      </div>
+
+      <div className="admin-stats">
+        <div className="admin-stat">
+          <span className="stat-number">{admins.length}</span>
+          <span className="stat-label">Total Admins</span>
+        </div>
+        <div className="admin-stat">
+          <span className="stat-number">
+            {admins.filter((a) => a.status === "active").length}
+          </span>
+          <span className="stat-label">Active</span>
+        </div>
+        <div className="admin-stat">
+          <span className="stat-number">
+            {admins.filter((a) => a.role === "Super Admin").length}
+          </span>
+          <span className="stat-label">Super Admins</span>
+        </div>
+        <div className="admin-stat">
+          <span className="stat-number">
+            {
+              admins.filter(
+                (a) =>
+                  a.lastLogin &&
+                  new Date() - new Date(a.lastLogin) < 24 * 60 * 60 * 1000,
+              ).length
+            }
+          </span>
+          <span className="stat-label">Active Today</span>
+        </div>
+      </div>
+
+      <div className="data-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Admin Details</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Last Login</th>
+              <th>Created</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredAdmins.map((admin) => (
+              <tr key={admin.id}>
+                <td>
+                  <div className="admin-details">
+                    <span className="admin-name">{admin.name}</span>
+                    <span className="admin-email">{admin.email}</span>
+                  </div>
+                </td>
+                <td>
+                  <span
+                    className={`role-badge ${admin.role.toLowerCase().replace(/\s+/g, "-")}`}
+                  >
+                    {admin.role}
+                  </span>
+                </td>
+                <td>
+                  <select
+                    className={`status-select ${admin.status}`}
+                    value={admin.status}
+                    onChange={(e) =>
+                      handleStatusChange(admin.id, e.target.value)
+                    }
+                  >
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                </td>
+                <td>
+                  <div className="login-info">
+                    {admin.lastLogin ? (
+                      <>
+                        <span className="login-date">
+                          {new Date(admin.lastLogin).toLocaleDateString()}
+                        </span>
+                        <span className="login-time">
+                          {new Date(admin.lastLogin).toLocaleTimeString()}
+                        </span>
+                      </>
+                    ) : (
+                      <span className="never-logged">Never</span>
+                    )}
+                  </div>
+                </td>
+                <td>
+                  <span className="created-date">
+                    {new Date(admin.createdAt).toLocaleDateString()}
+                  </span>
+                </td>
+                <td className="actions">
+                  <div className="action-group">
+                    <button
+                      className="action-icon"
+                      title="Edit Admin"
+                      onClick={() => handleEditAdmin(admin)}
+                    >
+                      <Edit className="w-4 h-4" />
+                    </button>
+                    {admin.role !== "Super Admin" && (
+                      <button
+                        className="action-icon danger"
+                        title="Delete Admin"
+                        onClick={() => handleDeleteAdmin(admin.id)}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    )}
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {filteredAdmins.length === 0 && (
+        <div className="empty-state">
+          <Shield className="w-16 h-16" />
+          <h3>No admins found</h3>
+          <p>Try adjusting your search or filter criteria</p>
+        </div>
+      )}
+
+      {/* Add/Edit Admin Modal */}
+      {showAddAdminModal && (
+        <AddAdminModal
+          admin={editingAdmin}
+          isOpen={showAddAdminModal}
+          onClose={() => {
+            setShowAddAdminModal(false);
+            setEditingAdmin(null);
+          }}
+          onSave={handleSaveAdmin}
+          roles={roles}
+        />
+      )}
     </div>
-  </div>
-);
+  );
+};
+
+// Add Admin Modal Component
+const AddAdminModal = ({ admin, isOpen, onClose, onSave, roles }) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    role: "Viewer",
+    status: "active",
+    permissions: [],
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const allPermissions = [
+    { id: "events", label: "Events Management" },
+    { id: "skillstorm", label: "SkillStorm Management" },
+    { id: "participants", label: "Participants Management" },
+    { id: "leaderboard", label: "Leaderboard Management" },
+    { id: "gallery", label: "Gallery Management" },
+    { id: "history", label: "History Management" },
+    { id: "admins", label: "Admin Management" },
+    { id: "settings", label: "Settings Management" },
+  ];
+
+  useEffect(() => {
+    if (admin) {
+      setFormData(admin);
+    } else {
+      setFormData({
+        name: "",
+        email: "",
+        role: "Viewer",
+        status: "active",
+        permissions: [],
+      });
+    }
+  }, [admin]);
+
+  const handleInputChange = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: "" }));
+    }
+  };
+
+  const handlePermissionChange = (permissionId) => {
+    setFormData((prev) => ({
+      ...prev,
+      permissions: prev.permissions.includes(permissionId)
+        ? prev.permissions.filter((p) => p !== permissionId)
+        : [...prev.permissions, permissionId],
+    }));
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formData.name.trim()) newErrors.name = "Name is required";
+    if (!formData.email.trim()) newErrors.email = "Email is required";
+    if (!/\S+@\S+\.\S+/.test(formData.email))
+      newErrors.email = "Email is invalid";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      const finalData = {
+        ...formData,
+        permissions:
+          formData.role === "Super Admin" ? ["all"] : formData.permissions,
+      };
+      onSave(finalData);
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="modal-overlay-admin">
+      <div className="modal-content-admin">
+        <div className="modal-header-admin">
+          <h3>{admin ? "Edit Admin" : "Add New Admin"}</h3>
+          <button onClick={onClose} className="modal-close-admin">
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="admin-form">
+          <div className="form-grid">
+            <div className="form-group">
+              <label>Name *</label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => handleInputChange("name", e.target.value)}
+                placeholder="Enter admin name"
+                className={errors.name ? "error" : ""}
+              />
+              {errors.name && <span className="error-text">{errors.name}</span>}
+            </div>
+
+            <div className="form-group">
+              <label>Email *</label>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => handleInputChange("email", e.target.value)}
+                placeholder="Enter email address"
+                className={errors.email ? "error" : ""}
+              />
+              {errors.email && (
+                <span className="error-text">{errors.email}</span>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label>Role</label>
+              <select
+                value={formData.role}
+                onChange={(e) => handleInputChange("role", e.target.value)}
+              >
+                {roles.map((role) => (
+                  <option key={role} value={role}>
+                    {role}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>Status</label>
+              <select
+                value={formData.status}
+                onChange={(e) => handleInputChange("status", e.target.value)}
+              >
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+            </div>
+
+            {formData.role !== "Super Admin" && (
+              <div className="form-group span-2">
+                <label>Permissions</label>
+                <div className="permissions-grid">
+                  {allPermissions.map((permission) => (
+                    <div key={permission.id} className="permission-item">
+                      <input
+                        type="checkbox"
+                        id={permission.id}
+                        checked={formData.permissions.includes(permission.id)}
+                        onChange={() => handlePermissionChange(permission.id)}
+                      />
+                      <label htmlFor={permission.id}>{permission.label}</label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="modal-actions-admin">
+            <button
+              type="button"
+              onClick={onClose}
+              className="btn-secondary-admin"
+            >
+              Cancel
+            </button>
+            <button type="submit" className="btn-primary-admin">
+              {admin ? "Update Admin" : "Create Admin"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
 
 export default Admin;
