@@ -32,7 +32,7 @@ const Leaderboard = () => {
   const [sortOrder, setSortOrder] = useState("desc");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  // Enhanced batch rankings with detailed stats
+  // Divine houses rankings with mythological stats
   const batchRankings = [
     {
       rank: 1,
@@ -44,16 +44,20 @@ const Leaderboard = () => {
       eventsWon: 8,
       podiumFinishes: 15,
       members: 45,
-      avatar: "🏆",
+      avatar: "⚡",
+      godName: "Zeus",
+      title: "House of Thunder",
+      divineRealm: "Olympus Peak",
       color: "from-yellow-400 via-yellow-500 to-yellow-600",
       glowColor: "rgba(251, 191, 36, 0.4)",
       trend: "up",
       weeklyChange: 12.5,
       highlights: [
-        "Programming Contest 1st",
-        "Robotics Challenge 1st",
-        "Innovation Pitch 2nd",
+        "Trial of Codes 1st ⚡",
+        "Forge Challenge 1st 🔥",
+        "Oracle Prophecy 2nd 🔮",
       ],
+      blessing: "Master of Lightning & Sky",
     },
     {
       rank: 2,
@@ -65,16 +69,20 @@ const Leaderboard = () => {
       eventsWon: 6,
       podiumFinishes: 13,
       members: 48,
-      avatar: "🥈",
+      avatar: "🦉",
+      godName: "Athena",
+      title: "House of Wisdom",
+      divineRealm: "Sacred Library",
       color: "from-gray-300 via-gray-400 to-gray-500",
       glowColor: "rgba(156, 163, 175, 0.4)",
       trend: "down",
       weeklyChange: -4.8,
       highlights: [
-        "AI Workshop 1st",
-        "Circuit Design 2nd",
-        "Gaming Tournament 1st",
+        "Wisdom Trial 1st 🦉",
+        "Sacred Circuits 2nd ⚙️",
+        "War Games 1st ⚔️",
       ],
+      blessing: "Goddess of Strategy & Wisdom",
     },
     {
       rank: 3,
@@ -86,16 +94,20 @@ const Leaderboard = () => {
       eventsWon: 5,
       podiumFinishes: 11,
       members: 42,
-      avatar: "🥉",
-      color: "from-orange-400 via-orange-500 to-orange-600",
-      glowColor: "rgba(251, 146, 60, 0.4)",
+      avatar: "🔱",
+      godName: "Poseidon",
+      title: "House of Depths",
+      divineRealm: "Ocean Throne",
+      color: "from-blue-400 via-blue-500 to-blue-600",
+      glowColor: "rgba(59, 130, 246, 0.4)",
       trend: "stable",
       weeklyChange: 0.2,
       highlights: [
-        "Startup Pitch 1st",
-        "Hardware Design 3rd",
-        "Code Review 2nd",
+        "Oracle Pitch 1st 🔮",
+        "Divine Craft 3rd 🔧",
+        "Code Waves 2nd 🌊",
       ],
+      blessing: "Lord of Seas & Earthquakes",
     },
     {
       rank: 4,
@@ -107,16 +119,20 @@ const Leaderboard = () => {
       eventsWon: 4,
       podiumFinishes: 8,
       members: 50,
-      avatar: "⭐",
-      color: "from-blue-400 via-blue-500 to-blue-600",
-      glowColor: "rgba(59, 130, 246, 0.4)",
+      avatar: "⚔️",
+      godName: "Ares",
+      title: "House of War",
+      divineRealm: "Battle Grounds",
+      color: "from-red-400 via-red-500 to-red-600",
+      glowColor: "rgba(239, 68, 68, 0.4)",
       trend: "up",
       weeklyChange: 8.9,
       highlights: [
-        "Web Dev Challenge 2nd",
-        "Data Science 1st",
-        "IoT Project 3rd",
+        "Web War 2nd ⚔️",
+        "Data Conquest 1st 📊",
+        "Network Siege 3rd 🛡️",
       ],
+      blessing: "God of Courage & War",
     },
     {
       rank: 5,
@@ -128,16 +144,20 @@ const Leaderboard = () => {
       eventsWon: 3,
       podiumFinishes: 7,
       members: 47,
-      avatar: "🌟",
-      color: "from-purple-400 via-purple-500 to-purple-600",
-      glowColor: "rgba(168, 85, 247, 0.4)",
+      avatar: "🏹",
+      godName: "Apollo",
+      title: "House of Light",
+      divineRealm: "Solar Temple",
+      color: "from-yellow-400 via-orange-500 to-red-500",
+      glowColor: "rgba(251, 191, 36, 0.4)",
       trend: "down",
       weeklyChange: -2.1,
       highlights: [
-        "Mobile App Dev 1st",
-        "Cybersecurity 3rd",
-        "ML Workshop 2nd",
+        "Swift Creation 1st 📱",
+        "Shield Craft 3rd 🛡️",
+        "Mystic Arts 2nd 🎨",
       ],
+      blessing: "God of Arts & Prophecy",
     },
   ];
 
@@ -313,47 +333,64 @@ const Leaderboard = () => {
   return (
     <Layout>
       <div className="leaderboard-page">
-        {/* Hero Section */}
-        <section className="leaderboard-hero">
-          <div className="hero-background-pattern"></div>
+        {/* Divine Pantheon Section */}
+        <section
+          className="leaderboard-hero-odyssey"
+          style={{
+            backgroundImage:
+              "url('https://images.pexels.com/photos/951536/pexels-photo-951536.jpeg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            position: "relative",
+          }}
+        >
+          <div
+            className="hero-background-pattern"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(220,20,60,0.9) 0%, rgba(0,0,139,0.9) 50%, rgba(25,25,112,0.95) 100%)",
+            }}
+          ></div>
           <div className="container">
             <div className="hero-content">
               <h1 className="hero-title">
-                Live Leaderboard
+                🏛️ The Divine Pantheon 🏛️
                 <BarChart3 className="title-icon" size={48} />
               </h1>
               <p className="hero-subtitle">
-                Real-time rankings and performance analytics for E-Week 2K25
-                competitions
+                Witness the eternal rankings of gods and heroes in real-time!
+                Watch as mortals ascend to divinity through valor and wisdom!
               </p>
               <div className="hero-stats">
                 <div className="stat-item">
                   <span className="stat-number">5</span>
-                  <span className="stat-label">Active Batches</span>
+                  <span className="stat-label">Divine Houses</span>
                 </div>
                 <div className="stat-item">
                   <span className="stat-number">25+</span>
-                  <span className="stat-label">Completed Events</span>
+                  <span className="stat-label">Epic Conquests</span>
                 </div>
                 <div className="stat-item">
                   <span className="stat-number">500+</span>
-                  <span className="stat-label">Participants</span>
+                  <span className="stat-label">Heroic Warriors</span>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Section 01: Batch Rankings */}
-        <section className="batch-rankings-section">
+        {/* Section 01: Divine Houses Rankings */}
+        <section className="odyssey-section divine-houses-section">
           <div className="container">
-            <div className="section-header">
-              <h2 className="section-title">
-                Batch Rankings
+            <div className="section-header-odyssey">
+              <h2 className="section-title-odyssey">
+                ⚡ Rankings of Divine Houses ⚡
                 <Trophy className="title-icon" size={32} />
               </h2>
-              <p className="section-subtitle">
-                Live standings based on total earned points across all events
+              <p className="section-subtitle-odyssey">
+                Behold the eternal standings of mighty houses based on glory
+                earned through divine trials
               </p>
             </div>
             <div className="mt-8"></div>
@@ -504,16 +541,17 @@ const Leaderboard = () => {
           </div>
         </section>
 
-        {/* Section 02: Past Events Scorecards */}
-        <section className="past-events-section">
+        {/* Section 02: Legendary Chronicles */}
+        <section className="odyssey-section legendary-chronicles-section">
           <div className="container">
-            <div className="section-header">
-              <h2 className="section-title">
-                Past Events Scorecards
+            <div className="section-header-odyssey">
+              <h2 className="section-title-odyssey">
+                📜 Legendary Chronicles of Glory 📜
                 <Target className="title-icon" size={32} />
               </h2>
-              <p className="section-subtitle">
-                Detailed results and performance analysis from completed events
+              <p className="section-subtitle-odyssey">
+                Sacred scrolls recording the eternal deeds and divine
+                achievements of legendary heroes
               </p>
             </div>
 

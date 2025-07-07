@@ -51,12 +51,24 @@ const Gallery = () => {
   }, []);
 
   const categories = [
-    { id: "all", label: "All Media", icon: <Layers className="w-4 h-4" /> },
-    { id: "photos", label: "Photos", icon: <Camera className="w-4 h-4" /> },
-    { id: "videos", label: "Videos", icon: <Video className="w-4 h-4" /> },
+    {
+      id: "all",
+      label: "🏛️ All Sacred Archives",
+      icon: <Layers className="w-4 h-4" />,
+    },
+    {
+      id: "photos",
+      label: "📸 Divine Images",
+      icon: <Camera className="w-4 h-4" />,
+    },
+    {
+      id: "videos",
+      label: "🎬 Epic Chronicles",
+      icon: <Video className="w-4 h-4" />,
+    },
     {
       id: "highlights",
-      label: "Highlights",
+      label: "⭐ Legendary Moments",
       icon: <Award className="w-4 h-4" />,
     },
   ];
@@ -113,24 +125,46 @@ const Gallery = () => {
   return (
     <Layout>
       <div className="gallery-page animate-slide-up">
-        {/* Ultra-Modern Hero Section */}
-        <section className="gallery-hero" ref={heroRef}>
-          {/* Animated Background like Events page */}
-          <div className="hero-background-events" style={{ zIndex: 0, position: 'absolute', inset: 0 }} />
+        {/* Hall of Eternal Legends Section */}
+        <section
+          className="gallery-hero-odyssey"
+          ref={heroRef}
+          style={{
+            backgroundImage:
+              "url('https://images.pexels.com/photos/951536/pexels-photo-951536.jpeg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            position: "relative",
+          }}
+        >
+          {/* Divine Temple Overlay */}
+          <div
+            className="hero-background-events"
+            style={{
+              zIndex: 0,
+              position: "absolute",
+              inset: 0,
+              background:
+                "linear-gradient(135deg, rgba(220,20,60,0.9) 0%, rgba(0,0,139,0.9) 50%, rgba(25,25,112,0.95) 100%)",
+            }}
+          />
           <div className="gallery-hero-bg">
-            {/* Enhanced Floating Shapes */}
+            {/* Floating Art & Memories */}
             <div className="floating-shapes">
-              <div className="shape shape-1"></div>
-              <div className="shape shape-2"></div>
-              <div className="shape shape-3"></div>
-              <div className="shape shape-4"></div>
-              <div className="shape shape-5"></div>
+              <div className="shape shape-1">🖼️</div>
+              <div className="shape shape-2">🏺</div>
+              <div className="shape shape-3">📸</div>
+              <div className="shape shape-4">🎭</div>
+              <div className="shape shape-5">🏛️</div>
             </div>
 
-            {/* Enhanced Particle Effect */}
+            {/* Sacred Memory Particles */}
             <div className="particles">
               {[...Array(20)].map((_, i) => (
-                <div key={i} className={`particle particle-${i}`}></div>
+                <div key={i} className={`particle particle-${i}`}>
+                  ✨
+                </div>
               ))}
             </div>
           </div>
@@ -144,47 +178,50 @@ const Gallery = () => {
                 }}
               >
                 <Camera className="w-16 h-16" />
-                <div className="logo-glow"></div>
+                <div className="divine-glow"></div>
+                <div className="art-frame">🏛️</div>
               </div>
-              <h1 className="gallery-hero-title hero-title-events">Visual Chronicles</h1>
+              <h1 className="gallery-hero-title hero-title-events">
+                🏺 Hall of Eternal Legends 🏺
+              </h1>
               <p className="gallery-hero-subtitle hero-subtitle-events">
-                Immerse yourself in the stunning visual journey of E-Week
-                celebrations
+                Behold the sacred gallery where heroes' greatest moments are
+                immortalized! Witness the epic chronicles captured for eternity!
               </p>
 
               <div className="gallery-stats-hero hero-stats-events">
                 <div className="hero-stat stat-card-events">
                   <span className="stat-value">{stats.photos}+</span>
-                  <span className="stat-label">Photos</span>
+                  <span className="stat-label">Sacred Images</span>
                 </div>
                 <div className="hero-stat stat-card-events">
                   <span className="stat-value">{stats.videos}+</span>
-                  <span className="stat-label">Videos</span>
+                  <span className="stat-label">Epic Chronicles</span>
                 </div>
                 <div className="hero-stat stat-card-events">
                   <span className="stat-value">
                     {(stats.totalViews / 1000).toFixed(1)}K
                   </span>
-                  <span className="stat-label">Views</span>
+                  <span className="stat-label">Divine Views</span>
                 </div>
                 <div className="hero-stat stat-card-events">
                   <span className="stat-value">{stats.highlights}</span>
-                  <span className="stat-label">Highlights</span>
+                  <span className="stat-label">Legendary Moments</span>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Advanced Filters Section */}
-        <section className="gallery-filters">
+        {/* Divine Archive Filters Section */}
+        <section className="odyssey-section divine-archive-filters">
           <div className="container">
-            <div className="filters-header">
+            <div className="divine-filters-header">
               <div className="search-container">
                 <Search className="w-5 h-5" />
                 <input
                   type="text"
-                  placeholder="Search memories..."
+                  placeholder="Search sacred memories and legendary deeds..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="search-input"
@@ -227,11 +264,11 @@ const Gallery = () => {
               ))}
             </div>
 
-            <div className="year-filters">
+            <div className="divine-year-filters">
               {years.map((year) => (
                 <button
                   key={year}
-                  className={`year-filter ${selectedYear === year ? "active" : ""}`}
+                  className={`divine-year-filter ${selectedYear === year ? "active" : ""}`}
                   onClick={() => setSelectedYear(year)}
                 >
                   {year}
@@ -241,22 +278,24 @@ const Gallery = () => {
           </div>
         </section>
 
-        {/* Enhanced Gallery Grid */}
-        <section className="gallery-content">
+        {/* Divine Hall Gallery Grid */}
+        <section className="odyssey-section divine-hall-gallery">
           <div className="container">
             {loading && (
-              <div className="gallery-loading">
-                <div className="loading-spinner"></div>
-                <p>Loading amazing memories...</p>
+              <div className="gallery-loading divine-loading">
+                <div className="loading-spinner divine-spinner"></div>
+                <p>
+                  ⏳ Unveiling sacred memories from the divine archives... ⏳
+                </p>
               </div>
             )}
 
             {!loading && filteredItems.length > 0 && (
-              <div className={`gallery-grid ${viewMode}`}>
+              <div className={`gallery-grid divine-gallery-grid ${viewMode}`}>
                 {filteredItems.map((item, index) => (
                   <div
                     key={item.id}
-                    className={`gallery-item ${item.type} ${viewMode === "masonry" && index % 3 === 1 ? "tall" : ""}`}
+                    className={`gallery-item divine-gallery-item ${item.type} ${viewMode === "masonry" && index % 3 === 1 ? "tall" : ""}`}
                     onClick={() => openLightbox(item)}
                   >
                     <div className="gallery-item-media">
@@ -337,20 +376,21 @@ const Gallery = () => {
             )}
 
             {!loading && filteredItems.length === 0 && (
-              <div className="gallery-empty">
+              <div className="gallery-empty divine-empty">
                 <Camera className="w-16 h-16" />
-                <h3>No memories found</h3>
+                <h3>🏺 No Sacred Memories Found 🏺</h3>
                 <p>
-                  Try adjusting your filters to discover more amazing moments
+                  Adjust your divine filters to unveil more legendary moments
+                  from the archives
                 </p>
               </div>
             )}
 
             {!loading && filteredItems.length > 0 && (
-              <div className="gallery-load-more">
-                <button className="load-more-btn">
+              <div className="gallery-load-more divine-load-more">
+                <button className="load-more-btn divine-load-btn">
                   <Layers className="w-5 h-5" />
-                  Load More Memories
+                  Unveil More Sacred Memories
                 </button>
               </div>
             )}

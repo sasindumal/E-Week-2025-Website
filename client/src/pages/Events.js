@@ -229,49 +229,55 @@ const Events = () => {
     },
   ];
 
-  // Ongoing events
+  // Active battlefields
   const ongoingEvents = [
     {
       id: 1,
-      name: "AI & Machine Learning Hackathon",
+      name: "Trial of Athena's Wisdom",
+      subtitle: "AI & Machine Learning Conquest",
       startTime: "09:00",
       endTime: "17:00",
-      location: "Tech Hub Alpha",
+      location: "Temple of Divine Intelligence",
       participants: 120,
       progress: 65,
-      category: "Competition",
+      category: "Divine Trial",
       icon: Code,
       gradient: "from-blue-500 to-purple-600",
       timeRemaining: "4h 23m",
-      status: "live",
+      status: "raging",
+      blessing: "🦉 Blessed by Athena's Owl",
     },
     {
       id: 2,
-      name: "Robotics Design Challenge",
+      name: "Hephaestus' Forge Challenge",
+      subtitle: "Mechanical Arts Mastery",
       startTime: "10:00",
       endTime: "16:00",
-      location: "Engineering Lab",
+      location: "Divine Forge of Creation",
       participants: 85,
       progress: 45,
-      category: "Engineering",
+      category: "Sacred Craft",
       icon: Cpu,
-      gradient: "from-green-500 to-teal-600",
+      gradient: "from-orange-500 to-red-600",
       timeRemaining: "6h 15m",
-      status: "live",
+      status: "raging",
+      blessing: "🔥 Forged in Divine Fire",
     },
     {
       id: 3,
-      name: "Startup Pitch Preparation",
+      name: "Apollo's Vision Quest",
+      subtitle: "Oracle of Innovation",
       startTime: "14:00",
       endTime: "18:00",
-      location: "Innovation Center",
+      location: "Sanctuary of Prophetic Wisdom",
       participants: 45,
       progress: 30,
-      category: "Workshop",
+      category: "Sacred Ritual",
       icon: Lightbulb,
-      gradient: "from-orange-500 to-red-600",
+      gradient: "from-yellow-500 to-orange-600",
       timeRemaining: "2h 45m",
-      status: "live",
+      status: "raging",
+      blessing: "☀️ Illuminated by Apollo",
     },
   ];
 
@@ -291,83 +297,95 @@ const Events = () => {
     alert("Registration submitted successfully!");
   };
 
-  // Upcoming events
+  // Prophetic trials of destiny
   const upcomingEvents = [
     {
       id: 1,
-      name: "Cybersecurity War Games",
+      name: "Sparta's Cyber War",
+      subtitle: "Trial of Digital Shields",
       date: "2025-08-26",
       time: "09:00",
-      duration: "6 hours",
-      location: "Security Command Center",
-      participants: "150+ registered",
-      category: "Competition",
-      priority: "high",
+      duration: "6 divine hours",
+      location: "Fortress of Digital Guardians",
+      participants: "150+ brave warriors",
+      category: "Epic War",
+      priority: "legendary",
       icon: Target,
       gradient: "from-red-500 to-pink-600",
-      description: "Advanced cybersecurity simulation and defense challenges",
-      points: "30 Points",
-      tags: ["Security", "CTF", "Networking"],
-      type: "team",
+      description:
+        "Defend the digital realm against the forces of chaos in this ultimate cyber warfare simulation",
+      points: "30 Glory Points",
+      tags: ["Shield", "War", "Strategy"],
+      type: "warband",
       playersPerTeam: 4,
       maxTeamsPerBatch: 2,
       maxPlayersPerBatch: 20,
+      blessing: "🛡️ Protected by Ares",
     },
     {
       id: 2,
-      name: "Quantum Computing Workshop",
+      name: "Mysteries of Quantum Realm",
+      subtitle: "Sacred Knowledge Workshop",
       date: "2025-08-28",
       time: "14:00",
-      duration: "4 hours",
-      location: "Quantum Lab",
-      participants: "80+ registered",
-      category: "Workshop",
-      priority: "medium",
+      duration: "4 sacred hours",
+      location: "Temple of Cosmic Mysteries",
+      participants: "80+ wise seekers",
+      category: "Sacred Wisdom",
+      priority: "divine",
       icon: Zap,
       gradient: "from-purple-500 to-blue-600",
-      description: "Hands-on experience with quantum algorithms and circuits",
-      points: "20 Points",
-      tags: ["Quantum", "Computing", "Research"],
+      description:
+        "Unlock the ancient secrets of quantum realms and harness otherworldly power",
+      points: "20 Glory Points",
+      tags: ["Mystery", "Cosmos", "Wisdom"],
       type: "individual",
       maxPlayersPerBatch: 15,
+      blessing: "⚡ Enlightened by Zeus",
     },
     {
       id: 3,
-      name: "Mobile App Development Sprint",
+      name: "Hermes' Swift Creation",
+      subtitle: "Mobile Arts Sprint",
       date: "2025-08-29",
       time: "10:00",
-      duration: "8 hours",
-      location: "Mobile Dev Studio",
-      participants: "100+ registered",
-      category: "Competition",
-      priority: "high",
+      duration: "8 lightning hours",
+      location: "Workshop of Swift Craft",
+      participants: "100+ swift artisans",
+      category: "Divine Sprint",
+      priority: "legendary",
       icon: Code,
       gradient: "from-green-500 to-cyan-600",
-      description: "Build and deploy mobile apps in a day-long sprint",
-      points: "10 Points",
-      tags: ["Mobile", "React Native", "Flutter"],
-      type: "team",
+      description:
+        "Channel Hermes' speed to forge magical mobile artifacts in a divine sprint",
+      points: "10 Glory Points",
+      tags: ["Swift", "Creation", "Mobile"],
+      type: "craft guild",
       playersPerTeam: 3,
       maxTeamsPerBatch: 3,
       maxPlayersPerBatch: 25,
+      blessing: "🪶 Blessed by Hermes",
     },
     {
       id: 4,
-      name: "Design Thinking Masterclass",
+      name: "Athena's Design Wisdom",
+      subtitle: "Sacred Art Masterclass",
       date: "2025-08-30",
       time: "11:00",
-      duration: "3 hours",
-      location: "Creative Hub",
-      participants: "60+ registered",
-      category: "Workshop",
-      priority: "medium",
+      duration: "3 enlightened hours",
+      location: "Hall of Divine Creativity",
+      participants: "60+ artistic souls",
+      category: "Sacred Art",
+      priority: "divine",
       icon: Lightbulb,
       gradient: "from-yellow-500 to-orange-600",
-      description: "Learn human-centered design principles and methods",
-      points: "20 Points",
-      tags: ["Design", "UX", "Innovation"],
+      description:
+        "Learn the divine principles of design blessed by Athena's infinite wisdom",
+      points: "20 Glory Points",
+      tags: ["Wisdom", "Beauty", "Art"],
       type: "individual",
       maxPlayersPerBatch: 12,
+      blessing: "🦉 Guided by Athena",
     },
   ];
 
@@ -512,50 +530,67 @@ const Events = () => {
   return (
     <Layout>
       <div className="events-page">
-        {/* Hero Section */}
-        <section className="events-hero">
-          <div className="hero-background-events"></div>
+        {/* Epic War Council Section */}
+        <section
+          className="events-hero-odyssey"
+          style={{
+            backgroundImage:
+              "url('https://images.pexels.com/photos/2022650/pexels-photo-2022650.jpeg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            position: "relative",
+          }}
+        >
+          <div
+            className="hero-background-events"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(220,20,60,0.9) 0%, rgba(0,0,139,0.9) 50%, rgba(25,25,112,0.95) 100%)",
+            }}
+          ></div>
           <div className="container">
             <div className="hero-content-events">
               <h1 className="hero-title-events">
-                Event Central
+                ⚔️ War Council of Trials ⚔️
                 <Activity className="title-icon" size={48} />
               </h1>
               <p className="hero-subtitle-events">
-                Your complete guide to E-Week 2025 events, schedules, and
-                competitions
+                Behold the grand chronicles of epic battles, heroic trials, and
+                legendary quests! Prepare yourself for glory, mortal warrior!
               </p>
               <div className="hero-stats-events">
                 <div className="stat-card-events">
                   <Flame className="stat-icon text-red-400" size={24} />
                   <span className="stat-number">3</span>
-                  <span className="stat-label">Live Events</span>
+                  <span className="stat-label">Active Battles</span>
                 </div>
                 <div className="stat-card-events">
                   <Clock className="stat-icon text-blue-400" size={24} />
                   <span className="stat-number">15</span>
-                  <span className="stat-label">Upcoming</span>
+                  <span className="stat-label">Prophecied Trials</span>
                 </div>
                 <div className="stat-card-events">
                   <CheckCircle className="stat-icon text-green-400" size={24} />
                   <span className="stat-number">8</span>
-                  <span className="stat-label">Completed</span>
+                  <span className="stat-label">Conquered Quests</span>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Section 01: 7-Day Schedule */}
-        <section className="schedule-section">
+        {/* Section 01: 7-Day Epic Campaign */}
+        <section className="odyssey-section epic-campaigns-section">
           <div className="container">
-            <div className="section-header-events">
-              <h2 className="section-title-events">
-                7-Day Event Schedule
+            <div className="section-header-odyssey">
+              <h2 className="section-title-odyssey">
+                🏛️ Seven Days of Epic Campaigns 🏛️
                 <Calendar className="title-icon" size={32} />
               </h2>
-              <p className="section-subtitle-events">
-                Complete timeline of all E-Week 2025 activities
+              <p className="section-subtitle-odyssey">
+                Witness the complete chronicle of divine trials spanning seven
+                legendary days of valor
               </p>
             </div>
 
@@ -623,16 +658,17 @@ const Events = () => {
           </div>
         </section>
 
-        {/* Section 02: Ongoing Events */}
-        <section className="ongoing-section">
+        {/* Section 02: Active Battlefields */}
+        <section className="odyssey-section active-battlefields-section">
           <div className="container">
-            <div className="section-header-events">
-              <h2 className="section-title-events">
-                Live Events
+            <div className="section-header-odyssey">
+              <h2 className="section-title-odyssey">
+                ⚡ Active Battlefields ⚡
                 <Flame className="title-icon text-red-400" size={32} />
               </h2>
-              <p className="section-subtitle-events">
-                Events happening right now with real-time updates
+              <p className="section-subtitle-odyssey">
+                Witness the epic battles raging at this very moment! Heroes
+                clash for eternal glory!
               </p>
             </div>
 
@@ -717,12 +753,12 @@ const Events = () => {
             <div className="container">
               <div className="events-search-header">
                 <h2 className="search-section-title">
-                  Find Your Events
+                  🔮 Divine Oracle Search 🔮
                   <Search className="title-icon" size={32} />
                 </h2>
                 <p className="search-section-subtitle">
-                  Advanced search and filtering to discover the perfect events
-                  for you
+                  Consult the Oracle to discover which sacred trials await your
+                  heroic spirit
                 </p>
               </div>
 
@@ -838,93 +874,95 @@ const Events = () => {
           </section>
         }
 
-        {/* Section 03: Upcoming Events */}
-        <section className="upcoming-section">
+        {/* Section 03: Prophetic Trials */}
+        <section className="odyssey-section prophetic-trials-section">
           <div className="container">
-            <div className="section-header-events">
-              <h2 className="section-title-events">
-                Upcoming Events
+            <div className="section-header-odyssey">
+              <h2 className="section-title-odyssey">
+                🏺 Prophetic Trials of Destiny 🏺
                 <Clock className="title-icon" size={32} />
               </h2>
               <p className="section-subtitle-events">
-                Register now for these exciting upcoming competitions and
-                workshops
+                Heed the prophecies! Register now for these legendary trials
+                that shall test your worth and courage!
               </p>
             </div>
 
-            <div className="upcoming-grid grid">
+            <div className="prophetic-grid-odyssey grid">
               {filteredUpcomingEvents.map((event, index) => {
                 const IconComponent = event.icon;
                 return (
                   <div
                     key={event.id}
-                    className="upcoming-card"
+                    className="prophetic-card-odyssey"
                     style={{ animationDelay: `${index * 200}ms` }}
                   >
                     <div
-                      className={`upcoming-gradient bg-gradient-to-br ${event.gradient}`}
+                      className={`prophetic-gradient bg-gradient-to-br ${event.gradient}`}
                     >
-                      {/* Priority Badge */}
+                      {/* Divine Badge */}
                       <div
-                        className={`priority-badge ${getPriorityColor(event.priority)}`}
+                        className={`divine-badge ${getPriorityColor(event.priority)}`}
                       >
                         {event.priority.toUpperCase()}
                       </div>
 
-                      {/* Event Icon */}
-                      <div className="upcoming-icon">
+                      {/* Divine Icon */}
+                      <div className="prophetic-icon">
                         <IconComponent size={28} />
                       </div>
 
-                      {/* Event Info */}
-                      <h3 className="upcoming-title">{event.name}</h3>
-                      <p className="upcoming-description">
+                      {/* Divine Info */}
+                      <h3 className="prophetic-title">{event.name}</h3>
+                      <h4 className="prophetic-subtitle">{event.subtitle}</h4>
+                      <p className="prophetic-description">
                         {event.description}
                       </p>
+                      <p className="prophetic-blessing">{event.blessing}</p>
 
-                      {/* Event Details */}
-                      <div className="upcoming-details">
-                        <div className="detail-row">
+                      {/* Divine Details */}
+                      <div className="prophetic-details">
+                        <div className="detail-row-prophetic">
                           <Calendar className="w-4 h-4 text-blue-400" />
                           <span>
                             {event.date} • {event.time}
                           </span>
                         </div>
-                        <div className="detail-row">
+                        <div className="detail-row-prophetic">
                           <Clock className="w-4 h-4 text-green-400" />
                           <span>{event.duration}</span>
                         </div>
-                        <div className="detail-row">
+                        <div className="detail-row-prophetic">
                           <MapPin className="w-4 h-4 text-purple-400" />
                           <span>{event.location}</span>
                         </div>
-                        <div className="detail-row">
+                        <div className="detail-row-prophetic">
                           <Users className="w-4 h-4 text-orange-400" />
                           <span>{event.participants}</span>
                         </div>
                       </div>
 
-                      {/* Tags */}
-                      <div className="event-tags">
+                      {/* Divine Tags */}
+                      <div className="prophetic-tags">
                         {event.tags.map((tag, idx) => (
-                          <span key={idx} className="event-tag">
+                          <span key={idx} className="prophetic-tag">
                             {tag}
                           </span>
                         ))}
                       </div>
 
-                      {/* Prize Info */}
-                      <div className="prize-info">
+                      {/* Glory Info */}
+                      <div className="glory-info">
                         <Award className="w-4 h-4 text-yellow-400" />
                         <span>{event.points}</span>
                       </div>
 
-                      {/* Action Button */}
+                      {/* Divine Action Button */}
                       <button
-                        className="upcoming-cta"
+                        className="prophetic-cta"
                         onClick={() => openRegistration(event)}
                       >
-                        <span>Register Now</span>
+                        <span>Accept the Prophecy</span>
                         <ArrowRight className="w-4 h-4" />
                       </button>
                     </div>
@@ -935,16 +973,17 @@ const Events = () => {
           </div>
         </section>
 
-        {/* Section 04: Past Events with Scorecards */}
+        {/* Section 04: Chronicles of Conquered Quests */}
         <section className="past-events-section">
           <div className="container">
             <div className="section-header-events">
               <h2 className="section-title-events">
-                Past Events & Results
+                📜 Chronicles of Conquered Quests 📜
                 <Trophy className="title-icon" size={32} />
               </h2>
               <p className="section-subtitle-events">
-                Complete results and scorecards from completed competitions
+                Behold the eternal records of legendary battles and the heroes
+                who achieved immortal glory
               </p>
             </div>
 
