@@ -579,7 +579,6 @@ const Events = () => {
             </div>
           </div>
         </section>
-
         {/* Section 01: 7-Day Epic Campaign */}
         <section className="odyssey-section epic-campaigns-section">
           <div className="container">
@@ -657,7 +656,6 @@ const Events = () => {
             </div>
           </div>
         </section>
-
         {/* Section 02: Active Battlefields */}
         <section className="odyssey-section active-battlefields-section">
           <div className="container">
@@ -746,135 +744,131 @@ const Events = () => {
             </div>
           </div>
         </section>
-
         {/* Advanced Search and Filter System */}
-        {
-          <section className="events-search-section">
-            <div className="container">
-              <div className="events-search-header">
-                <h2 className="search-section-title">
-                  🔮 Divine Oracle Search 🔮
-                  <Search className="title-icon" size={32} />
-                </h2>
-                <p className="search-section-subtitle">
-                  Consult the Oracle to discover which sacred trials await your
-                  heroic spirit
-                </p>
-              </div>
+        <section className="odyssey-section events-search-section">
+          <div className="container">
+            <div className="section-header-odyssey">
+              <h2 className="section-title-odyssey">
+                🔮 Divine Oracle Search 🔮
+                <Search className="title-icon" size={32} />
+              </h2>
+              <p className="section-subtitle-odyssey">
+                Consult the Oracle to discover which sacred trials await your
+                heroic spirit
+              </p>
+            </div>
 
-              <div className="events-search-bar">
-                <div className="search-container">
-                  <div className="search-input-wrapper">
-                    <Search className="search-icon" />
-                    <input
-                      type="text"
-                      placeholder="Search events by name, category, location..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="search-input"
-                    />
-                    {searchTerm && (
-                      <button
-                        onClick={() => setSearchTerm("")}
-                        className="clear-search"
-                      >
-                        <X className="w-4 h-4" />
-                      </button>
-                    )}
-                  </div>
-
-                  <button
-                    onClick={() => setIsFilterOpen(!isFilterOpen)}
-                    className={`filter-toggle ${isFilterOpen ? "active" : ""}`}
-                  >
-                    <Filter className="w-5 h-5" />
-                    <span>Filters</span>
-                  </button>
-
-                  <div className="sort-controls">
-                    <select
-                      value={sortBy}
-                      onChange={(e) => setSortBy(e.target.value)}
-                      className="sort-select"
-                    >
-                      <option value="time">Time</option>
-                      <option value="name">Name</option>
-                      <option value="participants">Participants</option>
-                      <option value="category">Category</option>
-                    </select>
+            <div className="events-search-bar">
+              <div className="search-container">
+                <div className="search-input-wrapper">
+                  <Search className="search-icon" />
+                  <input
+                    type="text"
+                    placeholder="Search events by name, category, location..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="search-input"
+                  />
+                  {searchTerm && (
                     <button
-                      onClick={() =>
-                        setSortOrder(sortOrder === "asc" ? "desc" : "asc")
-                      }
-                      className="sort-order"
+                      onClick={() => setSearchTerm("")}
+                      className="clear-search"
                     >
-                      {sortOrder === "asc" ? (
-                        <SortAsc className="w-5 h-5" />
-                      ) : (
-                        <SortDesc className="w-5 h-5" />
-                      )}
+                      <X className="w-4 h-4" />
                     </button>
-                  </div>
+                  )}
                 </div>
 
-                {/* Advanced Filters Panel */}
-                {isFilterOpen && (
-                  <div className="filters-panel">
-                    <div className="filter-group">
-                      <label className="filter-label">Category</label>
-                      <select
-                        value={selectedCategory}
-                        onChange={(e) => setSelectedCategory(e.target.value)}
-                        className="filter-select"
-                      >
-                        <option value="all">All Categories</option>
-                        <option value="Competition">Competition</option>
-                        <option value="Workshop">Workshop</option>
-                        <option value="Conference">Conference</option>
-                        <option value="Ceremony">Ceremony</option>
-                        <option value="Social">Social</option>
-                      </select>
-                    </div>
+                <button
+                  onClick={() => setIsFilterOpen(!isFilterOpen)}
+                  className={`filter-toggle ${isFilterOpen ? "active" : ""}`}
+                >
+                  <Filter className="w-5 h-5" />
+                  <span>Filters</span>
+                </button>
 
-                    <div className="filter-group">
-                      <label className="filter-label">Status</label>
-                      <select
-                        value={selectedStatus}
-                        onChange={(e) => setSelectedStatus(e.target.value)}
-                        className="filter-select"
-                      >
-                        <option value="all">All Status</option>
-                        <option value="scheduled">Scheduled</option>
-                        <option value="ongoing">Live/Ongoing</option>
-                        <option value="completed">Completed</option>
-                      </select>
-                    </div>
-
-                    <div className="filter-actions">
-                      <button
-                        onClick={() => {
-                          setSearchTerm("");
-                          setSelectedCategory("all");
-                          setSelectedStatus("all");
-                          setSortBy("time");
-                          setSortOrder("asc");
-                        }}
-                        className="clear-filters"
-                      >
-                        Clear All
-                      </button>
-                      <span className="results-count">
-                        {filteredUpcomingEvents.length} events found
-                      </span>
-                    </div>
-                  </div>
-                )}
+                <div className="sort-controls">
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="sort-select"
+                  >
+                    <option value="time">Time</option>
+                    <option value="name">Name</option>
+                    <option value="participants">Participants</option>
+                    <option value="category">Category</option>
+                  </select>
+                  <button
+                    onClick={() =>
+                      setSortOrder(sortOrder === "asc" ? "desc" : "asc")
+                    }
+                    className="sort-order"
+                  >
+                    {sortOrder === "asc" ? (
+                      <SortAsc className="w-5 h-5" />
+                    ) : (
+                      <SortDesc className="w-5 h-5" />
+                    )}
+                  </button>
+                </div>
               </div>
-            </div>
-          </section>
-        }
 
-        {/* Section 03: Prophetic Trials */}
+              {/* Advanced Filters Panel */}
+              {isFilterOpen && (
+                <div className="filters-panel">
+                  <div className="filter-group">
+                    <label className="filter-label">Category</label>
+                    <select
+                      value={selectedCategory}
+                      onChange={(e) => setSelectedCategory(e.target.value)}
+                      className="filter-select"
+                    >
+                      <option value="all">All Categories</option>
+                      <option value="Competition">Competition</option>
+                      <option value="Workshop">Workshop</option>
+                      <option value="Conference">Conference</option>
+                      <option value="Ceremony">Ceremony</option>
+                      <option value="Social">Social</option>
+                    </select>
+                  </div>
+
+                  <div className="filter-group">
+                    <label className="filter-label">Status</label>
+                    <select
+                      value={selectedStatus}
+                      onChange={(e) => setSelectedStatus(e.target.value)}
+                      className="filter-select"
+                    >
+                      <option value="all">All Status</option>
+                      <option value="scheduled">Scheduled</option>
+                      <option value="ongoing">Live/Ongoing</option>
+                      <option value="completed">Completed</option>
+                    </select>
+                  </div>
+
+                  <div className="filter-actions">
+                    <button
+                      onClick={() => {
+                        setSearchTerm("");
+                        setSelectedCategory("all");
+                        setSelectedStatus("all");
+                        setSortBy("time");
+                        setSortOrder("asc");
+                      }}
+                      className="clear-filters"
+                    >
+                      Clear All
+                    </button>
+                    <span className="results-count">
+                      {filteredUpcomingEvents.length} events found
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+        }{/* Section 03: Prophetic Trials */}
         <section className="odyssey-section prophetic-trials-section">
           <div className="container">
             <div className="section-header-odyssey">
@@ -972,16 +966,15 @@ const Events = () => {
             </div>
           </div>
         </section>
-
         {/* Section 04: Chronicles of Conquered Quests */}
-        <section className="past-events-section">
+        <section className="odyssey-section past-events-section">
           <div className="container">
-            <div className="section-header-events">
-              <h2 className="section-title-events">
+            <div className="section-header-odyssey">
+              <h2 className="section-title-odyssey">
                 📜 Chronicles of Conquered Quests 📜
                 <Trophy className="title-icon" size={32} />
               </h2>
-              <p className="section-subtitle-events">
+              <p className="section-subtitle-odyssey">
                 Behold the eternal records of legendary battles and the heroes
                 who achieved immortal glory
               </p>
@@ -1041,7 +1034,6 @@ const Events = () => {
             </div>
           </div>
         </section>
-
         {/* Registration Modal */}
         <EventRegistrationModal
           event={registrationModal.event}

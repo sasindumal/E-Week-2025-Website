@@ -419,21 +419,157 @@ const SkillStorm = () => {
                 </span>
               </p>
 
-              <div className="hero-stats-odyssey-skillstorm">
-                <div className="stat-item-odyssey-skillstorm">
-                  <Code className="stat-icon-skillstorm" size={24} />
-                  <span className="stat-number-skillstorm">3</span>
-                  <span className="stat-label-skillstorm">Sacred Trials</span>
+              <div
+                className="hero-cards-odyssey-skillstorm"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                  gap: "2rem",
+                  marginTop: "3rem",
+                  maxWidth: "900px",
+                  margin: "3rem auto 0",
+                }}
+              >
+                <div
+                  className="hero-card-skillstorm"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(147, 51, 234, 0.9))",
+                    padding: "2rem",
+                    borderRadius: "1rem",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    backdropFilter: "blur(10px)",
+                    textAlign: "center",
+                    position: "relative",
+                    overflow: "hidden",
+                  }}
+                >
+                  <div style={{ position: "relative", zIndex: 2 }}>
+                    <Code
+                      className="stat-icon-skillstorm"
+                      size={48}
+                      style={{ marginBottom: "1rem", color: "#60A5FA" }}
+                    />
+                    <div
+                      className="stat-number-skillstorm"
+                      style={{
+                        fontSize: "3rem",
+                        fontWeight: "bold",
+                        marginBottom: "0.5rem",
+                      }}
+                    >
+                      3
+                    </div>
+                    <div
+                      className="stat-label-skillstorm"
+                      style={{ fontSize: "1.1rem", opacity: 0.9 }}
+                    >
+                      Sacred Trials
+                    </div>
+                    <p
+                      style={{
+                        marginTop: "1rem",
+                        fontSize: "0.9rem",
+                        opacity: 0.8,
+                      }}
+                    >
+                      Divine coding, design & engineering challenges
+                    </p>
+                  </div>
                 </div>
-                <div className="stat-item-odyssey-skillstorm">
-                  <Gamepad2 className="stat-icon-skillstorm" size={24} />
-                  <span className="stat-number-skillstorm">7</span>
-                  <span className="stat-label-skillstorm">War Games</span>
+                <div
+                  className="hero-card-skillstorm"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgba(239, 68, 68, 0.9), rgba(245, 101, 101, 0.9))",
+                    padding: "2rem",
+                    borderRadius: "1rem",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    backdropFilter: "blur(10px)",
+                    textAlign: "center",
+                    position: "relative",
+                    overflow: "hidden",
+                  }}
+                >
+                  <div style={{ position: "relative", zIndex: 2 }}>
+                    <Gamepad2
+                      className="stat-icon-skillstorm"
+                      size={48}
+                      style={{ marginBottom: "1rem", color: "#F87171" }}
+                    />
+                    <div
+                      className="stat-number-skillstorm"
+                      style={{
+                        fontSize: "3rem",
+                        fontWeight: "bold",
+                        marginBottom: "0.5rem",
+                      }}
+                    >
+                      7
+                    </div>
+                    <div
+                      className="stat-label-skillstorm"
+                      style={{ fontSize: "1.1rem", opacity: 0.9 }}
+                    >
+                      War Games
+                    </div>
+                    <p
+                      style={{
+                        marginTop: "1rem",
+                        fontSize: "0.9rem",
+                        opacity: 0.8,
+                      }}
+                    >
+                      Epic esports battles across PC & mobile
+                    </p>
+                  </div>
                 </div>
-                <div className="stat-item-odyssey-skillstorm">
-                  <Trophy className="stat-icon-skillstorm" size={24} />
-                  <span className="stat-number-skillstorm">100</span>
-                  <span className="stat-label-skillstorm">Glory Points</span>
+                <div
+                  className="hero-card-skillstorm"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgba(245, 158, 11, 0.9), rgba(251, 191, 36, 0.9))",
+                    padding: "2rem",
+                    borderRadius: "1rem",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    backdropFilter: "blur(10px)",
+                    textAlign: "center",
+                    position: "relative",
+                    overflow: "hidden",
+                  }}
+                >
+                  <div style={{ position: "relative", zIndex: 2 }}>
+                    <Trophy
+                      className="stat-icon-skillstorm"
+                      size={48}
+                      style={{ marginBottom: "1rem", color: "#FBBF24" }}
+                    />
+                    <div
+                      className="stat-number-skillstorm"
+                      style={{
+                        fontSize: "3rem",
+                        fontWeight: "bold",
+                        marginBottom: "0.5rem",
+                      }}
+                    >
+                      100+
+                    </div>
+                    <div
+                      className="stat-label-skillstorm"
+                      style={{ fontSize: "1.1rem", opacity: 0.9 }}
+                    >
+                      Glory Points
+                    </div>
+                    <p
+                      style={{
+                        marginTop: "1rem",
+                        fontSize: "0.9rem",
+                        opacity: 0.8,
+                      }}
+                    >
+                      Eternal rewards for the worthy champions
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

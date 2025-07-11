@@ -359,12 +359,26 @@ const Home = () => {
               className="divine-logo-container"
               style={{
                 transform: `translateY(${scrollY * 0.1}px) rotateX(${mousePosition.x * 0.01}deg)`,
+                maxWidth: "400px",
+                width: "100%",
+                height: "auto",
+                margin: "10rem auto 2rem",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                position: "relative",
               }}
             >
               <img
                 src="https://cdn.builder.io/api/v1/assets/c5794fad86854d05a0a2b5f05a97b44d/e-week_logo_-2025-322131?format=webp&width=800"
                 alt="E-Week 2025 - The Odyssey"
                 className="odyssey-logo"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  maxWidth: "350px",
+                  objectFit: "contain",
+                }}
               />
               <div className="divine-glow"></div>
               <div className="laurel-wreath">🏆</div>
@@ -424,9 +438,21 @@ const Home = () => {
             <div
               className="divine-scroll-indicator"
               onClick={() => scrollToSection("leaderboard")}
+              style={{
+                marginTop: "3rem",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "0.5rem",
+                cursor: "pointer",
+                opacity: 0.9,
+                transition: "all 0.3s ease",
+              }}
             >
               <ChevronDown size={24} />
-              <span>⚡ Enter the Pantheon ⚡</span>
+              <span style={{ fontSize: "0.9rem", fontWeight: "500" }}>
+                ⚡ Enter the Pantheon ⚡
+              </span>
             </div>
           </div>
         </div>
