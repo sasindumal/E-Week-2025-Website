@@ -47,89 +47,92 @@ const SkillStorm = () => {
     alert("Registration submitted successfully!");
   };
 
-  // Main competitions data
+  // Sacred trials data
   const mainCompetitions = [
     {
-      id: "codeyssey",
-      name: "Codeyssey",
-      subtitle: "Coding Competition for Talented Students",
+      id: "athenas-code",
+      name: "Trial of Athena's Code",
+      subtitle: "Sacred Programming Quest for Divine Wisdom",
       description:
-        "Showcase your programming prowess in this ultimate coding challenge",
+        "Channel Athena's infinite wisdom to solve divine algorithms and earn the blessing of the goddess of strategic thinking",
       icon: Code,
       gradient: "from-blue-500 to-purple-600",
       requirements: {
-        teams: "Only 2 groups per batch can apply",
-        members: "3 to 5 members per group",
-        eligibility: "All engineering students",
+        teams: "Only 2 sacred guilds per house may enter",
+        members: "3 to 5 heroes per guild",
+        eligibility: "All engineering disciples",
       },
       prizes: [
-        "$2,000 First Prize",
-        "Internship Opportunities",
-        "Tech Gadgets",
+        "🏆 2,000 Golden Drachmas",
+        "🔮 Oracle's Apprenticeship",
+        "⚡ Divine Tech Artifacts",
       ],
-      duration: "6 hours",
-      format: "Algorithm & Problem Solving",
-      type: "team",
+      duration: "6 divine hours",
+      format: "Sacred Algorithm & Divine Problem Solving",
+      type: "guild",
       playersPerTeam: 4,
       maxTeamsPerBatch: 2,
       maxPlayersPerBatch: 20,
       date: "2025-08-26",
       time: "09:00",
-      location: "Programming Lab",
+      location: "Temple of Programming Wisdom",
+      blessing: "🦉 Blessed by Athena's Owl",
     },
     {
-      id: "pixel-ares",
-      name: "Pixel Ares",
-      subtitle: "Graphic Design Competition",
+      id: "aphrodites-art",
+      name: "Trial of Aphrodite's Beauty",
+      subtitle: "Divine Design Competition of Eternal Aesthetics",
       description:
-        "Unleash your creativity and design skills in this visual masterpiece challenge",
+        "Harness Aphrodite's gift of beauty to create visual masterpieces that would grace the halls of Olympus itself",
       icon: Palette,
       gradient: "from-pink-500 to-orange-600",
       requirements: {
-        teams: "Individual competition",
-        members: "Maximum 10 members per batch",
-        eligibility: "Creative minds welcome",
+        teams: "Solo champions only",
+        members: "Maximum 10 artists per divine house",
+        eligibility: "Creative souls blessed by the muses",
       },
       prizes: [
-        "Design Software Licenses",
-        "Professional Portfolio Review",
-        "Art Supplies",
+        "🎨 Divine Design Arsenal",
+        "👁️ Master Artist's Sacred Review",
+        "🌟 Celestial Art Supplies",
       ],
-      duration: "4 hours",
-      format: "Creative Design Challenge",
-      type: "individual",
+      duration: "4 sacred hours",
+      format: "Divine Creative Challenge",
+      type: "solo hero",
       maxPlayersPerBatch: 10,
       date: "2025-08-27",
       time: "10:00",
-      location: "Design Studio",
+      location: "Sanctuary of Divine Arts",
+      blessing: "💖 Graced by Aphrodite",
     },
     {
-      id: "titan-cad",
-      name: "Titan CAD",
-      subtitle: "SolidWorks Competition",
+      id: "hephaestus-forge",
+      name: "Trial of Hephaestus' Forge",
+      subtitle: "Sacred Engineering & Divine Craftsmanship",
       description:
-        "Engineer your way to victory with advanced 3D modeling and design",
+        "Master the divine forging techniques of Hephaestus to create engineering marvels worthy of the gods themselves",
       icon: Box,
-      gradient: "from-green-500 to-teal-600",
+      gradient: "from-orange-500 to-red-600",
       requirements: {
-        teams: "Only 5 groups per batch can apply",
-        members: "Exactly 2 members per group",
-        eligibility: "Engineering students",
+        teams: "Only 5 forging pairs per house may enter",
+        members: "Exactly 2 master craftsmen per pair",
+        eligibility: "Engineering disciples of the forge",
       },
       prizes: [
-        "CAD Software Licenses",
-        "3D Printer Access",
-        "Engineering Kits",
+        "⚒️ Divine CAD Arsenal",
+        "🔥 Sacred 3D Forge Access",
+        "🛠️ Celestial Engineering Tools",
       ],
-      duration: "5 hours",
-      format: "3D Modeling & Engineering",
-      type: "team",
+      duration: "5 forging hours",
+      format: "3D Divine Modeling & Sacred Engineering",
+      type: "forge pair",
       playersPerTeam: 2,
       maxTeamsPerBatch: 5,
       maxPlayersPerBatch: 25,
       date: "2025-08-28",
       time: "14:00",
-      location: "CAD Lab",
+      location: "Hephaestus' Divine Forge",
+      blessing: "🔥 Blessed by Sacred Fire",
     },
   ];
 
@@ -137,291 +140,467 @@ const SkillStorm = () => {
   const pcGames = [
     {
       id: "valorant",
-      name: "Valorant",
-      mode: "Unrated – Tournament Mode",
-      teamSize: "5 players + 1 substitute",
-      format: "Single/Double Elimination",
-      restriction: "One team per batch",
+      name: "Siege of Troy",
+      subtitle: "Valorant Divine War",
+      mode: "Sacred Combat – Tournament of Gods",
+      teamSize: "5 divine warriors + 1 blessed guardian",
+      format: "Epic Elimination Battles",
+      restriction: "One legion per divine house",
       icon: Target,
       gradient: "from-red-500 to-pink-600",
       rules: [
-        "Maximum FIVE players per team",
-        "One substitute player allowed",
-        "Each player registered for only one team",
-        "Substitute must be registered before tournament",
-        "Non-registered players not allowed",
-        "Match overturn possible for violations",
+        "Maximum FIVE divine warriors per legion",
+        "One blessed guardian allowed",
+        "Each warrior bound to single legion",
+        "Guardian must be consecrated before battle",
+        "Mortal warriors forbidden",
+        "Divine judgment for sacred violations",
       ],
-      type: "team",
+      type: "war legion",
       playersPerTeam: 5,
       maxTeamsPerBatch: 1,
       maxPlayersPerBatch: 15,
       date: "2025-08-29",
       time: "09:00",
-      location: "Gaming Arena A",
+      location: "Colosseum of Divine War",
+      blessing: "🏹 Blessed by Artemis the Huntress",
     },
     {
       id: "six-siege",
-      name: "Rainbow Six Siege",
-      mode: "Tactical Shooter",
-      teamSize: "5 players",
-      format: "Tournament Format",
-      restriction: "Random map selection",
+      name: "Fortress of Athena",
+      subtitle: "Rainbow Six Divine Siege",
+      mode: "Tactical Sacred Combat",
+      teamSize: "5 divine guardians",
+      format: "Sacred Tournament of Wisdom",
+      restriction: "Random divine realm selection",
       icon: Shield,
       gradient: "from-gray-600 to-blue-600",
-      mapPool: ["House", "Chalet", "Club House", "Kanal", "Oregon"],
-      matchDetails: [
-        "2 rounds per match",
-        "Preparation time: 60s",
-        "Action phase: 300s",
-        "Friendly fire disabled",
-        "Damage Handicap: 150",
-        "Hostage damage disabled",
-        "Secure time limit: 15s",
-        "Diffuser plant time: 10s",
+      mapPool: [
+        "Divine Palace",
+        "Sacred Chalet",
+        "Heroes' Club",
+        "River Styx",
+        "Mount Olympus",
       ],
-      type: "team",
+      matchDetails: [
+        "2 divine rounds per sacred match",
+        "Strategic preparation: 60 blessed seconds",
+        "Divine action phase: 300 eternal seconds",
+        "Allied protection enabled",
+        "Divine power handicap: 150",
+        "Innocent protection guaranteed",
+        "Sacred victory time: 15 divine seconds",
+        "Artifact placement time: 10 blessed seconds",
+      ],
+      type: "guardian squad",
       playersPerTeam: 5,
       maxTeamsPerBatch: 1,
       maxPlayersPerBatch: 15,
       date: "2025-08-29",
       time: "14:00",
-      location: "Gaming Arena B",
+      location: "Athena's Tactical Temple",
+      blessing: "🛡️ Protected by Athena's Shield",
     },
     {
       id: "blur",
-      name: "Blur",
-      mode: "Racing Competition",
-      teamSize: "4 players maximum",
-      format: "Class A and B available",
-      restriction: "Four players per batch",
+      name: "Chariot of Helios",
+      subtitle: "Divine Racing Championships",
+      mode: "Solar Chariot Competition",
+      teamSize: "4 divine charioteers maximum",
+      format: "Golden and Silver Chariots available",
+      restriction: "Four sun riders per divine house",
       icon: Car,
       gradient: "from-yellow-500 to-orange-600",
       mapPool: [
-        "SanFran Sausalito – Bay Area Tour (3 Laps)",
-        "La River – Concrete Basin (3 Laps)",
-        "La Docks – Cago Run (3 Laps)",
-        "Hollywood Hills – Hollywood Rift (2 Laps)",
-        "Brighton – Coastal Cruice (3 Laps)",
-        "Barcelona Gracia – Passeig De Gracia (3 Laps)",
-        "Amboy – Route 66 (2 Laps)",
+        "Sanctum of Poseidon – Bay of Tritons (3 Divine Laps)",
+        "River of Styx – Underworld Basin (3 Shadow Laps)",
+        "Hermes' Highway – Swift Messenger Run (3 Speed Laps)",
+        "Olympus Heights – Divine Mountain Rift (2 Sacred Laps)",
+        "Coastal Realm – Oceanic Divine Cruise (3 Wave Laps)",
+        "Temple Districts – Sacred Plaza Racing (3 Holy Laps)",
+        "Desert of Apollo – Solar Highway (2 Blazing Laps)",
       ],
-      type: "team",
+      type: "chariot crew",
       playersPerTeam: 4,
       maxTeamsPerBatch: 1,
       maxPlayersPerBatch: 12,
       date: "2025-08-30",
       time: "10:00",
-      location: "Gaming Arena C",
+      location: "Helios Racing Colosseum",
+      blessing: "☀️ Blessed by Helios the Sun God",
     },
     {
       id: "cod4",
-      name: "COD 4 (Search & Destroy)",
-      mode: "Search and Destroy",
-      teamSize: "5 players (1 girl required)",
-      format: "SND 10 minutes",
-      restriction: "One team per batch",
+      name: "Spartan Elite Forces",
+      subtitle: "COD 4 Sacred Hunt & Eliminate",
+      mode: "Hunt and Divine Elimination",
+      teamSize: "5 warriors (1 amazon required)",
+      format: "Sacred Hunt 10 divine minutes",
+      restriction: "One elite squad per divine house",
       icon: Crosshair,
       gradient: "from-green-600 to-teal-600",
       mapPool: [
-        "Crash",
-        "Carnival",
-        "Terminal",
-        "Estate",
-        "Karachchi",
-        "Scrapyard",
+        "Battle of Marathon",
+        "Festival of Dionysus",
+        "Oracle's Terminal",
+        "Hero's Estate",
+        "Ancient Karachchi",
+        "Warrior's Scrapyard",
       ],
       rules: [
-        "Maximum FIVE players per team",
-        "At least one girl per team",
-        "Non-permitted key bindings illegal",
-        "10-minute SND matches",
-        "Winner chooses map, loser chooses side",
-        "Friendly fire disabled",
-        "Kill streak rewards disabled",
+        "Maximum FIVE divine warriors per squad",
+        "At least one amazon warrior required",
+        "Forbidden combat bindings illegal",
+        "10 divine minutes sacred hunt matches",
+        "Victor chooses realm, defeated chooses position",
+        "Allied protection enabled",
+        "Divine streak rewards disabled",
       ],
-      type: "team",
+      type: "elite squad",
       playersPerTeam: 5,
       maxTeamsPerBatch: 1,
       maxPlayersPerBatch: 15,
       date: "2025-08-30",
       time: "15:00",
-      location: "Gaming Arena D",
+      location: "Spartan War Academy",
+      blessing: "⚔️ Blessed by Ares, God of War",
     },
     {
       id: "nfs-girls",
-      name: "Need for Speed Most Wanted",
-      mode: "Girls Only Racing",
-      teamSize: "4 girls maximum",
-      format: "Racing Tournament",
-      restriction: "Girls only from each batch",
+      name: "Amazon Racing Challenge",
+      subtitle: "Need for Speed Divine Huntresses",
+      mode: "Amazon Warriors Only Racing",
+      teamSize: "4 divine huntresses maximum",
+      format: "Sacred Racing Tournament",
+      restriction: "Amazon warriors only from each house",
       icon: Car,
       gradient: "from-purple-500 to-pink-600",
       rules: [
-        "Maximum four girls per batch",
-        "Maps announced prior to game",
-        "Single/Double elimination format",
-        "Female participants only",
+        "Maximum four amazon warriors per house",
+        "Divine realms announced before sacred race",
+        "Single/Double divine elimination format",
+        "Amazon huntresses only",
       ],
-      type: "team",
+      type: "huntress pack",
       playersPerTeam: 4,
       maxTeamsPerBatch: 1,
       maxPlayersPerBatch: 12,
       date: "2025-08-31",
       time: "10:00",
-      location: "Gaming Arena E",
+      location: "Artemis Racing Sanctuary",
+      blessing: "🏹 Blessed by Artemis, Goddess of the Hunt",
     },
   ];
 
   const mobileGames = [
     {
       id: "pubg-mobile",
-      name: "PUBG Mobile",
-      mode: "Battle Royale",
-      teamSize: "4 teams per batch",
-      format: "Mobile platform only",
-      restriction: "No emulators allowed",
+      name: "Battle of the Titans",
+      subtitle: "PUBG Mobile Divine Royale",
+      mode: "Epic Divine Battle Royale",
+      teamSize: "4 divine squads per house",
+      format: "Sacred mobile tablet only",
+      restriction: "No mortal emulation allowed",
       icon: Target,
       gradient: "from-orange-500 to-red-600",
-      mapPool: ["Erangel", "Sanhok"],
+      mapPool: ["Realm of Erangel", "Sacred Sanhok"],
       rules: [
-        "Maximum 4 teams per batch",
-        "Mobile platform only - no emulators",
-        "TDM mode if less than 8 teams",
-        "Bring your own device",
-        "No dress code required",
+        "Maximum 4 divine squads per house",
+        "Sacred mobile tablet only - no mortal emulation",
+        "Divine deathmatch if less than 8 squads",
+        "Bring your blessed divine tablet",
+        "Heroes may wear battle attire",
       ],
-      type: "team",
+      type: "divine squad",
       playersPerTeam: 4,
       maxTeamsPerBatch: 4,
       maxPlayersPerBatch: 30,
       date: "2025-08-31",
       time: "14:00",
-      location: "Mobile Gaming Zone",
+      location: "Mobile Divine Battlegrounds",
+      blessing: "🎯 Blessed by Apollo's Accuracy",
     },
     {
       id: "cod-mobile",
-      name: "COD Mobile",
-      mode: "Mobile Warfare",
-      teamSize: "TBD",
-      format: "Mobile Tournament",
-      restriction: "Mobile only",
+      name: "Mobile War of Gods",
+      subtitle: "COD Mobile Divine Warfare",
+      mode: "Sacred Mobile Combat",
+      teamSize: "Divine squad formation TBD",
+      format: "Mobile Divine Tournament",
+      restriction: "Sacred tablets only",
       icon: Crosshair,
       gradient: "from-blue-500 to-purple-600",
       rules: [
-        "Mobile devices only",
-        "Tournament format TBD",
-        "Bring your own device",
+        "Sacred mobile tablets only",
+        "Divine tournament format to be revealed",
+        "Bring your blessed battle tablet",
       ],
-      type: "team",
+      type: "divine squad",
       playersPerTeam: 5,
       maxTeamsPerBatch: 3,
       maxPlayersPerBatch: 25,
       date: "2025-08-31",
       time: "16:00",
-      location: "Mobile Gaming Zone",
+      location: "Mobile War Temple",
+      blessing: "📱 Blessed by Hermes' Swift Communication",
     },
   ];
 
   const funGames = [
     {
       id: "monopoly",
-      name: "Monopoly",
-      platform: "PC",
-      type: "Strategy Board Game",
-      registration: "No registration required",
+      name: "Olympus Empire",
+      subtitle: "Divine Monopoly",
+      platform: "Sacred PC",
+      type: "Strategic Divine Board Game",
+      registration: "Open to all mortals and demigods",
       icon: Joystick,
       gradient: "from-green-500 to-blue-500",
+      blessing: "🏛️ Blessed by Zeus, Ruler of Domains",
     },
     {
       id: "omi",
-      name: "Omi",
-      platform: "Mobile",
-      type: "Casual Game",
-      registration: "No registration required",
+      name: "Divine Omi",
+      subtitle: "Sacred Casual Quest",
+      platform: "Blessed Mobile",
+      type: "Casual Divine Entertainment",
+      registration: "Open to all seeking divine fun",
       icon: Smartphone,
       gradient: "from-purple-500 to-pink-500",
+      blessing: "🎮 Blessed by Dionysus, God of Celebration",
     },
   ];
 
   return (
     <Layout>
       <div className="skillstorm-page">
-        {/* Hero Section */}
-        <section className="skillstorm-hero">
-          <div className="hero-background-skillstorm"></div>
+        {/* Trials of Heroes Section */}
+        <section
+          className="skillstorm-hero-odyssey"
+          style={{
+            backgroundImage:
+              "url('https://images.pexels.com/photos/2022650/pexels-photo-2022650.jpeg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            position: "relative",
+          }}
+        >
+          <div
+            className="hero-background-skillstorm"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(220,20,60,0.9) 0%, rgba(0,0,139,0.9) 50%, rgba(25,25,112,0.95) 100%)",
+            }}
+          ></div>
           <div className="container">
             <div className="hero-content-skillstorm">
-              {/* SkillStorm Logo */}
+              {/* Divine Trials Logo */}
               <div className="skillstorm-logo-container">
                 <img
                   src="https://cdn.builder.io/api/v1/image/assets%2Fc5794fad86854d05a0a2b5f05a97b44d%2Faae1c430463649c0addd533bd2f58c0c?format=webp&width=800"
-                  alt="SkillStorm Logo"
+                  alt="Trials of Heroes - The Divine Challenges"
                   className="skillstorm-logo"
                 />
-                <div className="logo-glow-skillstorm"></div>
+                <div className="divine-logo-glow-skillstorm"></div>
+                <div className="laurel-frame">🏆</div>
               </div>
 
-              <h1 className="hero-title-skillstorm">
-                SkillStorm 2025
+              <h1 className="hero-title-odyssey-skillstorm">
+                ⚔️ TRIALS OF HEROES ⚔️
                 <Zap className="title-icon-skillstorm" size={48} />
               </h1>
 
-              <p className="hero-subtitle-skillstorm">
-                The Ultimate Multi-Disciplinary Competition Experience
+              <p className="hero-subtitle-odyssey-skillstorm">
+                Face the Ultimate Multi-Divine Challenge Experience
                 <br />
-                <span className="highlight-text-skillstorm">
-                  Code • Design • Engineer • Game
+                <span className="highlight-text-odyssey-skillstorm">
+                  ⚡ Code • 🎨 Design • ⚙️ Engineer • 🎮 Battle ⚡
                 </span>
               </p>
 
-              <div className="hero-stats-skillstorm">
-                <div className="stat-item-skillstorm">
-                  <Code className="stat-icon-skillstorm" size={24} />
-                  <span className="stat-number-skillstorm">3</span>
-                  <span className="stat-label-skillstorm">
-                    Core Competitions
-                  </span>
+              <div
+                className="hero-cards-odyssey-skillstorm"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                  gap: "2rem",
+                  marginTop: "3rem",
+                  maxWidth: "900px",
+                  margin: "3rem auto 0",
+                }}
+              >
+                <div
+                  className="hero-card-skillstorm"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(147, 51, 234, 0.9))",
+                    padding: "2rem",
+                    borderRadius: "1rem",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    backdropFilter: "blur(10px)",
+                    textAlign: "center",
+                    position: "relative",
+                    overflow: "hidden",
+                  }}
+                >
+                  <div style={{ position: "relative", zIndex: 2 }}>
+                    <Code
+                      className="stat-icon-skillstorm"
+                      size={48}
+                      style={{ marginBottom: "1rem", color: "#60A5FA" }}
+                    />
+                    <div
+                      className="stat-number-skillstorm"
+                      style={{
+                        fontSize: "3rem",
+                        fontWeight: "bold",
+                        marginBottom: "0.5rem",
+                      }}
+                    >
+                      3
+                    </div>
+                    <div
+                      className="stat-label-skillstorm"
+                      style={{ fontSize: "1.1rem", opacity: 0.9 }}
+                    >
+                      Sacred Trials
+                    </div>
+                    <p
+                      style={{
+                        marginTop: "1rem",
+                        fontSize: "0.9rem",
+                        opacity: 0.8,
+                      }}
+                    >
+                      Divine coding, design & engineering challenges
+                    </p>
+                  </div>
                 </div>
-                <div className="stat-item-skillstorm">
-                  <Gamepad2 className="stat-icon-skillstorm" size={24} />
-                  <span className="stat-number-skillstorm">7</span>
-                  <span className="stat-label-skillstorm">Esports Games</span>
+                <div
+                  className="hero-card-skillstorm"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgba(239, 68, 68, 0.9), rgba(245, 101, 101, 0.9))",
+                    padding: "2rem",
+                    borderRadius: "1rem",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    backdropFilter: "blur(10px)",
+                    textAlign: "center",
+                    position: "relative",
+                    overflow: "hidden",
+                  }}
+                >
+                  <div style={{ position: "relative", zIndex: 2 }}>
+                    <Gamepad2
+                      className="stat-icon-skillstorm"
+                      size={48}
+                      style={{ marginBottom: "1rem", color: "#F87171" }}
+                    />
+                    <div
+                      className="stat-number-skillstorm"
+                      style={{
+                        fontSize: "3rem",
+                        fontWeight: "bold",
+                        marginBottom: "0.5rem",
+                      }}
+                    >
+                      7
+                    </div>
+                    <div
+                      className="stat-label-skillstorm"
+                      style={{ fontSize: "1.1rem", opacity: 0.9 }}
+                    >
+                      War Games
+                    </div>
+                    <p
+                      style={{
+                        marginTop: "1rem",
+                        fontSize: "0.9rem",
+                        opacity: 0.8,
+                      }}
+                    >
+                      Epic esports battles across PC & mobile
+                    </p>
+                  </div>
                 </div>
-                <div className="stat-item-skillstorm">
-                  <Trophy className="stat-icon-skillstorm" size={24} />
-                  <span className="stat-number-skillstorm">100</span>
-                  <span className="stat-label-skillstorm">Total Points</span>
+                <div
+                  className="hero-card-skillstorm"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgba(245, 158, 11, 0.9), rgba(251, 191, 36, 0.9))",
+                    padding: "2rem",
+                    borderRadius: "1rem",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+                    backdropFilter: "blur(10px)",
+                    textAlign: "center",
+                    position: "relative",
+                    overflow: "hidden",
+                  }}
+                >
+                  <div style={{ position: "relative", zIndex: 2 }}>
+                    <Trophy
+                      className="stat-icon-skillstorm"
+                      size={48}
+                      style={{ marginBottom: "1rem", color: "#FBBF24" }}
+                    />
+                    <div
+                      className="stat-number-skillstorm"
+                      style={{
+                        fontSize: "3rem",
+                        fontWeight: "bold",
+                        marginBottom: "0.5rem",
+                      }}
+                    >
+                      100+
+                    </div>
+                    <div
+                      className="stat-label-skillstorm"
+                      style={{ fontSize: "1.1rem", opacity: 0.9 }}
+                    >
+                      Glory Points
+                    </div>
+                    <p
+                      style={{
+                        marginTop: "1rem",
+                        fontSize: "0.9rem",
+                        opacity: 0.8,
+                      }}
+                    >
+                      Eternal rewards for the worthy champions
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Main Competitions */}
-        <section className="main-competitions-section">
+        {/* Sacred Trials */}
+        <section className="odyssey-section sacred-trials-section">
           <div className="container">
-            <div className="section-header-skillstorm">
-              <h2 className="section-title-skillstorm">
-                Core Competitions
+            <div className="section-header-odyssey">
+              <h2 className="section-title-odyssey">
+                🏛️ The Three Sacred Trials 🏛️
                 <Target className="title-icon" size={32} />
               </h2>
-              <p className="section-subtitle-skillstorm">
-                Master your skills across coding, design, and engineering
+              <p className="section-subtitle-odyssey">
+                Prove your divine mastery across the sacred arts of code,
+                design, and engineering
               </p>
             </div>
 
-            <div className="main-competitions-grid">
+            <div className="sacred-trials-grid">
               {mainCompetitions.map((comp, index) => {
                 const IconComponent = comp.icon;
                 return (
                   <div
                     key={comp.id}
-                    className="main-comp-card"
+                    className="sacred-trial-card"
                     style={{ animationDelay: `${index * 200}ms` }}
                   >
                     <div
-                      className={`comp-gradient bg-gradient-to-br ${comp.gradient}`}
+                      className={`sacred-gradient bg-gradient-to-br ${comp.gradient}`}
                     >
                       <div className="comp-icon-container">
                         <IconComponent size={40} />
@@ -473,24 +652,24 @@ const SkillStorm = () => {
           </div>
         </section>
 
-        {/* Esports Section */}
-        <section className="esports-section">
+        {/* Divine War Games Section */}
+        <section className="odyssey-section divine-colosseum-section">
           <div className="container">
-            <div className="section-header-skillstorm">
-              <h2 className="section-title-skillstorm">
-                Clutch Zone - Esports Arena
+            <div className="section-header-odyssey">
+              <h2 className="section-title-odyssey">
+                ⚔️ Colosseum of Divine War Games ⚔️
                 <Gamepad2 className="title-icon" size={32} />
               </h2>
-              <p className="section-subtitle-skillstorm">
-                Battle for supremacy across PC games, mobile games, and fun
-                challenges
+              <p className="section-subtitle-odyssey">
+                Enter the sacred arenas where digital warriors clash in epic
+                battles for the favor of the gods!
               </p>
             </div>
 
-            {/* Gaming Categories */}
-            <div className="gaming-categories">
-              {/* PC Games */}
-              <div className="category-section">
+            {/* Divine War Categories */}
+            <div className="divine-war-categories">
+              {/* PC War Campaigns */}
+              <div className="divine-category-section">
                 <div
                   className="category-header"
                   onClick={() =>
@@ -501,8 +680,10 @@ const SkillStorm = () => {
                 >
                   <div className="category-info">
                     <Monitor className="category-icon" size={28} />
-                    <h3 className="category-title">PC Games</h3>
-                    <span className="games-count">{pcGames.length} Games</span>
+                    <h3 className="category-title">⚔️ PC War Campaigns</h3>
+                    <span className="games-count">
+                      {pcGames.length} Epic Battles
+                    </span>
                   </div>
                   <ChevronDown
                     className={`expand-icon ${expandedSection === "pc-games" ? "expanded" : ""}`}
@@ -588,9 +769,9 @@ const SkillStorm = () => {
                 >
                   <div className="category-info">
                     <Smartphone className="category-icon" size={28} />
-                    <h3 className="category-title">Mobile Games</h3>
+                    <h3 className="category-title">📱 Mobile Divine Trials</h3>
                     <span className="games-count">
-                      {mobileGames.length} Games
+                      {mobileGames.length} Sacred Quests
                     </span>
                   </div>
                   <ChevronDown
@@ -672,11 +853,11 @@ const SkillStorm = () => {
                 >
                   <div className="category-info">
                     <Joystick className="category-icon" size={28} />
-                    <h3 className="category-title">Fun Games</h3>
-                    <span className="games-count">{funGames.length} Games</span>
-                    <span className="no-reg-badge">
-                      No Registration Required
+                    <h3 className="category-title">🎭 Divine Entertainment</h3>
+                    <span className="games-count">
+                      {funGames.length} Sacred Pastimes
                     </span>
+                    <span className="no-reg-badge">Open to All Mortals</span>
                   </div>
                   <ChevronDown
                     className={`expand-icon ${expandedSection === "fun-games" ? "expanded" : ""}`}

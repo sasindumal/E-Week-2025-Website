@@ -394,24 +394,46 @@ const History = () => {
   return (
     <Layout>
       <div className="history-page animate-slide-up">
-        {/* Hero Section */}
-        <section className="history-hero" ref={heroRef}>
-          {/* Animated Background like Events page */}
-          <div className="hero-background-events" style={{ zIndex: 0, position: 'absolute', inset: 0 }} />
+        {/* Chronicles of Ancient Heroes Section */}
+        <section
+          className="history-hero-odyssey"
+          ref={heroRef}
+          style={{
+            backgroundImage:
+              "url('https://images.pexels.com/photos/951536/pexels-photo-951536.jpeg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            position: "relative",
+          }}
+        >
+          {/* Sacred Scroll Overlay */}
+          <div
+            className="hero-background-events"
+            style={{
+              zIndex: 0,
+              position: "absolute",
+              inset: 0,
+              background:
+                "linear-gradient(135deg, rgba(220,20,60,0.9) 0%, rgba(0,0,139,0.9) 50%, rgba(25,25,112,0.95) 100%)",
+            }}
+          />
           <div className="history-hero-bg">
-            {/* Enhanced Floating Shapes */}
+            {/* Ancient Artifacts Floating */}
             <div className="floating-shapes">
-              <div className="shape shape-1"></div>
-              <div className="shape shape-2"></div>
-              <div className="shape shape-3"></div>
-              <div className="shape shape-4"></div>
-              <div className="shape shape-5"></div>
+              <div className="shape shape-1">📜</div>
+              <div className="shape shape-2">🏺</div>
+              <div className="shape shape-3">⚱️</div>
+              <div className="shape shape-4">🏛️</div>
+              <div className="shape shape-5">📋</div>
             </div>
 
-            {/* Enhanced Particle Effect */}
+            {/* Sacred Time Particles */}
             <div className="particles">
               {[...Array(20)].map((_, i) => (
-                <div key={i} className={`particle particle-${i}`}></div>
+                <div key={i} className={`particle particle-${i}`}>
+                  ⌛
+                </div>
               ))}
             </div>
           </div>
@@ -425,11 +447,16 @@ const History = () => {
                 }}
               >
                 <HistoryIcon className="w-16 h-16" />
-                <div className="logo-glow"></div>
+                <div className="divine-glow"></div>
+                <div className="chronicle-frame">📜</div>
               </div>
-              <h1 className="history-hero-title hero-title-events">E-Week History</h1>
+              <h1 className="history-hero-title hero-title-events">
+                📜 Chronicles of Ancient Heroes 📜
+              </h1>
               <p className="history-hero-subtitle hero-subtitle-events">
-                Explore the legacy, champions, and milestones of E-Week through the years
+                Journey through the sacred annals of time! Discover the
+                legendary champions, epic battles, and divine milestones etched
+                in eternal history!
               </p>
             </div>
           </div>
@@ -437,7 +464,10 @@ const History = () => {
 
         {/* Year Navigation */}
         <section className="history-hero" ref={heroRef}>
-        <div className="hero-background-events" style={{ zIndex: 0, position: 'absolute', inset: 0 }} />
+          <div
+            className="hero-background-events"
+            style={{ zIndex: 0, position: "absolute", inset: 0 }}
+          />
           <div className="container">
             <div className="year-selector">
               <button
@@ -484,12 +514,14 @@ const History = () => {
           </div>
         </section>
 
-        {/* Year Overview */}
-        <section className="year-overview">
+        {/* Epic Year Legends */}
+        <section className="odyssey-section epic-year-legends">
           <div className="container">
             <div className="overview-header">
-              <h2 className="overview-title">E-Week {selectedYear}</h2>
-              <p className="overview-theme">"{currentYearData?.theme}"</p>
+              <h2 className="overview-title">
+                🏛️ The Epic of {selectedYear} 🏛️
+              </h2>
+              <p className="overview-theme">📜 "{currentYearData?.theme}" 📜</p>
             </div>
 
             <div className="overview-stats">
@@ -498,42 +530,42 @@ const History = () => {
                 <span className="stat-number">
                   {currentYearData?.totalParticipants.toLocaleString()}
                 </span>
-                <span className="stat-label">Participants</span>
+                <span className="stat-label">Brave Heroes</span>
               </div>
               <div className="overview-stat">
                 <Calendar className="w-6 h-6" />
                 <span className="stat-number">
                   {currentYearData?.totalEvents}
                 </span>
-                <span className="stat-label">Events</span>
+                <span className="stat-label">Epic Trials</span>
               </div>
               <div className="overview-stat">
                 <Crown className="w-6 h-6" />
                 <span className="stat-number">
                   {currentYearData?.overallChampion}
                 </span>
-                <span className="stat-label">Champion</span>
+                <span className="stat-label">Divine Champion</span>
               </div>
               <div className="overview-stat">
                 <Target className="w-6 h-6" />
                 <span className="stat-number">
                   {currentYearData?.championPoints}
                 </span>
-                <span className="stat-label">Points</span>
+                <span className="stat-label">Glory Points</span>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Category Navigation */}
-        <section className="category-navigation">
+        {/* Divine Category Navigation */}
+        <section className="odyssey-section divine-category-nav">
           <div className="container">
-            <div className="category-tabs">
+            <div className="divine-category-tabs">
               {categories.map((category) => (
                 <button
                   key={category.id}
                   onClick={() => setActiveCategory(category.id)}
-                  className={`category-tab ${activeCategory === category.id ? "active" : ""}`}
+                  className={`divine-category-tab ${activeCategory === category.id ? "active" : ""}`}
                 >
                   {category.icon}
                   <span>{category.label}</span>
@@ -543,8 +575,8 @@ const History = () => {
           </div>
         </section>
 
-        {/* Champions Display */}
-        <section className="champions-display">
+        {/* Divine Champions Display */}
+        <section className="odyssey-section divine-champions-display">
           <div className="container">
             {activeCategory === "overall" ? (
               <div className="champions-podium">
@@ -667,13 +699,15 @@ const History = () => {
           </div>
         </section>
 
-        {/* Year Highlights */}
-        <section className="year-highlights">
+        {/* Divine Year Highlights */}
+        <section className="odyssey-section divine-year-highlights">
           <div className="container">
-            <h3 className="highlights-title">Year Highlights</h3>
-            <div className="highlights-grid">
+            <h3 className="divine-highlights-title">
+              🌟 Divine Year Highlights 🌟
+            </h3>
+            <div className="divine-highlights-grid">
               {currentYearData?.highlights.map((highlight, index) => (
-                <div key={index} className="highlight-card">
+                <div key={index} className="divine-highlight-card">
                   <TrendingUp className="w-6 h-6" />
                   <p>{highlight}</p>
                 </div>
@@ -682,13 +716,15 @@ const History = () => {
           </div>
         </section>
 
-        {/* Memorable Events */}
-        <section className="memorable-events">
+        {/* Sacred Memorable Events */}
+        <section className="odyssey-section sacred-memorable-events">
           <div className="container">
-            <h3 className="memorable-title">Memorable Events</h3>
-            <div className="memorable-grid">
+            <h3 className="sacred-memorable-title">
+              ⚡ Sacred Memorable Events ⚡
+            </h3>
+            <div className="sacred-memorable-grid">
               {currentYearData?.memorableEvents.map((event, index) => (
-                <div key={index} className="memorable-card">
+                <div key={index} className="sacred-memorable-card">
                   <div className="memorable-header">
                     <Star className="w-6 h-6" />
                     <h4>{event.name}</h4>

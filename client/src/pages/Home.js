@@ -50,108 +50,126 @@ const Home = () => {
     };
   }, []);
 
-  // Modern batch leaderboard with enhanced styling
+  // Divine pantheon leaderboard with godly styling
   const batchLeaderboard = [
     {
       batch: "E21",
       points: 2450,
-      logo: "🏆",
+      logo: "⚡",
       rank: 1,
       wins: 24,
       growth: "+12%",
       color: "from-yellow-400 to-yellow-600",
+      title: "Zeus's Thunder",
+      blessing: "Master of Lightning",
     },
     {
       batch: "E22",
       points: 2120,
-      logo: "🥈",
+      logo: "🦉",
       rank: 2,
       wins: 18,
       growth: "+8%",
       color: "from-gray-300 to-gray-500",
+      title: "Athena's Wisdom",
+      blessing: "Goddess of Strategy",
     },
     {
       batch: "E20",
       points: 1980,
-      logo: "🥉",
+      logo: "🔱",
       rank: 3,
       wins: 15,
       growth: "+5%",
-      color: "from-orange-400 to-orange-600",
+      color: "from-blue-400 to-cyan-600",
+      title: "Poseidon's Might",
+      blessing: "Lord of the Seas",
     },
     {
       batch: "E23",
       points: 1750,
-      logo: "⭐",
+      logo: "⚔️",
       rank: 4,
       wins: 12,
       growth: "+15%",
-      color: "from-blue-400 to-blue-600",
+      color: "from-red-400 to-red-600",
+      title: "Ares' Valor",
+      blessing: "God of War",
     },
     {
       batch: "E24",
       points: 1420,
-      logo: "🌟",
+      logo: "🏹",
       rank: 5,
       wins: 9,
       growth: "+22%",
       color: "from-purple-400 to-purple-600",
+      title: "Apollo's Light",
+      blessing: "God of Arts",
     },
   ];
 
-  // Enhanced upcoming events
+  // Legendary trials and challenges
   const upcomingEvents = [
     {
       id: 1,
-      title: "AI & Machine Learning Hackathon",
+      title: "Trial of Athena's Wisdom",
+      subtitle: "AI & Machine Learning Hackathon",
       date: "August 25, 2025",
       time: "9:00 AM",
-      location: "Innovation Hub",
-      category: "Technical",
-      priority: "high",
-      participants: "500+",
-      prize: "20 Points",
+      location: "Temple of Innovation",
+      category: "Divine Trial",
+      priority: "legendary",
+      participants: "500+ Heroes",
+      prize: "20 Glory Points",
       icon: Code,
       gradient: "from-blue-500 to-purple-600",
+      blessing: "🦉 Blessed by Athena",
     },
     {
       id: 2,
-      title: "Robotics Championship",
+      title: "Hephaestus' Forge Challenge",
+      subtitle: "Robotics Championship",
       date: "August 26, 2025",
       time: "2:00 PM",
-      location: "Engineering Arena",
-      category: "Competition",
-      priority: "high",
-      participants: "200+",
-      prize: "30 Points",
+      location: "Divine Forge",
+      category: "Epic Quest",
+      priority: "legendary",
+      participants: "200+ Warriors",
+      prize: "30 Glory Points",
       icon: Cpu,
-      gradient: "from-green-500 to-teal-600",
+      gradient: "from-orange-500 to-red-600",
+      blessing: "🔥 Forged by Fire",
     },
     {
       id: 3,
-      title: "Startup Pitch Battle",
+      title: "Apollo's Oracle Prophecy",
+      subtitle: "Startup Pitch Battle",
       date: "August 27, 2025",
       time: "10:00 AM",
-      location: "Main Auditorium",
-      category: "Innovation",
-      priority: "medium",
-      participants: "150+",
-      prize: "20 Points",
+      location: "Oracle's Sanctum",
+      category: "Sacred Trial",
+      priority: "epic",
+      participants: "150+ Visionaries",
+      prize: "20 Glory Points",
       icon: Lightbulb,
-      gradient: "from-orange-500 to-red-600",
+      gradient: "from-yellow-500 to-orange-600",
+      blessing: "☀️ Illuminated by Apollo",
     },
     {
       id: 4,
-      title: "IoT Solutions Workshop",
+      title: "Hermes' Network Mastery",
+      subtitle: "IoT Solutions Workshop",
       date: "August 28, 2025",
       time: "1:00 PM",
-      location: "Tech Lab",
-      category: "Workshop",
-      priority: "medium",
-      participants: "100+",
-      prize: "10 Points",
+      location: "Messenger's Domain",
+      category: "Divine Workshop",
+      priority: "epic",
+      participants: "100+ Seekers",
+      prize: "10 Glory Points",
       icon: Target,
-      gradient: "from-pink-500 to-purple-600",
+      gradient: "from-green-500 to-teal-600",
+      blessing: "🪶 Swift as Hermes",
     },
   ];
 
@@ -223,46 +241,51 @@ const Home = () => {
     },
   ];
 
-  const modernFeatures = [
+  const divineVirtues = [
     {
       icon: Sparkles,
-      title: "Engineering Excellence",
+      title: "Arete (Excellence)",
       description:
-        "Showcase the capabilities, achievements, and unity of the Faculty of Engineering to the world.",
+        "Pursue the highest virtue and mastery in all endeavors, as the gods demand nothing less than perfection from true heroes.",
       color: "from-blue-600 to-cyan-500",
       delay: "0ms",
+      symbol: "⚡",
     },
     {
       icon: Users,
-      title: "Community Engagement",
+      title: "Philotimo (Honor)",
       description:
-        "Inspire and educate society through workshops, seminars, and school outreach programs.",
+        "Unite mortals and immortals through honor, respect, and the sacred bonds that forge legendary alliances.",
       color: "from-green-600 to-lime-500",
       delay: "100ms",
+      symbol: "🏛️",
     },
     {
       icon: Code,
-      title: "Dynamic Competitions",
+      title: "Agon (Contest)",
       description:
-        "Unleash talent through design, coding, gaming, and creativity contests across disciplines.",
+        "Embrace the spirit of heroic competition where champions rise through trials of skill, wit, and valor.",
       color: "from-purple-600 to-pink-500",
       delay: "200ms",
+      symbol: "⚔️",
     },
     {
       icon: Trophy,
-      title: "Unity & Collaboration",
+      title: "Koinonia (Fellowship)",
       description:
-        "Foster strong bonds between students, staff, and the community through shared goals and teamwork.",
+        "Forge unbreakable bonds between heroes, creating a brotherhood that transcends mortal limitations.",
       color: "from-yellow-500 to-orange-500",
       delay: "300ms",
+      symbol: "🤝",
     },
     {
       icon: HeartHandshake,
-      title: "Social Responsibility",
+      title: "Eunoia (Benevolence)",
       description:
-        "Give back to society with initiatives like blood donation campaigns and public awareness drives.",
+        "Channel divine compassion to aid the realm, spreading wisdom and healing throughout the land.",
       color: "from-red-600 to-rose-500",
       delay: "400ms",
+      symbol: "💝",
     },
   ];
 
@@ -286,10 +309,11 @@ const Home = () => {
     <Layout>
       {/* Ultra-Modern Hero Section */}
       <section
-        className="modern-hero"
+        className="odyssey-hero"
         ref={heroRef}
         style={{
-          backgroundImage: "url('/greek-gods-hero.jpg')",
+          backgroundImage:
+            "url('https://images.pexels.com/photos/15190971/pexels-photo-15190971.jpeg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
@@ -297,161 +321,203 @@ const Home = () => {
           zIndex: 1,
         }}
       >
-        {/* Overlay for readability */}
+        {/* Divine Overlay */}
         <div
           style={{
             position: "absolute",
             inset: 0,
-            background: "rgba(0,0,0,0.75)",
+            background:
+              "linear-gradient(135deg, rgba(220,20,60,0.8) 0%, rgba(0,0,139,0.8) 50%, rgba(25,25,112,0.9) 100%)",
             zIndex: 2,
             pointerEvents: "none",
           }}
         />
         <div style={{ position: "relative", zIndex: 3 }}>
-          {/* Animated Background */}
-          <div className="hero-background">
-            <div className="floating-shapes">
-              <div className="shape shape-1"></div>
-              <div className="shape shape-2"></div>
-              <div className="shape shape-3"></div>
-              <div className="shape shape-4"></div>
-              <div className="shape shape-5"></div>
+          {/* Greek Columns and Elements */}
+          <div className="greek-background">
+            <div className="floating-columns">
+              <div className="column column-1">⚱️</div>
+              <div className="column column-2">🏛️</div>
+              <div className="column column-3">⚔️</div>
+              <div className="column column-4">🛡️</div>
+              <div className="column column-5">🏺</div>
             </div>
 
-            {/* Particle Effect */}
-            <div className="particles">
-              {[...Array(20)].map((_, i) => (
-                <div key={i} className={`particle particle-${i}`}></div>
+            {/* Divine Particles */}
+            <div className="divine-particles">
+              {[...Array(25)].map((_, i) => (
+                <div key={i} className={`divine-particle divine-particle-${i}`}>
+                  ✨
+                </div>
               ))}
             </div>
           </div>
 
-          <div className="hero-content-modern">
-            {/* Floating Logo */}
+          <div className="hero-content-odyssey">
+            {/* Divine Logo */}
             <div
-              className="logo-container"
+              className="divine-logo-container"
               style={{
                 transform: `translateY(${scrollY * 0.1}px) rotateX(${mousePosition.x * 0.01}deg)`,
+                maxWidth: "400px",
+                width: "100%",
+                height: "auto",
+                margin: "10rem auto 2rem",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                position: "relative",
               }}
             >
               <img
                 src="https://cdn.builder.io/api/v1/assets/c5794fad86854d05a0a2b5f05a97b44d/e-week_logo_-2025-322131?format=webp&width=800"
-                alt="E-Week 2025"
-                className="modern-logo"
+                alt="E-Week 2025 - The Odyssey"
+                className="odyssey-logo"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  maxWidth: "350px",
+                  objectFit: "contain",
+                }}
               />
-              <div className="logo-glow"></div>
+              <div className="divine-glow"></div>
+              <div className="laurel-wreath">🏆</div>
             </div>
 
-            {/* Modern Typography */}
-            <div className="hero-text">
-              <h1 className="modern-title">
-                <span className="title-line">E-WEEK</span>
-                <span className="title-year">2K25</span>
-                <div className="title-underline"></div>
+            {/* Epic Typography */}
+            <div className="hero-text-odyssey">
+              <h1 className="odyssey-title">
+                <span className="title-line-odyssey">THE ODYSSEY</span>
+                <span className="title-year-odyssey">MMXXV</span>
+                <div className="greek-underline">⚡</div>
               </h1>
-              <p className="countdown-title">Organized By E22</p>
+              <p className="divine-subtitle">Forged by the Gods of E22</p>
 
-              <p className="modern-subtitle">
-                Warriors of the Odyssey, rise! The storm is near, and only the
-                brave shall write history.
+              <p className="epic-quote">
+                "By Zeus's thunder and Athena's wisdom, the greatest heroes
+                shall rise!
                 <br />
-                <span className="highlight-text">
-                  Get ready into the battle.
+                The trials await, and only the worthy shall claim eternal
+                glory!"
+                <br />
+                <span className="divine-highlight">
+                  ⚔️ Join the Pantheon of Champions ⚔️
                 </span>
               </p>
             </div>
 
-            {/* Enhanced Countdown */}
-            <div className="modern-countdown">
+            {/* Divine Countdown */}
+            <div className="divine-countdown">
+              <div className="countdown-header">
+                <span>🔥 The Great Trials Begin In 🔥</span>
+              </div>
               <CountdownTimer targetDate="2025-08-25T00:00:00" />
             </div>
 
-            {/* Modern CTA Buttons */}
-            <div className="modern-actions">
+            {/* Hero Actions */}
+            <div className="odyssey-actions">
               <button
                 onClick={() => setShowNotificationModal(true)}
-                className="btn-modern btn-primary-modern"
+                className="btn-odyssey btn-primary-odyssey"
               >
                 <Bell size={20} />
-                <span>Register for Notifications</span>
+                <span>Join the Prophecy</span>
                 <ArrowRight size={16} />
               </button>
 
               <button
                 onClick={() => scrollToSection("events")}
-                className="btn-modern btn-secondary-modern"
+                className="btn-odyssey btn-secondary-odyssey"
               >
                 <Play size={20} />
-                <span>Watch Trailer</span>
+                <span>Witness the Glory</span>
               </button>
             </div>
 
-            {/* Scroll Indicator */}
+            {/* Divine Scroll Indicator */}
             <div
-              className="scroll-indicator"
+              className="divine-scroll-indicator"
               onClick={() => scrollToSection("leaderboard")}
+              style={{
+                marginTop: "3rem",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "0.5rem",
+                cursor: "pointer",
+                opacity: 0.9,
+                transition: "all 0.3s ease",
+              }}
             >
               <ChevronDown size={24} />
-              <span>Explore</span>
+              <span style={{ fontSize: "0.9rem", fontWeight: "500" }}>
+                ⚡ Enter the Pantheon ⚡
+              </span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Modern Batch Competition */}
-      <section className="modern-section" id="leaderboard">
+      {/* Divine Pantheon Rankings */}
+      <section className="odyssey-section" id="leaderboard">
         <div className="container">
-          <div className="section-header-modern">
-            <h2 className="section-title-modern">
-              Batch Competition
+          <div className="section-header-odyssey">
+            <h2 className="section-title-odyssey">
+              🏛️ Pantheon of Heroes 🏛️
               <Sparkles className="title-icon" size={32} />
             </h2>
-            <p className="section-subtitle-modern">
-              Real-time leaderboard showing which engineering batch is
-              dominating the events
+            <p className="section-subtitle-odyssey">
+              Behold the mighty battalions ascending to godhood through valor
+              and wisdom! Which heroes shall claim their place among the
+              immortals?
             </p>
           </div>
 
-          <div className="leaderboard-modern">
+          <div className="pantheon-modern">
             {batchLeaderboard.map((batch, index) => (
               <div
                 key={batch.batch}
-                className={`leaderboard-card ${batch.rank <= 3 ? "top-three" : ""}`}
+                className={`pantheon-card ${batch.rank <= 3 ? "divine-three" : ""}`}
                 style={{
                   animationDelay: `${index * 100}ms`,
                   transform: `perspective(1000px) rotateY(${(mousePosition.x - window.innerWidth / 2) * 0.01}deg)`,
                 }}
               >
                 <div
-                  className={`card-gradient bg-gradient-to-br ${batch.color}`}
+                  className={`divine-gradient bg-gradient-to-br ${batch.color}`}
                 >
-                  <div className="rank-badge">#{batch.rank}</div>
-                  <div className="batch-emoji">{batch.logo}</div>
-                  <h3 className="batch-name">{batch.batch}</h3>
+                  <div className="divine-rank">#{batch.rank}</div>
+                  <div className="god-symbol">{batch.logo}</div>
+                  <h3 className="battalion-name">{batch.batch}</h3>
+                  <h4 className="divine-title">{batch.title}</h4>
+                  <p className="divine-blessing">{batch.blessing}</p>
 
-                  <div className="stats-section">
-                    <div className="main-stat">
-                      <span className="stat-number">
+                  <div className="divine-stats">
+                    <div className="glory-stat">
+                      <span className="glory-number">
                         {batch.points.toLocaleString()}
                       </span>
-                      <span className="stat-label">Points</span>
+                      <span className="glory-label">Glory Points</span>
                     </div>
 
-                    <div className="sub-stats">
-                      <div className="sub-stat">
-                        <span className="sub-number">{batch.wins}</span>
-                        <span className="sub-label">Wins</span>
+                    <div className="victory-stats">
+                      <div className="victory-stat">
+                        <span className="victory-number">{batch.wins}</span>
+                        <span className="victory-label">Victories</span>
                       </div>
-                      <div className="sub-stat growth">
-                        <span className="sub-number">{batch.growth}</span>
-                        <span className="sub-label">Growth</span>
+                      <div className="ascension-stat">
+                        <span className="ascension-number">{batch.growth}</span>
+                        <span className="ascension-label">
+                          Divine Ascension
+                        </span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="progress-bar">
+                  <div className="divine-progress">
+                    <div className="divine-progress-label">Path to Olympus</div>
                     <div
-                      className="progress-fill"
+                      className="divine-progress-fill"
                       style={{ width: `${(batch.points / 2500) * 100}%` }}
                     ></div>
                   </div>
@@ -462,81 +528,84 @@ const Home = () => {
 
           <div className="text-center mt-8 mb-8">
             <p className="text-white opacity-80 mb-6">
-              🎯 Earn points by participating in event activities!
+              ⚔️ Earn glory points through heroic deeds and divine trials! ⚔️
             </p>
             <div className="mt-8"></div>
             <Link
               to="/leaderboard"
-              className="btn-modern btn-secondary-modern inline-flex items-center gap-10"
+              className="btn-odyssey btn-secondary-odyssey inline-flex items-center gap-10"
             >
               <Trophy size={20} />
-              <span>View Full Leaderboard</span>
+              <span>Behold the Full Pantheon</span>
               <ArrowRight size={16} />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Ultra-Modern Events Section */}
-      <section className="modern-section events-section" id="events">
+      {/* Epic Trials Section */}
+      <section className="odyssey-section trials-section" id="events">
         <div className="container">
-          <div className="section-header-modern">
-            <h2 className="section-title-modern">
-              Upcoming Events
+          <div className="section-header-odyssey">
+            <h2 className="section-title-odyssey">
+              ⚔️ The Great Trials ⚔️
               <Calendar className="title-icon" size={32} />
             </h2>
-            <p className="section-subtitle-modern">
-              Cutting-edge competitions and workshops designed for the next
-              generation of engineers
+            <p className="section-subtitle-odyssey">
+              Face the legendary challenges that will test your courage, wisdom,
+              and strength! Only the worthy shall earn their place in the Hall
+              of Heroes!
             </p>
           </div>
 
-          <div className="events-grid-modern">
+          <div className="trials-grid-odyssey">
             {upcomingEvents.map((event, index) => {
               const IconComponent = event.icon;
               return (
                 <div
                   key={event.id}
-                  className="event-card-modern"
+                  className="trial-card-odyssey"
                   style={{ animationDelay: `${index * 150}ms` }}
                 >
                   <div
-                    className={`event-gradient bg-gradient-to-br ${event.gradient}`}
+                    className={`trial-gradient bg-gradient-to-br ${event.gradient}`}
                   >
-                    <div className="event-header">
-                      <div className="event-icon">
+                    <div className="trial-header">
+                      <div className="trial-icon">
                         <IconComponent size={24} />
                       </div>
-                      <div className="event-priority">
-                        <span className={`priority-badge ${event.priority}`}>
+                      <div className="trial-priority">
+                        <span className={`legend-badge ${event.priority}`}>
                           {event.priority.toUpperCase()}
                         </span>
                       </div>
                     </div>
 
-                    <h3 className="event-title">{event.title}</h3>
+                    <h3 className="trial-title">{event.title}</h3>
+                    <h4 className="trial-subtitle">{event.subtitle}</h4>
+                    <p className="divine-blessing-text">{event.blessing}</p>
 
-                    <div className="event-details">
-                      <div className="detail-item">
+                    <div className="trial-details">
+                      <div className="detail-item-trial">
                         <Calendar size={16} />
                         <span>{event.date}</span>
                       </div>
-                      <div className="detail-item">
+                      <div className="detail-item-trial">
                         <Clock size={16} />
                         <span>{event.time}</span>
                       </div>
-                      <div className="detail-item">
+                      <div className="detail-item-trial">
                         <MapPin size={16} />
                         <span>{event.location}</span>
                       </div>
                     </div>
 
-                    <div className="event-stats">
-                      <div className="stat-pill">
+                    <div className="trial-stats">
+                      <div className="heroes-pill">
                         <Users size={14} />
                         <span>{event.participants}</span>
                       </div>
-                      <div className="stat-pill prize">
+                      <div className="glory-pill">
                         <Award size={14} />
                         <span>{event.prize}</span>
                       </div>
@@ -549,16 +618,17 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Premium Sponsors Showcase */}
-      <section className="modern-section sponsors-section">
+      {/* Divine Patron Gods Showcase */}
+      <section className="odyssey-section patrons-section">
         <div className="container">
-          <div className="section-header-modern">
-            <h2 className="section-title-modern">
-              Premium Partners
+          <div className="section-header-odyssey">
+            <h2 className="section-title-odyssey">
+              🏛️ Patron Gods & Benefactors 🏛️
               <Star className="title-icon" size={32} />
             </h2>
-            <p className="section-subtitle-modern">
-              Powered by industry leaders investing in the future of engineering
+            <p className="section-subtitle-odyssey">
+              Blessed by divine patrons and mortal allies who support our heroic
+              endeavors
             </p>
           </div>
 
@@ -586,34 +656,38 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Modern Features */}
-      <section className="modern-section features-section">
+      {/* Divine Virtues */}
+      <section className="odyssey-section virtues-section">
         <div className="container">
-          <div className="section-header-modern">
-            <h2 className="section-title-modern">
-              Why E-WEEK 2K25 Excellent?
+          <div className="section-header-odyssey">
+            <h2 className="section-title-odyssey">
+              ⚡ The Five Sacred Virtues ⚡
               <Zap className="title-icon" size={32} />
             </h2>
+            <p className="section-subtitle-odyssey">
+              Discover the divine principles that guide our epic odyssey
+            </p>
           </div>
 
-          <div className="features-grid-modern">
-            {modernFeatures.map((feature, index) => {
-              const IconComponent = feature.icon;
+          <div className="virtues-grid-odyssey">
+            {divineVirtues.map((virtue, index) => {
+              const IconComponent = virtue.icon;
               return (
                 <div
                   key={index}
-                  className="feature-card-modern"
-                  style={{ animationDelay: feature.delay }}
+                  className="virtue-card-odyssey"
+                  style={{ animationDelay: virtue.delay }}
                 >
                   <div
-                    className={`feature-gradient bg-gradient-to-br ${feature.color}`}
+                    className={`virtue-gradient bg-gradient-to-br ${virtue.color}`}
                   >
-                    <div className="feature-icon-modern">
+                    <div className="virtue-symbol">{virtue.symbol}</div>
+                    <div className="virtue-icon-odyssey">
                       <IconComponent size={32} />
                     </div>
-                    <h3 className="feature-title-modern">{feature.title}</h3>
-                    <p className="feature-description-modern">
-                      {feature.description}
+                    <h3 className="virtue-title-odyssey">{virtue.title}</h3>
+                    <p className="virtue-description-odyssey">
+                      {virtue.description}
                     </p>
                   </div>
                 </div>
@@ -623,42 +697,44 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Modern Footer */}
-      <footer className="modern-footer">
+      {/* Divine Temple Footer */}
+      <footer className="divine-footer">
         <div className="container">
-          <div className="footer-content-modern">
-            <div className="footer-logo-section">
+          <div className="footer-content-odyssey">
+            <div className="footer-temple-section">
               <img
                 src="https://cdn.builder.io/api/v1/assets/c5794fad86854d05a0a2b5f05a97b44d/e-week_logo_-2025-322131?format=webp&width=800"
-                alt="E-Week 2025"
-                className="footer-logo-modern"
+                alt="The Odyssey 2025"
+                className="footer-logo-odyssey"
               />
-              <p className="footer-tagline">Engineering the Future, Together</p>
+              <p className="footer-prophecy">
+                🏛️ Forging Legends, Honoring Excellence 🏛️
+              </p>
             </div>
 
-            <div className="footer-info">
-              <p className="footer-text-modern">
-                University of Jaffna • Faculty of Engineering
+            <div className="footer-temple-info">
+              <p className="footer-text-odyssey">
+                🏺 Sacred Halls of Jaffna • Temple of Engineering Wisdom 🏺
               </p>
-              <p className="footer-copyright-modern">
-                © E-WEEK 2K25 • ORGANIZED BY E22
+              <p className="footer-inscription-odyssey">
+                ⚡ THE ODYSSEY MMXXV • BLESSED BY THE GODS OF E22 ⚡
               </p>
             </div>
           </div>
         </div>
       </footer>
 
-      {/* Ultra-Modern Notification Modal */}
+      {/* Divine Oracle Prophecy Modal */}
       {showNotificationModal && (
-        <div className="modal-overlay-modern">
-          <div className="modal-content-modern">
-            <div className="modal-header-modern">
-              <h3 className="modal-title-modern">
-                🚀 Join the E-WEEK 2K25 Journey
+        <div className="oracle-overlay-divine">
+          <div className="oracle-content-divine">
+            <div className="oracle-header-divine">
+              <h3 className="oracle-title-divine">
+                🔮 Receive the Divine Prophecy 🔮
               </h3>
               <button
                 onClick={() => setShowNotificationModal(false)}
-                className="modal-close-modern"
+                className="oracle-close-divine"
               >
                 ×
               </button>
@@ -667,47 +743,49 @@ const Home = () => {
             {!isRegistered ? (
               <form
                 onSubmit={handleNotificationSignup}
-                className="modal-form-modern"
+                className="oracle-form-divine"
               >
-                <p className="modal-description">
-                  Get exclusive notifications, event updates, and be the first
-                  to know when registration opens!
+                <p className="oracle-description">
+                  Let the Oracle's whispers reach you with sacred knowledge of
+                  trials ahead! Be among the first to receive divine messages
+                  when the great challenges begin!
                 </p>
 
-                <div className="input-group-modern">
+                <div className="input-group-divine">
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email address"
-                    className="input-modern"
+                    placeholder="Enter your sacred scroll address"
+                    className="input-divine"
                     required
                   />
-                  <div className="input-glow"></div>
+                  <div className="input-divine-glow"></div>
                 </div>
 
-                <div className="modal-actions-modern">
+                <div className="oracle-actions-divine">
                   <button
                     type="submit"
-                    className="btn-modern btn-primary-modern full-width"
+                    className="btn-divine btn-primary-divine full-width"
                   >
                     <Bell size={20} />
-                    <span>Notify Me</span>
+                    <span>Receive the Prophecy</span>
                     <Sparkles size={16} />
                   </button>
                 </div>
 
-                <p className="modal-footer-text">
-                  Join 500+ already signed up!
+                <p className="oracle-footer-text">
+                  🏛️ Join 500+ heroes who've received the divine messages! 🏛️
                 </p>
               </form>
             ) : (
-              <div className="success-message-modern">
-                <div className="success-icon">🎉</div>
-                <h4 className="success-title">Welcome Aboard!</h4>
-                <p className="success-description">
-                  You're now part of the E-Week 2025 community. Get ready for an
-                  amazing journey!
+              <div className="blessing-message-divine">
+                <div className="blessing-icon">⚡</div>
+                <h4 className="blessing-title">The Gods Have Blessed You!</h4>
+                <p className="blessing-description">
+                  You are now chosen among the heroes! The Oracle shall whisper
+                  to you when the great trials begin. May the gods favor your
+                  journey!
                 </p>
               </div>
             )}

@@ -4,18 +4,24 @@
   overflow-x: hidden;
 }
 
-/* Navigation Styles */
+/* Divine Navigation Styles */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(10, 10, 10, 0.95);
+  background: linear-gradient(
+    135deg,
+    rgba(17, 9, 33, 0.95) 0%,
+    rgba(25, 25, 112, 0.95) 50%,
+    rgba(17, 9, 33, 0.95) 100%
+  );
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(167, 28, 32, 0.1);
+  border-bottom: 2px solid rgba(255, 215, 0, 0.3);
   padding: 1rem 0;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.1);
 }
 
 .navbar .container {
@@ -24,25 +30,47 @@
   align-items: center;
 }
 
-.navbar-brand {
+.navbar-brand.odyssey-brand {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: var(--eweek-white);
+  color: var(--greek-gold);
   text-decoration: none;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 1.25rem;
   transition: all 0.3s ease;
 }
 
-.navbar-brand:hover {
+.navbar-brand.odyssey-brand:hover {
   transform: scale(1.05);
+  filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));
 }
 
-.navbar-brand img {
+.navbar-brand.odyssey-brand img {
   height: 2.5rem;
   width: auto;
-  filter: drop-shadow(0 0 10px rgba(167, 28, 32, 0.3));
+  filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.4));
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.brand-main {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--greek-gold);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  letter-spacing: 0.05em;
+}
+
+.brand-year {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--greek-bronze);
+  opacity: 0.9;
 }
 
 .navbar-nav {
@@ -56,10 +84,11 @@
 .navbar-nav a {
   color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   position: relative;
   transition: all 0.3s ease;
   padding: 0.5rem 0;
+  font-size: 0.95rem;
 }
 
 .navbar-nav a::after {
@@ -69,14 +98,16 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #a71c20, #ff4757);
+  background: linear-gradient(90deg, var(--greek-gold), var(--greek-bronze));
   transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
 .navbar-nav a:hover,
 .navbar-nav a.active {
-  color: #fff;
+  color: var(--greek-gold);
   transform: translateY(-1px);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
 .navbar-nav a:hover::after,
@@ -12953,5 +12984,2556 @@
 
   .login-header h1 {
     font-size: 1.5rem;
+  }
+}
+
+/* ===== ANCIENT GREEK ODYSSEY THEME STYLES ===== */
+
+/* Greek Color Palette */
+:root {
+  --greek-gold: #ffd700;
+  --greek-bronze: #cd7f32;
+  --greek-marble: #f8f8ff;
+  --greek-blue: #000080;
+  --greek-crimson: #dc143c;
+  --greek-navy: #110921;
+  --greek-purple: #6a0dad;
+  --greek-silver: #c0c0c0;
+}
+
+/* Greek Background Patterns */
+.greek-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.floating-columns {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.column {
+  position: absolute;
+  font-size: 3rem;
+  opacity: 0.15;
+  animation: float-greek 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3));
+}
+
+.column-1 {
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+.column-2 {
+  top: 20%;
+  right: 15%;
+  animation-delay: 1s;
+}
+.column-3 {
+  bottom: 30%;
+  left: 20%;
+  animation-delay: 2s;
+}
+.column-4 {
+  bottom: 15%;
+  right: 10%;
+  animation-delay: 3s;
+}
+.column-5 {
+  top: 50%;
+  left: 50%;
+  animation-delay: 4s;
+}
+
+.divine-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.divine-particle {
+  position: absolute;
+  font-size: 1rem;
+  opacity: 0.6;
+  animation: float-divine 8s linear infinite;
+  color: var(--greek-gold);
+}
+
+.divine-particle-0 {
+  top: 10%;
+  left: 5%;
+  animation-delay: 0s;
+}
+.divine-particle-1 {
+  top: 15%;
+  left: 85%;
+  animation-delay: 0.5s;
+}
+.divine-particle-2 {
+  top: 25%;
+  left: 75%;
+  animation-delay: 1s;
+}
+.divine-particle-3 {
+  top: 35%;
+  left: 15%;
+  animation-delay: 1.5s;
+}
+.divine-particle-4 {
+  top: 45%;
+  left: 65%;
+  animation-delay: 2s;
+}
+.divine-particle-5 {
+  top: 55%;
+  left: 25%;
+  animation-delay: 2.5s;
+}
+.divine-particle-6 {
+  top: 65%;
+  left: 85%;
+  animation-delay: 3s;
+}
+.divine-particle-7 {
+  top: 75%;
+  left: 35%;
+  animation-delay: 3.5s;
+}
+.divine-particle-8 {
+  top: 85%;
+  left: 75%;
+  animation-delay: 4s;
+}
+.divine-particle-9 {
+  top: 95%;
+  left: 45%;
+  animation-delay: 4.5s;
+}
+.divine-particle-10 {
+  top: 20%;
+  left: 95%;
+  animation-delay: 5s;
+}
+.divine-particle-11 {
+  top: 40%;
+  left: 5%;
+  animation-delay: 5.5s;
+}
+.divine-particle-12 {
+  top: 60%;
+  left: 55%;
+  animation-delay: 6s;
+}
+.divine-particle-13 {
+  top: 80%;
+  left: 15%;
+  animation-delay: 6.5s;
+}
+.divine-particle-14 {
+  top: 30%;
+  left: 45%;
+  animation-delay: 7s;
+}
+.divine-particle-15 {
+  top: 50%;
+  left: 85%;
+  animation-delay: 7.5s;
+}
+.divine-particle-16 {
+  top: 70%;
+  left: 25%;
+  animation-delay: 8s;
+}
+.divine-particle-17 {
+  top: 90%;
+  left: 65%;
+  animation-delay: 8.5s;
+}
+.divine-particle-18 {
+  top: 5%;
+  left: 35%;
+  animation-delay: 9s;
+}
+.divine-particle-19 {
+  top: 85%;
+  left: 5%;
+  animation-delay: 9.5s;
+}
+.divine-particle-20 {
+  top: 25%;
+  left: 55%;
+  animation-delay: 10s;
+}
+.divine-particle-21 {
+  top: 45%;
+  left: 95%;
+  animation-delay: 10.5s;
+}
+.divine-particle-22 {
+  top: 65%;
+  left: 45%;
+  animation-delay: 11s;
+}
+.divine-particle-23 {
+  top: 15%;
+  left: 25%;
+  animation-delay: 11.5s;
+}
+.divine-particle-24 {
+  top: 95%;
+  left: 75%;
+  animation-delay: 12s;
+}
+
+/* Greek Animations */
+@keyframes float-greek {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+    opacity: 0.25;
+  }
+}
+
+@keyframes float-divine {
+  0% {
+    transform: translateY(0) scale(0.8);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-15px) scale(1.2);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-30px) scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes glow-greek {
+  0%,
+  100% {
+    box-shadow:
+      0 0 20px rgba(255, 215, 0, 0.3),
+      0 0 40px rgba(255, 215, 0, 0.2),
+      0 0 60px rgba(255, 215, 0, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 30px rgba(255, 215, 0, 0.6),
+      0 0 60px rgba(255, 215, 0, 0.4),
+      0 0 90px rgba(255, 215, 0, 0.2);
+  }
+}
+
+@keyframes pulse-divine {
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+/* Hero Sections - Greek Style */
+.odyssey-hero,
+.events-hero-odyssey,
+.leaderboard-hero-odyssey,
+.skillstorm-hero-odyssey,
+.downloads-hero-odyssey,
+.gallery-hero-odyssey,
+.history-hero-odyssey {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    rgba(220, 20, 60, 0.9) 0%,
+    rgba(0, 0, 139, 0.9) 50%,
+    rgba(25, 25, 112, 0.95) 100%
+  );
+}
+
+.hero-content-odyssey,
+.hero-content-events,
+.hero-content-skillstorm,
+.downloads-hero-content,
+.gallery-hero-content,
+.history-hero-content {
+  text-align: center;
+  z-index: 10;
+  position: relative;
+}
+
+/* Divine Logo Container */
+.divine-logo-container,
+.skillstorm-logo-container,
+.downloads-hero-icon,
+.gallery-hero-icon,
+.history-hero-icon {
+  position: relative;
+  margin-bottom: 2rem;
+  display: inline-block;
+}
+
+.odyssey-logo,
+.skillstorm-logo {
+  max-height: 120px;
+  filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.5));
+}
+
+.divine-glow,
+.divine-logo-glow-skillstorm {
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 215, 0, 0.3) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: glow-greek 3s ease-in-out infinite;
+}
+
+.laurel-wreath,
+.laurel-frame,
+.scroll-frame,
+.art-frame,
+.chronicle-frame {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  font-size: 2rem;
+  animation: pulse-divine 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+}
+
+/* Epic Typography */
+.odyssey-title,
+.hero-title-odyssey-skillstorm {
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  text-shadow:
+    0 0 10px rgba(255, 215, 0, 0.5),
+    0 0 20px rgba(255, 215, 0, 0.3),
+    0 0 30px rgba(255, 215, 0, 0.1);
+  background: linear-gradient(
+    45deg,
+    var(--greek-gold),
+    var(--greek-bronze),
+    var(--greek-gold)
+  );
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer-gold 3s ease-in-out infinite;
+}
+
+.title-line-odyssey {
+  display: block;
+  font-size: 5rem;
+  letter-spacing: 0.1em;
+}
+
+.title-year-odyssey {
+  display: block;
+  font-size: 3rem;
+  opacity: 0.9;
+}
+
+.greek-underline {
+  margin: 1rem auto;
+  font-size: 2rem;
+  color: var(--greek-gold);
+  animation: pulse-divine 2s ease-in-out infinite;
+}
+
+.divine-subtitle,
+.epic-quote {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1rem;
+}
+
+.divine-highlight,
+.highlight-text-odyssey-skillstorm {
+  color: var(--greek-gold);
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 1.3rem;
+}
+
+@keyframes shimmer-gold {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Divine Countdown */
+.divine-countdown {
+  margin: 2rem 0;
+  padding: 2rem;
+  background: rgba(255, 215, 0, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+.countdown-header {
+  font-size: 1.1rem;
+  color: var(--greek-gold);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* Greek Buttons */
+.btn-odyssey,
+.btn-divine {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  font-weight: 700;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  margin: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary-odyssey,
+.btn-primary-divine {
+  background: linear-gradient(45deg, var(--greek-gold), var(--greek-bronze));
+  color: var(--greek-navy);
+  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.3);
+}
+
+.btn-secondary-odyssey {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 2px solid var(--greek-gold);
+  backdrop-filter: blur(10px);
+}
+
+.btn-odyssey:hover,
+.btn-divine:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(255, 215, 0, 0.4);
+}
+
+.btn-primary-odyssey:hover,
+.btn-primary-divine:hover {
+  background: linear-gradient(45deg, var(--greek-bronze), var(--greek-gold));
+}
+
+.btn-secondary-odyssey:hover {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: var(--greek-bronze);
+}
+
+/* Divine Scroll Indicator */
+.divine-scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--greek-gold);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: bounce 2s infinite;
+}
+
+.divine-scroll-indicator:hover {
+  color: var(--greek-bronze);
+  transform: translateX(-50%) scale(1.1);
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+/* Section Headers - Odyssey Style */
+.odyssey-section {
+  padding: 5rem 0;
+  background: linear-gradient(
+    180deg,
+    rgba(17, 9, 33, 0.95) 0%,
+    rgba(25, 25, 112, 0.9) 50%,
+    rgba(17, 9, 33, 0.95) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.section-header-odyssey {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+  z-index: 5;
+}
+
+.section-title-odyssey {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: var(--greek-gold);
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.section-subtitle-odyssey {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Pantheon Rankings */
+.pantheon-modern {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.pantheon-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  transition: all 0.4s ease;
+  animation: slideUp 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.pantheon-card.divine-three {
+  transform: scale(1.05);
+  box-shadow: 0 20px 60px rgba(255, 215, 0, 0.4);
+}
+
+.divine-gradient {
+  padding: 2rem;
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.divine-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 215, 0, 0.1) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.pantheon-card:hover .divine-gradient::before {
+  transform: translateX(100%);
+}
+
+.divine-rank {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--greek-gold);
+  color: var(--greek-navy);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.god-symbol {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  display: block;
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+  animation: pulse-divine 3s ease-in-out infinite;
+}
+
+.battalion-name {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.divine-title {
+  font-size: 1.2rem;
+  color: var(--greek-gold);
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.divine-blessing {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.divine-stats {
+  margin: 1.5rem 0;
+}
+
+.glory-stat {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.glory-number {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--greek-gold);
+  display: block;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+.glory-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.victory-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.victory-stat,
+.ascension-stat {
+  text-align: center;
+}
+
+.victory-number,
+.ascension-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  display: block;
+}
+
+.victory-label,
+.ascension-label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+}
+
+.divine-progress {
+  margin-top: 1.5rem;
+}
+
+.divine-progress-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.5rem;
+}
+
+.divine-progress-fill {
+  height: 8px;
+  background: linear-gradient(90deg, var(--greek-gold), var(--greek-bronze));
+  border-radius: 10px;
+  transition: width 0.8s ease;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+/* Trials Grid */
+.trials-grid-odyssey {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.trial-card-odyssey {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  animation: slideUp 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.trial-gradient {
+  padding: 2rem;
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 215, 0, 0.2);
+  position: relative;
+  height: 100%;
+}
+
+.trial-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.trial-icon {
+  background: rgba(255, 215, 0, 0.2);
+  padding: 1rem;
+  border-radius: 15px;
+  color: var(--greek-gold);
+}
+
+.legend-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.legend-badge.legendary {
+  background: linear-gradient(45deg, var(--greek-gold), var(--greek-bronze));
+  color: var(--greek-navy);
+}
+
+.legend-badge.epic {
+  background: linear-gradient(45deg, var(--greek-purple), var(--greek-blue));
+  color: white;
+}
+
+.trial-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.trial-subtitle {
+  font-size: 1rem;
+  color: var(--greek-gold);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.divine-blessing-text {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.trial-details {
+  margin: 1.5rem 0;
+}
+
+.detail-item-trial {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+.trial-stats {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.heroes-pill,
+.glory-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.glory-pill {
+  background: rgba(255, 215, 0, 0.2);
+  color: var(--greek-gold);
+  font-weight: 600;
+}
+
+/* Virtues Grid */
+.virtues-grid-odyssey {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.virtue-card-odyssey {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  animation: slideUp 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.virtue-gradient {
+  padding: 2rem;
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 215, 0, 0.2);
+  text-align: center;
+  position: relative;
+  height: 100%;
+}
+
+.virtue-symbol {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+  animation: pulse-divine 3s ease-in-out infinite;
+}
+
+.virtue-icon-odyssey {
+  background: rgba(255, 215, 0, 0.2);
+  padding: 1rem;
+  border-radius: 50%;
+  color: var(--greek-gold);
+  margin: 0 auto 1rem;
+  width: fit-content;
+}
+
+.virtue-title-odyssey {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: var(--greek-gold);
+}
+
+.virtue-description-odyssey {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+/* Divine Footer */
+.divine-footer {
+  background: linear-gradient(
+    135deg,
+    var(--greek-navy),
+    rgba(25, 25, 112, 0.9)
+  );
+  padding: 3rem 0 2rem;
+  border-top: 2px solid rgba(255, 215, 0, 0.3);
+  position: relative;
+}
+
+.divine-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--greek-gold),
+    transparent
+  );
+}
+
+.footer-content-odyssey {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.footer-temple-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-logo-odyssey {
+  max-height: 80px;
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3));
+}
+
+.footer-prophecy {
+  color: var(--greek-gold);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.footer-temple-info {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footer-text-odyssey {
+  margin-bottom: 0.5rem;
+}
+
+.footer-inscription-odyssey {
+  font-size: 0.9rem;
+  color: var(--greek-gold);
+  font-weight: 600;
+}
+
+/* Oracle Modal */
+.oracle-overlay-divine {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+.oracle-content-divine {
+  background: linear-gradient(
+    135deg,
+    var(--greek-navy),
+    rgba(25, 25, 112, 0.95)
+  );
+  border: 2px solid var(--greek-gold);
+  border-radius: 20px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.oracle-header-divine {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.oracle-title-divine {
+  color: var(--greek-gold);
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.oracle-close-divine {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--greek-gold);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.oracle-close-divine:hover {
+  background: rgba(255, 215, 0, 0.2);
+}
+
+.oracle-form-divine {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.oracle-description {
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.input-group-divine {
+  position: relative;
+}
+
+.input-divine {
+  width: 100%;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+}
+
+.input-divine:focus {
+  outline: none;
+  border-color: var(--greek-gold);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.input-divine::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.input-divine-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  opacity: 0;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 215, 0, 0.1),
+    transparent
+  );
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.input-divine:focus + .input-divine-glow {
+  opacity: 1;
+}
+
+.oracle-actions-divine {
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.oracle-footer-text {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.blessing-message-divine {
+  text-align: center;
+}
+
+.blessing-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: pulse-divine 2s ease-in-out infinite;
+}
+
+.blessing-title {
+  color: var(--greek-gold);
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.blessing-description {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+}
+
+/* Animation Delays */
+.pantheon-card:nth-child(1) {
+  animation-delay: 0ms;
+}
+.pantheon-card:nth-child(2) {
+  animation-delay: 100ms;
+}
+.pantheon-card:nth-child(3) {
+  animation-delay: 200ms;
+}
+.pantheon-card:nth-child(4) {
+  animation-delay: 300ms;
+}
+.pantheon-card:nth-child(5) {
+  animation-delay: 400ms;
+}
+
+.trial-card-odyssey:nth-child(1) {
+  animation-delay: 0ms;
+}
+.trial-card-odyssey:nth-child(2) {
+  animation-delay: 150ms;
+}
+.trial-card-odyssey:nth-child(3) {
+  animation-delay: 300ms;
+}
+.trial-card-odyssey:nth-child(4) {
+  animation-delay: 450ms;
+}
+
+.virtue-card-odyssey:nth-child(1) {
+  animation-delay: 0ms;
+}
+.virtue-card-odyssey:nth-child(2) {
+  animation-delay: 100ms;
+}
+.virtue-card-odyssey:nth-child(3) {
+  animation-delay: 200ms;
+}
+.virtue-card-odyssey:nth-child(4) {
+  animation-delay: 300ms;
+}
+.virtue-card-odyssey:nth-child(5) {
+  animation-delay: 400ms;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .odyssey-title,
+  .hero-title-odyssey-skillstorm {
+    font-size: 2.5rem;
+  }
+
+  .title-line-odyssey {
+    font-size: 3rem;
+  }
+
+  .title-year-odyssey {
+    font-size: 2rem;
+  }
+
+  .section-title-odyssey {
+    font-size: 2rem;
+  }
+
+  .pantheon-modern,
+  .trials-grid-odyssey,
+  .virtues-grid-odyssey {
+    grid-template-columns: 1fr;
+  }
+
+  .divine-gradient,
+  .trial-gradient,
+  .virtue-gradient {
+    padding: 1.5rem;
+  }
+}
+
+/* Divine Countdown Styling */
+.divine-countdown-active {
+  background: rgba(255, 215, 0, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 10px 40px rgba(255, 215, 0, 0.2);
+}
+
+.divine-countdown-title {
+  color: var(--greek-gold);
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  text-align: center;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+.divine-countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.divine-countdown-item {
+  text-align: center;
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 15px;
+  padding: 1.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.divine-countdown-item:hover {
+  background: rgba(255, 215, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+}
+
+.countdown-symbol {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  animation: pulse-divine 2s ease-in-out infinite;
+}
+
+.divine-countdown-number {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--greek-gold);
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.divine-countdown-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.divine-countdown-date {
+  text-align: center;
+  color: var(--greek-bronze);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.divine-countdown-expired {
+  background: linear-gradient(45deg, var(--greek-gold), var(--greek-bronze));
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.divine-announcement {
+  color: var(--greek-navy);
+  text-shadow: none;
+  font-weight: 900;
+  animation: pulse-divine 1.5s ease-in-out infinite;
+}
+
+.divine-live-text {
+  color: var(--greek-navy);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .divine-countdown-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .divine-countdown-number {
+    font-size: 2rem;
+  }
+
+  .divine-countdown-title {
+    font-size: 1.4rem;
+  }
+}
+
+/* Prophetic Events Styling */
+.prophetic-grid-odyssey {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.prophetic-card-odyssey {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  animation: slideUp 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.prophetic-gradient {
+  padding: 2rem;
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 215, 0, 0.2);
+  position: relative;
+  height: 100%;
+}
+
+.divine-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.prophetic-icon {
+  background: rgba(255, 215, 0, 0.2);
+  padding: 1rem;
+  border-radius: 15px;
+  color: var(--greek-gold);
+  width: fit-content;
+  margin-bottom: 1.5rem;
+}
+
+.prophetic-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.prophetic-subtitle {
+  font-size: 1rem;
+  color: var(--greek-gold);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.prophetic-description {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.prophetic-blessing {
+  font-size: 0.9rem;
+  color: var(--greek-bronze);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.prophetic-details {
+  margin: 1.5rem 0;
+}
+
+.detail-row-prophetic {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+.prophetic-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.prophetic-tag {
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  color: var(--greek-gold);
+}
+
+.glory-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--greek-gold);
+  font-weight: 600;
+  margin: 1rem 0;
+}
+
+.prophetic-cta {
+  width: 100%;
+  background: linear-gradient(45deg, var(--greek-gold), var(--greek-bronze));
+  color: var(--greek-navy);
+  border: none;
+  padding: 1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.prophetic-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+}
+
+/* Platform Selection - Greek Style */
+.platform-selection {
+  background: linear-gradient(
+    180deg,
+    rgba(17, 9, 33, 0.9) 0%,
+    rgba(25, 25, 112, 0.8) 100%
+  );
+  padding: 3rem 0;
+}
+
+.platform-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.platform-tab {
+  background: rgba(255, 215, 0, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 15px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+  min-width: 200px;
+  text-align: center;
+}
+
+.platform-tab.active {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: var(--greek-gold);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+}
+
+.platform-tab:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 215, 0, 0.15);
+}
+
+.platform-tab-icon {
+  color: var(--greek-gold);
+  margin-bottom: 1rem;
+}
+
+.platform-tab-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.platform-tab-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.download-count {
+  font-size: 0.9rem;
+  color: var(--greek-gold);
+  font-weight: 600;
+}
+
+.growth-indicator {
+  font-size: 0.8rem;
+  color: var(--greek-bronze);
+}
+
+/* System Requirements - Greek Style */
+.system-requirements {
+  background: linear-gradient(
+    180deg,
+    rgba(25, 25, 112, 0.8) 0%,
+    rgba(17, 9, 33, 0.9) 100%
+  );
+  padding: 5rem 0;
+}
+
+.requirements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.requirement-card {
+  background: rgba(255, 215, 0, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.requirement-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--greek-gold);
+  box-shadow: 0 15px 40px rgba(255, 215, 0, 0.2);
+}
+
+.requirement-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.requirement-icon {
+  padding: 1rem;
+  border-radius: 15px;
+  color: white;
+}
+
+.requirement-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.requirement-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.requirement-item:last-child {
+  border-bottom: none;
+}
+
+.requirement-item .label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.requirement-item .value {
+  color: var(--greek-gold);
+  font-weight: 600;
+}
+
+/* Support Section - Greek Style */
+.support-section {
+  background: linear-gradient(
+    135deg,
+    var(--greek-navy),
+    rgba(25, 25, 112, 0.9)
+  );
+  padding: 5rem 0;
+  text-align: center;
+}
+
+.support-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.support-title {
+  font-size: 2.5rem;
+  color: var(--greek-gold);
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+.support-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.support-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.support-btn {
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  text-decoration: none;
+}
+
+.support-btn:not(.outline) {
+  background: linear-gradient(45deg, var(--greek-gold), var(--greek-bronze));
+  color: var(--greek-navy);
+}
+
+.support-btn.outline {
+  background: transparent;
+  color: var(--greek-gold);
+  border: 2px solid var(--greek-gold);
+}
+
+.support-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .prophetic-grid-odyssey {
+    grid-template-columns: 1fr;
+  }
+
+  .platform-tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .requirements-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .support-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Sacred Trials Section Styling */
+.sacred-trials-section {
+  background: linear-gradient(
+    180deg,
+    rgba(17, 9, 33, 0.95) 0%,
+    rgba(25, 25, 112, 0.9) 50%,
+    rgba(17, 9, 33, 0.95) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.sacred-trials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+.sacred-trial-card {
+  position: relative;
+  border-radius: 25px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  animation: slideUp 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.sacred-trial-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 25px 60px rgba(255, 215, 0, 0.3);
+}
+
+.sacred-gradient {
+  padding: 2.5rem;
+  border-radius: 25px;
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  position: relative;
+  height: 100%;
+  background: rgba(255, 215, 0, 0.1);
+}
+
+/* Divine Colosseum Section */
+.divine-colosseum-section {
+  background: linear-gradient(
+    180deg,
+    rgba(25, 25, 112, 0.9) 0%,
+    rgba(139, 0, 0, 0.8) 50%,
+    rgba(25, 25, 112, 0.9) 100%
+  );
+  position: relative;
+}
+
+.divine-war-categories {
+  margin-top: 3rem;
+}
+
+.divine-category-section {
+  background: rgba(255, 215, 0, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.2);
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+/* Sacred Scroll Section */
+.sacred-scroll-section {
+  background: linear-gradient(
+    180deg,
+    rgba(17, 9, 33, 0.9) 0%,
+    rgba(25, 25, 112, 0.8) 100%
+  );
+  padding: 5rem 0;
+}
+
+.sacred-scroll-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.divine-scroll-info {
+  background: rgba(255, 215, 0, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 20px;
+  padding: 2.5rem;
+  backdrop-filter: blur(15px);
+}
+
+.divine-platform-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.divine-platform-icon {
+  padding: 1.5rem;
+  border-radius: 20px;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.divine-platform-details h2 {
+  font-size: 1.8rem;
+  color: var(--greek-gold);
+  margin-bottom: 0.5rem;
+  font-weight: 800;
+}
+
+.divine-platform-meta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.divine-platform-meta span {
+  background: rgba(255, 215, 0, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: var(--greek-gold);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.divine-platform-features {
+  margin-top: 2rem;
+}
+
+.divine-features-title {
+  color: var(--greek-gold);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* Epic Campaigns Section */
+.epic-campaigns-section {
+  background: linear-gradient(
+    180deg,
+    rgba(139, 0, 0, 0.8) 0%,
+    rgba(25, 25, 112, 0.9) 100%
+  );
+  padding: 5rem 0;
+}
+
+/* Active Battlefields Section */
+.active-battlefields-section {
+  background: linear-gradient(
+    180deg,
+    rgba(25, 25, 112, 0.9) 0%,
+    rgba(17, 9, 33, 0.95) 100%
+  );
+  padding: 5rem 0;
+  position: relative;
+}
+
+/* Prophetic Trials Section */
+.prophetic-trials-section {
+  background: linear-gradient(
+    180deg,
+    rgba(17, 9, 33, 0.95) 0%,
+    rgba(139, 0, 0, 0.8) 50%,
+    rgba(25, 25, 112, 0.9) 100%
+  );
+  padding: 5rem 0;
+}
+
+/* Divine Houses Section */
+.divine-houses-section {
+  background: linear-gradient(
+    180deg,
+    rgba(25, 25, 112, 0.9) 0%,
+    rgba(17, 9, 33, 0.95) 100%
+  );
+  padding: 5rem 0;
+}
+
+/* Legendary Chronicles Section */
+.legendary-chronicles-section {
+  background: linear-gradient(
+    180deg,
+    rgba(17, 9, 33, 0.95) 0%,
+    rgba(25, 25, 112, 0.9) 100%
+  );
+  padding: 5rem 0;
+}
+
+/* Day Selector Greek Styling */
+.day-selector {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 3rem 0;
+  flex-wrap: wrap;
+}
+
+.day-button {
+  background: rgba(255, 215, 0, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 15px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+  text-align: center;
+  min-width: 120px;
+}
+
+.day-button.active {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: var(--greek-gold);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+}
+
+.day-button:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 215, 0, 0.15);
+}
+
+.day-name {
+  display: block;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--greek-gold);
+  margin-bottom: 0.25rem;
+}
+
+.day-date {
+  display: block;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.25rem;
+}
+
+.day-count {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--greek-bronze);
+}
+
+/* Timeline Events Greek Styling */
+.schedule-timeline {
+  margin-top: 3rem;
+}
+
+.timeline-title {
+  color: var(--greek-gold);
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.timeline-events {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.timeline-event {
+  display: grid;
+  grid-template-columns: 150px 30px 1fr;
+  align-items: center;
+  gap: 1rem;
+  animation: slideUp 0.8s ease-out forwards;
+  opacity: 0;
+}
+
+.event-time {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--greek-gold);
+  font-weight: 600;
+  text-align: right;
+}
+
+.event-connector {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--greek-gold);
+  position: relative;
+}
+
+.event-connector::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 2px;
+  height: 60px;
+  background: rgba(255, 215, 0, 0.3);
+  transform: translateX(-50%);
+}
+
+.event-card-timeline {
+  background: rgba(255, 215, 0, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.2);
+  border-radius: 15px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.event-card-timeline:hover {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: var(--greek-gold);
+  transform: translateX(10px);
+}
+
+.event-header-timeline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.event-name-timeline {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.event-status {
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.event-details-timeline {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.detail-item-timeline {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+.event-type-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  font-size: 0.8rem;
+  width: fit-content;
+}
+
+@media (max-width: 768px) {
+  .sacred-trials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sacred-scroll-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .day-selector {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .timeline-event {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .event-connector::before {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .odyssey-title,
+  .hero-title-odyssey-skillstorm {
+    font-size: 2rem;
+  }
+
+  .title-line-odyssey {
+    font-size: 2.5rem;
+  }
+
+  .title-year-odyssey {
+    font-size: 1.5rem;
+  }
+
+  .section-title-odyssey {
+    font-size: 1.5rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .oracle-content-divine {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .divine-countdown-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .divine-countdown-item {
+    padding: 1rem;
+  }
+
+  .divine-countdown-number {
+    font-size: 1.8rem;
+  }
+
+  .divine-countdown-title {
+    font-size: 1.2rem;
+  }
+
+  .prophetic-gradient {
+    padding: 1.5rem;
+  }
+
+  .platform-tab {
+    min-width: auto;
+    width: 100%;
+  }
+
+  .requirement-card {
+    padding: 1.5rem;
+  }
+
+  .support-title {
+    font-size: 2rem;
+  }
+
+  .sacred-gradient {
+    padding: 1.5rem;
+  }
+
+  .divine-scroll-info {
+    padding: 1.5rem;
+  }
+
+  .divine-platform-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* Divine Archive Filters Styling */
+.divine-archive-filters {
+  background: linear-gradient(
+    180deg,
+    rgba(17, 9, 33, 0.9) 0%,
+    rgba(25, 25, 112, 0.8) 100%
+  );
+  padding: 3rem 0;
+}
+
+.divine-filters-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.divine-year-filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.divine-year-filter {
+  background: rgba(255, 215, 0, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 10px;
+  padding: 0.75rem 1.5rem;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.divine-year-filter.active {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: var(--greek-gold);
+  color: var(--greek-gold);
+  box-shadow: 0 5px 20px rgba(255, 215, 0, 0.2);
+}
+
+.divine-year-filter:hover {
+  background: rgba(255, 215, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Divine Hall Gallery Styling */
+.divine-hall-gallery {
+  background: linear-gradient(
+    180deg,
+    rgba(25, 25, 112, 0.8) 0%,
+    rgba(17, 9, 33, 0.9) 100%
+  );
+  padding: 5rem 0;
+}
+
+.divine-gallery-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.divine-gallery-grid.grid {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.divine-gallery-grid.masonry {
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: 200px;
+}
+
+.divine-gallery-item {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(255, 215, 0, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.2);
+}
+
+.divine-gallery-item:hover {
+  transform: translateY(-5px);
+  border-color: var(--greek-gold);
+  box-shadow: 0 15px 40px rgba(255, 215, 0, 0.3);
+}
+
+.divine-gallery-item.tall {
+  grid-row: span 2;
+}
+
+.divine-loading {
+  text-align: center;
+  padding: 4rem 0;
+  color: var(--greek-gold);
+}
+
+.divine-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 215, 0, 0.3);
+  border-top: 4px solid var(--greek-gold);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+.divine-empty {
+  text-align: center;
+  padding: 4rem 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.divine-empty h3 {
+  color: var(--greek-gold);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.divine-load-more {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.divine-load-btn {
+  background: linear-gradient(45deg, var(--greek-gold), var(--greek-bronze));
+  color: var(--greek-navy);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.divine-load-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+}
+
+/* Epic Year Legends Styling */
+.epic-year-legends {
+  background: linear-gradient(
+    180deg,
+    rgba(17, 9, 33, 0.95) 0%,
+    rgba(25, 25, 112, 0.9) 100%
+  );
+  padding: 4rem 0;
+}
+
+.overview-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.overview-title {
+  font-size: 3rem;
+  color: var(--greek-gold);
+  font-weight: 900;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.overview-theme {
+  font-size: 1.4rem;
+  color: var(--greek-bronze);
+  font-style: italic;
+  font-weight: 600;
+}
+
+.overview-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.overview-stat {
+  background: rgba(255, 215, 0, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.overview-stat:hover {
+  background: rgba(255, 215, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+}
+
+.overview-stat svg {
+  color: var(--greek-gold);
+  margin-bottom: 1rem;
+}
+
+.stat-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--greek-gold);
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Divine Category Navigation */
+.divine-category-nav {
+  background: linear-gradient(
+    180deg,
+    rgba(25, 25, 112, 0.9) 0%,
+    rgba(139, 0, 0, 0.8) 100%
+  );
+  padding: 3rem 0;
+}
+
+.divine-category-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.divine-category-tab {
+  background: rgba(255, 215, 0, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+  border-radius: 15px;
+  padding: 1rem 2rem;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.divine-category-tab.active {
+  background: rgba(255, 215, 0, 0.2);
+  border-color: var(--greek-gold);
+  color: var(--greek-gold);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+}
+
+.divine-category-tab:hover {
+  background: rgba(255, 215, 0, 0.15);
+  transform: translateY(-3px);
+}
+
+/* Divine Champions Display */
+.divine-champions-display {
+  background: linear-gradient(
+    180deg,
+    rgba(139, 0, 0, 0.8) 0%,
+    rgba(25, 25, 112, 0.9) 100%
+  );
+  padding: 5rem 0;
+}
+
+/* Divine Year Highlights */
+.divine-year-highlights {
+  background: linear-gradient(
+    180deg,
+    rgba(25, 25, 112, 0.9) 0%,
+    rgba(17, 9, 33, 0.95) 100%
+  );
+  padding: 4rem 0;
+}
+
+.divine-highlights-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--greek-gold);
+  font-weight: 800;
+  margin-bottom: 3rem;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+.divine-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.divine-highlight-card {
+  background: rgba(255, 215, 0, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.2);
+  border-radius: 15px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.divine-highlight-card:hover {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: var(--greek-gold);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
+}
+
+.divine-highlight-card svg {
+  color: var(--greek-gold);
+  flex-shrink: 0;
+}
+
+.divine-highlight-card p {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+}
+
+/* Sacred Memorable Events */
+.sacred-memorable-events {
+  background: linear-gradient(
+    180deg,
+    rgba(17, 9, 33, 0.95) 0%,
+    rgba(25, 25, 112, 0.9) 100%
+  );
+  padding: 4rem 0;
+}
+
+.sacred-memorable-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--greek-gold);
+  font-weight: 800;
+  margin-bottom: 3rem;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+}
+
+.sacred-memorable-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.sacred-memorable-card {
+  background: rgba(255, 215, 0, 0.1);
+  border: 2px solid rgba(255, 215, 0, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.sacred-memorable-card:hover {
+  background: rgba(255, 215, 0, 0.15);
+  border-color: var(--greek-gold);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(255, 215, 0, 0.2);
+}
+
+.memorable-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.memorable-header svg {
+  color: var(--greek-gold);
+}
+
+.memorable-header h4 {
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.memorable-winner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--greek-bronze);
+  font-weight: 600;
+}
+
+.memorable-winner svg {
+  color: var(--greek-gold);
+}
+
+.memorable-description {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .divine-year-filters {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .divine-gallery-grid.grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  .divine-category-tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .overview-title {
+    font-size: 2rem;
+  }
+
+  .divine-highlights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sacred-memorable-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .divine-gallery-grid.grid {
+    grid-template-columns: 1fr;
+  }
+
+  .overview-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .divine-highlights-title,
+  .sacred-memorable-title {
+    font-size: 1.8rem;
+  }
+
+  .divine-highlight-card,
+  .sacred-memorable-card {
+    padding: 1rem;
   }
 }
