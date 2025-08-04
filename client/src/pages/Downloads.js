@@ -23,57 +23,54 @@ const Downloads = () => {
   const platforms = [
     {
       id: "android",
-      name: "Sacred Android Tablet",
+      name: "Android",
       icon: <Smartphone className="w-8 h-8" />,
       color: "from-green-500 to-green-600",
-      version: "Chronicle II.I.O",
-      size: "45.2 Divine Scrolls",
-      requirements: "Sacred Android 8.0+",
+      version: "v2.1.0",
+      size: "45.2 MB",
+      requirements: "Android 8.0+",
       features: [
-        "🔔 Divine prophecy notifications",
-        "⚔️ Offline glory tracking",
-        "🏛️ Instant pantheon updates",
-        "🤝 Hero collaboration tools",
-        "📸 Epic moment sharing",
+        "Real-time event notifications",
+        "Offline score tracking",
+        "Instant leaderboard updates",
+        "Team collaboration tools",
+        "Photo sharing capabilities",
       ],
       downloadUrl: "#",
-      blessing: "Blessed by Hermes for swift communication",
     },
     {
       id: "macos",
-      name: "Divine MacOS Shrine",
+      name: "MacOS",
       icon: <Apple className="w-8 h-8" />,
       color: "from-gray-500 to-gray-600",
-      version: "Chronicle II.I.O",
-      size: "89.7 Sacred Texts",
-      requirements: "macOS Temple 11.0+",
+      version: "v2.1.0",
+      size: "89.7 MB",
+      requirements: "macOS 11.0+",
       features: [
-        "🏛️ Native temple experience",
-        "📊 Advanced oracle dashboard",
-        "🪟 Multi-window divine view",
-        "⌨️ Sacred key combinations",
-        "⚙️ System harmony integration",
+        "Native desktop experience",
+        "Advanced analytics dashboard",
+        "Multi-window support",
+        "Keyboard shortcuts",
+        "System integration",
       ],
       downloadUrl: "#",
-      blessing: "Blessed by Athena for wise organization",
     },
     {
       id: "windows",
-      name: "Windows Divine Portal",
+      name: "Windows",
       icon: <Monitor className="w-8 h-8" />,
       color: "from-blue-500 to-blue-600",
-      version: "Chronicle II.I.O",
-      size: "67.4 Sacred Runes",
-      requirements: "Windows Realm 10+",
+      version: "v2.1.0",
+      size: "67.4 MB",
+      requirements: "Windows 10+",
       features: [
-        "⚡ Optimized divine performance",
-        "👆 Sacred touch support",
-        "🔔 Live divine notifications",
-        "🔄 Background sync with Olympus",
-        "🌐 Universal divine platform",
+        "Optimized performance",
+        "Touch screen support",
+        "Live tile notifications",
+        "Background sync",
+        "Universal Windows Platform",
       ],
       downloadUrl: "#",
-      blessing: "Blessed by Zeus for ultimate power",
     },
   ];
 
@@ -101,46 +98,24 @@ const Downloads = () => {
   return (
     <Layout>
       <div className="downloads-page animate-slide-up">
-        {/* Ancient Sacred Scrolls Section */}
-        <section
-          className="downloads-hero-odyssey"
-          ref={heroRef}
-          style={{
-            backgroundImage:
-              "url('https://images.pexels.com/photos/8880303/pexels-photo-8880303.jpeg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            position: "relative",
-          }}
-        >
-          {/* Divine Overlay */}
-          <div
-            className="hero-background-events"
-            style={{
-              zIndex: 0,
-              position: "absolute",
-              inset: 0,
-              background:
-                "linear-gradient(135deg, rgba(220,20,60,0.9) 0%, rgba(0,0,139,0.9) 50%, rgba(25,25,112,0.95) 100%)",
-            }}
-          />
+        {/* Hero Section */}
+        <section className="downloads-hero" ref={heroRef}>
+          {/* Animated Background like Events page */}
+          <div className="hero-background-events" style={{ zIndex: 0, position: 'absolute', inset: 0 }} />
           <div className="downloads-hero-bg">
-            {/* Ancient Scrolls Floating */}
+            {/* Enhanced Floating Shapes */}
             <div className="floating-shapes">
-              <div className="shape shape-1">📜</div>
-              <div className="shape shape-2">🏛️</div>
-              <div className="shape shape-3">🏺</div>
-              <div className="shape shape-4">⚱️</div>
-              <div className="shape shape-5">📋</div>
+              <div className="shape shape-1"></div>
+              <div className="shape shape-2"></div>
+              <div className="shape shape-3"></div>
+              <div className="shape shape-4"></div>
+              <div className="shape shape-5"></div>
             </div>
 
-            {/* Sacred Particles */}
+            {/* Enhanced Particle Effect */}
             <div className="particles">
               {[...Array(20)].map((_, i) => (
-                <div key={i} className={`particle particle-${i}`}>
-                  ✨
-                </div>
+                <div key={i} className={`particle particle-${i}`}></div>
               ))}
             </div>
           </div>
@@ -154,29 +129,25 @@ const Downloads = () => {
                 }}
               >
                 <Download className="w-16 h-16" />
-                <div className="divine-glow"></div>
-                <div className="scroll-frame">📜</div>
+                <div className="logo-glow"></div>
               </div>
-              <h1 className="downloads-hero-title hero-title-events">
-                🏛️ Sacred Digital Scrolls 🏛️
-              </h1>
+              <h1 className="downloads-hero-title hero-title-events">Download E-Week 2025</h1>
               <p className="downloads-hero-subtitle hero-subtitle-events">
-                Receive the divine chronicles of The Odyssey on your sacred
-                viewing tablet! Access the eternal wisdom anywhere, anytime!
+                Get the official E-Week 2025 app on your favorite platform
               </p>
 
               <div className="downloads-stats hero-stats-events">
                 <div className="download-stat stat-card-events">
                   <span className="stat-number">46K+</span>
-                  <span className="stat-label">Sacred Downloads</span>
+                  <span className="stat-label">Total Downloads</span>
                 </div>
                 <div className="download-stat stat-card-events">
-                  <span className="stat-number">4.8⭐</span>
-                  <span className="stat-label">Divine Rating</span>
+                  <span className="stat-number">4.8★</span>
+                  <span className="stat-label">App Rating</span>
                 </div>
                 <div className="download-stat stat-card-events">
                   <span className="stat-number">98%</span>
-                  <span className="stat-label">Hero Satisfaction</span>
+                  <span className="stat-label">Satisfaction</span>
                 </div>
               </div>
             </div>
@@ -209,38 +180,31 @@ const Downloads = () => {
           </div>
         </section>
 
-        {/* Sacred Scroll Acquisition Section */}
-        <section className="odyssey-section sacred-scroll-section">
+        {/* Download Section */}
+        <section className="download-section">
           <div className="container">
-            <div className="sacred-scroll-content">
-              <div className="divine-scroll-info">
-                <div className="divine-platform-header">
+            <div className="download-content">
+              <div className="download-info">
+                <div className="platform-header">
                   <div
-                    className={`divine-platform-icon bg-gradient-to-r ${activePlatform.color}`}
+                    className={`platform-icon bg-gradient-to-r ${activePlatform.color}`}
                   >
                     {activePlatform.icon}
                   </div>
-                  <div className="divine-platform-details">
-                    <h2 className="divine-platform-name">
-                      {activePlatform.name}
-                    </h2>
-                    <p className="divine-blessing-text">
-                      {activePlatform.blessing}
-                    </p>
-                    <div className="divine-platform-meta">
-                      <span className="divine-version">
-                        {activePlatform.version}
-                      </span>
-                      <span className="divine-size">{activePlatform.size}</span>
-                      <span className="divine-requirements">
+                  <div className="platform-details">
+                    <h2 className="platform-name">{activePlatform.name}</h2>
+                    <div className="platform-meta">
+                      <span className="version">{activePlatform.version}</span>
+                      <span className="size">{activePlatform.size}</span>
+                      <span className="requirements">
                         {activePlatform.requirements}
                       </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="divine-platform-features">
-                  <h3 className="divine-features-title">Sacred Abilities</h3>
+                <div className="platform-features">
+                  <h3 className="features-title">Key Features</h3>
                   <ul className="features-list">
                     {activePlatform.features.map((feature, index) => (
                       <li key={index} className="feature-item">
@@ -255,11 +219,9 @@ const Downloads = () => {
                   <div className="security-badge">
                     <Shield className="w-6 h-6" />
                     <div className="security-text">
-                      <span className="security-title">
-                        🛡️ Divine Protection
-                      </span>
+                      <span className="security-title">Secure Download</span>
                       <span className="security-subtitle">
-                        Blessed and purified by the gods
+                        Verified and virus-free
                       </span>
                     </div>
                   </div>
@@ -288,11 +250,10 @@ const Downloads = () => {
                   <div className="download-cta">
                     <button className="download-btn primary">
                       <Download className="w-6 h-6" />
-                      Receive Sacred Scroll for{" "}
-                      {activePlatform.name.split(" ")[1] || activePlatform.name}
+                      Download for {activePlatform.name}
                     </button>
                     <button className="download-btn secondary">
-                      📜 Read Divine Chronicles
+                      View Release Notes
                     </button>
                   </div>
                 </div>
@@ -301,16 +262,10 @@ const Downloads = () => {
           </div>
         </section>
 
-        {/* Sacred System Requirements */}
+        {/* System Requirements */}
         <section className="system-requirements">
           <div className="container">
-            <h2 className="section-title-odyssey">
-              🏛️ Sacred System Requirements 🏛️
-            </h2>
-            <p className="section-subtitle-odyssey">
-              Ensure your divine device meets the sacred specifications to
-              receive the chronicles
-            </p>
+            <h2 className="section-title">System Requirements</h2>
             <div className="requirements-grid">
               {platforms.map((platform) => (
                 <div key={platform.id} className="requirement-card">
@@ -324,15 +279,15 @@ const Downloads = () => {
                   </div>
                   <div className="requirement-details">
                     <div className="requirement-item">
-                      <span className="label">Divine Version:</span>
+                      <span className="label">Version:</span>
                       <span className="value">{platform.version}</span>
                     </div>
                     <div className="requirement-item">
-                      <span className="label">Sacred Size:</span>
+                      <span className="label">Size:</span>
                       <span className="value">{platform.size}</span>
                     </div>
                     <div className="requirement-item">
-                      <span className="label">Realm:</span>
+                      <span className="label">OS:</span>
                       <span className="value">{platform.requirements}</span>
                     </div>
                   </div>
@@ -342,20 +297,18 @@ const Downloads = () => {
           </div>
         </section>
 
-        {/* Divine Support Section */}
+        {/* Support Section */}
         <section className="support-section">
           <div className="container">
             <div className="support-content">
-              <h2 className="support-title">🔮 Need Divine Guidance? 🔮</h2>
+              <h2 className="support-title">Need Help?</h2>
               <p className="support-subtitle">
-                Our sacred scribes and divine oracles are here to help you
-                master The Odyssey's sacred scrolls and unlock their full power
+                Our support team is here to help you get the most out of E-Week
+                2025
               </p>
               <div className="support-actions">
-                <button className="support-btn">Consult the Oracle</button>
-                <button className="support-btn outline">
-                  Sacred Knowledge Scrolls
-                </button>
+                <button className="support-btn">Contact Support</button>
+                <button className="support-btn outline">View FAQ</button>
               </div>
             </div>
           </div>

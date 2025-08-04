@@ -229,55 +229,49 @@ const Events = () => {
     },
   ];
 
-  // Active battlefields
+  // Ongoing events
   const ongoingEvents = [
     {
       id: 1,
-      name: "Trial of Athena's Wisdom",
-      subtitle: "AI & Machine Learning Conquest",
+      name: "AI & Machine Learning Hackathon",
       startTime: "09:00",
       endTime: "17:00",
-      location: "Temple of Divine Intelligence",
+      location: "Tech Hub Alpha",
       participants: 120,
       progress: 65,
-      category: "Divine Trial",
+      category: "Competition",
       icon: Code,
       gradient: "from-blue-500 to-purple-600",
       timeRemaining: "4h 23m",
-      status: "raging",
-      blessing: "🦉 Blessed by Athena's Owl",
+      status: "live",
     },
     {
       id: 2,
-      name: "Hephaestus' Forge Challenge",
-      subtitle: "Mechanical Arts Mastery",
+      name: "Robotics Design Challenge",
       startTime: "10:00",
       endTime: "16:00",
-      location: "Divine Forge of Creation",
+      location: "Engineering Lab",
       participants: 85,
       progress: 45,
-      category: "Sacred Craft",
+      category: "Engineering",
       icon: Cpu,
-      gradient: "from-orange-500 to-red-600",
+      gradient: "from-green-500 to-teal-600",
       timeRemaining: "6h 15m",
-      status: "raging",
-      blessing: "🔥 Forged in Divine Fire",
+      status: "live",
     },
     {
       id: 3,
-      name: "Apollo's Vision Quest",
-      subtitle: "Oracle of Innovation",
+      name: "Startup Pitch Preparation",
       startTime: "14:00",
       endTime: "18:00",
-      location: "Sanctuary of Prophetic Wisdom",
+      location: "Innovation Center",
       participants: 45,
       progress: 30,
-      category: "Sacred Ritual",
+      category: "Workshop",
       icon: Lightbulb,
-      gradient: "from-yellow-500 to-orange-600",
+      gradient: "from-orange-500 to-red-600",
       timeRemaining: "2h 45m",
-      status: "raging",
-      blessing: "☀️ Illuminated by Apollo",
+      status: "live",
     },
   ];
 
@@ -297,95 +291,83 @@ const Events = () => {
     alert("Registration submitted successfully!");
   };
 
-  // Prophetic trials of destiny
+  // Upcoming events
   const upcomingEvents = [
     {
       id: 1,
-      name: "Sparta's Cyber War",
-      subtitle: "Trial of Digital Shields",
+      name: "Cybersecurity War Games",
       date: "2025-08-26",
       time: "09:00",
-      duration: "6 divine hours",
-      location: "Fortress of Digital Guardians",
-      participants: "150+ brave warriors",
-      category: "Epic War",
-      priority: "legendary",
+      duration: "6 hours",
+      location: "Security Command Center",
+      participants: "150+ registered",
+      category: "Competition",
+      priority: "high",
       icon: Target,
       gradient: "from-red-500 to-pink-600",
-      description:
-        "Defend the digital realm against the forces of chaos in this ultimate cyber warfare simulation",
-      points: "30 Glory Points",
-      tags: ["Shield", "War", "Strategy"],
-      type: "warband",
+      description: "Advanced cybersecurity simulation and defense challenges",
+      points: "30 Points",
+      tags: ["Security", "CTF", "Networking"],
+      type: "team",
       playersPerTeam: 4,
       maxTeamsPerBatch: 2,
       maxPlayersPerBatch: 20,
-      blessing: "🛡️ Protected by Ares",
     },
     {
       id: 2,
-      name: "Mysteries of Quantum Realm",
-      subtitle: "Sacred Knowledge Workshop",
+      name: "Quantum Computing Workshop",
       date: "2025-08-28",
       time: "14:00",
-      duration: "4 sacred hours",
-      location: "Temple of Cosmic Mysteries",
-      participants: "80+ wise seekers",
-      category: "Sacred Wisdom",
-      priority: "divine",
+      duration: "4 hours",
+      location: "Quantum Lab",
+      participants: "80+ registered",
+      category: "Workshop",
+      priority: "medium",
       icon: Zap,
       gradient: "from-purple-500 to-blue-600",
-      description:
-        "Unlock the ancient secrets of quantum realms and harness otherworldly power",
-      points: "20 Glory Points",
-      tags: ["Mystery", "Cosmos", "Wisdom"],
+      description: "Hands-on experience with quantum algorithms and circuits",
+      points: "20 Points",
+      tags: ["Quantum", "Computing", "Research"],
       type: "individual",
       maxPlayersPerBatch: 15,
-      blessing: "⚡ Enlightened by Zeus",
     },
     {
       id: 3,
-      name: "Hermes' Swift Creation",
-      subtitle: "Mobile Arts Sprint",
+      name: "Mobile App Development Sprint",
       date: "2025-08-29",
       time: "10:00",
-      duration: "8 lightning hours",
-      location: "Workshop of Swift Craft",
-      participants: "100+ swift artisans",
-      category: "Divine Sprint",
-      priority: "legendary",
+      duration: "8 hours",
+      location: "Mobile Dev Studio",
+      participants: "100+ registered",
+      category: "Competition",
+      priority: "high",
       icon: Code,
       gradient: "from-green-500 to-cyan-600",
-      description:
-        "Channel Hermes' speed to forge magical mobile artifacts in a divine sprint",
-      points: "10 Glory Points",
-      tags: ["Swift", "Creation", "Mobile"],
-      type: "craft guild",
+      description: "Build and deploy mobile apps in a day-long sprint",
+      points: "10 Points",
+      tags: ["Mobile", "React Native", "Flutter"],
+      type: "team",
       playersPerTeam: 3,
       maxTeamsPerBatch: 3,
       maxPlayersPerBatch: 25,
-      blessing: "🪶 Blessed by Hermes",
     },
     {
       id: 4,
-      name: "Athena's Design Wisdom",
-      subtitle: "Sacred Art Masterclass",
+      name: "Design Thinking Masterclass",
       date: "2025-08-30",
       time: "11:00",
-      duration: "3 enlightened hours",
-      location: "Hall of Divine Creativity",
-      participants: "60+ artistic souls",
-      category: "Sacred Art",
-      priority: "divine",
+      duration: "3 hours",
+      location: "Creative Hub",
+      participants: "60+ registered",
+      category: "Workshop",
+      priority: "medium",
       icon: Lightbulb,
       gradient: "from-yellow-500 to-orange-600",
-      description:
-        "Learn the divine principles of design blessed by Athena's infinite wisdom",
-      points: "20 Glory Points",
-      tags: ["Wisdom", "Beauty", "Art"],
+      description: "Learn human-centered design principles and methods",
+      points: "20 Points",
+      tags: ["Design", "UX", "Innovation"],
       type: "individual",
       maxPlayersPerBatch: 12,
-      blessing: "🦉 Guided by Athena",
     },
   ];
 
@@ -530,66 +512,50 @@ const Events = () => {
   return (
     <Layout>
       <div className="events-page">
-        {/* Epic War Council Section */}
-        <section
-          className="events-hero-odyssey"
-          style={{
-            backgroundImage:
-              "url('https://images.pexels.com/photos/2022650/pexels-photo-2022650.jpeg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            position: "relative",
-          }}
-        >
-          <div
-            className="hero-background-events"
-            style={{
-              background:
-                "linear-gradient(135deg, rgba(220,20,60,0.9) 0%, rgba(0,0,139,0.9) 50%, rgba(25,25,112,0.95) 100%)",
-            }}
-          ></div>
+        {/* Hero Section */}
+        <section className="events-hero">
+          <div className="hero-background-events"></div>
           <div className="container">
             <div className="hero-content-events">
               <h1 className="hero-title-events">
-                ⚔️ War Council of Trials ⚔️
+                Event Central
                 <Activity className="title-icon" size={48} />
               </h1>
               <p className="hero-subtitle-events">
-                Behold the grand chronicles of epic battles, heroic trials, and
-                legendary quests! Prepare yourself for glory, mortal warrior!
+                Your complete guide to E-Week 2025 events, schedules, and
+                competitions
               </p>
               <div className="hero-stats-events">
                 <div className="stat-card-events">
                   <Flame className="stat-icon text-red-400" size={24} />
                   <span className="stat-number">3</span>
-                  <span className="stat-label">Active Battles</span>
+                  <span className="stat-label">Live Events</span>
                 </div>
                 <div className="stat-card-events">
                   <Clock className="stat-icon text-blue-400" size={24} />
                   <span className="stat-number">15</span>
-                  <span className="stat-label">Prophecied Trials</span>
+                  <span className="stat-label">Upcoming</span>
                 </div>
                 <div className="stat-card-events">
                   <CheckCircle className="stat-icon text-green-400" size={24} />
                   <span className="stat-number">8</span>
-                  <span className="stat-label">Conquered Quests</span>
+                  <span className="stat-label">Completed</span>
                 </div>
               </div>
             </div>
           </div>
         </section>
-        {/* Section 01: 7-Day Epic Campaign */}
-        <section className="odyssey-section epic-campaigns-section">
+
+        {/* Section 01: 7-Day Schedule */}
+        <section className="schedule-section">
           <div className="container">
-            <div className="section-header-odyssey">
-              <h2 className="section-title-odyssey">
-                🏛️ Seven Days of Epic Campaigns 🏛️
+            <div className="section-header-events">
+              <h2 className="section-title-events">
+                7-Day Event Schedule
                 <Calendar className="title-icon" size={32} />
               </h2>
-              <p className="section-subtitle-odyssey">
-                Witness the complete chronicle of divine trials spanning seven
-                legendary days of valor
+              <p className="section-subtitle-events">
+                Complete timeline of all E-Week 2025 activities
               </p>
             </div>
 
@@ -656,17 +622,17 @@ const Events = () => {
             </div>
           </div>
         </section>
-        {/* Section 02: Active Battlefields */}
-        <section className="odyssey-section active-battlefields-section">
+
+        {/* Section 02: Ongoing Events */}
+        <section className="ongoing-section">
           <div className="container">
-            <div className="section-header-odyssey">
-              <h2 className="section-title-odyssey">
-                ⚡ Active Battlefields ⚡
+            <div className="section-header-events">
+              <h2 className="section-title-events">
+                Live Events
                 <Flame className="title-icon text-red-400" size={32} />
               </h2>
-              <p className="section-subtitle-odyssey">
-                Witness the epic battles raging at this very moment! Heroes
-                clash for eternal glory!
+              <p className="section-subtitle-events">
+                Events happening right now with real-time updates
               </p>
             </div>
 
@@ -744,219 +710,221 @@ const Events = () => {
             </div>
           </div>
         </section>
+
         {/* Advanced Search and Filter System */}
-        <section className="odyssey-section events-search-section">
-          <div className="container">
-            <div className="section-header-odyssey">
-              <h2 className="section-title-odyssey">
-                🔮 Divine Oracle Search 🔮
-                <Search className="title-icon" size={32} />
-              </h2>
-              <p className="section-subtitle-odyssey">
-                Consult the Oracle to discover which sacred trials await your
-                heroic spirit
-              </p>
-            </div>
-
-            <div className="events-search-bar">
-              <div className="search-container">
-                <div className="search-input-wrapper">
-                  <Search className="search-icon" />
-                  <input
-                    type="text"
-                    placeholder="Search events by name, category, location..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="search-input"
-                  />
-                  {searchTerm && (
-                    <button
-                      onClick={() => setSearchTerm("")}
-                      className="clear-search"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
-                  )}
-                </div>
-
-                <button
-                  onClick={() => setIsFilterOpen(!isFilterOpen)}
-                  className={`filter-toggle ${isFilterOpen ? "active" : ""}`}
-                >
-                  <Filter className="w-5 h-5" />
-                  <span>Filters</span>
-                </button>
-
-                <div className="sort-controls">
-                  <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                    className="sort-select"
-                  >
-                    <option value="time">Time</option>
-                    <option value="name">Name</option>
-                    <option value="participants">Participants</option>
-                    <option value="category">Category</option>
-                  </select>
-                  <button
-                    onClick={() =>
-                      setSortOrder(sortOrder === "asc" ? "desc" : "asc")
-                    }
-                    className="sort-order"
-                  >
-                    {sortOrder === "asc" ? (
-                      <SortAsc className="w-5 h-5" />
-                    ) : (
-                      <SortDesc className="w-5 h-5" />
-                    )}
-                  </button>
-                </div>
+        {
+          <section className="events-search-section">
+            <div className="container">
+              <div className="events-search-header">
+                <h2 className="search-section-title">
+                  Find Your Events
+                  <Search className="title-icon" size={32} />
+                </h2>
+                <p className="search-section-subtitle">
+                  Advanced search and filtering to discover the perfect events
+                  for you
+                </p>
               </div>
 
-              {/* Advanced Filters Panel */}
-              {isFilterOpen && (
-                <div className="filters-panel">
-                  <div className="filter-group">
-                    <label className="filter-label">Category</label>
-                    <select
-                      value={selectedCategory}
-                      onChange={(e) => setSelectedCategory(e.target.value)}
-                      className="filter-select"
-                    >
-                      <option value="all">All Categories</option>
-                      <option value="Competition">Competition</option>
-                      <option value="Workshop">Workshop</option>
-                      <option value="Conference">Conference</option>
-                      <option value="Ceremony">Ceremony</option>
-                      <option value="Social">Social</option>
-                    </select>
+              <div className="events-search-bar">
+                <div className="search-container">
+                  <div className="search-input-wrapper">
+                    <Search className="search-icon" />
+                    <input
+                      type="text"
+                      placeholder="Search events by name, category, location..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="search-input"
+                    />
+                    {searchTerm && (
+                      <button
+                        onClick={() => setSearchTerm("")}
+                        className="clear-search"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    )}
                   </div>
 
-                  <div className="filter-group">
-                    <label className="filter-label">Status</label>
-                    <select
-                      value={selectedStatus}
-                      onChange={(e) => setSelectedStatus(e.target.value)}
-                      className="filter-select"
-                    >
-                      <option value="all">All Status</option>
-                      <option value="scheduled">Scheduled</option>
-                      <option value="ongoing">Live/Ongoing</option>
-                      <option value="completed">Completed</option>
-                    </select>
-                  </div>
+                  <button
+                    onClick={() => setIsFilterOpen(!isFilterOpen)}
+                    className={`filter-toggle ${isFilterOpen ? "active" : ""}`}
+                  >
+                    <Filter className="w-5 h-5" />
+                    <span>Filters</span>
+                  </button>
 
-                  <div className="filter-actions">
+                  <div className="sort-controls">
+                    <select
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value)}
+                      className="sort-select"
+                    >
+                      <option value="time">Time</option>
+                      <option value="name">Name</option>
+                      <option value="participants">Participants</option>
+                      <option value="category">Category</option>
+                    </select>
                     <button
-                      onClick={() => {
-                        setSearchTerm("");
-                        setSelectedCategory("all");
-                        setSelectedStatus("all");
-                        setSortBy("time");
-                        setSortOrder("asc");
-                      }}
-                      className="clear-filters"
+                      onClick={() =>
+                        setSortOrder(sortOrder === "asc" ? "desc" : "asc")
+                      }
+                      className="sort-order"
                     >
-                      Clear All
+                      {sortOrder === "asc" ? (
+                        <SortAsc className="w-5 h-5" />
+                      ) : (
+                        <SortDesc className="w-5 h-5" />
+                      )}
                     </button>
-                    <span className="results-count">
-                      {filteredUpcomingEvents.length} events found
-                    </span>
                   </div>
                 </div>
-              )}
+
+                {/* Advanced Filters Panel */}
+                {isFilterOpen && (
+                  <div className="filters-panel">
+                    <div className="filter-group">
+                      <label className="filter-label">Category</label>
+                      <select
+                        value={selectedCategory}
+                        onChange={(e) => setSelectedCategory(e.target.value)}
+                        className="filter-select"
+                      >
+                        <option value="all">All Categories</option>
+                        <option value="Competition">Competition</option>
+                        <option value="Workshop">Workshop</option>
+                        <option value="Conference">Conference</option>
+                        <option value="Ceremony">Ceremony</option>
+                        <option value="Social">Social</option>
+                      </select>
+                    </div>
+
+                    <div className="filter-group">
+                      <label className="filter-label">Status</label>
+                      <select
+                        value={selectedStatus}
+                        onChange={(e) => setSelectedStatus(e.target.value)}
+                        className="filter-select"
+                      >
+                        <option value="all">All Status</option>
+                        <option value="scheduled">Scheduled</option>
+                        <option value="ongoing">Live/Ongoing</option>
+                        <option value="completed">Completed</option>
+                      </select>
+                    </div>
+
+                    <div className="filter-actions">
+                      <button
+                        onClick={() => {
+                          setSearchTerm("");
+                          setSelectedCategory("all");
+                          setSelectedStatus("all");
+                          setSortBy("time");
+                          setSortOrder("asc");
+                        }}
+                        className="clear-filters"
+                      >
+                        Clear All
+                      </button>
+                      <span className="results-count">
+                        {filteredUpcomingEvents.length} events found
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        </section>
-        }{/* Section 03: Prophetic Trials */}
-        <section className="odyssey-section prophetic-trials-section">
+          </section>
+        }
+
+        {/* Section 03: Upcoming Events */}
+        <section className="upcoming-section">
           <div className="container">
-            <div className="section-header-odyssey">
-              <h2 className="section-title-odyssey">
-                🏺 Prophetic Trials of Destiny 🏺
+            <div className="section-header-events">
+              <h2 className="section-title-events">
+                Upcoming Events
                 <Clock className="title-icon" size={32} />
               </h2>
               <p className="section-subtitle-events">
-                Heed the prophecies! Register now for these legendary trials
-                that shall test your worth and courage!
+                Register now for these exciting upcoming competitions and
+                workshops
               </p>
             </div>
 
-            <div className="prophetic-grid-odyssey grid">
+            <div className="upcoming-grid grid">
               {filteredUpcomingEvents.map((event, index) => {
                 const IconComponent = event.icon;
                 return (
                   <div
                     key={event.id}
-                    className="prophetic-card-odyssey"
+                    className="upcoming-card"
                     style={{ animationDelay: `${index * 200}ms` }}
                   >
                     <div
-                      className={`prophetic-gradient bg-gradient-to-br ${event.gradient}`}
+                      className={`upcoming-gradient bg-gradient-to-br ${event.gradient}`}
                     >
-                      {/* Divine Badge */}
+                      {/* Priority Badge */}
                       <div
-                        className={`divine-badge ${getPriorityColor(event.priority)}`}
+                        className={`priority-badge ${getPriorityColor(event.priority)}`}
                       >
                         {event.priority.toUpperCase()}
                       </div>
 
-                      {/* Divine Icon */}
-                      <div className="prophetic-icon">
+                      {/* Event Icon */}
+                      <div className="upcoming-icon">
                         <IconComponent size={28} />
                       </div>
 
-                      {/* Divine Info */}
-                      <h3 className="prophetic-title">{event.name}</h3>
-                      <h4 className="prophetic-subtitle">{event.subtitle}</h4>
-                      <p className="prophetic-description">
+                      {/* Event Info */}
+                      <h3 className="upcoming-title">{event.name}</h3>
+                      <p className="upcoming-description">
                         {event.description}
                       </p>
-                      <p className="prophetic-blessing">{event.blessing}</p>
 
-                      {/* Divine Details */}
-                      <div className="prophetic-details">
-                        <div className="detail-row-prophetic">
+                      {/* Event Details */}
+                      <div className="upcoming-details">
+                        <div className="detail-row">
                           <Calendar className="w-4 h-4 text-blue-400" />
                           <span>
                             {event.date} • {event.time}
                           </span>
                         </div>
-                        <div className="detail-row-prophetic">
+                        <div className="detail-row">
                           <Clock className="w-4 h-4 text-green-400" />
                           <span>{event.duration}</span>
                         </div>
-                        <div className="detail-row-prophetic">
+                        <div className="detail-row">
                           <MapPin className="w-4 h-4 text-purple-400" />
                           <span>{event.location}</span>
                         </div>
-                        <div className="detail-row-prophetic">
+                        <div className="detail-row">
                           <Users className="w-4 h-4 text-orange-400" />
                           <span>{event.participants}</span>
                         </div>
                       </div>
 
-                      {/* Divine Tags */}
-                      <div className="prophetic-tags">
+                      {/* Tags */}
+                      <div className="event-tags">
                         {event.tags.map((tag, idx) => (
-                          <span key={idx} className="prophetic-tag">
+                          <span key={idx} className="event-tag">
                             {tag}
                           </span>
                         ))}
                       </div>
 
-                      {/* Glory Info */}
-                      <div className="glory-info">
+                      {/* Prize Info */}
+                      <div className="prize-info">
                         <Award className="w-4 h-4 text-yellow-400" />
                         <span>{event.points}</span>
                       </div>
 
-                      {/* Divine Action Button */}
+                      {/* Action Button */}
                       <button
-                        className="prophetic-cta"
+                        className="upcoming-cta"
                         onClick={() => openRegistration(event)}
                       >
-                        <span>Accept the Prophecy</span>
+                        <span>Register Now</span>
                         <ArrowRight className="w-4 h-4" />
                       </button>
                     </div>
@@ -966,17 +934,17 @@ const Events = () => {
             </div>
           </div>
         </section>
-        {/* Section 04: Chronicles of Conquered Quests */}
-        <section className="odyssey-section past-events-section">
+
+        {/* Section 04: Past Events with Scorecards */}
+        <section className="past-events-section">
           <div className="container">
-            <div className="section-header-odyssey">
-              <h2 className="section-title-odyssey">
-                📜 Chronicles of Conquered Quests 📜
+            <div className="section-header-events">
+              <h2 className="section-title-events">
+                Past Events & Results
                 <Trophy className="title-icon" size={32} />
               </h2>
-              <p className="section-subtitle-odyssey">
-                Behold the eternal records of legendary battles and the heroes
-                who achieved immortal glory
+              <p className="section-subtitle-events">
+                Complete results and scorecards from completed competitions
               </p>
             </div>
 
@@ -1034,6 +1002,7 @@ const Events = () => {
             </div>
           </div>
         </section>
+
         {/* Registration Modal */}
         <EventRegistrationModal
           event={registrationModal.event}

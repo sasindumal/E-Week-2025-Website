@@ -7,14 +7,14 @@ const Navigation = () => {
   const location = useLocation();
 
   const navItems = [
-    { path: "/", label: "🏛️ Pantheon" },
+    { path: "/", label: "Home" },
     //{ path: "/about", label: "About" },
-    { path: "/events", label: "⚔️ War Council" },
-    { path: "/leaderboard", label: "🏆 Divine Rankings" },
-    { path: "/skillstorm", label: "⚡ Hero Trials" },
-    { path: "/downloads", label: "📜 Sacred Scrolls" },
-    { path: "/gallery", label: "🏺 Hall of Legends" },
-    { path: "/history", label: "📋 Ancient Chronicles" },
+    { path: "/events", label: "Events" },
+    { path: "/leaderboard", label: "Leaderboard" },
+    { path: "/skillstorm", label: "SkillStorm" },
+    { path: "/downloads", label: "Downloads" },
+    { path: "/gallery", label: "Gallery" },
+    { path: "/history", label: "History" },
   ];
 
   const toggleMobileMenu = () => {
@@ -24,15 +24,12 @@ const Navigation = () => {
   return (
     <nav className="navbar">
       <div className="container">
-        <Link to="/" className="navbar-brand odyssey-brand">
+        <Link to="/" className="navbar-brand">
           <img
             src="https://cdn.builder.io/api/v1/assets/c5794fad86854d05a0a2b5f05a97b44d/e-week_logo_-2025-322131?format=webp&width=800"
-            alt="The Odyssey MMXXV"
+            alt="E-Week 2025"
           />
-          <span className="brand-text">
-            <span className="brand-main">THE ODYSSEY</span>
-            <span className="brand-year">MMXXV</span>
-          </span>
+          E-WEEK 2K25
         </Link>
 
         {/* Desktop Navigation */}

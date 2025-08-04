@@ -38,47 +38,37 @@ const CountdownTimer = ({ targetDate }) => {
 
   if (isExpired) {
     return (
-      <div className="countdown text-center divine-countdown-expired">
-        <h2 className="text-4xl font-bold divine-announcement mb-4">
-          ⚡ THE ODYSSEY MMXXV HAS BEGUN! ⚡
+      <div className="countdown text-center">
+        <h2 className="text-4xl font-bold text-red mb-4">
+          E-WEEK 2K25 HAS BEGUN!
         </h2>
-        <p className="text-xl divine-live-text">
-          The epic trials are now unfolding! Heroes, to battle!
-        </p>
+        <p className="text-xl">The event is now live!</p>
       </div>
     );
   }
 
   const timeUnits = [
-    { label: "Divine Days", value: timeLeft.days, symbol: "🗓️" },
-    { label: "Sacred Hours", value: timeLeft.hours, symbol: "⏰" },
-    { label: "Blessed Minutes", value: timeLeft.minutes, symbol: "⏱️" },
-    { label: "Holy Seconds", value: timeLeft.seconds, symbol: "⚡" },
+    { label: "Days", value: timeLeft.days },
+    { label: "Hours", value: timeLeft.hours },
+    { label: "Minutes", value: timeLeft.minutes },
+    { label: "Seconds", value: timeLeft.seconds },
   ];
 
   return (
-    <div className="countdown divine-countdown-active">
-      <h2 className="countdown-title divine-countdown-title">
-        ⚔️ Countdown to The Divine Odyssey ⚔️
-      </h2>
-      <div className="countdown-grid divine-countdown-grid">
+    <div className="countdown">
+      <h2 className="countdown-title">Countdown to E-Week 2K25</h2>
+      <div className="countdown-grid">
         {timeUnits.map((unit) => (
-          <div
-            key={unit.label}
-            className="countdown-item divine-countdown-item"
-          >
-            <div className="countdown-symbol">{unit.symbol}</div>
-            <div className="countdown-number divine-countdown-number">
+          <div key={unit.label} className="countdown-item">
+            <div className="countdown-number">
               {unit.value.toString().padStart(2, "0")}
             </div>
-            <div className="countdown-label divine-countdown-label">
-              {unit.label}
-            </div>
+            <div className="countdown-label">{unit.label}</div>
           </div>
         ))}
       </div>
-      <p className="countdown-date divine-countdown-date">
-        🏛️ August 25, 2025 • Sacred Halls of Engineering • Temple of Jaffna 🏛️
+      <p className="countdown-date">
+        August 25, 2025 • Faculty of Engineering • University of Jaffna
       </p>
     </div>
   );
