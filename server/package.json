@@ -5,15 +5,18 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "seed": "node prisma/seed.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
+    "@prisma/client": "^6.13.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "path": "^0.12.7"
+    "express": "^4.18.2",
+    "path": "^0.12.7",
+    "prisma": "^6.13.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
   }
-} 
+}

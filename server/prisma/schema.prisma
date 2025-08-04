@@ -1,0 +1,243 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// Core Tables
+model Event {
+  id                    Int       @id @default(autoincrement())
+  title                 String    @db.VarChar(255)
+  description           String?   @db.Text
+  date                  DateTime  @db.Date
+  timeStart             DateTime  @db.Time
+  timeEnd               DateTime  @db.Time
+  location              String?   @db.VarChar(255)
+  category              String    @db.VarChar(100)
+  maxParticipants       Int?
+  minTeamSize           Int       @default(1)
+  maxTeamSize           Int       @default(1)
+  isTeamEvent           Boolean   @default(false)
+  registrationDeadline  DateTime?
+  status                String    @default("upcoming") @db.VarChar(50)
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @default(now()) @updatedAt
+
+  // Relations
+  teams                 Team[]
+  eventRegistrations    EventRegistration[]
+  eventResults          EventResult[]
+  gallery               Gallery[]
+
+  @@map("events")
+}
+
+model Batch {
+  id            Int    @id @default(autoincrement())
+  batchCode     String @unique @db.VarChar(10)
+  year          Int
+  department    String? @db.VarChar(100)
+  totalStudents Int?
+  createdAt     DateTime @default(now())
+
+  // Relations
+  participants  Participant[]
+  teams         Team[]
+  eventResults  EventResult[]
+  leaderboard   Leaderboard[]
+
+  @@map("batches")
+}
+
+model Participant {
+  id          Int      @id @default(autoincrement())
+  studentId   String   @unique @db.VarChar(20)
+  name        String   @db.VarChar(255)
+  email       String   @unique @db.VarChar(255)
+  batchId     Int
+  phone       String?  @db.VarChar(20)
+  department  String?  @db.VarChar(100)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+
+  // Relations
+  batch       Batch    @relation(fields: [batchId], references: [id])
+  teams       TeamMember[]
+  captainTeams Team[] @relation("TeamCaptain")
+  eventRegistrations EventRegistration[]
+  eventResults EventResult[]
+  leaderboard Leaderboard[]
+  gallery     Gallery[]
+
+  @@map("participants")
+}
+
+model Team {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  batchId   Int
+  eventId   Int
+  captainId Int
+  teamCode  String   @unique @db.VarChar(50)
+  status    String   @default("registered") @db.VarChar(50)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  // Relations
+  batch     Batch    @relation(fields: [batchId], references: [id])
+  event     Event    @relation(fields: [eventId], references: [id])
+  captain   Participant @relation("TeamCaptain", fields: [captainId], references: [id])
+  members   TeamMember[]
+  eventRegistrations EventRegistration[]
+  eventResults EventResult[]
+  leaderboard Leaderboard[]
+
+  @@map("teams")
+}
+
+model TeamMember {
+  id            Int         @id @default(autoincrement())
+  teamId        Int
+  participantId Int
+  isCaptain     Boolean     @default(false)
+  joinedAt      DateTime    @default(now())
+
+  // Relations
+  team          Team        @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  participant   Participant @relation(fields: [participantId], references: [id])
+
+  @@unique([teamId, participantId])
+  @@map("team_members")
+}
+
+model EventRegistration {
+  id               Int      @id @default(autoincrement())
+  eventId          Int
+  participantId    Int?
+  teamId           Int?
+  registrationType String   @db.VarChar(20)
+  status           String   @default("registered") @db.VarChar(50)
+  registeredAt     DateTime @default(now())
+
+  // Relations
+  event           Event      @relation(fields: [eventId], references: [id])
+  participant     Participant? @relation(fields: [participantId], references: [id])
+  team            Team?      @relation(fields: [teamId], references: [id])
+
+  @@unique([eventId, participantId])
+  @@unique([eventId, teamId])
+  @@map("event_registrations")
+}
+
+model EventResult {
+  id              Int      @id @default(autoincrement())
+  eventId         Int
+  batchId         Int
+  participantId   Int?
+  teamId          Int?
+  position        Int?
+  pointsEarned    Int      @default(0)
+  additionalNotes String?  @db.Text
+  completedAt     DateTime @default(now())
+
+  // Relations
+  event           Event      @relation(fields: [eventId], references: [id])
+  batch           Batch      @relation(fields: [batchId], references: [id])
+  participant     Participant? @relation(fields: [participantId], references: [id])
+  team            Team?      @relation(fields: [teamId], references: [id])
+
+  @@map("event_results")
+}
+
+model Leaderboard {
+  id                  Int      @id @default(autoincrement())
+  batchId             Int
+  teamId              Int?
+  participantId       Int?
+  totalScore          Int      @default(0)
+  eventsParticipated  Int      @default(0)
+  rank                Int?
+  lastUpdated         DateTime @default(now())
+
+  // Relations
+  batch               Batch      @relation(fields: [batchId], references: [id])
+  team                Team?      @relation(fields: [teamId], references: [id])
+  participant         Participant? @relation(fields: [participantId], references: [id])
+
+  @@map("leaderboard")
+}
+
+model Gallery {
+  id          Int      @id @default(autoincrement())
+  title       String   @db.VarChar(255)
+  description String?  @db.Text
+  imageUrl    String   @db.VarChar(500)
+  year        Int
+  eventId     Int?
+  views       Int      @default(0)
+  likes       Int      @default(0)
+  isFeatured  Boolean  @default(false)
+  status      String   @default("active") @db.VarChar(50)
+  uploadedBy  Int?
+  createdAt   DateTime @default(now())
+
+  // Relations
+  event       Event?      @relation(fields: [eventId], references: [id])
+  uploader    Participant? @relation(fields: [uploadedBy], references: [id])
+
+  @@map("gallery")
+}
+
+model EventHistory {
+  id                Int      @id @default(autoincrement())
+  year              Int
+  eventTitle        String   @db.VarChar(255)
+  description       String?  @db.Text
+  highlights        String?  @db.Text
+  winnerName        String?  @db.VarChar(255)
+  winnerBatch       String?  @db.VarChar(10)
+  totalParticipants Int?
+  totalTeams        Int?
+  createdAt         DateTime @default(now())
+
+  @@map("event_history")
+}
+
+model AdminUser {
+  id           Int       @id @default(autoincrement())
+  username     String    @unique @db.VarChar(100)
+  email        String    @unique @db.VarChar(255)
+  passwordHash String    @db.VarChar(255)
+  role         String    @default("admin") @db.VarChar(50)
+  isActive     Boolean   @default(true)
+  lastLogin    DateTime?
+  createdAt    DateTime  @default(now())
+
+  // Relations
+  systemLogs   SystemLog[]
+
+  @@map("admin_users")
+}
+
+model SystemLog {
+  id           Int      @id @default(autoincrement())
+  action       String   @db.VarChar(100)
+  tableName    String?  @db.VarChar(50)
+  recordId     Int?
+  adminUserId  Int?
+  details      Json?
+  ipAddress    String?  @db.VarChar(45)
+  createdAt    DateTime @default(now())
+
+  // Relations
+  adminUser    AdminUser? @relation(fields: [adminUserId], references: [id])
+
+  @@map("system_logs")
+}
