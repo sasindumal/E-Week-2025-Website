@@ -30,6 +30,7 @@ export function EnhancedCard({
     <div
       className={cn(baseClasses, variants[variant], hoverEffect, className)}
       {...props}
+      data-oid="277._1t"
     >
       {children}
     </div>

@@ -52,11 +52,15 @@ export const EnhancedButton = forwardRef<
         )}
         disabled={disabled || isLoading}
         {...props}
+        data-oid="g0zp-at"
       >
         {isLoading ? (
-          <div className="flex items-center space-x-2">
-            <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-            <span>Loading...</span>
+          <div className="flex items-center space-x-2" data-oid="i9hzjf6">
+            <div
+              className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"
+              data-oid="k60l_sa"
+            />
+            <span data-oid="1ljj28h">Loading...</span>
           </div>
         ) : (
           children

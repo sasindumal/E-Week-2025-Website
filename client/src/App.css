@@ -307,6 +307,7 @@
 
 .logo-container {
   position: relative;
+  padding-top: 3rem;
   margin-bottom: 3rem;
   animation: logoEntrance 1.5s ease-out;
 }

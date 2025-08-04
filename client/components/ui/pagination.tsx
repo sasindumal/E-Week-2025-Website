@@ -10,8 +10,10 @@ const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
     aria-label="pagination"
     className={cn("mx-auto flex w-full justify-center", className)}
     {...props}
+    data-oid="392szc1"
   />
 );
+
 Pagination.displayName = "Pagination";
 
 const PaginationContent = React.forwardRef<
@@ -22,6 +24,7 @@ const PaginationContent = React.forwardRef<
     ref={ref}
     className={cn("flex flex-row items-center gap-1", className)}
     {...props}
+    data-oid="edl0nmi"
   />
 ));
 PaginationContent.displayName = "PaginationContent";
@@ -30,7 +33,7 @@ const PaginationItem = React.forwardRef<
   HTMLLIElement,
   React.ComponentProps<"li">
 >(({ className, ...props }, ref) => (
-  <li ref={ref} className={cn("", className)} {...props} />
+  <li ref={ref} className={cn("", className)} {...props} data-oid="2c7uw3f" />
 ));
 PaginationItem.displayName = "PaginationItem";
 
@@ -55,8 +58,10 @@ const PaginationLink = ({
       className,
     )}
     {...props}
+    data-oid=":-k-g:-"
   />
 );
+
 PaginationLink.displayName = "PaginationLink";
 
 const PaginationPrevious = ({
@@ -68,11 +73,13 @@ const PaginationPrevious = ({
     size="default"
     className={cn("gap-1 pl-2.5", className)}
     {...props}
+    data-oid="v6h1d5v"
   >
-    <ChevronLeft className="h-4 w-4" />
-    <span>Previous</span>
+    <ChevronLeft className="h-4 w-4" data-oid="g3mgrp2" />
+    <span data-oid="t8urb-7">Previous</span>
   </PaginationLink>
 );
+
 PaginationPrevious.displayName = "PaginationPrevious";
 
 const PaginationNext = ({
@@ -84,11 +91,13 @@ const PaginationNext = ({
     size="default"
     className={cn("gap-1 pr-2.5", className)}
     {...props}
+    data-oid="tvcm_zq"
   >
-    <span>Next</span>
-    <ChevronRight className="h-4 w-4" />
+    <span data-oid="wyiwarl">Next</span>
+    <ChevronRight className="h-4 w-4" data-oid=".xbgvdk" />
   </PaginationLink>
 );
+
 PaginationNext.displayName = "PaginationNext";
 
 const PaginationEllipsis = ({
@@ -99,11 +108,15 @@ const PaginationEllipsis = ({
     aria-hidden
     className={cn("flex h-9 w-9 items-center justify-center", className)}
     {...props}
+    data-oid="w:0i4n9"
   >
-    <MoreHorizontal className="h-4 w-4" />
-    <span className="sr-only">More pages</span>
+    <MoreHorizontal className="h-4 w-4" data-oid="sdxhzz5" />
+    <span className="sr-only" data-oid="j0lb88f">
+      More pages
+    </span>
   </span>
 );
+
 PaginationEllipsis.displayName = "PaginationEllipsis";
 
 export {
