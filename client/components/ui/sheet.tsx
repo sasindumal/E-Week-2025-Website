@@ -84,6 +84,7 @@ const SheetHeader = ({
     {...props}
   />
 );
+
 SheetHeader.displayName = "SheetHeader";
 
 const SheetFooter = ({
@@ -98,6 +99,7 @@ const SheetFooter = ({
     {...props}
   />
 );
+
 SheetFooter.displayName = "SheetFooter";
 
 const SheetTitle = React.forwardRef<

@@ -12,6 +12,7 @@ const Drawer = ({
     {...props}
   />
 );
+
 Drawer.displayName = "Drawer";
 
 const DrawerTrigger = DrawerPrimitive.Trigger;
@@ -47,6 +48,7 @@ const DrawerContent = React.forwardRef<
       {...props}
     >
       <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
+
       {children}
     </DrawerPrimitive.Content>
   </DrawerPortal>
@@ -62,6 +64,7 @@ const DrawerHeader = ({
     {...props}
   />
 );
+
 DrawerHeader.displayName = "DrawerHeader";
 
 const DrawerFooter = ({
@@ -73,6 +76,7 @@ const DrawerFooter = ({
     {...props}
   />
 );
+
 DrawerFooter.displayName = "DrawerFooter";
 
 const DrawerTitle = React.forwardRef<

@@ -50,11 +50,16 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
 
   if (isExpired) {
     return (
-      <div className="text-center">
-        <h2 className="text-4xl font-bold text-eweek-red mb-4">
+      <div className="text-center" data-oid="ihuk2yh">
+        <h2
+          className="text-4xl font-bold text-eweek-red mb-4"
+          data-oid="63ut67_"
+        >
           E-WEEK 2025 HAS BEGUN!
         </h2>
-        <p className="text-eweek-white text-xl">The event is now live!</p>
+        <p className="text-eweek-white text-xl" data-oid="tbllf5o">
+          The event is now live!
+        </p>
       </div>
     );
   }
@@ -67,26 +72,40 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
   ];
 
   return (
-    <div className="text-center">
-      <h2 className="text-2xl sm:text-3xl font-bold text-eweek-white mb-8">
+    <div className="text-center" data-oid="4u663.y">
+      <h2
+        className="text-2xl sm:text-3xl font-bold text-eweek-white mb-8"
+        data-oid="dqvhrl_"
+      >
         Countdown to E-Week 2025
       </h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+      <div
+        className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto"
+        data-oid="n.4oj5y"
+      >
         {timeUnits.map((unit, index) => (
           <div
             key={unit.label}
             className="bg-eweek-white/10 backdrop-blur-sm rounded-lg p-4 border border-eweek-red/30"
+            data-oid="2.p4q8d"
           >
-            <div className="text-3xl sm:text-4xl font-bold mb-2" style={{ color: '#ffa502' }}>
+            <div
+              className="text-3xl sm:text-4xl font-bold mb-2"
+              style={{ color: "#ffa502" }}
+              data-oid="1s_wp1:"
+            >
               {unit.value.toString().padStart(2, "0")}
             </div>
-            <div className="text-eweek-white text-sm uppercase tracking-wide">
+            <div
+              className="text-eweek-white text-sm uppercase tracking-wide"
+              data-oid="p-urb5r"
+            >
               {unit.label}
             </div>
           </div>
         ))}
       </div>
-      <p className="text-eweek-white/80 mt-6 text-lg">
+      <p className="text-eweek-white/80 mt-6 text-lg" data-oid="qz2_.vo">
         August 25, 2025 • UOJ Faculty of Engineering
       </p>
     </div>

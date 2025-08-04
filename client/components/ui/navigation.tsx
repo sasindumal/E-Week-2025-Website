@@ -24,6 +24,7 @@ export function Navigation() {
               alt="E-Week 2025"
               className="h-10 w-auto"
             />
+
             <span className="text-eweek-white font-bold text-xl">
               E-WEEK 2025
             </span>
