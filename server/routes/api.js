@@ -1,5 +1,5 @@
-const express = require("express");
-const router = express.Router();
+import { Router } from "express";
+const router = Router();
 
 // Sample data for demo
 const events = [
@@ -459,4 +459,4 @@ router.post("/events/:eventId/complete", (req, res) => {
   });
 });
 
-module.exports = router;
+export default router;

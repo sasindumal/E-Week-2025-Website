@@ -1,29 +1,42 @@
-const express = require("express");
-const cors = require("cors");
-const path = require("path");
-require("dotenv").config();
+import express, { json, urlencoded } from 'express';
+import cors from 'cors';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
+import connectDB from './config/db.js';
+import apiRouter from './routes/api.js';
+import eventRoutes from './routes/eventRoutes.js';
+
+dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Connect to MongoDB
+connectDB();
+
 // Middleware
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(json());
+app.use(urlencoded({ extended: true }));
 
 // API Routes
-app.use("/api", require("./routes/api"));
+app.use('/api', apiRouter);
+app.use('/api/createEvents', eventRoutes);
 
-// Serve static files from React build
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/build")));
+// Serve React static files in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(join(__dirname, '../client/build')));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  app.get('*', (req, res) => {
+    res.sendFile(join(__dirname, '../client/build/index.html'));
   });
 }
 
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on port ${PORT}`);
-  console.log(`🌐 Environment: ${process.env.NODE_ENV || "development"}`);
+  console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
 });
