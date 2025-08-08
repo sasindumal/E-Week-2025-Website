@@ -6,12 +6,19 @@ const eventSchema = new Schema({
   time: String,
   location: String,
   EventType: String, // e.g., Individulal, Team
-  MaxNoOfParticipants: Number,
+  MaxNoOfParticipantsPerTeam: Number,
   description: String,
   status:String,
   category: String,
-  pointsConfiguration: [Number] // first element is points for first place, second for second place, etc.
-                               
+  pointsConfiguration: [Number] ,// first element is points for first place, second for second place, etc.
+  winners:String,
+  firstRunnerUp: String,
+  secondRunnerUp: String,
+  maxTeamsPerBatch: Number,
+  
+
+  
+
 });
 
 export default model("eventSchema", eventSchema);

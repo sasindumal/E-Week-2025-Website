@@ -11,9 +11,10 @@ import SkillStorm from "./pages/SkillStorm";
 import Downloads from "./pages/Downloads";
 import Gallery from "./pages/Gallery";
 import History from "./pages/History";
-import Admin from "./pages/Admin";
+import AdminDashboard from "./pages/AdminDashBoard";
 import NotFound from "./pages/NotFound";
-
+import ManageEvents from "./pages/ManageEvents";
+import EventForm from "./pages/EventForm";
 // Context
 import { AppProvider } from "./context/AppContext";
 
@@ -31,8 +32,10 @@ function App() {
             <Route path="/downloads" element={<Downloads />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/history" element={<History />} />
-            <Route path="/admin/*" element={<Admin />} />
+            <Route path="/admin/*" element={<AdminDashboard />} />
+            <Route path="/admin/ManageEvents" element={<ManageEvents />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/admin/EventForm" element={<EventForm />} />
           </Routes>
         </div>
       </Router>
