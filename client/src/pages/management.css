@@ -70,7 +70,7 @@
 
 .event-table th,
 .event-table td {
-  padding: 14px 10px;
+  padding: 14px 20px;
   text-align: left;
   color: white;
 }
@@ -128,7 +128,7 @@
 }
 
 .fade-out {
-  animation: fadeOut 0.4s ease-out forwards;
+  animation: fadeOut 0.7s ease-out forwards;
 }
 
 @keyframes fadeOut {
@@ -141,3 +141,4 @@
     transform: scale(0.95);
   }
 }
+

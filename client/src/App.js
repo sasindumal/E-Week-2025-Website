@@ -15,6 +15,8 @@ import AdminDashboard from "./pages/AdminDashBoard";
 import NotFound from "./pages/NotFound";
 import ManageEvents from "./pages/ManageEvents";
 import EventForm from "./pages/EventForm";
+import EditableEventForm from "./pages/EditableEventForm";
+import SetResult from "./pages/SetResult";
 // Context
 import { AppProvider } from "./context/AppContext";
 
@@ -36,6 +38,9 @@ function App() {
             <Route path="/admin/ManageEvents" element={<ManageEvents />} />
             <Route path="*" element={<NotFound />} />
             <Route path="/admin/EventForm" element={<EventForm />} />
+            <Route path="/admin/EditableEventForm" element={<EditableEventForm />} />
+            <Route path="/admin/SetResult" element={<SetResult />} />
+
           </Routes>
         </div>
       </Router>

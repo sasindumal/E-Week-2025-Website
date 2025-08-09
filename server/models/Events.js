@@ -14,6 +14,7 @@ const eventSchema = new Schema({
   winners:String,
   firstRunnerUp: String,
   secondRunnerUp: String,
+  thirdRunnerUp: String,
   maxTeamsPerBatch: Number,
   
 

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import "./management.css";
 import { Trash, Pencil, RefreshCw } from "lucide-react";
+import { Square } from "lucide-react";
 
 const ManageEvents = () => {
   const navigate = useNavigate();
@@ -15,6 +16,43 @@ const ManageEvents = () => {
   const handleClick = () => {
     navigate("/admin/EventForm");
   };
+
+const handleDelete = async (id) => {
+  try {
+    const response = await fetch("http://localhost:5000/api/createEvents/deleteEvent", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ eventId: id }),
+    });
+
+    if (!response.ok) {
+      const data = await response.json();
+      throw new Error(data.message || "Failed to delete event");
+    }
+
+    // Add id to fadingOutIds to trigger animation
+    setFadingOutIds((prev) => [...prev, id]);
+
+    // Wait for animation duration (e.g., 500ms)
+    setTimeout(() => {
+      // Remove the event from your states AFTER animation ends
+      setEvents((prev) => prev.filter((event) => event._id !== id));
+      setLiveEvents((prev) => prev.filter((event) => event._id !== id));
+      setFinishedEvents((prev) => prev.filter((event) => event._id !== id));
+
+      // Clean up fadingOutIds list
+      setFadingOutIds((prev) => prev.filter((fadeId) => fadeId !== id));
+    }, 700); // duration should match your CSS animation time
+
+  } catch (error) {
+    console.error("Delete event error:", error);
+    alert("Failed to delete event: " + error.message);
+  }
+};
+
+
 
   const handleChangetoLive = async (id) => {
     setUpdatingEventId(id);
@@ -44,8 +82,20 @@ const ManageEvents = () => {
         setUpdatingEventId(null);
         setFadingOutIds((prev) => prev.filter((eid) => eid !== id));
       }
-    }, 400); // duration matches CSS fade time
+    }, 700); // duration matches CSS fade time
   };
+
+const handleEndEdit = async (id) => {
+  navigate("/admin/SetResult", { state: { eventId: id } });
+}
+
+
+
+
+  const handleEdit = (id) => {
+    navigate("/admin/EditableEventForm", { state: { eventId: id } });
+  };  
+
 
   const fetchUpcomingEvents = async () => {
     try {
@@ -119,9 +169,11 @@ const ManageEvents = () => {
                     <td>{event.time}</td>
                     <td>{event.location}</td>
                     <td>
-                      <button className="create-edit-button"><Pencil size={20} /></button>
-                      <button className="create-delete-button"><Trash size={20} /></button>
-                      <button className="create-edit-button"><RefreshCw size={20} /></button>
+                      <button className="create-edit-button" title="Edit Event" onClick={() => handleEdit(event._id)}><Pencil size={20} /></button>
+                      <button className="create-delete-button" title="Delete Event" onClick={() => handleDelete(event._id)}><Trash size={20} /></button>
+                      <button className="create-edit-button"   title="Stop Live Streaming" onClick={() => handleEndEdit(event._id)} > <Square size={20} /></button>
+ 
+
                     </td>
                   </tr>
                 ))}
@@ -154,10 +206,11 @@ const ManageEvents = () => {
                     <td>{event.time}</td>
                     <td>{event.location}</td>
                     <td>
-                      <button className="create-edit-button"><Pencil size={20} /></button>
-                      <button className="create-delete-button"><Trash size={20} /></button>
+                      <button className="create-edit-button" title="Edit Event" onClick={() => handleEdit(event._id)}><Pencil size={20} /></button>
+                      <button className="create-delete-button" title="Delete Event" onClick={() => handleDelete(event._id)}><Trash size={20} /></button>
                       <button
                         className="create-edit-button"
+                        title="Change to Live"
                         onClick={() => handleChangetoLive(event._id)}
                         disabled={updatingEventId === event._id}
                       >
@@ -182,9 +235,7 @@ const ManageEvents = () => {
               <thead>
                 <tr>
                   <th>Title</th>
-                  <th>Date</th>
-                  <th>Time</th>
-                  <th>Location</th>
+                 
                   <th>Champions</th>
                   <th>First RunnerUp</th>
                   <th>Second RunnerUp</th>
@@ -194,11 +245,8 @@ const ManageEvents = () => {
                 {finishedEvents.map((event) => (
                   <tr key={event._id}>
                     <td>{event.title}</td>
-                    <td>{new Date(event.date).toLocaleDateString()}</td>
-                    <td>{event.time}</td>
-                    <td>{event.location}</td>
                     <td>{event.winners}</td>
-                    <td>{event.firstRuunnerUp}</td>
+                    <td>{event.firstRunnerUp}</td>
                     <td>{event.secondRunnerUp}</td>
                   </tr>
                 ))}
