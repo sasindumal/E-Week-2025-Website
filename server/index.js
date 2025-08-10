@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import apiRouter from './routes/api.js';
 import eventRoutes from './routes/eventRoutes.js';
+import LeaderBoard from './routes/LeaderBoard.js';
 
 dotenv.config();
 
@@ -26,7 +27,7 @@ app.use(urlencoded({ extended: true }));
 // API Routes
 app.use('/api', apiRouter);
 app.use('/api/createEvents', eventRoutes);
-
+app.use('/api/LeaderBoard', LeaderBoard);
 // Serve React static files in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(join(__dirname, '../client/build')));
