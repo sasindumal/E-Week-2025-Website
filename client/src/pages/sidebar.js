@@ -1,3 +1,4 @@
+import React from "react";
 import {
   LayoutDashboard,
   Calendar,
@@ -81,42 +82,108 @@ const Sidebar = ({ activeEvents = 0 }) => {
   ];
 
   return (
-    <aside style={{ width: "240px", backgroundColor: "#fbf8f8ff", padding: "1rem" }}>
-      <h2 style={{ marginBottom: "2rem", color: "red" }}>Admin Panel</h2>
-      <nav>
-        <ul style={{ listStyle: "none", padding: 0 }}>
-          {navItems.map((item) => (
-            <li key={item.id} style={{ marginBottom: "1rem" }}>
-              <Link
-                to={item.path}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.5rem",
-                  textDecoration: "none",
-                  color: location.pathname === item.path ? "#000" : "#555",
-                  fontWeight: location.pathname === item.path ? "bold" : "normal",
-                }}
-              >
-                {item.icon}
-                <span>{item.label}</span>
-                {item.badge !== null && (
-                  <span
-                    style={{
-                      backgroundColor: "red",
-                      color: "white",
-                      borderRadius: "50%",
-                      padding: "0.2rem 0.6rem",
-                      fontSize: "0.75rem",
-                      marginLeft: "auto",
-                    }}
-                  >
-                    {item.badge}
-                  </span>
-                )}
-              </Link>
-            </li>
-          ))}
+    <aside
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "240px",
+        height: "100vh",
+        background: "linear-gradient(180deg, #1a1a2e, #16213e)",
+        paddingTop: "1.5rem",
+        paddingLeft: "1rem",
+        paddingRight: "1rem",
+        overflowY: "auto",
+        boxShadow: "2px 0 8px rgba(0,0,0,0.7)",
+        zIndex: 1000,
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <div
+        style={{
+          color: "#e6b89c",
+          fontWeight: "700",
+          fontSize: "1.25rem",
+          marginBottom: "2rem",
+          paddingLeft: "0.5rem",
+          display: "flex",
+          alignItems: "center",
+          gap: "0.5rem",
+          userSelect: "none",
+          fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+        }}
+      >
+        <Shield size={24} strokeWidth={1.5} />
+        <span>E-Week <strong>Admin</strong></span>
+      </div>
+      <nav style={{ flexGrow: 1 }}>
+        <ul
+          style={{
+            listStyle: "none",
+            padding: 0,
+            margin: 0,
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.6rem",
+          }}
+        >
+          {navItems.map((item) => {
+            const isActive = location.pathname === item.path;
+            return (
+              <li key={item.id}>
+                <Link
+                  to={item.path}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "1rem",
+                    padding: "0.75rem 1rem",
+                    borderRadius: "10px",
+                    textDecoration: "none",
+                    color: isActive ? "#f0c5b8" : "#b0b0b8",
+                    backgroundColor: isActive ? "rgba(224, 141, 115, 0.15)" : "transparent",
+                    border: isActive ? "1px solid #e08b73" : "none",
+                    fontWeight: isActive ? "600" : "400",
+                    fontSize: "1rem",
+                    cursor: "pointer",
+                    transition: "all 0.3s ease",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive) e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.05)";
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) e.currentTarget.style.backgroundColor = "transparent";
+                  }}
+                >
+                  {React.cloneElement(item.icon, {
+                    color: isActive ? "#f0c5b8" : "#b0b0b8",
+                    size: 20,
+                    strokeWidth: 1.5,
+                  })}
+                  <span style={{ flexGrow: 1 }}>{item.label}</span>
+                  {item.badge !== null && item.badge > 0 && (
+                    <span
+                      style={{
+                        backgroundColor: "#f44336",
+                        color: "#fff",
+                        borderRadius: "50%",
+                        padding: "0.2rem 0.6rem",
+                        fontSize: "0.75rem",
+                        fontWeight: "600",
+                        minWidth: "20px",
+                        textAlign: "center",
+                        lineHeight: 1,
+                        userSelect: "none",
+                      }}
+                    >
+                      {item.badge}
+                    </span>
+                  )}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </aside>

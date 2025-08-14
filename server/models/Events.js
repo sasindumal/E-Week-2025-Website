@@ -16,7 +16,7 @@ const eventSchema = new Schema({
   secondRunnerUp: String,
   thirdRunnerUp: String,
   maxTeamsPerBatch: Number,
-  
+  expectedFinishTime: String,
 
   
 

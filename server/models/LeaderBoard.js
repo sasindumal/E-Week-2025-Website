@@ -15,6 +15,12 @@ const LeaderBoard = new Schema({
   E23Points: Number,
   E24Points: Number,
   E21Points: Number,
+
+  E22Improvement: Number,
+  E23Improvement: Number, 
+  E24Improvement: Number,
+  E21Improvement: Number,
+
 });
 
 export default model("LeaderBoard", LeaderBoard);

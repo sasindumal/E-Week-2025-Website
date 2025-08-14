@@ -17,6 +17,8 @@ import ManageEvents from "./pages/ManageEvents";
 import EventForm from "./pages/EventForm";
 import EditableEventForm from "./pages/EditableEventForm";
 import SetResult from "./pages/SetResult";
+import AdminLeaderBoard from "./pages/AdminLeaderBoard";
+import EditPointsForm from "./pages/editpoints";
 // Context
 import { AppProvider } from "./context/AppContext";
 
@@ -40,7 +42,8 @@ function App() {
             <Route path="/admin/EventForm" element={<EventForm />} />
             <Route path="/admin/EditableEventForm" element={<EditableEventForm />} />
             <Route path="/admin/SetResult" element={<SetResult />} />
-
+            <Route path="/admin/leaderboard" element={<AdminLeaderBoard/>} />
+            <Route path="/admin/edit-points/:team/:points" element={<EditPointsForm />} />
           </Routes>
         </div>
       </Router>

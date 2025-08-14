@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import CountdownTimer from "../components/CountdownTimer";
+
 import {
+    Badge, Users, Speaker, MoreHorizontal,
   Calendar,
   Trophy,
-  Users,
+  Settings,
   Zap,
   Bell,
   Clock,
@@ -23,6 +25,15 @@ import {
   HeartHandshake,
 } from "lucide-react";
 
+const logos = [
+  "/e21.jpg", // E21 logo
+  "/e22.jpg", // E22 logo
+  "/e23.png", // E23 logo
+  "/e24.png"  // E24 logo
+];
+
+
+
 const Home = () => {
   const [isRegistered, setIsRegistered] = useState(false);
   const [email, setEmail] = useState("");
@@ -30,6 +41,71 @@ const Home = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
   const heroRef = useRef(null);
+  const [leaderBoardRows, setLeaderBoardRows] = useState([]);
+  const [upcomingEvents, setUpcomingEvents] = useState([]);
+  
+  const categoryIcons = {
+  Competition: <Trophy size={24} color="#FFD700" />,
+   Workshop: <Settings size={24} color="#2196F3" />,
+  Social: <Users size={24} color="#9C27B0" />,
+  Conference: <Speaker size={24} color="#FF5722" />,
+  Other: <MoreHorizontal size={24} color="#607D8B" />,
+  Ceremony: <Badge size={24} color="#FFC107" />,
+};
+
+  
+  useEffect(() => {
+      const fetchLeaderBoard = async () => {
+        try {
+          const response = await fetch("/api/leaderboard/getLeaderBoard");
+          if (!response.ok) throw new Error("Failed to fetch leaderboard data");
+          const data = await response.json();
+          const teams = ["E21", "E22", "E23", "E24"];
+          const teamData = teams.map((team) => {
+            const rankArray = data[`${team}Rank`] || [];
+            const totalWonEvents = rankArray.filter(
+              (rank) => rank && rank.toLowerCase() === "winners"
+            ).length;
+            const members = Math.floor(Math.random() * 10) + 40;
+  
+            return {
+              team,
+              members,
+              points: data[`${team}Points`] || 0,
+              totalWonEvents,
+              podiums: rankArray.filter(
+                (rank) => rank && rank.toLowerCase() !== "thirdrunnerup"
+              ).length,
+              improvement: data[`${team}Improvement`] || 0,
+            };
+          });
+  
+          const sortedTeams = teamData.sort((a, b) => b.points - a.points);
+          setLeaderBoardRows(sortedTeams);
+        } catch (error) {
+          console.error("Error fetching leaderboard data:", error);
+        }
+      };
+  
+      fetchLeaderBoard();
+      fetchUpcomingEvents();
+      
+    }, []);
+
+  const fetchUpcomingEvents = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/createEvents/UpcomingEvents"
+      );
+      if (!response.ok) throw new Error("Failed to fetch upcoming events");
+      const data = await response.json();
+      setUpcomingEvents(data);
+    } catch (error) {
+      console.error("Error fetching upcoming events:", error);
+    }
+  };
+
+
 
   // Track mouse for parallax effects
   useEffect(() => {
@@ -50,111 +126,10 @@ const Home = () => {
     };
   }, []);
 
-  // Modern batch leaderboard with enhanced styling
-  const batchLeaderboard = [
-    {
-      batch: "E21",
-      points: 2450,
-      logo: "🏆",
-      rank: 1,
-      wins: 24,
-      growth: "+12%",
-      color: "from-yellow-400 to-yellow-600",
-    },
-    {
-      batch: "E22",
-      points: 2120,
-      logo: "🥈",
-      rank: 2,
-      wins: 18,
-      growth: "+8%",
-      color: "from-gray-300 to-gray-500",
-    },
-    {
-      batch: "E20",
-      points: 1980,
-      logo: "🥉",
-      rank: 3,
-      wins: 15,
-      growth: "+5%",
-      color: "from-orange-400 to-orange-600",
-    },
-    {
-      batch: "E23",
-      points: 1750,
-      logo: "⭐",
-      rank: 4,
-      wins: 12,
-      growth: "+15%",
-      color: "from-blue-400 to-blue-600",
-    },
-    {
-      batch: "E24",
-      points: 1420,
-      logo: "🌟",
-      rank: 5,
-      wins: 9,
-      growth: "+22%",
-      color: "from-purple-400 to-purple-600",
-    },
-  ];
+  
+  
 
-  // Enhanced upcoming events
-  const upcomingEvents = [
-    {
-      id: 1,
-      title: "AI & Machine Learning Hackathon",
-      date: "August 25, 2025",
-      time: "9:00 AM",
-      location: "Innovation Hub",
-      category: "Technical",
-      priority: "high",
-      participants: "500+",
-      prize: "20 Points",
-      icon: Code,
-      gradient: "from-blue-500 to-purple-600",
-    },
-    {
-      id: 2,
-      title: "Robotics Championship",
-      date: "August 26, 2025",
-      time: "2:00 PM",
-      location: "Engineering Arena",
-      category: "Competition",
-      priority: "high",
-      participants: "200+",
-      prize: "30 Points",
-      icon: Cpu,
-      gradient: "from-green-500 to-teal-600",
-    },
-    {
-      id: 3,
-      title: "Startup Pitch Battle",
-      date: "August 27, 2025",
-      time: "10:00 AM",
-      location: "Main Auditorium",
-      category: "Innovation",
-      priority: "medium",
-      participants: "150+",
-      prize: "20 Points",
-      icon: Lightbulb,
-      gradient: "from-orange-500 to-red-600",
-    },
-    {
-      id: 4,
-      title: "IoT Solutions Workshop",
-      date: "August 28, 2025",
-      time: "1:00 PM",
-      location: "Tech Lab",
-      category: "Workshop",
-      priority: "medium",
-      participants: "100+",
-      prize: "10 Points",
-      icon: Target,
-      gradient: "from-pink-500 to-purple-600",
-    },
-  ];
-
+ 
   // Premium sponsors with enhanced data
   const sponsors = [
     {
@@ -413,46 +388,79 @@ const Home = () => {
           </div>
 
           <div className="leaderboard-modern">
-            {batchLeaderboard.map((batch, index) => (
+            {leaderBoardRows.map((row,i) => (
+              
+              
               <div
-                key={batch.batch}
-                className={`leaderboard-card ${batch.rank <= 3 ? "top-three" : ""}`}
+                key={row.team}
+                className={`leaderboard-card ${i+1 <= 3 ? "top-three" : ""}`}
                 style={{
-                  animationDelay: `${index * 100}ms`,
+                  animationDelay: `${(i+1)* 100}ms`,
                   transform: `perspective(1000px) rotateY(${(mousePosition.x - window.innerWidth / 2) * 0.01}deg)`,
                 }}
               >
                 <div
-                  className={`card-gradient bg-gradient-to-br ${batch.color}`}
+                  className={`card-gradient bg-gradient-to-br yellow-400 to-yellow-600`}
                 >
-                  <div className="rank-badge">#{batch.rank}</div>
-                  <div className="batch-emoji">{batch.logo}</div>
-                  <h3 className="batch-name">{batch.batch}</h3>
+                  <div className="rank-badge">#{i+1}</div>
+                  <div className="batch-emoji">
+                    <img
+                      src={
+                        row.team === "E21"
+                          ? logos[0]
+                          : row.team === "E22"
+                          ? logos[1]
+                          : row.team === "E23"
+                          ? logos[2]
+                          : row.team === "E24"
+                          ? logos[3]
+                          : ""
+                      }
+                      alt={row.team + " logo"}
+                      style={{ width: "100px", height: "auto" }} 
+                    />
+                  </div>
+                  <h3 className="batch-name">{row.team}</h3>
 
                   <div className="stats-section">
                     <div className="main-stat">
                       <span className="stat-number">
-                        {batch.points.toLocaleString()}
+                        {row.points.toLocaleString()}
                       </span>
                       <span className="stat-label">Points</span>
                     </div>
 
                     <div className="sub-stats">
                       <div className="sub-stat">
-                        <span className="sub-number">{batch.wins}</span>
+                        <span className="sub-number">{row.totalWonEvents}</span>
                         <span className="sub-label">Wins</span>
                       </div>
-                      <div className="sub-stat growth">
-                        <span className="sub-number">{batch.growth}</span>
-                        <span className="sub-label">Growth</span>
-                      </div>
+                        <div className="sub-stat growth">
+                   <span
+                   style={{
+                    fontWeight: "bold",
+                    fontSize: "1.5rem",
+                  color:
+               row.improvement < 0
+                    ? "red"
+                  : row.improvement === 0
+                 ? "gray"
+                 : "green",
+  }}
+>
+  {row.improvement}%
+</span>
+
+                     <span className="sub-label">Growth Rate</span>
+                         </div>
+
                     </div>
                   </div>
 
                   <div className="progress-bar">
                     <div
                       className="progress-fill"
-                      style={{ width: `${(batch.points / 2500) * 100}%` }}
+                      style={{ width: `${(row.points / 2500) * 100}%` }}
                     ></div>
                   </div>
                 </div>
@@ -492,26 +500,27 @@ const Home = () => {
           </div>
 
           <div className="events-grid-modern">
-            {upcomingEvents.map((event, index) => {
-              const IconComponent = event.icon;
+            {upcomingEvents.map((event,_id) => {
+             
               return (
                 <div
-                  key={event.id}
+                  key={_id}
                   className="event-card-modern"
-                  style={{ animationDelay: `${index * 150}ms` }}
+                  style={{ animationDelay: `${2* 150}ms` }}
                 >
                   <div
-                    className={`event-gradient bg-gradient-to-br ${event.gradient}`}
+                    className={`event-gradient bg-gradient-to-br yellow-400 to-yellow-600`}
                   >
-                    <div className="event-header">
+                      <div className="event-header">
+                        
+
                       <div className="event-icon">
-                        <IconComponent size={24} />
+                        <Calendar size={24} color="blue" />
                       </div>
-                      <div className="event-priority">
-                        <span className={`priority-badge ${event.priority}`}>
-                          {event.priority.toUpperCase()}
-                        </span>
-                      </div>
+                      <span>
+                     {categoryIcons[event.category] || <MoreHorizontal size={24} />}
+                     </span>
+
                     </div>
 
                     <h3 className="event-title">{event.title}</h3>
@@ -519,7 +528,11 @@ const Home = () => {
                     <div className="event-details">
                       <div className="detail-item">
                         <Calendar size={16} />
-                        <span>{event.date}</span>
+                      <span>
+                        {new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "short", year: "numeric" })
+                        .format(new Date(event.date))}
+                      </span>
+
                       </div>
                       <div className="detail-item">
                         <Clock size={16} />
@@ -530,17 +543,20 @@ const Home = () => {
                         <span>{event.location}</span>
                       </div>
                     </div>
-
-                    <div className="event-stats">
-                      <div className="stat-pill">
-                        <Users size={14} />
-                        <span>{event.participants}</span>
-                      </div>
-                      <div className="stat-pill prize">
-                        <Award size={14} />
-                        <span>{event.prize}</span>
-                      </div>
+                  
+                   {event.category === "Competition" && (
+                  <div className="event-stats">
+                    <div className="stat-pill">
+                   <Users size={14} />
+                    <span>{event.MaxNoOfParticipantsPerTeam}</span>
                     </div>
+                   <div className="stat-pill prize">
+                      <Award size={14} />
+                     <span>{event.pointsConfiguration[0]}</span>
+                    </div>
+                           </div>
+)}
+
                   </div>
                 </div>
               );

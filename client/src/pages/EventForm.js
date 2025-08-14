@@ -16,16 +16,12 @@ const EventForm = () => {
     firstRunnerUp: "",
     secondRunnerUp: "",
     maxTeamsPerBatch: "",
-    
+     expectedFinishTime: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -35,11 +31,12 @@ const EventForm = () => {
       ...formData,
       MaxNoOfParticipantsPerTeam: Number(formData.MaxNoOfParticipantsPerTeam),
       maxTeamsPerBatch: Number(formData.maxTeamsPerBatch),
-      
       pointsConfiguration: formData.pointsConfiguration
-        .split(",")
-        .map((n) => Number(n.trim()))
-        .filter((n) => !isNaN(n)),
+        ? formData.pointsConfiguration
+            .split(",")
+            .map((n) => Number(n.trim()))
+            .filter((n) => !isNaN(n))
+        : [],
     };
 
     try {
@@ -69,7 +66,7 @@ const EventForm = () => {
           firstRunnerUp: "",
           secondRunnerUp: "",
           maxTeamsPerBatch: "",
-          
+           expectedFinishTime: "",
         });
       } else {
         const errorData = await response.json();
@@ -105,56 +102,21 @@ const EventForm = () => {
         { label: "Title", name: "title", type: "text", placeholder: "Title" },
         { label: "Date", name: "date", type: "date" },
         { label: "Time", name: "time", type: "time" },
-        {
-          label: "Location",
-          name: "location",
-          type: "text",
-          placeholder: "Location",
-        },
+         { label: "Finish Time", name: "expectedFinishTime", type: "time" },
+        { label: "Location", name: "location", type: "text", placeholder: "Location" },
         {
           label: "Max Number of Teams/Individual per Batch",
           name: "maxTeamsPerBatch",
           type: "number",
           placeholder: "e.g. 100",
         },
-        {
-          label: "Description",
-          name: "description",
-          type: "textarea",
-          placeholder: "Description",
-        },
-        {
-          label: "Status",
-          name: "status",
-          type: "text",
-          placeholder: "Status (e.g. upcoming)",
-        },
-        {
-          label: "Category",
-          name: "category",
-          type: "text",
-          placeholder: "Category",
-        },
-        {
-          label: "Points Configuration",
-          name: "pointsConfiguration",
-          type: "text",
-          placeholder: "Comma-separated points (e.g. 10,8,6)",
-        },
-        {
-          label: "Max Players Per Team",
-          name: "MaxNoOfParticipantsPerTeam",
-          type: "number",
-          placeholder: "e.g. 5",
-        },
-     
-      
-      
+        { label: "Description", name: "description", type: "textarea", placeholder: "Description" },
+        { label: "Status", name: "status", type: "text", placeholder: "Status (e.g. upcoming)" },
+        { label: "Points Configuration", name: "pointsConfiguration", type: "text", placeholder: "10,8,6" },
+        { label: "Max Players Per Team", name: "MaxNoOfParticipantsPerTeam", type: "number", placeholder: "e.g. 5" },
       ].map((input) => (
         <div key={input.name} style={{ display: "flex", flexDirection: "column" }}>
-          <label style={{ marginBottom: "0.25rem", color: "#ccc" }}>
-            {input.label}
-          </label>
+          <label style={{ marginBottom: "0.25rem", color: "#ccc" }}>{input.label}</label>
           {input.type === "textarea" ? (
             <textarea
               name={input.name}
@@ -176,6 +138,26 @@ const EventForm = () => {
         </div>
       ))}
 
+      {/* Category select */}
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <label style={{ marginBottom: "0.25rem", color: "#ccc" }}>Category</label>
+        <select
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          style={inputStyle}
+        >
+          <option value="">Select Category</option>
+          <option value="Competition">Competition</option>
+          <option value="Workshop">Workshop</option>
+          <option value="Conference">Conference</option>
+          <option value="Ceremony">Ceremony</option>
+          <option value="Social">Social</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      {/* Event type */}
       <div style={{ display: "flex", flexDirection: "column" }}>
         <label style={{ color: "#ccc" }}>Event Type:</label>
         <select

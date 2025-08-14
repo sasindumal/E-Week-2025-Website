@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import Layout from "../components/Layout";
 import EventRegistrationModal from "../components/EventRegistrationModal";
 import {
@@ -38,6 +38,159 @@ const Events = () => {
     isOpen: false,
     event: null,
   });
+
+  const [upcoming,setUpcoming]=useState([]);
+  const [live,setLive]=useState([]);
+  const [finished,setFinished]=useState([]);
+  const [events, setEvents] = useState([]);
+  const weekDays = [ "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"];
+  const MondayEvents = events.filter(event => event.day === "Monday");
+  const TuesdayEvents = events.filter(event => event.day === "Tuesday");
+  const WednesdayEvents = events.filter(event => event.day === "Wednesday");
+  const ThursdayEvents = events.filter(event => event.day === "Thursday");
+  const FridayEvents = events.filter(event => event.day === "Friday");
+  const SaturdayEvents = events.filter(event => event.day === "Saturday");
+  const SundayEvents = events.filter(event => event.day === "Sunday");
+   
+  const MyWeekSchedule = [MondayEvents, TuesdayEvents, WednesdayEvents, ThursdayEvents, FridayEvents, SaturdayEvents, SundayEvents];
+
+  console.log("MyWeekSchedule:", MyWeekSchedule); // log the schedule
+function getProgressColor(progress) {
+  if (progress < 30) return "#3b82f6"; // blue-500
+  if (progress < 70) return "#22c55e"; // green-500
+  return "#f97316"; // orange-500
+}
+
+useEffect(() => {
+  const fetchEvents = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/createEvents/getEvents");
+      const data = await res.json();
+
+      // Add `day` field to each event
+      const eventsWithDay = data.map(event => {
+        const eventDate = new Date(event.date);
+        const dayName = weekDays[eventDate.getDay()];
+        return { ...event, day: dayName };
+      });
+
+      setEvents(eventsWithDay); // store in state
+      console.log("Events fetched:", eventsWithDay); // log updated data
+    } catch (err) {
+      console.error("Error fetching events:", err);
+    }
+  };
+  
+  fetchEvents();
+  console.log("Events state updated:", events); // log state after fetching
+}, []);
+
+
+const [presentTime, setPresentTime] = useState(getCurrentTime());
+
+  // Helper: Get current time in HH:mm
+  function getCurrentTime() {
+    return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: false });
+  }
+
+  // Update present time every minute
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPresentTime(getCurrentTime());
+    }, 60000); // 1 minute
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Helper: convert HH:mm → minutes
+  function toMinutes(timeStr) {
+  if (!timeStr || typeof timeStr !== "string") return null; // guard
+  const [hours, minutes] = timeStr.split(":").map(Number);
+  return hours * 60 + minutes;
+}
+
+function getEventProgress(startTime, endTime) {
+  const start = toMinutes(startTime);
+  const end = toMinutes(endTime);
+  const current = toMinutes(presentTime);
+
+  // If any time is missing, just return 0%
+  if (start === null || end === null || current === null) {
+    return "0%";
+  }
+
+  const progress = ((current - start) / (end - start)) * 100;
+  return Math.max(0, Math.min(100, progress)).toFixed(1) + "%";
+}
+
+
+const fetchUpcomingEvents = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/createEvents/UpcomingEvents");
+      if (!response.ok) {
+        throw new Error("Failed to fetch upcoming events");
+      }
+      const data = await response.json();
+      setUpcoming(data);
+    } catch (error) {
+      console.error("Error fetching upcoming events:", error);
+    }
+  };
+
+  const fetchLiveEvents = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/createEvents/LiveEvents");
+      if (!response.ok) {
+        throw new Error("Failed to fetch upcoming events");
+      }
+      const data = await response.json();
+      setLive(data);
+    } catch (error) {
+      console.error("Error fetching upcoming events:", error);
+    }
+  };
+
+   const fetchFinishedEvents = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/createEvents/FinishedEvents");
+      if (!response.ok) {
+        throw new Error("Failed to fetch upcoming events");
+      }
+      const data = await response.json();
+      setFinished(data);
+    } catch (error) {
+      console.error("Error fetching upcoming events:", error);
+    }
+  };
+
+useEffect(() => {
+  fetchUpcomingEvents();
+  fetchLiveEvents();
+  fetchFinishedEvents();
+ 
+}, []);
+   
+function getTimeRemaining(startTime, endTime) {
+  // Convert "HH:mm" to minutes
+  const toMinutes = (timeStr) => {
+    if (!timeStr) return 0;
+    const [hours, minutes] = timeStr.split(":").map(Number);
+    return hours * 60 + minutes;
+  };
+
+  const now = new Date();
+  const currentMinutes = now.getHours() * 60 + now.getMinutes();
+  const end = toMinutes(endTime);
+
+  let remaining = end - currentMinutes; // minutes remaining
+  if (remaining < 0) remaining = 0; // event finished
+
+  const hours = Math.floor(remaining / 60);
+  const minutes = remaining % 60;
+
+  return `${hours}h ${minutes}m`;
+}
+
 
   // 7-day schedule
   const weekSchedule = [
@@ -229,51 +382,11 @@ const Events = () => {
     },
   ];
 
-  // Ongoing events
-  const ongoingEvents = [
-    {
-      id: 1,
-      name: "AI & Machine Learning Hackathon",
-      startTime: "09:00",
-      endTime: "17:00",
-      location: "Tech Hub Alpha",
-      participants: 120,
-      progress: 65,
-      category: "Competition",
-      icon: Code,
-      gradient: "from-blue-500 to-purple-600",
-      timeRemaining: "4h 23m",
-      status: "live",
-    },
-    {
-      id: 2,
-      name: "Robotics Design Challenge",
-      startTime: "10:00",
-      endTime: "16:00",
-      location: "Engineering Lab",
-      participants: 85,
-      progress: 45,
-      category: "Engineering",
-      icon: Cpu,
-      gradient: "from-green-500 to-teal-600",
-      timeRemaining: "6h 15m",
-      status: "live",
-    },
-    {
-      id: 3,
-      name: "Startup Pitch Preparation",
-      startTime: "14:00",
-      endTime: "18:00",
-      location: "Innovation Center",
-      participants: 45,
-      progress: 30,
-      category: "Workshop",
-      icon: Lightbulb,
-      gradient: "from-orange-500 to-red-600",
-      timeRemaining: "2h 45m",
-      status: "live",
-    },
-  ];
+
+
+
+  
+
 
   // Registration handlers
   const openRegistration = (event) => {
@@ -291,140 +404,7 @@ const Events = () => {
     alert("Registration submitted successfully!");
   };
 
-  // Upcoming events
-  const upcomingEvents = [
-    {
-      id: 1,
-      name: "Cybersecurity War Games",
-      date: "2025-08-26",
-      time: "09:00",
-      duration: "6 hours",
-      location: "Security Command Center",
-      participants: "150+ registered",
-      category: "Competition",
-      priority: "high",
-      icon: Target,
-      gradient: "from-red-500 to-pink-600",
-      description: "Advanced cybersecurity simulation and defense challenges",
-      points: "30 Points",
-      tags: ["Security", "CTF", "Networking"],
-      type: "team",
-      playersPerTeam: 4,
-      maxTeamsPerBatch: 2,
-      maxPlayersPerBatch: 20,
-    },
-    {
-      id: 2,
-      name: "Quantum Computing Workshop",
-      date: "2025-08-28",
-      time: "14:00",
-      duration: "4 hours",
-      location: "Quantum Lab",
-      participants: "80+ registered",
-      category: "Workshop",
-      priority: "medium",
-      icon: Zap,
-      gradient: "from-purple-500 to-blue-600",
-      description: "Hands-on experience with quantum algorithms and circuits",
-      points: "20 Points",
-      tags: ["Quantum", "Computing", "Research"],
-      type: "individual",
-      maxPlayersPerBatch: 15,
-    },
-    {
-      id: 3,
-      name: "Mobile App Development Sprint",
-      date: "2025-08-29",
-      time: "10:00",
-      duration: "8 hours",
-      location: "Mobile Dev Studio",
-      participants: "100+ registered",
-      category: "Competition",
-      priority: "high",
-      icon: Code,
-      gradient: "from-green-500 to-cyan-600",
-      description: "Build and deploy mobile apps in a day-long sprint",
-      points: "10 Points",
-      tags: ["Mobile", "React Native", "Flutter"],
-      type: "team",
-      playersPerTeam: 3,
-      maxTeamsPerBatch: 3,
-      maxPlayersPerBatch: 25,
-    },
-    {
-      id: 4,
-      name: "Design Thinking Masterclass",
-      date: "2025-08-30",
-      time: "11:00",
-      duration: "3 hours",
-      location: "Creative Hub",
-      participants: "60+ registered",
-      category: "Workshop",
-      priority: "medium",
-      icon: Lightbulb,
-      gradient: "from-yellow-500 to-orange-600",
-      description: "Learn human-centered design principles and methods",
-      points: "20 Points",
-      tags: ["Design", "UX", "Innovation"],
-      type: "individual",
-      maxPlayersPerBatch: 12,
-    },
-  ];
-
-  // Past events with scorecards
-  const pastEvents = [
-    {
-      id: 1,
-      name: "Opening Hackathon",
-      date: "Aug 25, 2025",
-      category: "Competition",
-      participants: 180,
-      duration: "24 hours",
-      status: "completed",
-      icon: "🚀",
-      scores: [
-        { team: "Code Crusaders", batch: "E21", score: 950, rank: 1 },
-        { team: "Digital Dynamos", batch: "E23", score: 890, rank: 2 },
-        { team: "Tech Titans", batch: "E22", score: 850, rank: 3 },
-        { team: "Innovation Inc", batch: "E20", score: 820, rank: 4 },
-        { team: "Future Builders", batch: "E24", score: 780, rank: 5 },
-      ],
-    },
-    {
-      id: 2,
-      name: "Robotics Championship",
-      date: "Aug 24, 2025",
-      category: "Engineering",
-      participants: 120,
-      duration: "8 hours",
-      status: "completed",
-      icon: "🤖",
-      scores: [
-        { team: "Robo Rangers", batch: "E22", score: 920, rank: 1 },
-        { team: "Mech Masters", batch: "E21", score: 880, rank: 2 },
-        { team: "Bot Builders", batch: "E20", score: 840, rank: 3 },
-        { team: "Circuit Squad", batch: "E24", score: 800, rank: 4 },
-        { team: "Auto Engineers", batch: "E23", score: 760, rank: 5 },
-      ],
-    },
-    {
-      id: 3,
-      name: "AI Innovation Challenge",
-      date: "Aug 23, 2025",
-      category: "Innovation",
-      participants: 95,
-      duration: "12 hours",
-      status: "completed",
-      icon: "🧠",
-      scores: [
-        { team: "Neural Networks", batch: "E23", score: 910, rank: 1 },
-        { team: "Deep Learners", batch: "E21", score: 870, rank: 2 },
-        { team: "AI Architects", batch: "E22", score: 850, rank: 3 },
-        { team: "Machine Minds", batch: "E24", score: 810, rank: 4 },
-        { team: "Data Wizards", batch: "E20", score: 790, rank: 5 },
-      ],
-    },
-  ];
+ 
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -465,50 +445,7 @@ const Events = () => {
     }
   };
 
-  // Filter and sort upcoming events
-  const filteredUpcomingEvents = upcomingEvents
-    .filter((event) => {
-      const matchesSearch =
-        searchTerm === "" ||
-        event.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        event.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        event.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        event.description.toLowerCase().includes(searchTerm.toLowerCase());
-
-      const matchesCategory =
-        selectedCategory === "all" || event.category === selectedCategory;
-      const matchesStatus =
-        selectedStatus === "all" ||
-        (selectedStatus === "scheduled" && event.date !== "Today");
-
-      return matchesSearch && matchesCategory && matchesStatus;
-    })
-    .sort((a, b) => {
-      let comparison = 0;
-
-      switch (sortBy) {
-        case "time":
-          // Simple time comparison for demo - in real app would parse dates properly
-          comparison = a.time.localeCompare(b.time);
-          break;
-        case "name":
-          comparison = a.name.localeCompare(b.name);
-          break;
-        case "participants":
-          const aParticipants = parseInt(a.participants.replace(/\D/g, ""));
-          const bParticipants = parseInt(b.participants.replace(/\D/g, ""));
-          comparison = bParticipants - aParticipants;
-          break;
-        case "category":
-          comparison = a.category.localeCompare(b.category);
-          break;
-        default:
-          comparison = 0;
-      }
-
-      return sortOrder === "asc" ? comparison : -comparison;
-    });
-
+  
   return (
     <Layout>
       <div className="events-page">
@@ -528,17 +465,17 @@ const Events = () => {
               <div className="hero-stats-events">
                 <div className="stat-card-events">
                   <Flame className="stat-icon text-red-400" size={24} />
-                  <span className="stat-number">3</span>
+                  <span className="stat-number">{live.length}</span>
                   <span className="stat-label">Live Events</span>
                 </div>
                 <div className="stat-card-events">
                   <Clock className="stat-icon text-blue-400" size={24} />
-                  <span className="stat-number">15</span>
+                  <span className="stat-number">{upcoming.length}</span>
                   <span className="stat-label">Upcoming</span>
                 </div>
                 <div className="stat-card-events">
                   <CheckCircle className="stat-icon text-green-400" size={24} />
-                  <span className="stat-number">8</span>
+                  <span className="stat-number">{finished.length}</span>
                   <span className="stat-label">Completed</span>
                 </div>
               </div>
@@ -560,31 +497,44 @@ const Events = () => {
             </div>
 
             {/* Day Selector */}
-            <div className="day-selector">
-              {weekSchedule.map((day, index) => (
-                <button
-                  key={index}
-                  onClick={() => setSelectedDay(index)}
-                  className={`day-button ${selectedDay === index ? "active" : ""}`}
-                >
-                  <span className="day-name">{day.day}</span>
-                  <span className="day-date">{day.date}</span>
-                  <span className="day-count">{day.events.length} events</span>
-                </button>
-              ))}
-            </div>
+               <div className="day-selector">
+             {MyWeekSchedule.map((dayEvents, index) => (
+                    <button
+                     key={index}
+                     onClick={() => setSelectedDay(index)}
+                     className={`day-button ${selectedDay === index ? "active" : ""}`}
+                   >
+               {/* You can display a day name using index or a helper array */}
+                <span className="day-name">{weekDays[index]}</span>
+
+               {/* Safe access to first event's date */}
+               <span className="day-date">
+                    {dayEvents.length > 0
+              ? new Date(dayEvents[0].date).toLocaleString("default", {
+               month: "long",
+               year: "numeric",
+               })
+              : "No date"}
+               </span>
+
+                 {/* Number of events for that day */}
+                  <span className="day-count">{dayEvents.length} events</span>
+                  </button>
+                        ))}
+                   </div>
+
 
             {/* Selected Day Events */}
             <div className="schedule-timeline">
               <h3 className="timeline-title">
-                {weekSchedule[selectedDay].day} Schedule
+                {weekDays[selectedDay]} Schedule
               </h3>
               <div className="timeline-events">
-                {weekSchedule[selectedDay].events.map((event, index) => (
+                {MyWeekSchedule[selectedDay].map((event, index) => (
                   <div
-                    key={event.id}
+                    key={event._id}
                     className="timeline-event"
-                    style={{ animationDelay: `${index * 100}ms` }}
+                    style={{ animationDelay: `${2 * 100}ms` }}
                   >
                     <div className="event-time">
                       <Clock className="w-4 h-4" />
@@ -593,7 +543,7 @@ const Events = () => {
                     <div className="event-connector"></div>
                     <div className="event-card-timeline">
                       <div className="event-header-timeline">
-                        <h4 className="event-name-timeline">{event.name}</h4>
+                        <h4 className="event-name-timeline">{event.title}</h4>
                         <span
                           className={`event-status ${getStatusColor(event.status)}`}
                         >
@@ -607,13 +557,13 @@ const Events = () => {
                         </div>
                         <div className="detail-item-timeline">
                           <Users className="w-4 h-4 text-green-400" />
-                          <span>{event.participants} participants</span>
+                          <span>{event.MaxNoOfParticipantsPerTeam} participants</span>
                         </div>
                       </div>
                       <div
-                        className={`event-type-badge bg-gradient-to-r ${getTypeColor(event.type)}`}
+                        className={`event-type-badge bg-gradient-to-r from-${getTypeColor(event.category)}`}
                       >
-                        {event.type}
+                        {event.category}
                       </div>
                     </div>
                   </div>
@@ -637,16 +587,16 @@ const Events = () => {
             </div>
 
             <div className="ongoing-grid">
-              {ongoingEvents.map((event, index) => {
-                const IconComponent = event.icon;
+              {live.map((event, _id) => {
+               
                 return (
                   <div
                     key={event.id}
                     className="ongoing-card"
-                    style={{ animationDelay: `${index * 150}ms` }}
+                    style={{ animationDelay: `${2 * 150}ms` }}
                   >
                     <div
-                      className={`ongoing-gradient bg-gradient-to-br ${event.gradient}`}
+                      className={`ongoing-gradient bg-gradient-to-br yellow-500 to-orange-600`}
                     >
                       {/* Live Indicator */}
                       <div className="live-indicator">
@@ -655,17 +605,15 @@ const Events = () => {
                       </div>
 
                       {/* Event Icon */}
-                      <div className="ongoing-icon">
-                        <IconComponent size={32} />
-                      </div>
+                      
 
                       {/* Event Info */}
-                      <h3 className="ongoing-title">{event.name}</h3>
+                      <h3 className="ongoing-title">{event.title}</h3>
                       <div className="ongoing-meta">
                         <div className="meta-item-ongoing">
                           <Clock className="w-4 h-4" />
                           <span>
-                            {event.startTime} - {event.endTime}
+                            {event.time} - {event.expectedFinishTime}
                           </span>
                         </div>
                         <div className="meta-item-ongoing">
@@ -674,7 +622,7 @@ const Events = () => {
                         </div>
                         <div className="meta-item-ongoing">
                           <Users className="w-4 h-4" />
-                          <span>{event.participants} participants</span>
+                          <span>{event.MaxNoOfParticipantsPerTeam*event.maxTeamsPerBatch} participants</span>
                         </div>
                       </div>
 
@@ -682,27 +630,36 @@ const Events = () => {
                       <div className="progress-container">
                         <div className="progress-header">
                           <span>Progress</span>
-                          <span>{event.progress}%</span>
+                          
+                         <span>
+                            {getEventProgress(event.time, event.expectedFinishTime)}
+    
+                             </span>
+
                         </div>
                         <div className="progress-bar-ongoing">
-                          <div
-                            className="progress-fill-ongoing"
-                            style={{ width: `${event.progress}%` }}
-                          ></div>
-                        </div>
+                              <div className="progress-bar-ongoing">
+                                      <div
+                                    className="progress-fill-ongoing"
+                                  style={{
+                              width: `${parseInt(getEventProgress(event.time, event.expectedFinishTime))}%`
+                                 }}
+                                  ></div>
+                               </div>
+                           </div>
                       </div>
 
                       {/* Time Remaining */}
-                      <div className="time-remaining">
-                        <Timer className="w-4 h-4 text-yellow-400" />
-                        <span>{event.timeRemaining} remaining</span>
-                      </div>
+                     <div className="time-remaining">
+                     <Timer className="w-4 h-4 text-yellow-400" />
+                         <span>
+                          {getTimeRemaining(event.time, event.expectedFinishTime)}
+                           </span>
+                         </div>
+
 
                       {/* Action Button */}
-                      <button className="ongoing-cta">
-                        <Play className="w-4 h-4" />
-                        <span>Watch Live</span>
-                      </button>
+                   
                     </div>
                   </div>
                 );
@@ -828,7 +785,7 @@ const Events = () => {
                         Clear All
                       </button>
                       <span className="results-count">
-                        {filteredUpcomingEvents.length} events found
+                        {upcoming.length} events found
                       </span>
                     </div>
                   </div>
@@ -853,31 +810,25 @@ const Events = () => {
             </div>
 
             <div className="upcoming-grid grid">
-              {filteredUpcomingEvents.map((event, index) => {
-                const IconComponent = event.icon;
+              {upcoming.map((event, _id) => {
+                
                 return (
                   <div
-                    key={event.id}
+                    key={event._id}
                     className="upcoming-card"
-                    style={{ animationDelay: `${index * 200}ms` }}
+                    style={{ animationDelay: `${2 * 200}ms` }}
                   >
                     <div
-                      className={`upcoming-gradient bg-gradient-to-br ${event.gradient}`}
+                      className={`upcoming-gradient bg-gradient-to-br yellow-500 to-orange-600`}
                     >
                       {/* Priority Badge */}
-                      <div
-                        className={`priority-badge ${getPriorityColor(event.priority)}`}
-                      >
-                        {event.priority.toUpperCase()}
-                      </div>
+                    
 
-                      {/* Event Icon */}
-                      <div className="upcoming-icon">
-                        <IconComponent size={28} />
-                      </div>
+                   
+                     
 
                       {/* Event Info */}
-                      <h3 className="upcoming-title">{event.name}</h3>
+                      <h3 className="upcoming-title">{event.title}</h3>
                       <p className="upcoming-description">
                         {event.description}
                       </p>
@@ -887,38 +838,41 @@ const Events = () => {
                         <div className="detail-row">
                           <Calendar className="w-4 h-4 text-blue-400" />
                           <span>
-                            {event.date} • {event.time}
-                          </span>
+                             {new Date(event.date).toLocaleDateString(undefined, {
+                              year: "numeric",
+                              month: "short",
+                               day: "numeric"
+                             })} 
+                              </span>
+
                         </div>
                         <div className="detail-row">
                           <Clock className="w-4 h-4 text-green-400" />
-                          <span>{event.duration}</span>
+                          <span>{event.time}</span>
                         </div>
                         <div className="detail-row">
                           <MapPin className="w-4 h-4 text-purple-400" />
                           <span>{event.location}</span>
                         </div>
+                        {event.category==="Competition"&&(
                         <div className="detail-row">
                           <Users className="w-4 h-4 text-orange-400" />
-                          <span>{event.participants}</span>
-                        </div>
-                      </div>
-
-                      {/* Tags */}
-                      <div className="event-tags">
-                        {event.tags.map((tag, idx) => (
-                          <span key={idx} className="event-tag">
-                            {tag}
+                         <span>
+                          {parseInt(event.MaxNoOfParticipantsPerTeam) * parseInt(event.maxTeamsPerBatch)}
                           </span>
-                        ))}
+                        </div>
+                        )}
                       </div>
 
+                     
+                      {event.category==="Competition"&&(
+                      <>
                       {/* Prize Info */}
-                      <div className="prize-info">
+                      <div className="prize-info">  
                         <Award className="w-4 h-4 text-yellow-400" />
-                        <span>{event.points}</span>
+                        <span>{event.pointsConfiguration[0]}</span>
                       </div>
-
+                        
                       {/* Action Button */}
                       <button
                         className="upcoming-cta"
@@ -927,12 +881,15 @@ const Events = () => {
                         <span>Register Now</span>
                         <ArrowRight className="w-4 h-4" />
                       </button>
+                    </>)}
                     </div>
                   </div>
+                      
                 );
               })}
             </div>
           </div>
+  
         </section>
 
         {/* Section 04: Past Events with Scorecards */}
@@ -949,23 +906,23 @@ const Events = () => {
             </div>
 
             <div className="past-events-grid">
-              {pastEvents.map((event, index) => (
+              {finished.map((event,_id) => (
                 <div
-                  key={event.id}
+                  key={event._id}
                   className="past-event-card"
-                  style={{ animationDelay: `${index * 250}ms` }}
+                  style={{ animationDelay: `${2 * 250}ms` }}
                 >
                   <div className="past-event-header">
                     <div className="past-event-info">
-                      <div className="past-event-icon">{event.icon}</div>
+                      
                       <div className="past-event-details">
-                        <h3 className="past-event-name">{event.name}</h3>
+                        <h3 className="past-event-name">{event.title}</h3>
                         <div className="past-event-meta">
                           <span>{event.date}</span>
                           <span>•</span>
-                          <span>{event.participants} participants</span>
+                          <span>{event.MaxNoOfParticipantsPerTeam} participants</span>
                           <span>•</span>
-                          <span>{event.duration}</span>
+                          <span>{event.time}</span>
                         </div>
                       </div>
                     </div>
@@ -974,27 +931,37 @@ const Events = () => {
                   <div className="scoreboard">
                     <h4 className="scoreboard-title">Final Results</h4>
                     <div className="scores-list">
-                      {event.scores.map((score, idx) => (
-                        <div key={idx} className="score-row">
-                          <div className="score-rank">
-                            <div
-                              className={`rank-number ${
-                                idx < 3 ? "podium" : "regular"
-                              }`}
-                            >
-                              #{score.rank}
-                            </div>
+                      
+                        <div className="scoreboard">
+                                   {[
+                             { rank: 1, name: event.winners, points: event.pointsConfiguration[0] },
+                             { rank: 2, name: event.firstRunnerUp, points: event.pointsConfiguration[1] },
+                             { rank: 3, name: event.secondRunnerUp, points: event.pointsConfiguration[2] },
+                             { rank: 4, name: event.thirdRunnerUp, points: event.pointsConfiguration[3] },
+                           ].map(({ rank, name, points }) => (
+                             <div key={rank} className="score-row">
+                                 {/* Rank */}
+                                  <div className="score-rank">
+                                       <div
+                                           className={`rank-number ${rank <= 1 ? "podium" : "regular"}`}
+                                            >
+                                          #{rank}
+                                       </div>
+                                      </div>
+
+                             {/* Team Name */}
+                                    <div className="score-team">
+                                <span className="team-name">{name}</span>
                           </div>
-                          <div className="score-team">
-                            <span className="team-name">{score.team}</span>
-                            <span className="team-batch">{score.batch}</span>
+
+                           {/* Points */}
+                            <div className="score-points">
+                         <span className="points-value">{points}</span>
+                         <span className="points-label">pts</span>
                           </div>
-                          <div className="score-points">
-                            <span className="points-value">{score.score}</span>
-                            <span className="points-label">pts</span>
-                          </div>
-                        </div>
-                      ))}
+                      </div>
+                       ))}
+                </div>                  
                     </div>
                   </div>
                 </div>

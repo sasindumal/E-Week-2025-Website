@@ -1,11 +1,17 @@
-import Sidebar from "./sidebar"; // Adjust the path as needed
+import Sidebar from "./sidebar"; // Adjust path if needed
 
 const AdminDashBoard = ({ adminData = { stats: { activeEvents: 0 } } }) => {
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
-      <Sidebar activeEvents={adminData.stats.activeEvents} />
-
-      <main style={{ flexGrow: 1, padding: "2rem", color: "red" }}>
+    <div style={{ minHeight: "100vh" }}>
+      <Sidebar />
+      <main
+        style={{
+          marginLeft: "240px", // <-- IMPORTANT if sidebar fixed width 240px & fixed position
+          padding: "2rem",
+          color: "red",
+          backgroundColor: "#121212",
+        }}
+      >
         <h1>Admin Dashboard</h1>
         <p style={{ color: "white" }}>
           Welcome to the admin dashboard. Here you can manage events, users, and other administrative tasks.

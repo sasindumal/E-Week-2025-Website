@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import "./management.css";
 import { Trash, Pencil, RefreshCw } from "lucide-react";
 import { Square } from "lucide-react";
-
+import { MapPin } from "lucide-react";
 const ManageEvents = () => {
   const navigate = useNavigate();
   const [events, setEvents] = useState([]);
@@ -136,10 +136,13 @@ const handleEndEdit = async (id) => {
     fetchUpcomingEvents();
   }, [liveEvents]);
 
-  return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
-      <Sidebar />
-      <div style={{ padding: "2rem", color: "red", flex: 1 }}>
+   return (
+    <div style={{ minHeight: "100vh" }}>
+      {/* Sidebar is fixed with width 240px inside sidebar component */}
+      <Sidebar activeEvents={liveEvents.length} />
+
+      {/* Main content container with marginLeft to avoid overlap */}
+      <div style={{ marginLeft: "240px", padding: "2rem", color: "red" }}>
         <h1>Manage Events</h1>
         <p style={{ color: "white" }}>
           This is the Manage Events page where you can create, edit, and delete events.
@@ -148,6 +151,7 @@ const handleEndEdit = async (id) => {
           Create Event
         </button>
 
+        {/* Your existing tables and event list rendering */}
         <div className="event-list">
           <h2>Live Events List</h2>
           {liveEvents.length > 0 ? (
@@ -167,13 +171,15 @@ const handleEndEdit = async (id) => {
                     <td>{event.title}</td>
                     <td>{new Date(event.date).toLocaleDateString()}</td>
                     <td>{event.time}</td>
-                    <td>{event.location}</td>
+                   
+                   <td>
+                  <MapPin size={16} style={{ marginRight: "6px", verticalAlign: "middle" }} />
+                  {event.location}
+                   </td>
                     <td>
                       <button className="create-edit-button" title="Edit Event" onClick={() => handleEdit(event._id)}><Pencil size={20} /></button>
                       <button className="create-delete-button" title="Delete Event" onClick={() => handleDelete(event._id)}><Trash size={20} /></button>
-                      <button className="create-edit-button"   title="Stop Live Streaming" onClick={() => handleEndEdit(event._id)} > <Square size={20} /></button>
- 
-
+                      <button className="create-edit-button" title="Stop Live Streaming" onClick={() => handleEndEdit(event._id)}><Square size={20} /></button>
                     </td>
                   </tr>
                 ))}
@@ -204,7 +210,11 @@ const handleEndEdit = async (id) => {
                     <td>{event.title}</td>
                     <td>{new Date(event.date).toLocaleDateString()}</td>
                     <td>{event.time}</td>
-                    <td>{event.location}</td>
+                    
+                     <td>
+                    <MapPin size={16} style={{ marginRight: "6px", verticalAlign: "middle" }} />
+                    {event.location}
+                     </td>
                     <td>
                       <button className="create-edit-button" title="Edit Event" onClick={() => handleEdit(event._id)}><Pencil size={20} /></button>
                       <button className="create-delete-button" title="Delete Event" onClick={() => handleDelete(event._id)}><Trash size={20} /></button>
@@ -235,7 +245,6 @@ const handleEndEdit = async (id) => {
               <thead>
                 <tr>
                   <th>Title</th>
-                 
                   <th>Champions</th>
                   <th>First RunnerUp</th>
                   <th>Second RunnerUp</th>

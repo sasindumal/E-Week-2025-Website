@@ -1,0 +1,269 @@
+/* Container & layout */
+.admin-leaderboard {
+  min-height: 100vh;
+  background-color: #0f0f0f;
+  display: flex;
+}
+
+.admin-leaderboard main {
+  margin-left: 240px;
+  padding: 2rem;
+  flex-grow: 1;
+  color: white;
+}
+
+/* Heading */
+.admin-leaderboard h1 {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 700;
+  color: #e80909ff;
+  margin-bottom: 0.5rem;
+}
+
+.admin-leaderboard p.subtitle {
+  color: #9ca3af; /* text-gray-400 */
+  margin-bottom: 1rem;
+}
+
+/* Buttons container */
+.buttons-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Stats cards container */
+.stats-container {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* Individual stats card */
+.stats-card {
+  background: linear-gradient(to right, #070707, #161515);
+  border-radius: 0.75rem;
+  border: 1px solid #1f2937;
+  padding: 1.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  height: 150px;
+}
+
+.stats-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ef4444;
+}
+
+.stats-label {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Table styling */
+.leaderboard-table {
+  width: 100%;
+  border-spacing: 0 0.5rem;
+  table-layout: auto;
+  border-collapse: separate;
+  color: white;
+}
+
+.leaderboard-table thead tr {
+  background: linear-gradient(90deg, #1e263aff 0%, #203056ff 100%);
+  color: #d1d5db; /* gray-300 */
+}
+
+.leaderboard-table th {
+  padding: 1rem;
+  font-size: 18px;
+  text-align: left;
+  font-weight: 600;
+  user-select: none;
+}
+
+.leaderboard-table th:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.leaderboard-table th:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+/* Table rows */
+.leaderboard-row {
+  transition: all 0.2s ease;
+  color: white;
+}
+
+/* Table row cells dynamic backgrounds handled inline via JS */
+/* If you want, you can create classes for ranks but inline is fine */
+
+/* Action buttons container */
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* Action buttons styles */
+.action-button {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  color: white;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.action-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.6);
+}
+
+/* Specific color overrides */
+.action-button.view {
+  color: #ef4444;
+}
+
+.action-button.view:hover {
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.8);
+}
+
+.action-button.edit {
+  color: #3b82f6;
+  transition: all 0.2s ease-in-out;
+}
+
+.action-button.edit:hover {
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.8);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .stats-container {
+    justify-content: center;
+  }
+  
+  .buttons-container {
+    justify-content: center;
+  }
+}
+
+
+.stats-container {
+  display: flex;
+  gap: 1.5rem; /* space between cards */
+  margin-bottom: 1.5rem;
+    flex-wrap: wrap; /* allows cards to wrap on smaller screens */
+  
+}
+
+.stats-card {
+  background: linear-gradient(to right, #070707, #161515); /* dark red to light red */
+  border-radius: 0.75rem; /* matches rounded-xl */
+  border: 1px solid #1f2937; /* matches border-gray-800 */
+  padding: 1.5rem 2.5rem; /* py-6 px-10 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* shadow-sm */
+  width: 250px;   
+  height: 140px;
+}
+
+.stats-number {
+  font-size: 3rem; /* text-3xl */
+  font-weight: bold;
+  color: #ef4444; /* text-red-500 */
+}
+
+
+
+.stats-label {
+  color: #9ca3af; /* text-gray-400 */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 600; /* font-semibold */
+  text-transform: uppercase;
+  letter-spacing: 0.05em; /* tracking-wide */
+}
+
+
+.button-event {
+  background: linear-gradient(to right, #050505, #1f1e1e); /* dark red to light red */
+  color: white;
+  border-radius: 15px;
+  width: 200px;
+  height: 60px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.buttons-container {
+  display: flex;
+  gap: 1rem; /* gap-4 = 1rem */
+  margin-bottom: 1.5rem; /* mb-6 = 1.5rem */
+}
+
+.button-batch {
+  background: linear-gradient(to right, #8B0000, #ef4444);
+  color: white;
+  border-radius: 15px;
+  width: 200px;
+  height: 60px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button-batch:hover {
+  background: linear-gradient(to right, #a00000, #ff6666); /* lighter on hover */
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.6); /* red glow */
+}
+
+.button-event {
+  background: linear-gradient(to right, #050505, #1f1e1e);
+  color: white;
+  border-radius: 15px;
+  width: 200px;
+  height: 60px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button-event:hover {
+  background: linear-gradient(to right, #222222, #444444); /* slightly lighter */
+  box-shadow: 0 4px 15px rgba(100, 100, 100, 0.6); /* subtle gray glow */
+}

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const EditableEventForm = () => {
- const location = useLocation();
+  const location = useLocation();
   const eventId = location.state?.eventId;
   const navigate = useNavigate();
 
@@ -23,6 +22,7 @@ const EditableEventForm = () => {
     secondRunnerUp: "",
     thirdRunnerUp: "",
     maxTeamsPerBatch: "",
+    expectedFinishTime: "",
   });
 
   useEffect(() => {
@@ -40,28 +40,32 @@ const EditableEventForm = () => {
         );
         if (!res.ok) throw new Error("Failed to fetch event");
 
-
         const data = await res.json();
-   console.log("Fetched event data:", data);
-setFormData({
-  title: data.title || "",
-  date: data.date ? data.date.split("T")[0] : "",
-  time: data.time || "",
-  location: data.location || "",
-  eventType: data.eventType || "Individual",
-  MaxNoOfParticipantsPerTeam: data.MaxNoOfParticipantsPerTeam || "",
-  description: data.description || "",
-  status: data.status || "upcoming",
-  category: data.category || "",
-  pointsConfiguration: data.pointsConfiguration
-    ? data.pointsConfiguration.join(",")
-    : "",
-  winners: data.winners || "",
-  firstRunnerUp: data.firstRunnerUp || "",
-  secondRunnerUp: data.secondRunnerUp || "",
-  maxTeamsPerBatch: data.maxTeamsPerBatch || "",
-});
+        console.log("Fetched event data:", data);
 
+        setFormData({
+          title: data.title || "",
+          date: data.date ? data.date.split("T")[0] : "",
+          time: data.time || "",
+          location: data.location || "",
+          eventType: data.eventType || "Individual",
+          MaxNoOfParticipantsPerTeam: data.MaxNoOfParticipantsPerTeam || "",
+          description: data.description || "",
+          status: data.status || "upcoming",
+          // Normalize category to match select options
+          category: data.category
+            ? data.category.charAt(0).toUpperCase() + data.category.slice(1).toLowerCase()
+            : "",
+          pointsConfiguration: data.pointsConfiguration
+            ? data.pointsConfiguration.join(",")
+            : "",
+          winners: data.winners || "",
+          firstRunnerUp: data.firstRunnerUp || "",
+          secondRunnerUp: data.secondRunnerUp || "",
+          thirdRunnerUp: data.thirdRunnerUp || "",
+          maxTeamsPerBatch: data.maxTeamsPerBatch || "",
+          expectedFinishTime: data.expectedFinishTime || "",
+        });
       } catch (err) {
         console.error(err);
       }
@@ -78,9 +82,8 @@ setFormData({
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Prepare data for sending (convert numbers and points array)
     const finalData = {
-        eventId,
+      eventId,
       ...formData,
       MaxNoOfParticipantsPerTeam: Number(formData.MaxNoOfParticipantsPerTeam),
       maxTeamsPerBatch: Number(formData.maxTeamsPerBatch),
@@ -90,26 +93,28 @@ setFormData({
         .filter((n) => !isNaN(n)),
     };
 
-   try {
-  const response = await fetch("http://localhost:5000/api/createEvents/UpdateEventsById", {
-    method: "POST", // 
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(finalData),
-  });
-  console.log("Sending data:", finalData);
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/createEvents/UpdateEventsById",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(finalData),
+        }
+      );
+      console.log("Sending data:", finalData);
 
-  if (response.ok) {
-    alert("Event updated successfully!");
-    navigate("/admin/ManageEvents"); // navigate back after successful update
-  } else {
-    const errorData = await response.json();
-    alert("Update failed: " + (errorData.message || "Unknown error"));
-  }
-} catch (err) {
-  console.error("Network error:", err);
-  alert("Network error occurred");
-}
-
+      if (response.ok) {
+        alert("Event updated successfully!");
+        navigate("/admin/ManageEvents");
+      } else {
+        const errorData = await response.json();
+        alert("Update failed: " + (errorData.message || "Unknown error"));
+      }
+    } catch (err) {
+      console.error("Network error:", err);
+      alert("Network error occurred");
+    }
   };
 
   return (
@@ -132,10 +137,12 @@ setFormData({
         Edit Event
       </h2>
 
+      {/* Other inputs */}
       {[
         { label: "Title", name: "title", type: "text", placeholder: "Title" },
         { label: "Date", name: "date", type: "date" },
         { label: "Time", name: "time", type: "time" },
+        { label: "Finish Time", name: "expectedFinishTime", type: "time" },
         { label: "Location", name: "location", type: "text", placeholder: "Location" },
         {
           label: "Max Number of Teams/Individuals per Batch",
@@ -143,26 +150,10 @@ setFormData({
           type: "number",
           placeholder: "e.g. 100",
         },
-        {
-          label: "Description",
-          name: "description",
-          type: "textarea",
-          placeholder: "Description",
-        },
+        { label: "Description", name: "description", type: "textarea", placeholder: "Description" },
         { label: "Status", name: "status", type: "text", placeholder: "Status" },
-        { label: "Category", name: "category", type: "text", placeholder: "Category" },
-        {
-          label: "Points Configuration",
-          name: "pointsConfiguration",
-          type: "text",
-          placeholder: "Comma-separated points (e.g. 10,8,6)",
-        },
-        {
-          label: "Max Players Per Team",
-          name: "MaxNoOfParticipantsPerTeam",
-          type: "number",
-          placeholder: "e.g. 5",
-        },
+        { label: "Points Configuration", name: "pointsConfiguration", type: "text", placeholder: "10,8,6" },
+        { label: "Max Players Per Team", name: "MaxNoOfParticipantsPerTeam", type: "number", placeholder: "e.g. 5" },
       ].map((input) => (
         <div key={input.name} style={{ display: "flex", flexDirection: "column" }}>
           <label style={{ marginBottom: "0.25rem", color: "#ccc" }}>{input.label}</label>
@@ -187,6 +178,26 @@ setFormData({
         </div>
       ))}
 
+      {/* Category select */}
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <label style={{ marginBottom: "0.25rem", color: "#ccc" }}>Category</label>
+        <select
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          style={inputStyle}
+        >
+          <option value="">Select Category</option>
+          <option value="Competition">Competition</option>
+          <option value="Workshop">Workshop</option>
+          <option value="Conference">Conference</option>
+          <option value="Ceremony">Ceremony</option>
+          <option value="Social">Social</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      {/* Event type */}
       <div style={{ display: "flex", flexDirection: "column" }}>
         <label style={{ color: "#ccc" }}>Event Type:</label>
         <select
@@ -199,7 +210,7 @@ setFormData({
           <option value="Team">Team</option>
         </select>
       </div>
-       
+
       <button
         type="submit"
         style={{
