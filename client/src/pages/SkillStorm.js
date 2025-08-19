@@ -446,18 +446,6 @@ const SkillStorm = () => {
                         </div>
                       </div>
 
-                      <div className="comp-prizes">
-                        <h5 className="prizes-title">Prizes & Rewards</h5>
-                        <div className="prizes-list">
-                          {comp.prizes.map((prize, idx) => (
-                            <div key={idx} className="prize-item">
-                              <Award className="w-3 h-3 text-yellow-400" />
-                              <span>{prize}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
                       <button
                         onClick={() => openRegistration(comp)}
                         className="comp-register-btn"

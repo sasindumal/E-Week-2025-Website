@@ -68,7 +68,7 @@ const CountdownTimer = ({ targetDate }) => {
         ))}
       </div>
       <p className="countdown-date">
-        August 25, 2025 • Faculty of Engineering • University of Jaffna
+        September 01, 2025 • Faculty of Engineering • University of Jaffna
       </p>
     </div>
   );

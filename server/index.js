@@ -13,6 +13,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // API Routes
 app.use("/api", require("./routes/api"));
+app.use("/api/auth", require("./routes/auth"));
+app.use("/api/admin", require("./routes/admin-api"));
 
 // Serve static files from React build
 if (process.env.NODE_ENV === "production") {

@@ -13,8 +13,8 @@ const Navigation = () => {
     { path: "/leaderboard", label: "Leaderboard" },
     { path: "/skillstorm", label: "SkillStorm" },
     { path: "/downloads", label: "Downloads" },
-    { path: "/gallery", label: "Gallery" },
-    { path: "/history", label: "History" },
+    //{ path: "/gallery", label: "Gallery" },
+    //{ path: "/history", label: "History" },
   ];
 
   const toggleMobileMenu = () => {

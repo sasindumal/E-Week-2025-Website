@@ -466,36 +466,6 @@ const Leaderboard = () => {
                         </div>
                       </div>
 
-                      {/* Recent Highlights */}
-                      <div className="highlights-section">
-                        <h4 className="highlights-title">Recent Highlights</h4>
-                        <div className="highlights-list">
-                          {batch.highlights.map((highlight, idx) => (
-                            <div key={idx} className="highlight-item">
-                              <Star className="w-3 h-3 text-yellow-400" />
-                              <span>{highlight}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Progress Bar */}
-                      <div className="progress-section">
-                        <div className="progress-bar">
-                          <div
-                            className="progress-fill"
-                            style={{
-                              width: `${(batch.totalPoints / 5000) * 100}%`,
-                            }}
-                          ></div>
-                        </div>
-                        <div className="progress-label">
-                          <span>Progress to 5,000 points</span>
-                          <span>
-                            {Math.round((batch.totalPoints / 5000) * 100)}%
-                          </span>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 );

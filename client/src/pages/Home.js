@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Download } from "lucide-react";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import CountdownTimer from "../components/CountdownTimer";
@@ -335,7 +336,7 @@ const Home = () => {
               }}
             >
               <img
-                src="https://cdn.builder.io/api/v1/assets/c5794fad86854d05a0a2b5f05a97b44d/e-week_logo_-2025-322131?format=webp&width=800"
+                src="/Eweeklogo.png"
                 alt="E-Week 2025"
                 className="modern-logo"
               />
@@ -363,19 +364,22 @@ const Home = () => {
 
             {/* Enhanced Countdown */}
             <div className="modern-countdown">
-              <CountdownTimer targetDate="2025-08-25T00:00:00" />
+              <CountdownTimer targetDate="2025-09-01T00:00:00" />
             </div>
 
             {/* Modern CTA Buttons */}
             <div className="modern-actions">
-              <button
-                onClick={() => setShowNotificationModal(true)}
-                className="btn-modern btn-primary-modern"
+
+              <Link
+                to="/downloads"
+                className="btn-modern btn-primary-modern inline-flex items-center gap-10"
               >
-                <Bell size={20} />
-                <span>Register for Notifications</span>
+                <Download size={20} />
+                <span>Download App</span>
                 <ArrowRight size={16} />
-              </button>
+
+              </Link>
+
 
               <button
                 onClick={() => scrollToSection("events")}
