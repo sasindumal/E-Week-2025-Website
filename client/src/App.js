@@ -12,6 +12,7 @@ import Downloads from "./pages/Downloads";
 import Gallery from "./pages/Gallery";
 import History from "./pages/History";
 import Admin from "./pages/Admin";
+import AdminLogin from "./pages/AdminLogin";
 import NotFound from "./pages/NotFound";
 
 // Context
@@ -31,6 +32,7 @@ function App() {
             <Route path="/downloads" element={<Downloads />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/history" element={<History />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin/*" element={<Admin />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

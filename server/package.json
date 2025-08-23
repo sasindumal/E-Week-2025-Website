@@ -8,12 +8,6 @@
     "dev": "nodemon index.js"
   },
   "dependencies": {
-<<<<<<< Updated upstream
-    "express": "^4.18.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "path": "^0.12.7"
-=======
     "@prisma/client": "^6.13.0",
     "axios": "^1.11.0",
     "bcryptjs": "^3.0.2",
@@ -23,7 +17,6 @@
     "jsonwebtoken": "^9.0.2",
     "path": "^0.12.7",
     "prisma": "^6.13.0"
->>>>>>> Stashed changes
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

@@ -14,11 +14,7 @@ const Downloads = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [scrollY, setScrollY] = useState(0);
   const heroRef = useRef(null);
-  const [downloadStats] = useState({
-    android: { count: 15420, growth: "+23%" },
-    macos: { count: 8930, growth: "+18%" },
-    windows: { count: 22150, growth: "+31%" },
-  });
+ 
 
   const platforms = [
     {
@@ -39,39 +35,23 @@ const Downloads = () => {
       downloadUrl: "#",
     },
     {
-      id: "macos",
-      name: "MacOS",
+      id: "ios",
+      name: "iOS",
       icon: <Apple className="w-8 h-8" />,
-      color: "from-gray-500 to-gray-600",
-      version: "v2.1.0",
-      size: "89.7 MB",
-      requirements: "macOS 11.0+",
-      features: [
-        "Native desktop experience",
-        "Advanced analytics dashboard",
-        "Multi-window support",
-        "Keyboard shortcuts",
-        "System integration",
-      ],
-      downloadUrl: "#",
-    },
-    {
-      id: "windows",
-      name: "Windows",
-      icon: <Monitor className="w-8 h-8" />,
       color: "from-blue-500 to-blue-600",
       version: "v2.1.0",
-      size: "67.4 MB",
-      requirements: "Windows 10+",
+      size: "120 MB",
+      requirements: "iOS 14.0+",
       features: [
-        "Optimized performance",
-        "Touch screen support",
-        "Live tile notifications",
-        "Background sync",
-        "Universal Windows Platform",
+        "Optimized for iPhone and iPad",
+        "Push notifications",
+        "Offline access",
+        "Gesture support",
+        "Seamless sync with MacOS app",
       ],
       downloadUrl: "#",
     },
+
   ];
 
   const activePlatform = platforms.find((p) => p.id === activeTab);
@@ -136,20 +116,6 @@ const Downloads = () => {
                 Get the official E-Week 2025 app on your favorite platform
               </p>
 
-              <div className="downloads-stats hero-stats-events">
-                <div className="download-stat stat-card-events">
-                  <span className="stat-number">46K+</span>
-                  <span className="stat-label">Total Downloads</span>
-                </div>
-                <div className="download-stat stat-card-events">
-                  <span className="stat-number">4.8★</span>
-                  <span className="stat-label">App Rating</span>
-                </div>
-                <div className="download-stat stat-card-events">
-                  <span className="stat-number">98%</span>
-                  <span className="stat-label">Satisfaction</span>
-                </div>
-              </div>
             </div>
           </div>
         </section>
@@ -167,12 +133,7 @@ const Downloads = () => {
                   <div className="platform-tab-icon">{platform.icon}</div>
                   <span className="platform-tab-name">{platform.name}</span>
                   <div className="platform-tab-stats">
-                    <span className="download-count">
-                      {downloadStats[platform.id].count.toLocaleString()}
-                    </span>
-                    <span className="growth-indicator">
-                      {downloadStats[platform.id].growth}
-                    </span>
+                    
                   </div>
                 </button>
               ))}

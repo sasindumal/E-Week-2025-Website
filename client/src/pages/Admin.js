@@ -148,13 +148,13 @@ const Admin = () => {
       path: "/admin/events",
       badge: adminData.stats.activeEvents,
     },
-    {
+    {/*
       id: "skillstorm",
       label: "SkillStorm",
       icon: <Zap className="w-5 h-5" />,
       path: "/admin/skillstorm",
       badge: null,
-    },
+    */},
     {
       id: "leaderboard",
       label: "Leaderboard",
@@ -169,7 +169,7 @@ const Admin = () => {
       path: "/admin/participants",
       badge: null,
     },
-    {
+    {/*
       id: "gallery",
       label: "Gallery",
       icon: <Image className="w-5 h-5" />,
@@ -182,7 +182,7 @@ const Admin = () => {
       icon: <History className="w-5 h-5" />,
       path: "/admin/history",
       badge: null,
-    },
+    */},
     {
       id: "admins",
       label: "Admin Users",
@@ -190,13 +190,13 @@ const Admin = () => {
       path: "/admin/admins",
       badge: null,
     },
-    {
+    {/*
       id: "settings",
       label: "Settings",
       icon: <Settings className="w-5 h-5" />,
       path: "/admin/settings",
       badge: null,
-    },
+    */},
   ];
 
   if (!isAuthenticated) {
@@ -336,10 +336,10 @@ const Admin = () => {
             path="/events"
             element={<AdminEvents onNotify={addNotification} />}
           />
-          <Route
+          {/*<Route
             path="/skillstorm"
             element={<AdminSkillStorm onNotify={addNotification} />}
-          />
+          />*/}
           <Route
             path="/leaderboard"
             element={<AdminLeaderboard onNotify={addNotification} />}
@@ -348,22 +348,22 @@ const Admin = () => {
             path="/participants"
             element={<AdminParticipants onNotify={addNotification} />}
           />
-          <Route
+          {/*<Route
             path="/gallery"
             element={<AdminGallery onNotify={addNotification} />}
-          />
-          <Route
+          />*/}
+          {/*<Route
             path="/history"
             element={<AdminHistory onNotify={addNotification} />}
-          />
+          />*/}
           <Route
             path="/admins"
             element={<AdminUsers onNotify={addNotification} />}
           />
-          <Route
+          {/*<Route
             path="/settings"
             element={<AdminSettings onNotify={addNotification} />}
-          />
+          />*/}
         </Routes>
       </main>
     </div>
