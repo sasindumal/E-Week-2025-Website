@@ -106,7 +106,7 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
         ))}
       </div>
       <p className="text-eweek-white/80 mt-6 text-lg" data-oid="4cvoaf2">
-        August 25, 2025 • UOJ Faculty of Engineering
+        August 30, 2025 • Faculty of Engineering • University of Jaffna
       </p>
     </div>
   );

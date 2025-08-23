@@ -11,7 +11,7 @@ const Navigation = () => {
     //{ path: "/about", label: "About" },
     { path: "/events", label: "Events" },
     { path: "/leaderboard", label: "Leaderboard" },
-    { path: "/skillstorm", label: "SkillStorm" },
+    //{ path: "/skillstorm", label: "SkillStorm" },
     { path: "/downloads", label: "Downloads" },
     //{ path: "/gallery", label: "Gallery" },
     //{ path: "/history", label: "History" },

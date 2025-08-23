@@ -3,9 +3,9 @@
   "name": "E-Week 2025 - University of Jaffna",
   "icons": [
     {
-      "src": "https://cdn.builder.io/api/v1/assets/c5794fad86854d05a0a2b5f05a97b44d/e-week_logo_-2025-322131?format=webp&width=64",
+      "src": "/Eweeklogo.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/webp"
+      "type": "image/png"
     },
     {
       "src": "https://cdn.builder.io/api/v1/assets/c5794fad86854d05a0a2b5f05a97b44d/e-week_logo_-2025-322131?format=webp&width=192",

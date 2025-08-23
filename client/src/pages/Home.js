@@ -364,7 +364,7 @@ const Home = () => {
 
             {/* Enhanced Countdown */}
             <div className="modern-countdown">
-              <CountdownTimer targetDate="2025-09-01T00:00:00" />
+              <CountdownTimer targetDate="2025-08-30T08:00:00" />
             </div>
 
             {/* Modern CTA Buttons */}
